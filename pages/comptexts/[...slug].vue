@@ -1,0 +1,124 @@
+<script setup>
+definePageMeta({
+  middleware: ['auth']
+})
+const { user } = useUserSession()
+useHead({
+  script: [{ src: '/textPage.js', tagPosition: 'bodyClose', defer: true }]
+})
+const route = useRoute()
+const urnReffs = route.params.slug.map((urnReff) => {
+  const urnParts = urnReff.split(';')
+  let reff = '1'
+  if (urnParts.length === 2) {
+    reff = urnParts[1]
+  }
+  return [urnParts[0], reff]
+})
+</script>
+
+<template>
+  <v-responsive>
+    <Footer />
+    <v-main class="d-flex justify-center" min-height="300px">
+      <v-container v-if="user.role === 'user'" class="text-column">
+        <v-alert type="warning"
+          >This page is only available to project members.
+          <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
+        >
+      </v-container>
+      <v-container
+        v-else
+        v-for="urnReff in urnReffs"
+        :key="urnReff.join(';')"
+        :id="urnReff.join(';')"
+        class="text-column"
+      >
+        <CommentaryColumn
+          v-if="urnReff[0].includes('commentary')"
+          :urn="urnReff[0]"
+          :reff="urnReff[1]"
+        />
+        <TextColumn v-else :urn="urnReff[0]" :reff="urnReff[1]" />
+      </v-container>
+    </v-main>
+  </v-responsive>
+</template>
+
+<style scoped>
+.text-column {
+  padding-right: calc(var(--section-gap) / 2);
+  padding-left: calc(var(--section-gap) / 2);
+  max-width: 1200px;
+  /* height: 80vh; */
+}
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color-text);
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--color-background-mute);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  display: block;
+}
+.show {
+  display: block;
+}
+</style>
+
+<style>
+.citation-section::before {
+  content: attr(n) ' ';
+  vertical-align: super;
+  font-size: small;
+}
+.section-d-dropdown-content,
+.section-b-dropdown-content {
+  transition: all 0.4s linear;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+div.texteinleitung p,
+div.cjh-Zitaterläuterung p {
+  font-size: smaller;
+}
+
+.text-content {
+  overflow-y: auto;
+  height: 68vh;
+}
+
+.space-before::before {
+  content: ' ';
+}
+
+.space-after::after {
+  content: ' ';
+}
+
+@keyframes note-focus {
+  from {
+    background-color: lightgrey;
+  }
+  to {
+    background-color: initial;
+  }
+}
+
+.flash-yellow {
+  animation-name: note-focus;
+  animation-duration: 5s;
+}
+
+.cjh-Autorennamen {
+  font-variant: small-caps;
+}
+</style>

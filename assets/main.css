@@ -1,0 +1,13 @@
+@import './base.css';
+
+#__nuxt {
+  margin: 0 auto;
+}
+
+.bg-akademie {
+  background-color: var(--color-akademie);
+}
+
+html {
+  overflow-y: auto;
+}

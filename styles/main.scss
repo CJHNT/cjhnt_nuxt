@@ -1,0 +1,5 @@
+$my-override-fonts: 'Noto Serif', 'Noto Serif Hebrew', 'Noto Serif Ethiopic', serif;
+
+@use 'vuetify' with (
+  $body-font-family: $my-override-fonts
+);
