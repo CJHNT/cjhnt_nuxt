@@ -1,5 +1,6 @@
 <script setup>
 import { Xslt, XmlParser } from 'xslt-processor'
+import { parseFromString } from 'dom-parser'
 
 const { locale } = useI18n()
 const props = defineProps({ urn: String, reff: String })
@@ -43,10 +44,11 @@ const xmlParser = new XmlParser()
 const parsedXslt = xmlParser.xmlParse(rawXsl)
 const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
 const formattedText = parsedText
-const parser = new DOMParser()
-const domText = parser.parseFromString(formattedText, 'text/html')
+// const parser = new DOMParser()
+// const domText = parser.parseFromString(formattedText, 'text/html')
+const domText = parseFromString(formattedText)
 const { data: ntText } = await useAsyncData('apiNtText', async () => {
-  const ntElement = domText.querySelector('.nt-source-text')
+  const ntElement = domText.getElementsByClassName('nt-source-text')[0]
   const ntSource = ntElement.getAttribute('source-text')
   const ntVerse = ntElement.getAttribute('source-verse')
   const apiResult = await $fetch('http://127.0.0.1:5000/api/dts/document', {
@@ -60,9 +62,9 @@ const { data: ntText } = await useAsyncData('apiNtText', async () => {
 })
 function langText() {
   if (locale.value === 'en' && parsedText.includes('lang="en"')) {
-    return domText.querySelector('div[lang=en]').outerHTML
+    return domText.getElementById('en-text').outerHTML
   } else {
-    return domText.querySelector('div[lang=de]').outerHTML
+    return domText.getElementById('de-text').outerHTML
   }
 }
 

@@ -8,7 +8,8 @@
             <xsl:variable name="langtag" select="@subtype"/>
             <xsl:element name="div">     
                 <xsl:attribute name="xml:space">preserve</xsl:attribute>
-                <xsl:attribute name="lang"><xsl:value-of select="$langtag"/></xsl:attribute>           
+                <xsl:attribute name="lang"><xsl:value-of select="$langtag"/></xsl:attribute>
+                <xsl:attribute name="id"><xsl:value-of select="$langtag"/>-text</xsl:attribute>
                 <xsl:element name="h1">
                     <xsl:attribute name="lang"><xsl:value-of select="$langtag"/></xsl:attribute>
                     <xsl:value-of select="/t:TEI/t:teiHeader/t:fileDesc/t:titleStmt/t:title[@n=$langtag]"/>
