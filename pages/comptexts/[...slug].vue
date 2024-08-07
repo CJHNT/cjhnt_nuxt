@@ -74,7 +74,7 @@ const urnReffs = route.params.slug.map((urnReff) => {
 
 <style>
 .citation-section::before {
-  content: attr(n) ' ';
+  content: ' ' attr(n) ' ';
   vertical-align: super;
   font-size: small;
 }
