@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/devtools'
   ],
+
   googleFonts: {
     families: {
       'Noto Serif': {
@@ -59,12 +60,16 @@ export default defineNuxtConfig({
     },
     display: 'swap'
   },
+
   i18n: {
     vueI18n: './i18n.config.ts'
   },
+
   runtimeConfig: {
     esUrl: process.env.ES_URL,
     esUser: process.env.ES_USER,
     esPw: process.env.ES_PW
-  }
+  },
+
+  compatibilityDate: '2024-08-07'
 })

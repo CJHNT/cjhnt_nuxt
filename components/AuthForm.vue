@@ -13,6 +13,20 @@ const showPassword = ref(false)
 const showRepeatPassword = ref(false)
 const wantsUpdates = ref(false)
 
+function validateEmail() {
+  const pattern =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return pattern.test(email.value) || 'Invalid e-mail.'
+}
+
+function compareEmails() {
+  return email.value === repeatEmail.value || 'Emails do not match'
+}
+
+function comparePasswords() {
+  return password.value === repeatPassword.value || 'Passwords do not match'
+}
+
 const submit = () => {
   const payload = {
     email: email.value,
@@ -33,6 +47,7 @@ const submit = () => {
         <v-text-field
           v-if="['Sign up', 'Change email', 'Login'].includes(title)"
           :label="label ? label : 'Email'"
+          :rules="[validateEmail()]"
           prepend-icon="mdi-email"
           v-model="email"
         />
@@ -41,6 +56,7 @@ const submit = () => {
           label="Verify email"
           prepend-icon="mdi-email"
           v-model="repeatEmail"
+          :rules="[compareEmails()]"
         />
         <v-text-field
           v-if="['Sign up', 'Change password', 'Login'].includes(title)"
@@ -59,6 +75,7 @@ const submit = () => {
           :append-icon="showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showRepeatPassword = !showRepeatPassword"
           v-model="repeatPassword"
+          :rules="[comparePasswords()]"
         />
         <v-checkbox
           v-if="['Sign up', 'Change update status'].includes(title)"

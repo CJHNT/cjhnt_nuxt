@@ -23,6 +23,12 @@ const login = async (body) => {
 
 <template>
   <v-main>
-    <AuthForm :loading="loading" @submit="login" title="Login" />
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
+          <AuthForm :loading="loading" @submit="login" title="Login" />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-main>
 </template>
