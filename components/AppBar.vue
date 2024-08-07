@@ -15,6 +15,7 @@ const logout = () => {
       <v-btn
         href="https://www.theol.uni-leipzig.de/institut-fuer-neutestamentliche-wissenschaft/forschung/corpus-judaeo-hellenisticum-novi-testamenti-digital"
         target="_blank"
+        class="d-md-none"
         ><v-img
           src="@/assets/img/cjh-logo-quadratisch-klein.png"
           alt="Logo: CJHNT Project"

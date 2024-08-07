@@ -5,7 +5,8 @@
       :elevation="isHovering ? 24 : 4"
       class="mx-auto px-6 pb-6 pt-3 news-card"
     >
-      <v-card-title class="news-title text-wrap font-weight-black text-subtitle-1"
+      <v-card-title
+        class="news-title text-wrap font-weight-black text-subtitle-2 text-xl-subtitle-1"
         >Das CJHNT digital Projekt ist gestartet</v-card-title
       >
       <v-card-text class="news-snippet"
@@ -27,7 +28,8 @@
       :elevation="isHovering ? 24 : 4"
       class="mx-auto px-6 pb-6 pt-3 news-card"
     >
-      <v-card-title class="news-title text-wrap font-weight-black text-subtitle-1"
+      <v-card-title
+        class="news-title text-wrap font-weight-black text-subtitle-2 text-xl-subtitle-1"
         >Check out our new platform</v-card-title
       >
       <v-card-text class="news-snippet"
@@ -48,7 +50,8 @@
       :elevation="isHovering ? 24 : 4"
       class="mx-auto px-6 pb-6 pt-3 news-card"
     >
-      <v-card-title class="news-title text-wrap font-weight-black text-subtitle-1"
+      <v-card-title
+        class="news-title text-wrap font-weight-black text-subtitle-2 text-xl-subtitle-1"
         >New texts are coming</v-card-title
       >
       <v-card-text class="news-snippet"
@@ -71,14 +74,14 @@
   padding-top: 0;
 }
 .news-snippet {
-  height: 76px;
+  height: 4.2em;
   overflow: hidden;
   position: relative;
   margin-bottom: 8px;
   padding-bottom: 0px;
 }
 .news-card {
-  margin-bottom: -80px;
+  margin-bottom: -4em;
 }
 
 .news-snippet::after {

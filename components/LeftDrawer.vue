@@ -22,7 +22,7 @@ const rail = ref(false)
               </v-col>
             </v-row>
             <v-row class="h-50">
-              <v-col>
+              <v-col class="pt-0">
                 <NewsCards />
               </v-col>
             </v-row>

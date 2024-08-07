@@ -32,7 +32,7 @@ const { data: xmlText } = await useFetch('/api/dts/document', {
 var rawXsl = ''
 if (props.urn.includes('commentary')) {
   rawXsl = (await import('../assets/source/commentary.xsl?raw')).default
-} else if (props.urn.includes('tlg0031') || props.urn.includes('tlg0527')) {
+} else if (props.urn.includes('tlg0031') || props.urn.includes('tlg0527') || props.urn.includes('1henoch')) {
   rawXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
 } else {
   rawXsl = (await import('../assets/source/epidoc.xsl?raw')).default

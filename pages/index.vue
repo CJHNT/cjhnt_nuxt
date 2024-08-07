@@ -4,8 +4,8 @@ const { user } = useUserSession()
 
 <template>
   <v-responsive class="align-center">
-    <Footer border="t" />
     <LeftDrawer />
+    <Footer border="t" />
 
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <v-container>
@@ -21,6 +21,35 @@ const { user } = useUserSession()
           </v-row>
         </template>
         <template v-else>
+          <v-row justify="center">
+            <v-col cols="auto" class="pb-sm-16">
+              <picture class="d-none d-md-flex">
+                <source
+                  media="(max-width: 960px)"
+                  srcset="@/assets/img/Wort-Bildmarke-JF.png"
+                  height="180"
+                />
+                <source
+                  media="(max-width: 1280px)"
+                  srcset="@/assets/img/Wort-Bildmarke-JF.png"
+                  height="180"
+                />
+                <img
+                  src="@/assets/img/Wort-Bildmarke-JF.png"
+                  alt="Logo: CJHNT Projekt"
+                  height="270"
+                />
+              </picture>
+            </v-col>
+          </v-row>
+          <!-- <v-row justify="center pb-16">
+            <v-col cols="auto" class="pt-0">
+              <p class="text-caption">
+                © The Trustees of the British Museum. Shared under a Creative Commons CC BY-NC-SA
+                4.0 licence.
+              </p>
+            </v-col>
+          </v-row> -->
           <SearchBar />
           <CollectionCards />
         </template>
