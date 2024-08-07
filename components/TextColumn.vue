@@ -9,8 +9,9 @@ const reffDepth = () => {
   }
   return 1
 }
-const { data: navReturn } = await useFetch('http://127.0.0.1:5000/api/dts/navigation', {
-  query: { id: props.urn, level: reffDepth() }
+const { data: navReturn } = await useFetch('/api/dts/navigation', {
+  body: { id: props.urn, level: reffDepth() },
+  method: 'POST'
 })
 const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
 let usedReff = props.reff
@@ -24,8 +25,9 @@ const currentIndex = validReffs.findIndex((m) => m === usedReff)
 const prevId = currentIndex > 0 ? validReffs[currentIndex - 1] : null
 const nextId = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
 
-const { data: xmlText } = await useFetch('http://127.0.0.1:5000/api/dts/document', {
-  query: { id: props.urn, ref: usedReff }
+const { data: xmlText } = await useFetch('/api/dts/document', {
+  body: { id: props.urn, ref: usedReff },
+  method: 'POST'
 })
 var rawXsl = ''
 if (props.urn.includes('commentary')) {
@@ -39,7 +41,9 @@ const xsltClass = new Xslt()
 const xmlParser = new XmlParser()
 const parsedXslt = xmlParser.xmlParse(rawXsl)
 const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
-const formattedText = parsedText.replaceAll('span><span', 'span> <span')
+function formattedText() {
+  return parsedText.replaceAll('span><span', 'span> <span')
+}
 </script>
 
 <template>
@@ -67,9 +71,8 @@ const formattedText = parsedText.replaceAll('span><span', 'span> <span')
         >
       </v-col>
     </v-row>
-    <v-row v-html="ntText"></v-row>
   </v-container>
-  <v-container class="text-content" v-html="formattedText"></v-container>
+  <v-container class="text-content" v-html="formattedText()"></v-container>
 </template>
 
 <style></style>

@@ -6,6 +6,7 @@ defineProps({
 })
 const emit = defineEmits(['submit'])
 const email = ref('')
+const repeatEmail = ref('')
 const password = ref('')
 const repeatPassword = ref('')
 const showPassword = ref(false)
@@ -15,6 +16,7 @@ const wantsUpdates = ref(false)
 const submit = () => {
   const payload = {
     email: email.value,
+    repeatEmail: repeatEmail.value,
     password: password.value,
     repeatPassword: repeatPassword.value,
     wantsUpdates: wantsUpdates.value
@@ -24,11 +26,9 @@ const submit = () => {
 </script>
 
 <template>
-  <v-card width="400" class="mx-auto mt-5">
+  <v-card width="100%" class="mx-auto mt-5">
     <v-form @submit.prevent="submit">
-      <v-card-title class="pb-0">
-        <h1>{{ title }}</h1>
-      </v-card-title>
+      <v-card-title class="pb-0 text-h5">{{ title }}</v-card-title>
       <v-card-text>
         <v-text-field
           v-if="['Sign up', 'Change email', 'Login'].includes(title)"
@@ -40,7 +40,7 @@ const submit = () => {
           v-if="title === 'Change email'"
           label="Verify email"
           prepend-icon="mdi-email"
-          v-model="email"
+          v-model="repeatEmail"
         />
         <v-text-field
           v-if="['Sign up', 'Change password', 'Login'].includes(title)"

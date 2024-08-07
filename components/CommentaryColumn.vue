@@ -4,13 +4,15 @@ import { parseFromString } from 'dom-parser'
 
 const { locale } = useI18n()
 const props = defineProps({ urn: String, reff: String })
-const { data: navReturn } = await useFetch('http://127.0.0.1:5000/api/dts/navigation', {
-  query: { id: props.urn }
+const { data: navReturn } = await useFetch('/api/dts/navigation', {
+  body: { id: props.urn },
+  method: 'POST'
 })
 const { data: collMembers } = await useAsyncData('apiPrevNext', async () => {
   const parentId = props.urn.split('.').slice(0, -1).join('.')
-  const parentData = await $fetch('http://127.0.0.1:5000/api/dts/collections', {
-    query: { id: parentId }
+  const parentData = await $fetch('/api/dts/collections', {
+    body: { id: parentId },
+    method: 'POST'
   })
   return [...parentData.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
 })
@@ -33,8 +35,9 @@ let usedReff = props.reff
 if (!validReffs.includes(props.reff)) {
   usedReff = validReffs[0]
 }
-const { data: xmlText } = await useFetch('http://127.0.0.1:5000/api/dts/document', {
-  query: { id: props.urn, ref: usedReff }
+const { data: xmlText } = await useFetch('/api/dts/document', {
+  body: { id: props.urn, ref: usedReff },
+  method: 'POST'
 })
 const ntFragmentXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
 const rawXsl = (await import('../assets/source/commentary.xsl?raw')).default
@@ -51,8 +54,9 @@ const { data: ntText } = await useAsyncData('apiNtText', async () => {
   const ntElement = domText.getElementsByClassName('nt-source-text')[0]
   const ntSource = ntElement.getAttribute('source-text')
   const ntVerse = ntElement.getAttribute('source-verse')
-  const apiResult = await $fetch('http://127.0.0.1:5000/api/dts/document', {
-    query: { id: ntSource, ref: ntVerse }
+  const apiResult = await $fetch('/api/dts/document', {
+    body: { id: ntSource, ref: ntVerse },
+    method: 'POST'
   })
   const processedResult = await xsltClass.xsltProcess(
     xmlParser.xmlParse(apiResult),
@@ -75,13 +79,15 @@ onMounted(() => {
       const el = event.currentTarget
       const sourceUrn = el.getAttribute('source-text')
       const sourceRef = el.getAttribute('source-verse')
-      const { data: collInfo } = await useFetch(`http://127.0.0.1:5000/api/dts/collections`, {
-        query: { id: sourceUrn }
+      const { data: collInfo } = await useFetch(`/api/dts/collections`, {
+        body: { id: sourceUrn },
+        method: 'POST'
       })
       var langTexts = {}
       for (const member of collInfo.value.member) {
-        const { data: originalText } = await useFetch('http://127.0.0.1:5000/api/dts/document', {
-          query: { id: member['@id'], ref: sourceRef }
+        const { data: originalText } = await useFetch('/api/dts/document', {
+          body: { id: member['@id'], ref: sourceRef },
+          method: 'POST'
         })
         const processedResult = await xsltClass.xsltProcess(
           xmlParser.xmlParse(originalText.value),
@@ -151,9 +157,17 @@ onMounted(() => {
       <v-col cols="8">
         <v-container>
           <v-row>
-            <v-col><nuxt-link :to="`/comptexts/${prevId}`">Prev</nuxt-link></v-col>
+            <v-col
+              ><nuxt-link :to="`/comptexts/${prevId}`" v-show="prevId !== null"
+                >Prev</nuxt-link
+              ></v-col
+            >
             <v-spacer></v-spacer>
-            <v-col><nuxt-link :to="`/comptexts/${nextId}`">Next</nuxt-link></v-col>
+            <v-col
+              ><nuxt-link :to="`/comptexts/${nextId}`" v-show="nextId !== null"
+                >Next</nuxt-link
+              ></v-col
+            >
           </v-row>
           <v-row class="text-content" v-html="langText()"> </v-row>
         </v-container>
@@ -186,5 +200,9 @@ onMounted(() => {
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
+}
+
+.sectionA p {
+  font-size: smaller;
 }
 </style>

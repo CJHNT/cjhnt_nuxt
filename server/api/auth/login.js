@@ -24,6 +24,7 @@ export default defineEventHandler(async (event) => {
 
     const db = await initDb() // Initialize database connection
     const user = await db.get('SELECT * FROM users WHERE email = ?', [email])
+    const hashedPassword = await bcrypt.hash(password, 10)
 
     // For security reasons, do not specify if email or password is incorrect
     if (!user || !(await bcrypt.compare(password, user.password))) {

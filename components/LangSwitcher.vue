@@ -1,8 +1,8 @@
 <script setup>
-const { setLocale } = useI18n()
+const { setLocale, locale } = useI18n()
 </script>
 
 <template>
-  <v-btn @click="setLocale('en')">en</v-btn>|
-  <v-btn @click="setLocale('de')">de</v-btn>
+  <v-btn v-if="locale === 'de'" @click="setLocale('en')">en</v-btn>
+  <v-btn v-if="locale === 'en'" @click="setLocale('de')">de</v-btn>
 </template>

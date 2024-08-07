@@ -59,7 +59,7 @@
         <xsl:if test="t:p/node()">
             <xsl:element name="h3">Section A</xsl:element>
             <xsl:element name="div">
-                <xsl:attribute name="type"><xsl:value-of select="@type"/></xsl:attribute>
+                <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
                 <xsl:for-each select="t:p">
                     <xsl:apply-templates select="."></xsl:apply-templates>
                 </xsl:for-each>
@@ -185,6 +185,18 @@
         </xsl:element>
         <xsl:element name="div">
             <xsl:for-each select="t:div">
+                <xsl:apply-templates select="."></xsl:apply-templates>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:div[@type='cjh-Petit']">
+        <xsl:element name="div">
+            <xsl:attribute name="source"><xsl:value-of select="@source"/></xsl:attribute>
+            <xsl:attribute name="class">text-caption</xsl:attribute>
+            <xsl:attribute name="id"><xsl:value-of select="@n"/></xsl:attribute>
+            <xsl:element name="h5"><xsl:value-of select="@source"/></xsl:element>
+            <xsl:for-each select="t:p">
                 <xsl:apply-templates select="."></xsl:apply-templates>
             </xsl:for-each>
         </xsl:element>
@@ -406,7 +418,7 @@
         </xsl:for-each>
     </xsl:template>
     
-    <xsl:template match="t:w">
+    <xsl:template match="t:w[not(parent::t:seg[@type='cjh-Griechisch'])]">
         <xsl:element name="span">
             <xsl:choose>
                 <xsl:when test="preceding-sibling::node()[1][self::text()] and ends-with(preceding-sibling::node()[1], ' ')">
@@ -417,6 +429,38 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:value-of select="."/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:seg[@type='cjh-Griechisch']">
+        <xsl:element name="span">
+            <xsl:choose>
+                <xsl:when test="preceding-sibling::node()[1][self::text()] and ends-with(preceding-sibling::node()[1], ' ')">
+                    <xsl:attribute name="class">greek space-before</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class">greek</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:when test="self::t:w">
+                        <xsl:element name="span">
+                            <xsl:choose>
+                                <xsl:when test="preceding-sibling::node()[1][self::text()] and ends-with(preceding-sibling::node()[1], ' ')">
+                                    <xsl:attribute name="class">w space-before</xsl:attribute>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="class">w</xsl:attribute>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:value-of select="."/>
+                        </xsl:element>
+                    </xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
         </xsl:element>
     </xsl:template>
     

@@ -1,7 +1,5 @@
 <script setup>
-const { loggedIn, user, session } = useUserSession()
-
-console.log('User', user.value, 'Session', session.value)
+const { user } = useUserSession()
 </script>
 
 <template>

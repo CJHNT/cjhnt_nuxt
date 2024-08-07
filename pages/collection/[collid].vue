@@ -8,8 +8,9 @@ const { user } = useUserSession()
 const { locale } = useI18n()
 const collName = ref({})
 const { data, pending } = await useAsyncData('apiAllTexts', async () => {
-  const allTexts = await $fetch('http://127.0.0.1:5000/api/dts/collections', {
-    query: { id: useParam('collid') }
+  const allTexts = await $fetch('/api/dts/collections', {
+    body: { id: useParam('collid') },
+    method: 'POST'
   })
   collName.value = {
     de: allTexts['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
@@ -21,22 +22,19 @@ const { data, pending } = await useAsyncData('apiAllTexts', async () => {
   }
   if (allTexts.totalItems < 50) {
     const textPromises = allTexts.member.map(async (m) => {
-      const { data: textData } = await useFetch('http://127.0.0.1:5000/api/dts/collections', {
-        query: { id: m['@id'] }
+      const textData = await $fetch('/api/dts/collections', {
+        body: { id: m['@id'] },
+        method: 'POST'
       })
       const returnObject = {
-        id: textData.value['@id'],
-        de: textData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-          ? textData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')[
-              '@value'
-            ]
+        id: textData['@id'],
+        de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+          ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
           : m.title,
-        en: textData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-          ? textData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')[
-              '@value'
-            ]
+        en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+          ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
           : m.title,
-        type: textData.value['@type']
+        type: textData['@type']
       }
       return returnObject
     })
