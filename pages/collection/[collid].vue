@@ -20,7 +20,7 @@ const { data, pending } = await useAsyncData('apiAllTexts', async () => {
       ? allTexts['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
       : allTexts.title
   }
-  if (allTexts.totalItems < 50) {
+  if (allTexts.totalItems < 100) {
     const textPromises = allTexts.member.map(async (m) => {
       const textData = await $fetch('/api/dts/collections', {
         body: { id: m['@id'] },

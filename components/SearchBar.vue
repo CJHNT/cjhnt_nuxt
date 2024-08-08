@@ -2,7 +2,7 @@
 const searchTerm = ref('')
 function buildSearchParams() {
   if (searchTerm) {
-    return navigateTo(`/search/results?term=${searchTerm.value.replace(' ', '+')}`)
+    return navigateTo(`/search/results?term=${searchTerm.value.replace(' ', '+')}&page=1`)
   }
 }
 </script>

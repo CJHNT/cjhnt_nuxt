@@ -10,5 +10,13 @@ export default defineEventHandler(async (event) => {
     body: body
   })
   // return returnData
-  return returnData.hits.hits.map((h) => [h['_source']['title'], h['highlight']['text']])
+  const returnObject = {
+    total: returnData.hits.total.value,
+    hits: returnData.hits.hits.map((h) => [
+      h['_source']['urn'],
+      h['_source']['title'],
+      h['highlight']['text']
+    ])
+  }
+  return returnObject
 })
