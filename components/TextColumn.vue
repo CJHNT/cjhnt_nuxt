@@ -32,7 +32,11 @@ const { data: xmlText } = await useFetch('/api/dts/document', {
 var rawXsl = ''
 if (props.urn.includes('commentary')) {
   rawXsl = (await import('../assets/source/commentary.xsl?raw')).default
-} else if (props.urn.includes('tlg0031') || props.urn.includes('tlg0527') || props.urn.includes('1henoch')) {
+} else if (
+  props.urn.includes('tlg0031') ||
+  props.urn.includes('tlg0527') ||
+  props.urn.includes('1henoch')
+) {
   rawXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
 } else {
   rawXsl = (await import('../assets/source/epidoc.xsl?raw')).default
@@ -41,9 +45,9 @@ const xsltClass = new Xslt()
 const xmlParser = new XmlParser()
 const parsedXslt = xmlParser.xmlParse(rawXsl)
 const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
-function formattedText() {
+const formattedText = computed(() => {
   return parsedText.replaceAll('span><span', 'span> <span')
-}
+})
 </script>
 
 <template>
@@ -51,7 +55,7 @@ function formattedText() {
     <v-row v-if="alertText">
       <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
     </v-row>
-    <v-row>
+    <v-row v-if="formattedText">
       <v-col cols="auto">
         <NuxtLink :to="`/comptexts/${props.urn};${prevId}`" v-show="prevId !== null"
           >Previous {{ navReturn.citeType }}</NuxtLink
@@ -72,7 +76,7 @@ function formattedText() {
       </v-col>
     </v-row>
   </v-container>
-  <v-container class="text-content" v-html="formattedText()"></v-container>
+  <v-container class="text-content" v-html="formattedText"></v-container>
 </template>
 
 <style></style>
