@@ -12,13 +12,18 @@ const logout = () => {
 <template>
   <v-app-bar color="#027f42">
     <template v-slot:prepend>
-      <v-btn href="https://cjhnt-info.saw-leipzig.de/de" target="_blank" class="d-md-none"
+      <v-btn class="d-md-none"
         ><v-img
           src="@/assets/img/cjh-logo-quadratisch-klein.png"
           alt="Logo: CJHNT Project"
           width="32"
           inline
         ></v-img
+      ></v-btn>
+      <v-btn
+        icon="mdi-information-outline"
+        href="https://cjhnt-info.saw-leipzig.de/de"
+        target="_blank"
       ></v-btn>
       <v-btn icon="mdi-home" href="/"></v-btn>
     </template>
