@@ -27,12 +27,15 @@ const sortedMembers = computed(() => {
 })
 import primaryImage from '@/assets/img/1_primary_texts.png'
 import commentaryImage from '@/assets/img/commentary.jpg'
+import infoImage from '@/assets/img/wissen_texts.png'
 
 function getImage(urn) {
   if (urn === '1_primary_texts') {
     return primaryImage
   } else if (urn === 'urn:cts:cjhnt:commentary') {
     return commentaryImage
+  } else if (urn === 'wissen_texts') {
+    return infoImage
   }
 }
 </script>
@@ -41,15 +44,24 @@ function getImage(urn) {
   <v-row justify="center">
     <v-col v-for="member in sortedMembers" :key="member.id" cols="auto">
       <template>
-        <nuxt-link class="mx-auto" :to="`/collection/${member.id}`" :title="member[locale]">
-          <picture>
-            <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" />
-            <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" />
-            <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" />
-            <img :src="getImage(member.id)" :alt="member[locale]" height="200" />
-          </picture>
-        </nuxt-link>
+        <figure>
+          <figcaption class="text-caption">{{ member[locale] }}</figcaption>
+          <nuxt-link class="mx-auto" :to="`/collection/${member.id}`" :title="member[locale]">
+            <picture>
+              <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" />
+              <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" />
+              <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" />
+              <img :src="getImage(member.id)" :alt="member[locale]" height="200" />
+            </picture>
+          </nuxt-link>
+        </figure>
       </template>
     </v-col>
   </v-row>
 </template>
+
+<style>
+figcaption {
+  text-align: center;
+}
+</style>

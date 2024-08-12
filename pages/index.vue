@@ -9,20 +9,9 @@ const { user } = useUserSession()
 
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <v-container>
-        <template v-if="!user || user.role === 'user'">
-          <v-row justify="center">
-            <v-col cols="12" md="8" xl="4">
-              <v-alert type="info"
-                >We'll be publishing our first texts soon.
-                <nuxt-link :to="{ name: 'auth-register' }">Sign up</nuxt-link> for an account if you
-                want to be notified.</v-alert
-              >
-            </v-col>
-          </v-row>
-        </template>
-        <template v-else>
-          <v-row justify="center">
-            <v-col cols="auto" class="pb-sm-16">
+        <v-row justify="center">
+          <v-col cols="auto" class="pb-sm-16">
+            <a href="https://cjhnt-info.saw-leipzig.de/de" target="_blank">
               <picture class="d-none d-md-flex">
                 <source
                   media="(max-width: 960px)"
@@ -40,8 +29,21 @@ const { user } = useUserSession()
                   height="270"
                 />
               </picture>
+            </a>
+          </v-col>
+        </v-row>
+        <template v-if="!user || user.role === 'user'">
+          <v-row justify="center">
+            <v-col cols="12" md="8" xl="4">
+              <v-alert type="info"
+                >We'll be publishing our first texts soon.
+                <nuxt-link :to="{ name: 'auth-register' }">Sign up</nuxt-link> for an account if you
+                want to be notified.</v-alert
+              >
             </v-col>
           </v-row>
+        </template>
+        <template v-else>
           <!-- <v-row justify="center pb-16">
             <v-col cols="auto" class="pt-0">
               <p class="text-caption">

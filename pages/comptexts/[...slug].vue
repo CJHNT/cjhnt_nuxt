@@ -39,6 +39,11 @@ const urnReffs = route.params.slug.map((urnReff) => {
           :urn="urnReff[0]"
           :reff="urnReff[1]"
         />
+        <InfoColumn
+          v-else-if="urnReff[0].includes('cjhnt:info')"
+          :urn="urnReff[0]"
+          :reff="urnReff[1]"
+        />
         <TextColumn v-else :urn="urnReff[0]" :reff="urnReff[1]" />
       </v-container>
     </v-main>

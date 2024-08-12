@@ -12,10 +12,7 @@ const logout = () => {
 <template>
   <v-app-bar color="#027f42">
     <template v-slot:prepend>
-      <v-btn
-        href="https://www.theol.uni-leipzig.de/institut-fuer-neutestamentliche-wissenschaft/forschung/corpus-judaeo-hellenisticum-novi-testamenti-digital"
-        target="_blank"
-        class="d-md-none"
+      <v-btn href="https://cjhnt-info.saw-leipzig.de/de" target="_blank" class="d-md-none"
         ><v-img
           src="@/assets/img/cjh-logo-quadratisch-klein.png"
           alt="Logo: CJHNT Project"
