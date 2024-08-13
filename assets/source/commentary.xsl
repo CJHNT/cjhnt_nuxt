@@ -57,7 +57,14 @@
     
     <xsl:template match="t:div[@type='sectionA']">
         <xsl:if test="t:p/node()">
-            <xsl:element name="h3">Section A</xsl:element>
+            <xsl:choose>
+                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                    <xsl:element name="h3">Literature</xsl:element>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="h3">Literatur</xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:element name="div">
                 <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
                 <xsl:for-each select="t:p">
@@ -69,7 +76,14 @@
     
     <xsl:template match="t:div[@type='sectionB']">
         <xsl:if test="t:p/node()">
-            <xsl:element name="h3">Section B</xsl:element>
+            <xsl:choose>
+                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                    <xsl:element name="h3">Primary Sources</xsl:element>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="h3">Belegstellenübersicht</xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:element name="div">
                 <xsl:attribute name="type"><xsl:value-of select="@type"/></xsl:attribute>
                 <xsl:for-each select="t:p">
@@ -93,7 +107,14 @@
     
     <xsl:template match="t:div[@type='sectionC']">
         <xsl:if test="t:p/node()">
-            <xsl:element name="h3">Section C</xsl:element>
+            <xsl:choose>
+                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                    <xsl:element name="h3">Rationale for Chosen Sources</xsl:element>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="h3">Begründung der Textauswahl</xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:element name="div">
                 <xsl:attribute name="type"><xsl:value-of select="@type"/></xsl:attribute>
                 <xsl:for-each select="t:p">
@@ -113,8 +134,15 @@
                         </xsl:for-each>
                     </xsl:element>
                 </xsl:when>
-                <xsl:otherwise>                    
-                    <xsl:element name="h3">Section D</xsl:element>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                            <xsl:element name="h3">Texts</xsl:element>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:element name="h3">Texte</xsl:element>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:element name="div">
@@ -128,7 +156,14 @@
     
     <xsl:template match="t:div[@type='sectionE']">
         <xsl:if test="t:p/node()">
-            <xsl:element name="h3">Section E</xsl:element>
+            <xsl:choose>
+                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                    <xsl:element name="h3">Summary and Additional Information</xsl:element>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="h3">Zusammenfassende Auswertung und weiterführende Hinweise</xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:element name="div">
                 <xsl:attribute name="type"><xsl:value-of select="@type"/></xsl:attribute>
                 <xsl:for-each select="t:p">
