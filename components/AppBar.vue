@@ -3,9 +3,8 @@ const { loggedIn, user, clear, fetch } = useUserSession()
 const router = useRouter()
 
 fetch()
-const logout = async () => {
-  await clear()
-  router.push({ name: 'index' })
+const logout = () => {
+  clear().then(router.push({ name: 'index' }))
 }
 </script>
 
