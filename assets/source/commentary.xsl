@@ -278,10 +278,12 @@
     </xsl:template>
     
     <xsl:template match="t:seg[@type='beleg-section']">
-        <xsl:element name="span">
-            <xsl:attribute name="title"><xsl:value-of select="@n"/></xsl:attribute>
-            <xsl:attribute name="class">space-after</xsl:attribute>
-            <xsl:value-of select="."/>
+        <xsl:if test="preceding-sibling::*">            
+            <xsl:element name="br"></xsl:element>
+        </xsl:if>
+        <xsl:element name="b">
+            <xsl:attribute name="class">beleg-section-name</xsl:attribute>
+            <xsl:value-of select="@n"/>
         </xsl:element>
     </xsl:template>
     

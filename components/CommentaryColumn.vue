@@ -205,4 +205,12 @@ onMounted(() => {
 .sectionA p {
   font-size: smaller;
 }
+
+.beleg-section-name::after {
+  content: ': ';
+}
+
+.beleg-section-name::before {
+  content: '- ';
+}
 </style>
