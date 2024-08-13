@@ -57,7 +57,7 @@ const sortedMembers = computed(() => {
 <template>
   <v-responsive class="align-center">
     <Footer />
-    <v-container v-if="user.role === 'user'">
+    <v-container v-if="user?.role === 'user'">
       <v-alert type="warning"
         >This page is only available to project members.
         <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert

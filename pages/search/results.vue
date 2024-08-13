@@ -40,7 +40,7 @@ const searchPages = computed(() => {
 
 <template>
   <v-main style="min-height: 300px">
-    <v-container v-if="user.role === 'user'">
+    <v-container v-if="user?.role === 'user'">
       <v-alert type="warning"
         >This page is only available to project members.
         <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
