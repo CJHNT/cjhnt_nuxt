@@ -1,5 +1,13 @@
 <script setup>
-const { user } = useUserSession()
+const { user, fetch } = useUserSession()
+fetch()
+const searchTerm = ref('')
+
+watch(searchTerm, () => {
+  if (searchTerm) {
+    return navigateTo(`/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&page=1`)
+  }
+})
 </script>
 
 <template>
@@ -52,7 +60,7 @@ const { user } = useUserSession()
               </p>
             </v-col>
           </v-row> -->
-          <SearchBar />
+          <SearchBar v-model="searchTerm" />
           <CollectionCards />
         </template>
       </v-container>

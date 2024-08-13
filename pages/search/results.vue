@@ -6,7 +6,14 @@ definePageMeta({
 const { user } = useUserSession()
 const route = useRoute()
 const searchParams = {
-  query: { match_phrase: { text: { query: route.query.term.replaceAll('+', ' '), slop: '8' } } },
+  query: {
+    match_phrase: {
+      text: {
+        query: route.query.term.replaceAll('+', ' '),
+        slop: route.query.slop || '8'
+      }
+    }
+  },
   highlight: {
     pre_tags: ['<b>'],
     post_tags: ['</b>'],

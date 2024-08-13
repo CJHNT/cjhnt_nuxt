@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     hits: returnData.hits.hits.map((h) => [
       h['_source']['urn'],
       h['_source']['title'],
-      h['highlight']['text']
+      h['highlight'] ? h['highlight']['text'] : ''
     ])
   }
   return returnObject

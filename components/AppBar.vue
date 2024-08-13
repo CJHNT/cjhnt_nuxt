@@ -28,7 +28,12 @@ const logout = () => {
       <v-btn icon="mdi-home" href="/"></v-btn>
     </template>
     <template v-slot:append>
-      <v-btn icon="mdi-magnify"></v-btn>
+      <v-tooltip location="bottom" text="Advanced Search">
+        <template v-slot:activator="{ props }">
+          <v-btn icon="mdi-magnify" to="/search/advanced" v-bind="props"></v-btn>
+        </template>
+      </v-tooltip>
+
       <template v-if="loggedIn">
         <v-tooltip location="bottom" :text="`Logged in as ${user.email}`">
           <template v-slot:activator="{ props }">

@@ -1,12 +1,14 @@
 <script setup>
-const { data: newsItems } = await useFetch(
-  'https://cjhnt-info.saw-leipzig.de/++api++/@search?portal_type=News%20Item&sort_on=created&sort_limit=3'
-)
+const { data: newsItems } = await useFetch('/api/plone/news')
 </script>
 
 <template>
   <v-container class="pa-0">
-    <v-hover v-for="item in newsItems.items.slice(0, 3)" v-slot="{ isHovering, props }">
+    <v-hover
+      v-if="newsItems"
+      v-for="item in newsItems.items.slice(0, 3)"
+      v-slot="{ isHovering, props }"
+    >
       <v-card
         v-bind="props"
         :elevation="isHovering ? 24 : 4"

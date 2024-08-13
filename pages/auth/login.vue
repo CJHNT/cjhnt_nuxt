@@ -11,7 +11,7 @@ const login = async (body) => {
       method: 'POST',
       body
     })
-    router.push({ name: 'auth-dashboard' })
+    router.push('/')
     loading.value = false
   } catch (error) {
     console.log({ error })

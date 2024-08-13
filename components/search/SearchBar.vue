@@ -1,8 +1,9 @@
 <script setup>
+const parentSearchTerm = defineModel()
 const searchTerm = ref('')
-function buildSearchParams() {
+function sendSearchQuery() {
   if (searchTerm) {
-    return navigateTo(`/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&page=1`)
+    parentSearchTerm.value = searchTerm.value
   }
 }
 </script>
@@ -15,7 +16,7 @@ function buildSearchParams() {
           hint="Hit <Enter> to search"
           type="input"
           prepend-inner-icon="mdi-magnify"
-          @keydown.enter.prevent="buildSearchParams"
+          @keydown.enter.prevent="sendSearchQuery"
           v-model="searchTerm"
           clearable
         ></v-text-field>
