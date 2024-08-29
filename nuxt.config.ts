@@ -3,6 +3,11 @@ import { transformAssetUrls } from 'vite-plugin-vuetify'
 import path from 'path'
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [{ rel: 'icon', href: '/favicon.svg' }]
+    }
+  },
   devtools: {
     enabled: true,
     vscode: {},
