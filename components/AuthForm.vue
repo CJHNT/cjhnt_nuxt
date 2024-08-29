@@ -78,29 +78,32 @@ const submit = () => {
           :rules="[comparePasswords()]"
         />
         <v-checkbox
-          v-if="['Sign up', 'Change update status'].includes(title)"
+          v-if="['Sign up'].includes(title)"
           v-model="wantsUpdates"
-          label="Send me updates about the project"
+          :label="label || 'Send me updates about the project'"
         ></v-checkbox>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
         <v-btn color="success" :disabled="loading" type="submit">
           <template v-if="loading">please wait...</template>
+          <template v-else-if="title === 'Change update status'">{{ label }}</template>
           <template v-else>{{ title }}</template>
         </v-btn>
       </v-card-actions>
-      <v-divider></v-divider>
-      <v-card-text>
-        <template v-if="title === 'Sign up'">
-          Already registered?
-          <nuxt-link :to="{ name: 'auth-login' }">Log in</nuxt-link>
-        </template>
-        <template v-else-if="title === 'Login'">
-          Don't have an account yet?
-          <nuxt-link :to="{ name: 'auth-register' }">Sign up</nuxt-link>
-        </template>
-      </v-card-text>
+      <template v-if="['Sign up', 'Login'].includes(title)">
+        <v-divider></v-divider>
+        <v-card-text>
+          <template v-if="title === 'Sign up'">
+            Already registered?
+            <nuxt-link :to="{ name: 'auth-login' }">Log in</nuxt-link>
+          </template>
+          <template v-else-if="title === 'Login'">
+            Don't have an account yet?
+            <nuxt-link :to="{ name: 'auth-register' }">Sign up</nuxt-link>
+          </template>
+        </v-card-text>
+      </template>
     </v-form>
   </v-card>
 </template>

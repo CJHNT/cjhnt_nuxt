@@ -44,6 +44,27 @@ const changePassword = async (body) => {
     loading.value = false
   }
 }
+const changeNotification = async (body) => {
+  loading.value = true
+  try {
+    await $fetch('/api/auth/changeNotification', {
+      method: 'POST',
+      body
+    })
+    await fetch()
+    router.push({ name: 'auth-dashboard' })
+    alertMessage.value.type = 'success'
+    alertMessage.value.message =
+      user.value.wantsUpdates === true
+        ? 'You will now receive project status updates.'
+        : 'You will no longer receive project status updates.'
+    loading.value = false
+  } catch (error) {
+    console.log({ error })
+    alert(error.statusMessage || error)
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -60,8 +81,8 @@ const changePassword = async (body) => {
           <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">Hello {{ user?.email }}</p>
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <template v-if="loggedIn">
+      <template v-if="loggedIn">
+        <v-row justify="center">
           <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
@@ -78,11 +99,24 @@ const changePassword = async (body) => {
               label="New email"
             />
           </v-col>
-        </template>
-        <template v-else>
+        </v-row>
+
+        <v-row justify="center">
+          <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
+            <AuthForm
+              :loading="loading"
+              @submit="changeNotification"
+              title="Change update status"
+              :label="user.wantsUpdates ? 'Turn off Project Updates' : 'Turn on Project Updates'"
+            />
+          </v-col>
+        </v-row>
+      </template>
+      <template v-else>
+        <v-row>
           <p>Please <nuxt-link :to="{ name: 'auth-login' }">log in</nuxt-link> to view this page</p>
-        </template>
-      </v-row>
+        </v-row>
+      </template>
     </v-container>
   </v-main>
 </template>
