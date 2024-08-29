@@ -1,10 +1,24 @@
 <script setup>
 const rail = ref(false)
+const barTemporary = ref(false)
+
+onMounted(() => {
+  if (window.innerWidth < 1280) {
+    rail.value = true
+    barTemporary.value = true
+  }
+})
 </script>
 
 <template>
-  <v-navigation-drawer :rail="rail" @click="rail = false" width="500">
-    <v-container class="pr-0 fill-height">
+  <v-navigation-drawer
+    :rail="rail"
+    @click="rail = false"
+    width="500"
+    mobile-breakpoint="xs"
+    rail-width="30"
+  >
+    <v-container class="px-0 fill-height">
       <v-row no-gutters class="fill-height">
         <v-col v-if="!rail" class="fill-height">
           <v-container class="fill-height">
