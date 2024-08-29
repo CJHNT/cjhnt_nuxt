@@ -1,5 +1,10 @@
 <script setup>
-const { data: newsItems } = await useFetch('/api/plone/news')
+const { locale } = useI18n()
+const { data: newsItems } = await useFetch(`/api/plone/news/${locale.value}`)
+
+watch(locale, async (newLocale) => {
+  newsItems.value = await $fetch(`/api/plone/news/${newLocale}`)
+})
 </script>
 
 <template>

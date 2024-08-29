@@ -24,7 +24,7 @@ const logout = () => {
         href="https://cjhnt-info.saw-leipzig.de/de"
         target="_blank"
       ></v-btn>
-      <v-btn icon="mdi-home" href="/"></v-btn>
+      <v-btn icon="mdi-home" to="/"></v-btn>
     </template>
     <template v-slot:append>
       <v-tooltip location="bottom" text="Advanced Search">
