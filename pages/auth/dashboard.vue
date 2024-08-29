@@ -83,7 +83,7 @@ const changeNotification = async (body) => {
       </v-row>
       <template v-if="loggedIn">
         <v-row justify="center">
-          <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
+          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
               @submit="changePassword"
@@ -91,7 +91,7 @@ const changeNotification = async (body) => {
               label="New password"
             />
           </v-col>
-          <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
+          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
               @submit="changeEmail"
@@ -102,7 +102,7 @@ const changeNotification = async (body) => {
         </v-row>
 
         <v-row justify="center">
-          <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
+          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
               @submit="changeNotification"
