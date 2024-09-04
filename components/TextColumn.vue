@@ -38,6 +38,8 @@ if (props.urn.includes('commentary')) {
   props.urn.includes('1henoch')
 ) {
   rawXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
+} else if (props.urn.includes('qumran')) {
+  rawXsl = (await import('../assets/source/qumran.xsl?raw')).default
 } else {
   rawXsl = (await import('../assets/source/epidoc.xsl?raw')).default
 }
@@ -51,34 +53,43 @@ const formattedText = computed(() => {
 </script>
 
 <template>
-  <v-responsive>
-    <v-container>
-      <v-row v-if="alertText">
-        <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
-      </v-row>
-      <v-row v-if="formattedText">
-        <v-col cols="auto">
-          <NuxtLink :to="`/comptexts/${props.urn};${prevId}`" v-show="prevId !== null"
-            >Previous {{ navReturn.citeType }}</NuxtLink
-          >
-        </v-col>
-        <v-col>
-          <ToReffDropdown
-            :currentReff="usedReff"
-            :allReffs="validReffs"
-            :reffName="navReturn.citeType"
-            :textUrn="props.urn"
-          />
-        </v-col>
-        <v-col cols="auto">
-          <NuxtLink :to="`/comptexts/${props.urn};${nextId}`" v-show="nextId !== null"
-            >Next {{ navReturn.citeType }}</NuxtLink
-          >
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-container class="text-content" v-html="formattedText"></v-container>
-  </v-responsive>
+  <v-container>
+    <v-row justify="center">
+      <v-col v-if="props.urn.includes('qumran')" cols="4">
+        <template>
+          <QumranZeichenerklärung />
+        </template>
+      </v-col>
+      <v-col cols="8">
+        <v-container>
+          <v-row v-if="alertText">
+            <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
+          </v-row>
+          <v-row v-if="formattedText">
+            <v-col cols="auto">
+              <NuxtLink :to="`/comptexts/${props.urn};${prevId}`" v-show="prevId !== null"
+                >Previous {{ navReturn.citeType }}</NuxtLink
+              >
+            </v-col>
+            <v-col>
+              <ToReffDropdown
+                :currentReff="usedReff"
+                :allReffs="validReffs"
+                :reffName="navReturn.citeType"
+                :textUrn="props.urn"
+              />
+            </v-col>
+            <v-col cols="auto">
+              <NuxtLink :to="`/comptexts/${props.urn};${nextId}`" v-show="nextId !== null"
+                >Next {{ navReturn.citeType }}</NuxtLink
+              >
+            </v-col>
+          </v-row>
+        </v-container>
+        <v-container class="text-content" v-html="formattedText"></v-container>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style></style>

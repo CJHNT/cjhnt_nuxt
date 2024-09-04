@@ -1,3 +1,31 @@
 {
-  "welcome": "Willkommen"
+  "welcome": "Willkommen",
+  "qumranZeichenerklärung": {
+    "title": "Zeichenerklärung",
+    "row1": "Ergänzter Text",
+    "row2": "Textlücke von unbestimmter Länge",
+    "row3": "versehentliche Hinzufügung",
+    "row4": "versehentliche Auslassung",
+    "row5": "ursprünglicher Text vor Schreiberkorrektur",
+    "row6": "im Manuskript von einem Schreiber in א korrigiert",
+    "row7": "im Manuskript von einem Schreiber nachträglich eingefügt",
+    "row8": "nicht deutbarer Zeichenrest",
+    "row9": "nicht eindeutig deutbarer Zeichenrest",
+    "row10": "im Manuskript getilgter Text",
+    "row11": "Randbemerkung im Manuskript",
+    "row12": "Variante, die von einem Schreiber über einem Zeichen notiert wurde",
+    "row13": "Konjektur",
+    "row14": "vacat, unbeschriftetes Material",
+    "row15": "moderne Alternativlesung eines Buchstabens",
+    "row16": "moderne Alternativlesung eines Wortes",
+    "row17": "phonematische Angabe einer Grundform",
+    "row18": "phonetische Angabe",
+    "row19": "geworden zu",
+    "row20": "geworden aus",
+    "row21": "gleich",
+    "row22": "ungleich",
+    "row23": "Verweis auf ein aramäisches Lemma",
+    "row24": "Verweis auf ein hebräisches Lemma",
+    "row25": "markiert ein Lemma in der Lemmaliste als Verweis auf ein anderes Lemma, dessen Wörterbuchartikel auch durch Anklicken der Verweislemmata aufgerufen wird. Ein Verweislemma kann entweder eine andere Schreibweise des Hauptlemmas oder Teil eines zusammengesetzten Namens sein oder ein Lemma angeben, das mangels Belegen keinen eigenen Artikel hat, aber in dem Lemma, auf das es verweist, thematisiert wird"
+  }
 }

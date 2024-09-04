@@ -1,3 +1,31 @@
 {
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "qumranZeichenerklärung": {
+    "title": "Sigla",
+    "row1": "restored text",
+    "row2": "gap in the text of an indeterminate length",
+    "row3": "accidental addition",
+    "row4": "accidental omission",
+    "row5": "original text before scribal correction",
+    "row6": "corrected in the manuscript by a scribe to א",
+    "row7": "secondarily inserted in the manuscript by a scribe",
+    "row8": "unreadable remains of character",
+    "row9": "remains of character that cannot be clearly interpreted",
+    "row10": "text erased from the manuscript",
+    "row11": "marginal note in the manuscript",
+    "row12": "variant inserted by a scribe above a character",
+    "row13": "conjecture",
+    "row14": "vacat, material without writing",
+    "row15": "modern alternative reading of a letter",
+    "row16": "modern alternative reading of a word",
+    "row17": "phonemic representation of a base form",
+    "row18": "phonetic representation",
+    "row19": "becomes",
+    "row20": "comes from",
+    "row21": "equal to",
+    "row22": "not equal",
+    "row23": "reference to an Aramaic lemma",
+    "row24": "reference to a Hebrew lemma",
+    "row25": "marks a lemma in the lemma list as a reference to another lemma. Clicking on such a lemma will load the article of the referenced lemma. Lemmas with an '*' may either be a different spelling of the main lemma, part of a compound name, or indicate a lemma that has no article of its own due to lack of evidence, but is a subject of discussion in the lemma to which it is linked."
+  }
 }
