@@ -1,36 +1,36 @@
 <script setup>
 const { t } = useI18n()
 const items = [
-  { example: '[א]', explanation: t('qumranZeichenerklärung.row1') },
-  { example: '[--]', explanation: t('qumranZeichenerklärung.row2') },
-  { example: '{א}', explanation: t('qumranZeichenerklärung.row3') },
-  { example: '⟨א⟩', explanation: t('qumranZeichenerklärung.row4') },
-  { example: '⟦ה⟧', explanation: t('qumranZeichenerklärung.row5') },
-  { example: '«א»', explanation: t('qumranZeichenerklärung.row6') },
-  { example: '+«א»+', explanation: t('qumranZeichenerklärung.row7') },
-  { example: '○', explanation: t('qumranZeichenerklärung.row8') },
-  { example: 'א֯', explanation: t('qumranZeichenerklärung.row9') },
-  { example: 'א', explanation: t('qumranZeichenerklärung.row10') },
-  { example: '⊢אב⊣', explanation: t('qumranZeichenerklärung.row11') },
+  { example: '[א]', explanation: 'qumranZeichenerklärung.row1' },
+  { example: '[--]', explanation: 'qumranZeichenerklärung.row2' },
+  { example: '{א}', explanation: 'qumranZeichenerklärung.row3' },
+  { example: '⟨א⟩', explanation: 'qumranZeichenerklärung.row4' },
+  { example: '⟦ה⟧', explanation: 'qumranZeichenerklärung.row5' },
+  { example: '«א»', explanation: 'qumranZeichenerklärung.row6' },
+  { example: '+«א»+', explanation: 'qumranZeichenerklärung.row7' },
+  { example: '○', explanation: 'qumranZeichenerklärung.row8' },
+  { example: 'א֯', explanation: 'qumranZeichenerklärung.row9' },
+  { example: 'א', explanation: 'qumranZeichenerklärung.row10' },
+  { example: '⊢אב⊣', explanation: 'qumranZeichenerklärung.row11' },
   {
     example: 'א/ב',
-    explanation: t('qumranZeichenerklärung.row12')
+    explanation: 'qumranZeichenerklärung.row12'
   },
-  { example: '!א', explanation: t('qumranZeichenerklärung.row13') },
-  { example: '___', explanation: t('qumranZeichenerklärung.row14') },
-  { example: 'א/ח', explanation: t('qumranZeichenerklärung.row15') },
-  { example: '(אם)', explanation: t('qumranZeichenerklärung.row16') },
-  { example: '/ /', explanation: t('qumranZeichenerklärung.row17') },
-  { example: '[a]', explanation: t('qumranZeichenerklärung.row18') },
-  { example: '›', explanation: t('qumranZeichenerklärung.row19') },
-  { example: '‹', explanation: t('qumranZeichenerklärung.row20') },
-  { example: '=', explanation: t('qumranZeichenerklärung.row21') },
-  { example: '≠', explanation: t('qumranZeichenerklärung.row22') },
-  { example: '↓', explanation: t('qumranZeichenerklärung.row23') },
-  { example: '→', explanation: t('qumranZeichenerklärung.row24') },
+  { example: '!א', explanation: 'qumranZeichenerklärung.row13' },
+  { example: '___', explanation: 'qumranZeichenerklärung.row14' },
+  { example: 'א/ח', explanation: 'qumranZeichenerklärung.row15' },
+  { example: '(אם)', explanation: 'qumranZeichenerklärung.row16' },
+  { example: '/ /', explanation: 'qumranZeichenerklärung.row17' },
+  { example: '[a]', explanation: 'qumranZeichenerklärung.row18' },
+  { example: '›', explanation: 'qumranZeichenerklärung.row19' },
+  { example: '‹', explanation: 'qumranZeichenerklärung.row20' },
+  { example: '=', explanation: 'qumranZeichenerklärung.row21' },
+  { example: '≠', explanation: 'qumranZeichenerklärung.row22' },
+  { example: '↓', explanation: 'qumranZeichenerklärung.row23' },
+  { example: '→', explanation: 'qumranZeichenerklärung.row24' },
   {
     example: '*',
-    explanation: t('qumranZeichenerklärung.row25')
+    explanation: 'qumranZeichenerklärung.row25'
   }
 ]
 </script>
@@ -43,8 +43,8 @@ const items = [
         <v-table density="compact" height="50vh">
           <tbody>
             <tr v-for="item in items" :key="item.name">
-              <td>{{ item.example }}</td>
-              <td>{{ item.explanation }}</td>
+              <td>{{ $t(item.example) }}</td>
+              <td>{{ $t(item.explanation) }}</td>
             </tr>
           </tbody>
         </v-table>
