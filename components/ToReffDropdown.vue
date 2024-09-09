@@ -19,10 +19,10 @@ function makeNewUrl(n) {
 </script>
 
 <template>
-  <v-menu v-if="dropdownMembers.length > 0">
+  <v-menu v-if="dropdownMembers.length > 0" width="10rem">
     <template v-slot:activator="{ props }">
       <v-btn variant="text" size="x-small" v-bind="props">
-        {{ `Go to ${compProps.reffName}:` }}
+        {{ $t('comptext.goTo') }}
       </v-btn>
     </template>
     <v-list density="compact" :lines="false">

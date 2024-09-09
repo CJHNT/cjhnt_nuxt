@@ -23,7 +23,9 @@ watch(locale, async (newLocale) => {
           item.title
         }}</v-card-title>
         <v-card-text class="news-snippet">{{ item.description }}</v-card-text>
-        <v-card-text class="py-0"><a :href="item['@id']" target="_blank">Read more</a></v-card-text>
+        <v-card-text class="py-0"
+          ><a :href="item['@id']" target="_blank">{{ $t('index.readMore') }}</a></v-card-text
+        >
       </v-card>
     </v-hover>
   </v-container>

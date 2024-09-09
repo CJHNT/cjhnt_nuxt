@@ -34,7 +34,7 @@ const logout = () => {
       </v-tooltip>
 
       <template v-if="loggedIn">
-        <v-tooltip location="bottom" :text="`Logged in as ${user.email}`">
+        <v-tooltip location="bottom" :text="$t('auth.loggedInAs', { email: user.email })">
           <template v-slot:activator="{ props }">
             <v-btn icon="mdi-account" to="/auth/dashboard" v-bind="props"></v-btn>
             <v-btn icon="mdi-logout" @click="logout" v-bind="props"></v-btn>

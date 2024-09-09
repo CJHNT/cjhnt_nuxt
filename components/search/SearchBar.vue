@@ -13,7 +13,7 @@ function sendSearchQuery() {
     <v-col>
       <v-responsive class="mx-auto" max-width="344">
         <v-text-field
-          hint="Hit <Enter> to search"
+          :hint="$t('index.searchHint')"
           type="input"
           prepend-inner-icon="mdi-magnify"
           @keydown.enter.prevent="sendSearchQuery"

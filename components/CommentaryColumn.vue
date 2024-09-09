@@ -8,15 +8,24 @@ const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
   method: 'POST'
 })
-const { data: collMembers } = await useAsyncData('apiPrevNext', async () => {
+const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
   const parentId = props.urn.split('.').slice(0, -1).join('.')
   const parentData = await $fetch('/api/dts/collections', {
     body: { id: parentId },
     method: 'POST'
   })
-  return [...parentData.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
+  return parentData
 })
-const memberItems = collMembers.value
+const docTitle = {
+  de: parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+    ? parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+    : parentData.value.title,
+  en: parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+    ? parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+    : parentData.value.title
+}
+const collMembers = [...parentData.value.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
+const memberItems = collMembers
   .filter((m) => m['@id'] !== props.urn)
   .map((m) => {
     const returnValue = {
@@ -26,10 +35,6 @@ const memberItems = collMembers.value
     }
     return returnValue
   })
-const currentIndex = collMembers.value.findIndex((m) => m['@id'] === props.urn)
-const prevId = currentIndex > 0 ? collMembers.value[currentIndex - 1]['@id'] : null
-const nextId =
-  currentIndex + 1 < collMembers.value.length ? collMembers.value[currentIndex + 1]['@id'] : null
 const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
 let usedReff = props.reff
 if (!validReffs.includes(props.reff)) {
@@ -145,7 +150,7 @@ onMounted(() => {
             <v-autocomplete
               :items="memberItems"
               density="compact"
-              hint="Read another text"
+              :hint="$t('comptext.readAnother')"
               width="200"
               persistent-hint
               clearable
@@ -156,18 +161,31 @@ onMounted(() => {
       </v-col>
       <v-col cols="8">
         <v-container>
-          <v-row>
-            <v-col
-              ><nuxt-link :to="`/comptexts/${prevId}`" v-show="prevId !== null"
-                >Prev</nuxt-link
-              ></v-col
-            >
-            <v-spacer></v-spacer>
-            <v-col
-              ><nuxt-link :to="`/comptexts/${nextId}`" v-show="nextId !== null"
-                >Next</nuxt-link
-              ></v-col
-            >
+          <v-row justify="center">
+            <v-col cols="auto" class="pr-0">
+              <h1>{{ docTitle[locale] }} {{ usedReff }}</h1>
+            </v-col>
+            <v-col cols="auto" class="pl-0">
+              <v-dialog max-width="500">
+                <template v-slot:activator="{ props: activatorProps }">
+                  <v-btn v-bind="activatorProps" variant="plain" size="x-small"
+                    ><v-icon> mdi-copyright </v-icon></v-btn
+                  >
+                </template>
+
+                <template v-slot:default="{ isActive }">
+                  <v-card title="Copyright">
+                    <v-card-text>{{ $t('comptext.commentaryLicense') }}</v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn :text="$t('closeDialog')" @click="isActive.value = false"></v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </template>
+              </v-dialog>
+            </v-col>
           </v-row>
           <v-row class="text-content" v-html="langText()"> </v-row>
         </v-container>

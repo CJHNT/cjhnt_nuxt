@@ -78,7 +78,9 @@ const changeNotification = async (body) => {
             :text="alertMessage.message"
             closable
           ></v-alert>
-          <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">Hello {{ user?.email }}</p>
+          <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">
+            {{ $t('auth.hello') }} {{ user?.email }}
+          </p>
         </v-col>
       </v-row>
       <template v-if="loggedIn">
@@ -87,16 +89,16 @@ const changeNotification = async (body) => {
             <AuthForm
               :loading="loading"
               @submit="changePassword"
-              title="Change password"
-              label="New password"
+              title="auth.changePassword"
+              label="auth.newPassword"
             />
           </v-col>
           <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
               @submit="changeEmail"
-              title="Change email"
-              label="New email"
+              title="auth.changeEmail"
+              label="auth.newEmail"
             />
           </v-col>
         </v-row>
@@ -106,8 +108,8 @@ const changeNotification = async (body) => {
             <AuthForm
               :loading="loading"
               @submit="changeNotification"
-              title="Change update status"
-              :label="user.wantsUpdates ? 'Turn off Project Updates' : 'Turn on Project Updates'"
+              title="auth.changeUpdateStatus"
+              :label="user.wantsUpdates ? 'auth.turnOffUpdates' : 'auth.turnOnUpdates'"
             />
           </v-col>
         </v-row>

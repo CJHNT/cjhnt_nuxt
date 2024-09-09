@@ -1,5 +1,55 @@
 {
   "welcome": "Willkommen",
+  "wait": "bitte warten...",
+  "closeDialog": "Fenster schließen",
+  "index": {
+    "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
+    "signUp": "Legen Sie ein Konto an",
+    "readMore": "Weiter lesen",
+    "introBlurb": "Willkommen auf der Forschungsplattform des CJHNT! Alle unsere Texte, sowohl die im Rahmen des Projekts erstellten Kommentare als auch die frühjüdischen Texte, auf denen sie beruhen, werden hier veröffentlicht. Wir werden auch eine erweiterte Suchfunktion haben, die es Ihnen ermöglicht, Ihre eigenen Recherchen in unserem Korpus durchzuführen. Um die Plattform nutzen zu können, müssen Sie ein {0}. Während des Registrierungsprozesses können Sie sich auch dafür anmelden, Updates über neue Texte und neue Funktionen zu erhalten.",
+    "register": "Konto anlegen",
+    "searchHint": "Drücken Sie <Enter>, um zu suchen"
+  },
+  "auth": {
+    "hello": "Herzlich Willkommen",
+    "changePassword": "Passwort ändern",
+    "changeEmail": "Emailadresse ändern",
+    "changeUpdateStatus": "Benachrichtigungen ändern",
+    "signUp": "Registrieren",
+    "login": "Einloggen",
+    "verifyEmail": "Email verifizieren",
+    "verifyPassword": "Passwort verifizieren",
+    "password": "Passwort",
+    "sendMeUpdates": "Updates über das Projekt erhalten",
+    "alreadyRegistered": "Schon registriert?",
+    "noAccountYet": "Noch kein Benutzerkonto?",
+    "newPassword": "Neues Passwort",
+    "newEmail": "Neue Emailadresse",
+    "turnOffUpdates": "Benachrichtigungen ausschalten",
+    "turnOnUpdates": "Benachrichtigungen anschalten",
+    "noPasswordMatch": "Passwörter sind nicht gleich",
+    "noEmailMatch": "Emailadressen sind nich gleich",
+    "loggedInAs": "Als {email} eingeloggt"
+  },
+  "comptext": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "goTo": "Gehe zu",
+    "commentaryLicense": "Bereitgestellt unter einer Creative Commons Namensnennung-ShareAlike 4.0 International Lizenz.",
+    "readAnother": "Einen anderen Text lesen"
+  },
+  "collection": {
+    "bible": "Bibel",
+    "nt": "Neues Testament",
+    "lxx": "Septuaginta",
+    "authors": "Hellenistisch-jüdische Autoren",
+    "qumran": "Qumran",
+    "philo": "Philo",
+    "josephus": "Josephus",
+    "author_fragments": "Fragmente",
+    "pseudo": "Pseudonyme und anonyme Schriften",
+    "other": "Sonstige Quellen"
+  },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",
     "row1": "Ergänzter Text",

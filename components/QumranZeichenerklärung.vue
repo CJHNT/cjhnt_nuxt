@@ -1,5 +1,4 @@
 <script setup>
-const { t } = useI18n()
 const items = [
   { example: '[א]', explanation: 'qumranZeichenerklärung.row1' },
   { example: '[--]', explanation: 'qumranZeichenerklärung.row2' },

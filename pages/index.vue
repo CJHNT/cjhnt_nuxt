@@ -44,9 +44,9 @@ watch(searchTerm, () => {
           <v-row justify="center">
             <v-col cols="12" md="8" xl="4">
               <v-alert type="info"
-                >We'll be publishing our first texts soon.
-                <nuxt-link :to="{ name: 'auth-register' }">Sign up</nuxt-link> for an account if you
-                want to be notified.</v-alert
+                ><i18n-t keypath="index.userAlert">
+                  <nuxt-link :to="{ name: 'auth-register' }">{{ $t('index.signUp') }}</nuxt-link>
+                </i18n-t></v-alert
               >
             </v-col>
           </v-row>

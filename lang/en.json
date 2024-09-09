@@ -1,5 +1,55 @@
 {
   "welcome": "Welcome",
+  "wait": "please wait...",
+  "closeDialog": "Close Dialog",
+  "index": {
+    "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
+    "signUp": "Sign up",
+    "readMore": "Read more",
+    "introBlurb": "Welcome to the CJHNT research platform! All of our texts, both the commentaries produced in the project and the early Jewish texts that they depend on, will be published here. We will also have advanced search functionality to allow you to do your own research on our corpus. To use the platform you will need to {0}. During the registration process you can also sign up to receive updates about new texts and new functionality.",
+    "register": "register for an account",
+    "searchHint": "Hit <Enter> to search"
+  },
+  "auth": {
+    "hello": "Hello",
+    "changePassword": "Change Password",
+    "changeEmail": "Change Email",
+    "changeUpdateStatus": "Change update status",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "verifyEmail": "Verify Email",
+    "verifyPassword": "Verify Password",
+    "password": "Password",
+    "sendMeUpdates": "Send me updates about the project",
+    "alreadyRegistered": "Already registered?",
+    "noAccountYet": "Don't have an account yet?",
+    "newPassword": "New Password",
+    "newEmail": "New Email",
+    "turnOffUpdates": "Turn off Project Updates",
+    "turnOnUpdates": "Turn on Project Updates",
+    "noPasswordMatch": "Passwords do not match",
+    "noEmailMatch": "Emails do not match",
+    "loggedInAs": "Logged in as {email}"
+  },
+  "collection": {
+    "bible": "Bible",
+    "nt": "New Testament",
+    "lxx": "Septuagint",
+    "authors": "Hellenistic-Jewish Authors",
+    "qumran": "Qumran",
+    "philo": "Philo",
+    "josephus": "Flavius Josephus",
+    "author_fragments": "Fragments",
+    "pseudo": "Pseudonymous and Anonymous Writings",
+    "other": "Other Sources"
+  },
+  "comptext": {
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to",
+    "commentaryLicense": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
+    "readAnother": "Read another text"
+  },
   "qumranZeichenerklärung": {
     "title": "Sigla",
     "row1": "restored text",
