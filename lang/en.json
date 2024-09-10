@@ -41,7 +41,11 @@
     "josephus": "Flavius Josephus",
     "author_fragments": "Fragments",
     "pseudo": "Pseudonymous and Anonymous Writings",
-    "other": "Other Sources"
+    "other": "Other Sources",
+    "searchHint": "Find a collection",
+    "openMenu": "Show collection list",
+    "closeMenu": "Hide collection list",
+    "emptySearchMessage": "No results"
   },
   "comptext": {
     "previous": "Previous",

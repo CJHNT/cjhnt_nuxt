@@ -5,10 +5,11 @@ definePageMeta({
 
 const tab = ref(null)
 const subTab = ref(null)
-const loading = ref(false)
 const { user } = useUserSession()
 const { locale } = useI18n()
-const { name } = useDisplay()
+const searchList = ref([])
+const programmaticChange = ref(false)
+const foundElementId = ref(null)
 const subColls = [
   {
     title: 'collection.bible',
@@ -63,21 +64,50 @@ for (let coll in collectionLists.value) {
           ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
           : m.title,
         type: textData['@type'],
-        versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']])
+        versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
+        parentId: coll
       }
       return returnObject
     })
     const finishedPromises = await Promise.all(textPromises)
     return finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
   })
+  data.value.map((e) => {
+    searchList.value.push({
+      id: e.id,
+      en: e.en,
+      de: e.de,
+      subTab: e.parentId,
+      tab: subColls.find((c) => {
+        for (let subC of c.collections) {
+          if (subC.urn === e.parentId) {
+            return true
+          }
+        }
+        return false
+      }).title
+    })
+  })
   collectionLists.value[coll] = data.value
 }
 
-// watch(subTab, (newUrn) => {
-//   sortedMembers.value = [...collectionLists.value[newUrn]].sort((a, b) => a.id.localeCompare(b.id))
-// })
+async function goToSubtab(newTab, newSubtab, newId) {
+  if (tab.value !== newTab) {
+    programmaticChange.value = true
+  }
+  subTab.value = newSubtab
+  tab.value = newTab
+  await nextTick()
+  const foundElement = document.getElementById(newId)
+  foundElement.addEventListener('animationend', () => foundElement.classList.remove('flash-yellow'))
+  foundElement.classList.add('flash-yellow')
+}
+
 watch(tab, (newTab) => {
-  subTab.value = subColls.find((e) => e.title === newTab).collections[0].urn
+  if (!programmaticChange.value) {
+    subTab.value = subColls.find((e) => e.title === newTab).collections[0].urn
+  }
+  programmaticChange.value = false
 })
 </script>
 
@@ -92,6 +122,30 @@ watch(tab, (newTab) => {
     </v-container>
     <v-main v-else class="d-flex" justify="center" style="min-height: 300px">
       <v-container>
+        <v-row justify="center">
+          <v-col cols="12" xl="8" xxl="6">
+            <v-autocomplete
+              :items="searchList"
+              :itemTitle="locale"
+              noDataText="collection.emptySearchMessage"
+              openText="collection.openMenu"
+              closeText="collection.closeMenu"
+              density="compact"
+              :hint="$t('collection.searchHint')"
+              width="200"
+              persistent-hint
+              clearable
+            >
+              <template v-slot:item="{ props, item }">
+                <v-list-item
+                  v-bind="props"
+                  :title="item.raw[locale]"
+                  @click="goToSubtab(item.raw.tab, item.raw.subTab, item.raw.id)"
+                ></v-list-item>
+              </template>
+            </v-autocomplete>
+          </v-col>
+        </v-row>
         <v-row justify="center">
           <v-col cols="12" xl="8" xxl="6">
             <v-card>
@@ -145,3 +199,19 @@ watch(tab, (newTab) => {
     </v-main>
   </v-responsive>
 </template>
+
+<style>
+@keyframes work-focus {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: initial;
+  }
+}
+
+.flash-yellow {
+  animation-name: work-focus;
+  animation-duration: 5s;
+}
+</style>

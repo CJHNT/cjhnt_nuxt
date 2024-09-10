@@ -47,7 +47,12 @@ const numCols = computed(() => {
     <v-row>
       <v-col v-for="x in numCols">
         <v-list lines="one">
-          <v-list-item v-for="member in colLists[x - 1]" :key="member.id" class="pa-0">
+          <v-list-item
+            v-for="member in colLists[x - 1]"
+            :key="member.id"
+            class="pa-0"
+            :id="member.id"
+          >
             <v-list-item-title>{{ member[locale] }}</v-list-item-title>
             <v-list-item-subtitle>
               <v-btn

@@ -31,13 +31,6 @@
     "noEmailMatch": "Emailadressen sind nich gleich",
     "loggedInAs": "Als {email} eingeloggt"
   },
-  "comptext": {
-    "previous": "Zurück",
-    "next": "Weiter",
-    "goTo": "Gehe zu",
-    "commentaryLicense": "Bereitgestellt unter einer Creative Commons Namensnennung-ShareAlike 4.0 International Lizenz.",
-    "readAnother": "Einen anderen Text lesen"
-  },
   "collection": {
     "bible": "Bibel",
     "nt": "Neues Testament",
@@ -48,7 +41,18 @@
     "josephus": "Josephus",
     "author_fragments": "Fragmente",
     "pseudo": "Pseudonyme und anonyme Schriften",
-    "other": "Sonstige Quellen"
+    "other": "Sonstige Quellen",
+    "searchHint": "Eine Sammlung finden",
+    "openMenu": "Sammlungsliste zeigen",
+    "closeMenu": "Sammlungsliste schließen",
+    "emptySearchMessage": "Keine Treffer"
+  },
+  "comptext": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "goTo": "Gehe zu",
+    "commentaryLicense": "Bereitgestellt unter einer Creative Commons Namensnennung-ShareAlike 4.0 International Lizenz.",
+    "readAnother": "Einen anderen Text lesen"
   },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",
