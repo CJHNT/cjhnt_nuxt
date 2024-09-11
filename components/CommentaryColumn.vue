@@ -21,12 +21,12 @@ const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
   return parentData
 })
 const docTitle = {
-  de: parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-    ? parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-    : parentData.value.title,
-  en: parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-    ? parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-    : parentData.value.title
+  de: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+    : textMeta.value.title,
+  en: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+    : textMeta.value.title
 }
 const citation = {
   de:
@@ -209,7 +209,7 @@ onMounted(() => {
         <v-container>
           <v-row justify="center">
             <v-col cols="auto" class="pr-0">
-              <h1>{{ docTitle[locale] }} {{ usedReff }}</h1>
+              <h1>{{ docTitle[locale] }}</h1>
             </v-col>
             <v-col cols="auto" class="pl-0">
               <v-dialog max-width="500">
