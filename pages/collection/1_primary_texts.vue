@@ -9,7 +9,6 @@ const { user } = useUserSession()
 const { locale } = useI18n()
 const searchList = ref([])
 const programmaticChange = ref(false)
-const foundElementId = ref(null)
 const subColls = [
   {
     title: 'collection.bible',
@@ -114,14 +113,13 @@ watch(tab, (newTab) => {
 <template>
   <v-responsive>
     <Footer />
-    <v-container v-if="user?.role === 'user'">
-      <v-alert type="warning"
-        >This page is only available to project members.
-        <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
-      >
-    </v-container>
-    <v-main v-else class="d-flex" justify="center" style="min-height: 300px">
-      <v-container>
+    <v-main class="d-flex" justify="center" style="min-height: 300px">
+      <v-container v-if="user?.role === 'user'" class="text-column">
+        <v-alert type="warning"
+          >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
+        >
+      </v-container>
+      <v-container v-else>
         <v-row justify="center">
           <v-col cols="12" xl="8" xxl="6">
             <v-autocomplete

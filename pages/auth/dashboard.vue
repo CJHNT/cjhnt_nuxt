@@ -18,7 +18,7 @@ const changeEmail = async (body) => {
     fetch()
     router.push({ name: 'auth-dashboard' })
     alertMessage.value.type = 'success'
-    alertMessage.value.message = 'Email successfully changed.'
+    alertMessage.value.message = 'auth.emailChanged'
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -36,7 +36,7 @@ const changePassword = async (body) => {
     fetch()
     router.push({ name: 'auth-dashboard' })
     alertMessage.value.type = 'success'
-    alertMessage.value.message = 'Password successfully changed.'
+    alertMessage.value.message = 'auth.passwordChanged'
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -55,9 +55,7 @@ const changeNotification = async (body) => {
     router.push({ name: 'auth-dashboard' })
     alertMessage.value.type = 'success'
     alertMessage.value.message =
-      user.value.wantsUpdates === true
-        ? 'You will now receive project status updates.'
-        : 'You will no longer receive project status updates.'
+      user.value.wantsUpdates === true ? 'auth.updatesOn' : 'auth.updatesOff'
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -75,12 +73,17 @@ const changeNotification = async (body) => {
           <v-alert
             v-if="alertMessage.message"
             :type="alertMessage.type"
-            :text="alertMessage.message"
+            :text="$t(alertMessage.message)"
             closable
           ></v-alert>
           <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">
             {{ $t('auth.hello') }} {{ user?.email }}
           </p>
+          <v-alert v-else type="info" closable>
+            <i18n-t keypath="auth.pleaseLogin">
+              <nuxt-link :to="{ name: 'auth-login' }">{{ $t('auth.pleaseLoginLink') }}</nuxt-link>
+            </i18n-t>
+          </v-alert>
         </v-col>
       </v-row>
       <template v-if="loggedIn">
@@ -112,11 +115,6 @@ const changeNotification = async (body) => {
               :label="user.wantsUpdates ? 'auth.turnOffUpdates' : 'auth.turnOnUpdates'"
             />
           </v-col>
-        </v-row>
-      </template>
-      <template v-else>
-        <v-row>
-          <p>Please <nuxt-link :to="{ name: 'auth-login' }">log in</nuxt-link> to view this page</p>
         </v-row>
       </template>
     </v-container>

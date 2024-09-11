@@ -25,7 +25,7 @@ function submit() {
                 <SearchAdvancedSlop v-model="slop" />
               </v-row>
               <v-card-actions>
-                <v-btn color="success" type="submit">Search</v-btn>
+                <v-btn color="success" type="submit">{{ $t('search.search') }}</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>

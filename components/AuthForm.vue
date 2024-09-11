@@ -19,14 +19,6 @@ function validateEmail() {
   return pattern.test(email.value) || 'Invalid e-mail.'
 }
 
-function compareEmails() {
-  return email.value === repeatEmail.value || 'Emails do not match'
-}
-
-function comparePasswords() {
-  return password.value === repeatPassword.value || 'Passwords do not match'
-}
-
 const submit = () => {
   const payload = {
     email: email.value,
@@ -56,7 +48,7 @@ const submit = () => {
           :label="$t('auth.verifyEmail')"
           prepend-icon="mdi-email"
           v-model="repeatEmail"
-          :rules="[() => email.value === repeatEmail.value || $t('noEmailMatch')]"
+          :rules="[() => email === repeatEmail || $t('auth.noEmailMatch')]"
         />
         <v-text-field
           v-if="['auth.signUp', 'auth.changePassword', 'auth.login'].includes(title)"

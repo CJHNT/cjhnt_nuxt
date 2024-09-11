@@ -15,15 +15,15 @@ const register = async (body) => {
   loading.value = true
   if (!validateEmail(body.email)) {
     alertMessage.value.type = 'error'
-    alertMessage.value.message = 'Invalid email.'
+    alertMessage.value.message = 'auth.invalidEmail'
     loading.value = false
   } else if (!body.password) {
     alertMessage.value.type = 'error'
-    alertMessage.value.message = 'Password field is empty.'
+    alertMessage.value.message = 'auth.emptyPassword'
     loading.value = false
   } else if (body.password !== body.repeatPassword) {
     alertMessage.value.type = 'error'
-    alertMessage.value.message = 'Passwords do not match.'
+    alertMessage.value.message = 'auth.noPasswordMatch'
     loading.value = false
   } else {
     try {
@@ -49,7 +49,7 @@ const register = async (body) => {
           <v-alert
             v-if="alertMessage.message"
             :type="alertMessage.type"
-            :text="alertMessage.message"
+            :text="$t(alertMessage.message)"
             closable
           ></v-alert>
         </v-col>

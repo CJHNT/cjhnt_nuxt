@@ -11,7 +11,7 @@ const parentSearchSlop = defineModel()
       label="Slop"
       variant="outlined"
     >
-      <v-tooltip activator="parent" location="start">Maximum distance between words</v-tooltip>
+      <v-tooltip activator="parent" location="start">{{ $t('search.slopTooltip') }}</v-tooltip>
     </v-text-field>
   </v-col>
 </template>

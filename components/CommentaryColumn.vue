@@ -8,6 +8,10 @@ const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
   method: 'POST'
 })
+const { data: textMeta } = await useFetch('/api/dts/collections', {
+  body: { id: props.urn },
+  method: 'POST'
+})
 const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
   const parentId = props.urn.split('.').slice(0, -1).join('.')
   const parentData = await $fetch('/api/dts/collections', {
@@ -24,6 +28,28 @@ const docTitle = {
     ? parentData.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
     : parentData.value.title
 }
+const citation = {
+  de:
+    textMeta.value['dts:dublincore'] &&
+    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+      (e) => e['@language'] === 'deu'
+    )
+      ? textMeta.value['dts:dublincore'] &&
+        textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+          (e) => e['@language'] === 'deu'
+        )['@value']
+      : '',
+  en:
+    textMeta.value['dts:dublincore'] &&
+    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+      (e) => e['@language'] === 'eng'
+    )
+      ? textMeta.value['dts:dublincore'] &&
+        textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+          (e) => e['@language'] === 'eng'
+        )['@value']
+      : ''
+}
 const collMembers = [...parentData.value.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
 const memberItems = collMembers
   .filter((m) => m['@id'] !== props.urn)
@@ -31,7 +57,7 @@ const memberItems = collMembers
     const returnValue = {
       value: m['@id'],
       title: m.title.split(' ').pop(),
-      props: { href: `/comptexts/${m['@id']}` }
+      props: { href: `/texts/${m['@id']}` }
     }
     return returnValue
   })
@@ -52,8 +78,6 @@ const xmlParser = new XmlParser()
 const parsedXslt = xmlParser.xmlParse(rawXsl)
 const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
 const formattedText = parsedText
-// const parser = new DOMParser()
-// const domText = parser.parseFromString(formattedText, 'text/html')
 const domText = parseFromString(formattedText)
 const { data: ntText } = await useAsyncData('apiNtText', async () => {
   const ntElement = domText.getElementsByClassName('nt-source-text')[0]
@@ -94,19 +118,33 @@ onMounted(() => {
           body: { id: member['@id'], ref: sourceRef },
           method: 'POST'
         })
-        const processedResult = await xsltClass.xsltProcess(
-          xmlParser.xmlParse(originalText.value),
-          xmlParser.xmlParse(epidocXsl)
-        )
-        if (!['eng', 'deu'].includes(member['dts:extensions']['dc:language'])) {
-          langTexts['Original'] = processedResult
+        let processedResult = ''
+        if (
+          member['@id'].includes('tlg0031') ||
+          member['@id'].includes('tlg0527') ||
+          member['@id'].includes('1henoch')
+        ) {
+          processedResult = await xsltClass.xsltProcess(
+            xmlParser.xmlParse(originalText.value),
+            xmlParser.xmlParse(ntFragmentXsl)
+          )
         } else {
-          langTexts[member['dts:extensions']['dc:language']] = processedResult
+          processedResult = await xsltClass.xsltProcess(
+            xmlParser.xmlParse(originalText.value),
+            xmlParser.xmlParse(epidocXsl)
+          )
+        }
+
+        if (!['eng', 'deu'].includes(member['dts:extensions']['dc:language'])) {
+          langTexts['Original'] = processedResult.replaceAll('span><span', 'span> <span')
+        } else {
+          langTexts[member['dts:extensions']['dc:language']] = processedResult.replaceAll(
+            'span><span',
+            'span> <span'
+          )
         }
       }
       const dropdownContent = document.querySelector(el.getAttribute('data-target'))
-      // dropdownContent.querySelector('#belegstelle-content').innerHTML =
-      //   `<p>${originalText.value}</p>`
       const tabRow = dropdownContent.querySelector('.tab')
       const langContents = dropdownContent.querySelector('.tabcontent')
       tabRow.innerHTML = ''
@@ -146,7 +184,7 @@ onMounted(() => {
       <v-col cols="4">
         <v-container>
           <v-row v-html="ntText"></v-row>
-          <v-row>
+          <v-row class="my-4">
             <v-autocomplete
               :items="memberItems"
               density="compact"
@@ -156,6 +194,14 @@ onMounted(() => {
               clearable
             >
             </v-autocomplete>
+          </v-row>
+          <v-row>
+            <v-card>
+              <v-card-title class="text-body-2 font-weight-bold">{{
+                $t('comptext.suggestedCitation')
+              }}</v-card-title>
+              <v-card-text class="text-body-2">{{ citation[locale] }}</v-card-text>
+            </v-card>
           </v-row>
         </v-container>
       </v-col>

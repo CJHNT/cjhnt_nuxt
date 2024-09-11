@@ -52,14 +52,6 @@ watch(searchTerm, () => {
           </v-row>
         </template>
         <template v-else>
-          <!-- <v-row justify="center pb-16">
-            <v-col cols="auto" class="pt-0">
-              <p class="text-caption">
-                © The Trustees of the British Museum. Shared under a Creative Commons CC BY-NC-SA
-                4.0 licence.
-              </p>
-            </v-col>
-          </v-row> -->
           <SearchBar v-model="searchTerm" />
           <CollectionCards />
         </template>

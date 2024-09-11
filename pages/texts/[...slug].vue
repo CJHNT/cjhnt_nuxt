@@ -23,8 +23,7 @@ const urnReffs = route.params.slug.map((urnReff) => {
     <v-main class="d-flex justify-center" min-height="300px">
       <v-container v-if="user?.role === 'user'" class="text-column">
         <v-alert type="warning"
-          >This page is only available to project members.
-          <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
+          >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
         >
       </v-container>
       <v-container
@@ -125,5 +124,9 @@ div.cjh-Zitaterläuterung p {
 
 .cjh-Autorennamen {
   font-variant: small-caps;
+}
+
+.section-subtitle {
+  font-weight: bold;
 }
 </style>

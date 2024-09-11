@@ -14,7 +14,7 @@ const logout = () => {
       <v-btn class="d-md-none"
         ><v-img
           src="@/assets/img/cjh-logo-quadratisch-klein.png"
-          alt="Logo: CJHNT Project"
+          :alt="$t('index.logoAlt')"
           width="32"
           inline
         ></v-img
@@ -27,7 +27,7 @@ const logout = () => {
       <v-btn icon="mdi-home" to="/"></v-btn>
     </template>
     <template v-slot:append>
-      <v-tooltip location="bottom" text="Advanced Search">
+      <v-tooltip location="bottom" :text="$t('search.toAdvancedSearch')">
         <template v-slot:activator="{ props }">
           <v-btn icon="mdi-magnify" to="/search/advanced" v-bind="props"></v-btn>
         </template>

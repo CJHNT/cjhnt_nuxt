@@ -27,7 +27,7 @@ function makeNewUrl(n) {
     </template>
     <v-list density="compact" :lines="false">
       <v-list-item v-for="(member, index) in dropdownMembers" :key="index" :value="index">
-        <NuxtLink :to="`/comptexts/${makeNewUrl(member)}`">{{ member }}</NuxtLink>
+        <NuxtLink :to="`/texts/${makeNewUrl(member)}`">{{ member }}</NuxtLink>
       </v-list-item>
     </v-list>
   </v-menu>

@@ -57,19 +57,18 @@ const sortedMembers = computed(() => {
 <template>
   <v-responsive class="align-center">
     <Footer />
-    <v-container v-if="user?.role === 'user'">
-      <v-alert type="warning"
-        >This page is only available to project members.
-        <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
-      >
-    </v-container>
-    <v-main v-else class="d-flex justify-center" style="min-height: 300px">
-      <div class="collection-list">
+    <v-main class="d-flex justify-center" style="min-height: 300px">
+      <v-container v-if="user?.role === 'user'" class="text-column">
+        <v-alert type="warning"
+          >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
+        >
+      </v-container>
+      <div v-else class="collection-list">
         <h1>{{ collName[locale] }}</h1>
         <ul class="collection-list">
-          <li v-if="pending">Loading...</li>
+          <li v-if="pending">{{ $t('loading') }}</li>
           <li v-else v-for="member in sortedMembers" :key="member.id" class="col-link">
-            <nuxt-link v-if="member.type === 'Resource'" :to="`/comptexts/${member.id}`">{{
+            <nuxt-link v-if="member.type === 'Resource'" :to="`/texts/${member.id}`">{{
               member[locale]
             }}</nuxt-link>
             <nuxt-link v-else :to="`/collection/${member.id}`">{{ member[locale] }}</nuxt-link>

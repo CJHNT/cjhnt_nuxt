@@ -2,13 +2,15 @@
   "welcome": "Willkommen",
   "wait": "bitte warten...",
   "closeDialog": "Fenster schließen",
+  "loading": "Laden...",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
     "signUp": "Legen Sie ein Konto an",
     "readMore": "Weiter lesen",
     "introBlurb": "Willkommen auf der Forschungsplattform des CJHNT! Alle unsere Texte, sowohl die im Rahmen des Projekts erstellten Kommentare als auch die frühjüdischen Texte, auf denen sie beruhen, werden hier veröffentlicht. Wir werden auch eine erweiterte Suchfunktion haben, die es Ihnen ermöglicht, Ihre eigenen Recherchen in unserem Korpus durchzuführen. Um die Plattform nutzen zu können, müssen Sie ein {0}. Während des Registrierungsprozesses können Sie sich auch dafür anmelden, Updates über neue Texte und neue Funktionen zu erhalten.",
     "register": "Konto anlegen",
-    "searchHint": "Drücken Sie <Enter>, um zu suchen"
+    "searchHint": "Drücken Sie <Enter>, um zu suchen",
+    "logoAlt": "Logo: CJHNT Projekt"
   },
   "auth": {
     "hello": "Herzlich Willkommen",
@@ -25,11 +27,20 @@
     "noAccountYet": "Noch kein Benutzerkonto?",
     "newPassword": "Neues Passwort",
     "newEmail": "Neue Emailadresse",
-    "turnOffUpdates": "Benachrichtigungen ausschalten",
-    "turnOnUpdates": "Benachrichtigungen anschalten",
+    "turnOffUpdates": "Projektstatus-Updates ausschalten",
+    "turnOnUpdates": "Projektstatus-Updates anschalten",
     "noPasswordMatch": "Passwörter sind nicht gleich",
     "noEmailMatch": "Emailadressen sind nich gleich",
-    "loggedInAs": "Als {email} eingeloggt"
+    "loggedInAs": "Als {email} eingeloggt",
+    "onlyProject": "Diese Seite ist nur für Projektmitglieder zugänglich",
+    "emailChanged": "Emailadresse geändert.",
+    "passwordChanged": "Passwort geändert.",
+    "updatesOff": "Sie erhalten keine Projektstatus-Updates mehr.",
+    "updatesOn": "Sie erhalten nun Projektstatus-Updates.",
+    "pleaseLogin": "{0}, um diese Seite zu sehen.",
+    "pleaseLoginLink": "Loggen Sie sich ein",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "emptyPassword": "Passwortfeld ist leer."
   },
   "collection": {
     "bible": "Bibel",
@@ -52,7 +63,14 @@
     "next": "Weiter",
     "goTo": "Gehe zu",
     "commentaryLicense": "Bereitgestellt unter einer Creative Commons Namensnennung-ShareAlike 4.0 International Lizenz.",
-    "readAnother": "Einen anderen Text lesen"
+    "readAnother": "Einen anderen Text lesen",
+    "suggestedCitation": "Empfohlene Zitierweise"
+  },
+  "search": {
+    "toAdvancedSearch": "Erweiterte Suche",
+    "slopTooltip": "Maximaler Abstand zwischen Wörtern",
+    "search": "Suche",
+    "results": "Suchergebnisse"
   },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",

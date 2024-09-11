@@ -59,10 +59,10 @@
         <xsl:if test="t:p/node()">
             <xsl:choose>
                 <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                    <xsl:element name="h3">Literature</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Literature</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:element name="h3">Literatur</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Literatur</xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:element name="div">
@@ -78,10 +78,10 @@
         <xsl:if test="t:p/node()">
             <xsl:choose>
                 <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                    <xsl:element name="h3">Primary Sources</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Primary Sources</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:element name="h3">Belegstellenübersicht</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Belegstellenübersicht</xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:element name="div">
@@ -109,10 +109,10 @@
         <xsl:if test="t:p/node()">
             <xsl:choose>
                 <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                    <xsl:element name="h3">Rationale for Chosen Sources</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Rationale for Chosen Sources</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:element name="h3">Begründung der Textauswahl</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Begründung der Textauswahl</xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:element name="div">
@@ -137,10 +137,10 @@
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                            <xsl:element name="h3">Texts</xsl:element>
+                            <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Texts</xsl:element>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:element name="h3">Texte</xsl:element>
+                            <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Texte</xsl:element>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:otherwise>
@@ -158,10 +158,10 @@
         <xsl:if test="t:p/node()">
             <xsl:choose>
                 <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                    <xsl:element name="h3">Summary and Additional Information</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Summary and Additional Information</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:element name="h3">Zusammenfassende Auswertung und weiterführende Hinweise</xsl:element>
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Zusammenfassende Auswertung und weiterführende Hinweise</xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:element name="div">

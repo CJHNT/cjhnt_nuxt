@@ -40,20 +40,19 @@ const searchPages = computed(() => {
 
 <template>
   <v-main style="min-height: 300px">
-    <v-container v-if="user?.role === 'user'">
+    <v-container v-if="user?.role === 'user'" class="text-column">
       <v-alert type="warning"
-        >This page is only available to project members.
-        <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
+        >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
       >
     </v-container>
     <v-container v-else>
       <v-row justify="center">
         <v-col cols="auto">
-          <h1>Search Results</h1>
+          <h1>{{ $t('search.results') }}</h1>
           <ul class="collection-list">
-            <li v-if="pending">Loading...</li>
+            <li v-if="pending">{{ $('loading') }}</li>
             <li v-else v-for="result in results.hits">
-              <nuxt-link :to="`/comptexts/${result[0]}`">{{ result[1] }}</nuxt-link>
+              <nuxt-link :to="`/texts/${result[0]}`">{{ result[1] }}</nuxt-link>
               <ul>
                 <li v-for="phrase in result[2]" v-html="phrase"></li>
               </ul>
@@ -66,7 +65,7 @@ const searchPages = computed(() => {
           <a
             v-if="route.query.page && parseInt(route.query.page) !== 1"
             :href="`/search/results?term=${route.query.term}&page=${route.query.page ? parseInt(route.query.page) - 1 : 1}`"
-            >Previous</a
+            >{{ $t('comptext.previous') }}</a
           >
         </v-col>
         <v-col cols="auto">
@@ -81,7 +80,7 @@ const searchPages = computed(() => {
           <a
             v-if="route.query.page && parseInt(route.query.page) * 10 <= results.total"
             :href="`/search/results?term=${route.query.term}&page=${route.query.page ? parseInt(route.query.page) + 1 : 1}`"
-            >Next</a
+            >{{ $t('comptext.next') }}</a
           >
         </v-col>
       </v-row>

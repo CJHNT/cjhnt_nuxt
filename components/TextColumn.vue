@@ -69,9 +69,7 @@ const formattedText = computed(() => {
   <v-container>
     <v-row justify="center">
       <v-col v-if="props.urn.includes('qumran')" cols="4">
-        <template>
-          <QumranZeichenerklärung />
-        </template>
+        <QumranZeichenerklärung />
       </v-col>
       <v-col cols="8">
         <v-container>
@@ -108,7 +106,7 @@ const formattedText = computed(() => {
           </v-row>
           <v-row v-if="formattedText">
             <v-col cols="auto">
-              <NuxtLink :to="`/comptexts/${props.urn};${prevId}`" v-show="prevId !== null">{{
+              <NuxtLink :to="`/texts/${props.urn};${prevId}`" v-show="prevId !== null">{{
                 $t('comptext.previous')
               }}</NuxtLink>
             </v-col>
@@ -121,7 +119,7 @@ const formattedText = computed(() => {
               />
             </v-col>
             <v-col cols="auto">
-              <NuxtLink :to="`/comptexts/${props.urn};${nextId}`" v-show="nextId !== null">{{
+              <NuxtLink :to="`/texts/${props.urn};${nextId}`" v-show="nextId !== null">{{
                 $t('comptext.next')
               }}</NuxtLink>
             </v-col>

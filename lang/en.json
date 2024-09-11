@@ -2,13 +2,15 @@
   "welcome": "Welcome",
   "wait": "please wait...",
   "closeDialog": "Close Dialog",
+  "loading": "Loading...",
   "index": {
     "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
     "signUp": "Sign up",
     "readMore": "Read more",
     "introBlurb": "Welcome to the CJHNT research platform! All of our texts, both the commentaries produced in the project and the early Jewish texts that they depend on, will be published here. We will also have advanced search functionality to allow you to do your own research on our corpus. To use the platform you will need to {0}. During the registration process you can also sign up to receive updates about new texts and new functionality.",
     "register": "register for an account",
-    "searchHint": "Hit <Enter> to search"
+    "searchHint": "Hit <Enter> to search",
+    "logoAlt": "Logo: CJHNT Project"
   },
   "auth": {
     "hello": "Hello",
@@ -29,7 +31,16 @@
     "turnOnUpdates": "Turn on Project Updates",
     "noPasswordMatch": "Passwords do not match",
     "noEmailMatch": "Emails do not match",
-    "loggedInAs": "Logged in as {email}"
+    "loggedInAs": "Logged in as {email}",
+    "onlyProject": "This page is only available to project members.",
+    "emailChanged": "Email successfully changed.",
+    "passwordChanged": "Password successfully changed.",
+    "updatesOff": "You will no longer receive project status updates.",
+    "updatesOn": "You will now receive project status updates.",
+    "pleaseLogin": "Please {0} to view this page",
+    "pleaseLoginLink": "log in",
+    "invalidEmail": "Invalid email.",
+    "emptyPassword": "Password field is empty."
   },
   "collection": {
     "bible": "Bible",
@@ -52,7 +63,14 @@
     "next": "Next",
     "goTo": "Go to",
     "commentaryLicense": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
-    "readAnother": "Read another text"
+    "readAnother": "Read another text",
+    "suggestedCitation": "Suggested Citation Form"
+  },
+  "search": {
+    "toAdvancedSearch": "Advanced Search",
+    "slopTooltip": "Maximum distance between words",
+    "search": "Search",
+    "results": "Search Results"
   },
   "qumranZeichenerklärung": {
     "title": "Sigla",

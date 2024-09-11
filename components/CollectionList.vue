@@ -57,7 +57,7 @@ const numCols = computed(() => {
             <v-list-item-subtitle>
               <v-btn
                 v-for="version in member.versions"
-                :to="`/comptexts/${version[0]}`"
+                :to="`/texts/${version[0]}`"
                 variant="plain"
                 density="compact"
                 >{{ version[1] }}</v-btn
