@@ -272,6 +272,20 @@
             <xsl:attribute name="source"><xsl:value-of select="@source"/></xsl:attribute>
             <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
             <xsl:for-each select="t:p">
+                <xsl:choose>
+                    <xsl:when test="$currentType = 'cjh-ZitatHebr'">
+                        <xsl:attribute name="lang">heb</xsl:attribute>
+                        <xsl:attribute name="dir">rtl</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="$currentType = 'cjh-ZitatSyr'">
+                        <xsl:attribute name="lang">syr</xsl:attribute>
+                        <xsl:attribute name="dir">rtl</xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="$currentType = 'cjh-ZitatArab'">
+                        <xsl:attribute name="lang">ara</xsl:attribute>
+                        <xsl:attribute name="dir">rtl</xsl:attribute>
+                    </xsl:when>
+                </xsl:choose>
                 <xsl:apply-templates select="."></xsl:apply-templates>
             </xsl:for-each>
         </xsl:element>
