@@ -3,7 +3,7 @@ const parentSearchSlop = defineModel()
 </script>
 
 <template>
-  <v-col cols="3">
+  <v-col cols="4" md="4" xxl="3">
     <v-text-field
       v-model="parentSearchSlop"
       density="compact"

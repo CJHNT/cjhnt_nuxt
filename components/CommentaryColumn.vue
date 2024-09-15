@@ -54,9 +54,18 @@ const collMembers = [...parentData.value.member].sort((a, b) => a['@id'].localeC
 const memberItems = collMembers
   .filter((m) => m['@id'] !== props.urn)
   .map((m) => {
+    const docTitle = {
+      de: m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+        ? m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+        : m.title,
+      en: m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+        ? m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+        : m.title
+    }
     const returnValue = {
       value: m['@id'],
-      title: m.title.split(' ').pop(),
+      en: docTitle.en,
+      de: docTitle.de,
       props: { href: `/texts/${m['@id']}` }
     }
     return returnValue
@@ -187,6 +196,7 @@ onMounted(() => {
           <v-row class="my-4">
             <v-autocomplete
               :items="memberItems"
+              :item-title="locale"
               density="compact"
               :hint="$t('comptext.readAnother')"
               width="200"
