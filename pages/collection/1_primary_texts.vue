@@ -66,6 +66,11 @@ for (let coll in collectionLists.value) {
         versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
         parentId: coll
       }
+      const navData = await $fetch('/api/dts/navigation', {
+        body: { id: returnObject.versions[0][0] },
+        method: 'POST'
+      })
+      returnObject.firstChild = navData['hydra:member'][0].ref
       return returnObject
     })
     const finishedPromises = await Promise.all(textPromises)

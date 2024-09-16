@@ -49,6 +49,18 @@
         </p>
     </xsl:template>-->
     
+    <xsl:template match="t:w">
+        <xsl:element name="span">
+            <xsl:attribute name="lemma">
+                <xsl:value-of select="@lemma"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+                <xsl:value-of select="@n"/>
+            </xsl:attribute>
+            <xsl:value-of select="text()"/>
+        </xsl:element>
+    </xsl:template>
+    
     <xsl:template match="t:l">
         <xsl:element name="li">
             <xsl:apply-templates select="@urn" />
