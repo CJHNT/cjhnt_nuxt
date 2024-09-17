@@ -11,7 +11,7 @@ watch(locale, async (newLocale) => {
   <v-container class="pa-0">
     <v-hover
       v-if="newsItems"
-      v-for="item in newsItems.items.slice(0, 3)"
+      v-for="item in newsItems.items.slice(0, 3).reverse()"
       v-slot="{ isHovering, props }"
     >
       <v-card
