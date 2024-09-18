@@ -74,7 +74,9 @@
     "itemsPerPage": "Pro Seite",
     "searchResults": "Ergebnisse durchsuchen",
     "itemPerPageAll": "Alle",
-    "noResults": "Keine Ergebnisse"
+    "noResults": "Keine Ergebnisse",
+    "searchFieldLabel": "Suchfeld:",
+    "belegstellen": "Belegstellen"
   },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",

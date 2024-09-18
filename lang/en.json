@@ -74,7 +74,9 @@
     "itemsPerPage": "Per Page",
     "searchResults": "Filter results",
     "itemPerPageAll": "All",
-    "noResults": "No results"
+    "noResults": "No results",
+    "searchFieldLabel": "Search field:",
+    "belegstellen": "Cited sources"
   },
   "qumranZeichenerklärung": {
     "title": "Sigla",

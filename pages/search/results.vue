@@ -48,7 +48,7 @@ const tableSearch = ref('')
     </v-container>
     <v-container v-else>
       <v-row justify="center">
-        <v-col cols="auto">
+        <v-col cols="12" md="9" xl="6">
           <h1>{{ $t('search.results') }}</h1>
           <v-text-field
             width="300"

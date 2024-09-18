@@ -18,11 +18,11 @@ function submit() {
   <v-main>
     <v-container>
       <v-row justify="center">
-        <v-col cols="12" lg="3" xl="2">
+        <v-col cols="12" lg="3">
           <v-card width="100%" class="mx-auto mt-5">
             <v-form @submit.prevent="submit">
               <SearchAdvancedBar v-model="searchTerm" />
-              <v-row align="center" justify="center">
+              <v-row align="center">
                 <SearchAdvancedField v-model="field" />
               </v-row>
               <v-row align="center" justify="center">
