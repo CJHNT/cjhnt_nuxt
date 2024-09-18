@@ -70,7 +70,11 @@
     "toAdvancedSearch": "Erweiterte Suche",
     "slopTooltip": "Maximaler Abstand zwischen Wörtern",
     "search": "Suche",
-    "results": "Suchergebnisse"
+    "results": "Suchergebnisse",
+    "itemsPerPage": "Pro Seite",
+    "searchResults": "Ergebnisse durchsuchen",
+    "itemPerPageAll": "Alle",
+    "noResults": "Keine Ergebnisse"
   },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",

@@ -4,10 +4,11 @@ definePageMeta({
 })
 const searchTerm = ref('')
 const slop = ref(0)
+const field = ref('text')
 function submit() {
   if (searchTerm) {
     return navigateTo(
-      `/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&slop=${slop.value}&page=1`
+      `/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&field=${field.value}&slop=${slop.value}&page=1`
     )
   }
 }
@@ -21,6 +22,9 @@ function submit() {
           <v-card width="100%" class="mx-auto mt-5">
             <v-form @submit.prevent="submit">
               <SearchAdvancedBar v-model="searchTerm" />
+              <v-row align="center" justify="center">
+                <SearchAdvancedField v-model="field" />
+              </v-row>
               <v-row align="center" justify="center">
                 <SearchAdvancedSlop v-model="slop" />
               </v-row>

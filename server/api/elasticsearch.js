@@ -12,11 +12,14 @@ export default defineEventHandler(async (event) => {
   // return returnData
   const returnObject = {
     total: returnData.hits.total.value,
-    hits: returnData.hits.hits.map((h) => [
-      h['_source']['urn'],
-      h['_source']['title'],
-      h['highlight'] ? h['highlight']['text'] : ''
-    ])
+    hits: returnData.hits.hits.map((h) => {
+      const hitObject = {
+        urn: h['_source']['urn'],
+        title: h['_source']['title'],
+        highlight: h['highlight'] ? h['highlight'] : ''
+      }
+      return hitObject
+    })
   }
   return returnObject
 })

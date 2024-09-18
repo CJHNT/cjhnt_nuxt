@@ -70,7 +70,11 @@
     "toAdvancedSearch": "Advanced Search",
     "slopTooltip": "Maximum distance between words",
     "search": "Search",
-    "results": "Search Results"
+    "results": "Search Results",
+    "itemsPerPage": "Per Page",
+    "searchResults": "Filter results",
+    "itemPerPageAll": "All",
+    "noResults": "No results"
   },
   "qumranZeichenerklärung": {
     "title": "Sigla",

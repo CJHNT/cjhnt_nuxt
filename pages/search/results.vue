@@ -5,12 +5,16 @@ definePageMeta({
 
 const { user } = useUserSession()
 const route = useRoute()
+const queryType = route.query.field === 'belegstellen' ? 'match_phrase_prefix' : 'match_phrase'
+const slop = route.query.field === 'belegstellen' ? '0' : route.query.slop || '8'
+const highlighter = route.query.field === 'belegstellen' ? 'unified' : 'fvh'
 const searchParams = {
+  size: 10000,
   query: {
-    match_phrase: {
-      text: {
+    [queryType]: {
+      [route.query.field]: {
         query: route.query.term.replaceAll('+', ' '),
-        slop: route.query.slop || '8'
+        slop: slop
       }
     }
   },
@@ -18,24 +22,21 @@ const searchParams = {
     pre_tags: ['<b>'],
     post_tags: ['</b>'],
     fields: {
-      text: { type: 'fvh' }
+      [route.query.field]: { type: highlighter }
     }
   },
   sort: [{ urn: { order: 'asc' } }],
   from: route.query.page ? (route.query.page - 1) * 10 : 0
 }
-const { data: results, pending } = await useFetch('/api/elasticsearch', {
+const { data: results } = await useFetch('/api/elasticsearch', {
   method: 'post',
   body: searchParams
 })
-
-const searchPages = computed(() => {
-  const totalPages = Math.ceil(results.value.total / 10)
-  const allPageArray = [...Array(totalPages).keys()]
-  const removeIndex = allPageArray.indexOf(parseInt(route.query.page) - 1)
-  allPageArray.splice(removeIndex, 1)
-  return allPageArray
-})
+const tableHeaders = [
+  { title: 'Document', key: 'title' },
+  { title: 'Hits', key: 'highlight', value: (item) => item.highlight[route.query.field] }
+]
+const tableSearch = ref('')
 </script>
 
 <template>
@@ -49,39 +50,51 @@ const searchPages = computed(() => {
       <v-row justify="center">
         <v-col cols="auto">
           <h1>{{ $t('search.results') }}</h1>
-          <ul class="collection-list">
-            <li v-if="pending">{{ $('loading') }}</li>
-            <li v-else v-for="result in results.hits">
-              <nuxt-link :to="`/texts/${result[0]}`">{{ result[1] }}</nuxt-link>
-              <ul>
-                <li v-for="phrase in result[2]" v-html="phrase"></li>
+          <v-text-field
+            width="300"
+            v-model="tableSearch"
+            :label="$t('search.searchResults')"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            hide-details
+            single-line
+            clearable
+          ></v-text-field>
+          <v-data-table
+            :headers="tableHeaders"
+            :items="results.hits"
+            :items-per-page-text="$t('search.itemsPerPage')"
+            v-model:search="tableSearch"
+            :show-current-page="true"
+            page-text=""
+            :items-per-page-options="[
+              { value: 10, title: '10' },
+              { value: 25, title: '25' },
+              { value: 50, title: '50' },
+              { value: 100, title: '100' },
+              { value: -1, title: $t('search.itemPerPageAll') }
+            ]"
+            :no-data-text="$t('search.noResults')"
+          >
+            <template v-slot:item.title="{ item }">
+              <nuxt-link :to="`/texts/${item.urn}`">{{ item.title }}</nuxt-link>
+            </template>
+            <template v-slot:item.highlight="{ item }">
+              <ul class="ml-4">
+                <li v-for="(phrase, field) in item.highlight">
+                  <template v-if="item.highlight.length > 1">
+                    <h4>{{ field.charAt(0).toUpperCase() + field.slice(1) }}</h4>
+                    <ul class="ml-4">
+                      <li v-for="p in phrase" v-html="p"></li>
+                    </ul>
+                  </template>
+                  <template v-else>
+                    <li v-for="p in phrase" v-html="p"></li>
+                  </template>
+                </li>
               </ul>
-            </li>
-          </ul>
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols="1">
-          <a
-            v-if="route.query.page && parseInt(route.query.page) !== 1"
-            :href="`/search/results?term=${route.query.term}&page=${route.query.page ? parseInt(route.query.page) - 1 : 1}`"
-            >{{ $t('comptext.previous') }}</a
-          >
-        </v-col>
-        <v-col cols="auto">
-          <a
-            class="page-link"
-            v-for="searchPage in searchPages"
-            :href="`/search/results?term=${route.query.term}&page=${searchPage + 1}`"
-            >{{ searchPage + 1 }}</a
-          >
-        </v-col>
-        <v-col cols="1" class="text-right">
-          <a
-            v-if="route.query.page && parseInt(route.query.page) * 10 <= results.total"
-            :href="`/search/results?term=${route.query.term}&page=${route.query.page ? parseInt(route.query.page) + 1 : 1}`"
-            >{{ $t('comptext.next') }}</a
-          >
+            </template>
+          </v-data-table>
         </v-col>
       </v-row>
     </v-container>

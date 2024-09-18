@@ -5,7 +5,9 @@ const searchTerm = ref('')
 
 watch(searchTerm, () => {
   if (searchTerm) {
-    return navigateTo(`/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&page=1`)
+    return navigateTo(
+      `/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&field=text&page=1`
+    )
   }
 })
 </script>
