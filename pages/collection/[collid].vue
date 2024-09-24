@@ -2,14 +2,16 @@
 definePageMeta({
   middleware: ['auth']
 })
-import { useParam } from '~/composables/useParam'
+const route = useRoute()
 
 const { user } = useUserSession()
 const { locale } = useI18n()
 const collName = ref({})
+const ancestors = ref([])
+
 const { data, pending } = await useAsyncData('apiAllTexts', async () => {
   const allTexts = await $fetch('/api/dts/collections', {
-    body: { id: useParam('collid') },
+    body: { id: route.params.collid },
     method: 'POST'
   })
   collName.value = {
@@ -19,6 +21,29 @@ const { data, pending } = await useAsyncData('apiAllTexts', async () => {
     en: allTexts['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
       ? allTexts['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
       : allTexts.title
+  }
+  let hasParent =
+    allTexts['dts:dublincore'] && allTexts['dts:dublincore']['dct:isPartOf']
+      ? allTexts['dts:dublincore']['dct:isPartOf'][0]['@id']
+      : false
+  while (hasParent) {
+    const parentInfo = await $fetch('/api/dts/collections', {
+      body: { id: allTexts['dts:dublincore']['dct:isPartOf'][0]['@id'] },
+      method: 'POST'
+    })
+    const parentTitle = {
+      de: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
+        ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
+        : parentInfo.title,
+      en: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
+        ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
+        : parentInfo.title
+    }
+    ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle })
+    hasParent =
+      parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']
+        ? parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
+        : false
   }
   if (allTexts.totalItems < 100) {
     const textPromises = allTexts.member.map(async (m) => {
@@ -64,6 +89,11 @@ const sortedMembers = computed(() => {
         >
       </v-container>
       <div v-else class="collection-list">
+        <v-breadcrumbs :items="ancestors">
+          <template v-slot:item="{ item }">
+            <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
+          </template>
+        </v-breadcrumbs>
         <h1>{{ collName[locale] }}</h1>
         <ul class="collection-list">
           <li v-if="pending">{{ $t('loading') }}</li>

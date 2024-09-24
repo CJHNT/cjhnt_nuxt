@@ -37,6 +37,7 @@ const urnReffs = route.params.slug.map((urnReff) => {
           v-if="urnReff[0].includes('commentary')"
           :urn="urnReff[0]"
           :reff="urnReff[1]"
+          v-model="allAncestors"
         />
         <InfoColumn
           v-else-if="urnReff[0].includes('cjhnt:info')"

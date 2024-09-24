@@ -1,10 +1,11 @@
 <script setup>
 import AuthForm from '@/components/AuthForm.vue'
 
-const alertMessage = ref({ type: '', message: '' })
 const { loggedIn, user, fetch } = useUserSession()
 const loading = ref(false)
 const router = useRouter()
+const notificationStore = useNotificationStore()
+const { t } = useI18n()
 
 fetch()
 
@@ -17,8 +18,9 @@ const changeEmail = async (body) => {
     })
     fetch()
     router.push({ name: 'auth-dashboard' })
-    alertMessage.value.type = 'success'
-    alertMessage.value.message = 'auth.emailChanged'
+    const notificationType = 'success'
+    const notificationMessage = t('auth.emailChanged')
+    notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -35,8 +37,9 @@ const changePassword = async (body) => {
     })
     fetch()
     router.push({ name: 'auth-dashboard' })
-    alertMessage.value.type = 'success'
-    alertMessage.value.message = 'auth.passwordChanged'
+    const notificationType = 'success'
+    const notificationMessage = t('auth.passwordChanged')
+    notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -53,9 +56,10 @@ const changeNotification = async (body) => {
     })
     await fetch()
     router.push({ name: 'auth-dashboard' })
-    alertMessage.value.type = 'success'
-    alertMessage.value.message =
-      user.value.wantsUpdates === true ? 'auth.updatesOn' : 'auth.updatesOff'
+    const notificationType = 'success'
+    const notificationMessage =
+      user.value.wantsUpdates === true ? t('auth.updatesOn') : t('auth.updatesOff')
+    notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
     console.log({ error })
@@ -63,6 +67,9 @@ const changeNotification = async (body) => {
     loading.value = false
   }
 }
+onUnmounted(() => {
+  notificationStore.$reset()
+})
 </script>
 
 <template>
@@ -70,12 +77,6 @@ const changeNotification = async (body) => {
     <v-container>
       <v-row justify="center">
         <v-col cols="12" lg="6" xl="4">
-          <v-alert
-            v-if="alertMessage.message"
-            :type="alertMessage.type"
-            :text="$t(alertMessage.message)"
-            closable
-          ></v-alert>
           <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">
             {{ $t('auth.hello') }} {{ user?.email }}
           </p>

@@ -4,6 +4,7 @@ import { parseFromString } from 'dom-parser'
 
 const { locale } = useI18n()
 const props = defineProps({ urn: String, reff: String })
+const ancestors = ref([])
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
   method: 'POST'
@@ -13,11 +14,46 @@ const { data: textMeta } = await useFetch('/api/dts/collections', {
   method: 'POST'
 })
 const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
-  const parentId = props.urn.split('.').slice(0, -1).join('.')
+  const parentId =
+    textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:isPartOf']
+      ? textMeta.value['dts:dublincore']['dct:isPartOf']['@id']
+      : props.urn.split('.').slice(0, -1).join('.')
   const parentData = await $fetch('/api/dts/collections', {
     body: { id: parentId },
     method: 'POST'
   })
+  const parentTitle = {
+    de: parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
+      ? parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
+      : parentData.title,
+    en: parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
+      ? parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
+      : parentData.title
+  }
+  ancestors.value.unshift({ id: parentId, title: parentTitle })
+  let hasParent =
+    parentData['dts:dublincore'] && parentData['dts:dublincore']['dct:isPartOf']
+      ? parentData['dts:dublincore']['dct:isPartOf'][0]['@id']
+      : false
+  while (hasParent) {
+    const parentInfo = await $fetch('/api/dts/collections', {
+      body: { id: hasParent },
+      method: 'POST'
+    })
+    const parentTitle = {
+      de: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
+        ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
+        : parentInfo.title,
+      en: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
+        ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
+        : parentInfo.title
+    }
+    ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle })
+    hasParent =
+      parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']
+        ? parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
+        : false
+  }
   return parentData
 })
 const docTitle = {
@@ -218,6 +254,19 @@ onMounted(() => {
       <v-col cols="8">
         <v-container>
           <v-row justify="center">
+            <v-col cols="12">
+              <v-breadcrumbs :items="ancestors">
+                <template v-slot:item="{ item }">
+                  <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
+                </template>
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-slash-forward" size="small"></v-icon>
+                </template>
+                <template v-slot:divider>
+                  <v-icon icon="mdi-slash-forward" size="small"></v-icon>
+                </template>
+              </v-breadcrumbs>
+            </v-col>
             <v-col cols="auto" class="pr-0">
               <h1>{{ docTitle[locale] }}</h1>
             </v-col>

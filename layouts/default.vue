@@ -9,6 +9,7 @@ import './assets/main.css'
 <template>
   <v-app class="rounded rounded-md">
     <AppBar />
+    <NotificationContainer />
     <slot />
   </v-app>
 </template>

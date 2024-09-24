@@ -3,6 +3,8 @@ import { Xslt, XmlParser } from 'xslt-processor'
 const { locale } = useI18n()
 
 const props = defineProps({ urn: String, reff: { type: String, default: 1 } })
+const ancestors = ref([])
+const notificationStore = useNotificationStore()
 const reffDepth = () => {
   const reffSections = props.reff.match(/\./g)
   if (reffSections) {
@@ -22,6 +24,37 @@ const docTitle = {
     ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
     : docMeta.value.title
 }
+const parentId =
+  docMeta['dts:dublincore'] && docMeta['dts:dublincore']['dct:isPartOf']
+    ? docMeta.value['dts:dublincore']['dct:isPartOf']['@id']
+    : props.urn.split('.').slice(0, -1).join('.')
+const { data: parentData } = await useFetch('/api/dts/collections', {
+  body: { id: parentId },
+  method: 'POST'
+})
+let hasParent =
+  parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']
+    ? parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+    : false
+while (hasParent) {
+  const parentInfo = await $fetch('/api/dts/collections', {
+    body: { id: hasParent },
+    method: 'POST'
+  })
+  const parentTitle = {
+    de: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
+      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
+      : parentInfo.title,
+    en: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
+      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
+      : parentInfo.title
+  }
+  ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle })
+  hasParent =
+    parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']
+      ? parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
+      : false
+}
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn, level: reffDepth() },
   method: 'POST'
@@ -30,7 +63,15 @@ const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
 let usedReff = props.reff
 const alertText = ref('')
 if (!validReffs.includes(props.reff)) {
-  alertText.value = `Reference ${usedReff} not found in ${props.urn}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
+  await useAsyncData('refWarning', () =>
+    notificationStore
+      .addNotification({
+        type: 'warning',
+        message: `Reference ${usedReff} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
+      })
+      .then(() => true)
+  )
+  console.log('Notification', usedReff)
   usedReff = validReffs[0]
 }
 
@@ -63,6 +104,9 @@ const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value)
 const formattedText = computed(() => {
   return parsedText.replaceAll('span><span', 'span> <span')
 })
+onUnmounted(() => {
+  notificationStore.$reset()
+})
 </script>
 
 <template>
@@ -77,6 +121,13 @@ const formattedText = computed(() => {
             <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
           </v-row>
           <v-row justify="center">
+            <v-col cols="12">
+              <v-breadcrumbs :items="ancestors">
+                <template v-slot:item="{ item }">
+                  <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
+                </template>
+              </v-breadcrumbs>
+            </v-col>
             <v-col cols="auto" class="pr-0">
               <h1>{{ docTitle[locale] }} {{ usedReff }}</h1>
             </v-col>

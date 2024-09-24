@@ -13,8 +13,8 @@ const subColls = [
   {
     title: 'collection.bible',
     collections: [
-      { title: 'collection.nt', urn: 'urn:cts:greekLit:tlg0031' },
-      { title: 'collection.lxx', urn: 'urn:cts:greekLit:lxx' }
+      { title: 'collection.nt', urn: 'urn:cts:cjhnt:nt' },
+      { title: 'collection.lxx', urn: 'urn:cts:cjhnt:lxx' }
     ]
   },
   {
@@ -34,8 +34,8 @@ const subColls = [
 ]
 
 const collectionLists = ref({
-  'urn:cts:greekLit:tlg0031': [],
-  'urn:cts:greekLit:lxx': [],
+  'urn:cts:cjhnt:nt': [],
+  'urn:cts:cjhnt:lxx': [],
   'urn:cts:cjhnt:qumran': [],
   'urn:cts:greekLit:tlg0018': [],
   'urn:cts:greekLit:tlg0526': [],
