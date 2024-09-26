@@ -14,10 +14,8 @@ const { locale } = useI18n()
     </template>
     <template v-slot:prepend>
       <v-icon v-if="index > 0" icon="mdi-subdirectory-arrow-right" size="small"></v-icon>
-      <v-icon v-else icon="mdi-slash-forward" size="small"></v-icon>
-    </template>
-    <template v-slot:divider>
-      <v-icon icon="mdi-slash-forward" size="small"></v-icon>
+      <!-- <v-icon v-else icon="mdi-slash-forward" size="small"></v-icon> -->
+      <span v-else class="pr-2">/</span>
     </template>
   </v-breadcrumbs>
 </template>

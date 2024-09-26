@@ -44,7 +44,6 @@ if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dc
     hasParent = parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-console.log(parentData)
 while (hasParent) {
   const parentInfo = await $fetch('/api/dts/collections', {
     body: { id: hasParent },

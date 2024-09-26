@@ -16,7 +16,6 @@ const urnReffs = route.params.slug.map((urnReff) => {
   return [urnParts[0], reff]
 })
 const allAncestors = ref([])
-console.log(allAncestors.value)
 </script>
 
 <template>
@@ -34,7 +33,7 @@ console.log(allAncestors.value)
             v-for="(urnReff, index) in urnReffs"
             :key="urnReff.join(';')"
             :id="urnReff.join(';')"
-            :cols="urnReff[0].includes('commentary') ? 6 : 4"
+            :cols="urnReff[0].includes('commentary') || urnReff[0].includes('qumran') ? 6 : 4"
             class="text-column"
           >
             <CommentaryColumn
