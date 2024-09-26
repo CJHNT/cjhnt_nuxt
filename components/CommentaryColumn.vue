@@ -1,9 +1,9 @@
 <script setup>
-import { Xslt, XmlParser } from 'xslt-processor'
 import { parseFromString } from 'dom-parser'
 
 const { locale } = useI18n()
-const props = defineProps({ urn: String, reff: String })
+const props = defineProps({ urn: String, reff: String, index: Number })
+const allAncestors = defineModel()
 const ancestors = ref([])
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
@@ -13,6 +13,15 @@ const { data: textMeta } = await useFetch('/api/dts/collections', {
   body: { id: props.urn },
   method: 'POST'
 })
+
+const docTitle = {
+  de: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+    : textMeta.value.title,
+  en: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+    : textMeta.value.title
+}
 const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
   const parentId =
     textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:isPartOf']
@@ -30,7 +39,7 @@ const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
       ? parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
       : parentData.title
   }
-  ancestors.value.unshift({ id: parentId, title: parentTitle })
+  ancestors.value.unshift({ id: parentId, title: parentTitle, disabled: false, ref: '' })
   let hasParent =
     parentData['dts:dublincore'] && parentData['dts:dublincore']['dct:isPartOf']
       ? parentData['dts:dublincore']['dct:isPartOf'][0]['@id']
@@ -48,22 +57,17 @@ const { data: parentData } = await useAsyncData('apiPrevNext', async () => {
         ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
         : parentInfo.title
     }
-    ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle })
+    ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle, disabled: false, ref: '' })
     hasParent =
       parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']
         ? parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
         : false
   }
+  ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: '' })
   return parentData
 })
-const docTitle = {
-  de: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-    : textMeta.value.title,
-  en: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-    : textMeta.value.title
-}
+allAncestors.value.push(ancestors.value)
+
 const citation = {
   de:
     textMeta.value['dts:dublincore'] &&
@@ -111,35 +115,23 @@ let usedReff = props.reff
 if (!validReffs.includes(props.reff)) {
   usedReff = validReffs[0]
 }
-const { data: xmlText } = await useFetch('/api/dts/document', {
-  body: { id: props.urn, ref: usedReff },
+const { data: formattedText } = await useFetch('/api/dts/document', {
+  body: { id: props.urn, ref: usedReff, xsl: 'assets/source/commentary.sef.json' },
   method: 'POST'
 })
-const ntFragmentXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
-const rawXsl = (await import('../assets/source/commentary.xsl?raw')).default
-const epidocXsl = (await import('../assets/source/epidoc.xsl?raw')).default
-const xsltClass = new Xslt()
-const xmlParser = new XmlParser()
-const parsedXslt = xmlParser.xmlParse(rawXsl)
-const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
-const formattedText = parsedText
-const domText = parseFromString(formattedText)
+const domText = parseFromString(formattedText.value)
 const { data: ntText } = await useAsyncData('apiNtText', async () => {
   const ntElement = domText.getElementsByClassName('nt-source-text')[0]
   const ntSource = ntElement.getAttribute('source-text')
   const ntVerse = ntElement.getAttribute('source-verse')
   const apiResult = await $fetch('/api/dts/document', {
-    body: { id: ntSource, ref: ntVerse },
+    body: { id: ntSource, ref: ntVerse, xsl: 'assets/source/nt_fragment.sef.json' },
     method: 'POST'
   })
-  const processedResult = await xsltClass.xsltProcess(
-    xmlParser.xmlParse(apiResult),
-    xmlParser.xmlParse(ntFragmentXsl)
-  )
-  return processedResult.replaceAll('span><span', 'span> <span')
+  return apiResult
 })
 function langText() {
-  if (locale.value === 'en' && parsedText.includes('lang="en"')) {
+  if (locale.value === 'en' && formattedText.value.includes('lang="en"')) {
     return domText.getElementById('en-text').outerHTML
   } else {
     return domText.getElementById('de-text').outerHTML
@@ -153,40 +145,35 @@ onMounted(() => {
       const el = event.currentTarget
       const sourceUrn = el.getAttribute('source-text')
       const sourceRef = el.getAttribute('source-verse')
-      const { data: collInfo } = await useFetch(`/api/dts/collections`, {
+      const collInfo = await $fetch(`/api/dts/collections`, {
         body: { id: sourceUrn },
         method: 'POST'
       })
       var langTexts = {}
-      for (const member of collInfo.value.member) {
-        const { data: originalText } = await useFetch('/api/dts/document', {
-          body: { id: member['@id'], ref: sourceRef },
+      for (const member of collInfo.member) {
+        const xslPath = () => {
+          switch (true) {
+            case member['@id'].includes('commentary'):
+              return 'assets/source/commentary.sef.json'
+            case member['@id'].includes('tlg0031'):
+            case member['@id'].includes('tlg0527'):
+            case member['@id'].includes('1henoch'):
+              return 'assets/source/nt_fragment.sef.json'
+            case member['@id'].includes('qumran'):
+              return 'assets/source/qumran.sef.json'
+            default:
+              return 'assets/source/epidoc.sef.json'
+          }
+        }
+        const processedResult = await $fetch('/api/dts/document', {
+          body: { id: member['@id'], ref: sourceRef, xsl: xslPath() },
           method: 'POST'
         })
-        let processedResult = ''
-        if (
-          member['@id'].includes('tlg0031') ||
-          member['@id'].includes('tlg0527') ||
-          member['@id'].includes('1henoch')
-        ) {
-          processedResult = await xsltClass.xsltProcess(
-            xmlParser.xmlParse(originalText.value),
-            xmlParser.xmlParse(ntFragmentXsl)
-          )
-        } else {
-          processedResult = await xsltClass.xsltProcess(
-            xmlParser.xmlParse(originalText.value),
-            xmlParser.xmlParse(epidocXsl)
-          )
-        }
 
         if (!['eng', 'deu'].includes(member['dts:extensions']['dc:language'])) {
-          langTexts['Original'] = processedResult.replaceAll('span><span', 'span> <span')
+          langTexts['Original'] = processedResult
         } else {
-          langTexts[member['dts:extensions']['dc:language']] = processedResult.replaceAll(
-            'span><span',
-            'span> <span'
-          )
+          langTexts[member['dts:extensions']['dc:language']] = processedResult
         }
       }
       const dropdownContent = document.querySelector(el.getAttribute('data-target'))
@@ -226,7 +213,7 @@ onMounted(() => {
 <template>
   <v-container>
     <v-row>
-      <v-col cols="4">
+      <v-col cols="4" :order="index">
         <v-container>
           <v-row v-html="ntText"></v-row>
           <v-row class="my-4">
@@ -254,19 +241,6 @@ onMounted(() => {
       <v-col cols="8">
         <v-container>
           <v-row justify="center">
-            <v-col cols="12">
-              <v-breadcrumbs :items="ancestors">
-                <template v-slot:item="{ item }">
-                  <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
-                </template>
-                <template v-slot:prepend>
-                  <v-icon icon="mdi-slash-forward" size="small"></v-icon>
-                </template>
-                <template v-slot:divider>
-                  <v-icon icon="mdi-slash-forward" size="small"></v-icon>
-                </template>
-              </v-breadcrumbs>
-            </v-col>
             <v-col cols="auto" class="pr-0">
               <h1>{{ docTitle[locale] }}</h1>
             </v-col>

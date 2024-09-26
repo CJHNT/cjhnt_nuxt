@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-    xmlns:t="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs math"
-    version="3.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0" xmlns:t="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="t">
+    <xsl:output omit-xml-declaration="yes" indent="yes" method="html"/>
     <xsl:template match="/">
                 <xsl:for-each select="//t:body">
                     <xsl:for-each select="t:div">
-                        <xsl:for-each select="node()">
-                            <xsl:choose>
-                                <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
-                                <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:for-each>
+                        <xsl:element name="div">
+                            <xsl:for-each select="node()">
+                                <xsl:choose>
+                                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:for-each>
+                        </xsl:element>
                     </xsl:for-each>
                 </xsl:for-each>
     </xsl:template>

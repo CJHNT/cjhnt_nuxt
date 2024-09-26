@@ -1,8 +1,8 @@
 <script setup>
-import { Xslt, XmlParser } from 'xslt-processor'
 const { locale } = useI18n()
 
 const props = defineProps({ urn: String, reff: { type: String, default: 1 } })
+const allAncestors = defineModel()
 const ancestors = ref([])
 const notificationStore = useNotificationStore()
 const reffDepth = () => {
@@ -24,18 +24,27 @@ const docTitle = {
     ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
     : docMeta.value.title
 }
-const parentId =
-  docMeta['dts:dublincore'] && docMeta['dts:dublincore']['dct:isPartOf']
-    ? docMeta.value['dts:dublincore']['dct:isPartOf']['@id']
-    : props.urn.split('.').slice(0, -1).join('.')
+let parentId = props.urn.split('.').slice(0, -1).join('.')
+if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPartOf']) {
+  if (typeof docMeta.value['dts:dublincore']['dct:isPartOf'] === 'string') {
+    parentId = docMeta.value['dts:dublincore']['dct:isPartOf']
+  } else if (Array.isArray(docMeta.value['dts:dublincore']['dct:isPartOf'])) {
+    parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+  }
+}
 const { data: parentData } = await useFetch('/api/dts/collections', {
   body: { id: parentId },
   method: 'POST'
 })
-let hasParent =
-  parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']
-    ? parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
-    : false
+let hasParent = false
+if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
+  if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
+    hasParent = parentData.value['dts:dublincore']['dct:isPartOf']
+  } else if (Array.isArray(parentData.value['dts:dublincore']['dct:isPartOf'])) {
+    hasParent = parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+  }
+}
+console.log(parentData)
 while (hasParent) {
   const parentInfo = await $fetch('/api/dts/collections', {
     body: { id: hasParent },
@@ -49,11 +58,18 @@ while (hasParent) {
       ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
       : parentInfo.title
   }
-  ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle })
-  hasParent =
-    parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']
-      ? parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
-      : false
+  ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle, disabled: false, ref: '' })
+  if (parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']) {
+    if (typeof parentInfo['dts:dublincore']['dct:isPartOf'] === 'string') {
+      hasParent = parentInfo['dts:dublincore']['dct:isPartOf']
+    } else if (Array.isArray(parentInfo['dts:dublincore']['dct:isPartOf'])) {
+      hasParent = parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
+    } else {
+      hasParent = false
+    }
+  } else {
+    hasParent = false
+  }
 }
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn, level: reffDepth() },
@@ -71,39 +87,33 @@ if (!validReffs.includes(props.reff)) {
       })
       .then(() => true)
   )
-  console.log('Notification', usedReff)
   usedReff = validReffs[0]
 }
+ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff })
 
 const currentIndex = validReffs.findIndex((m) => m === usedReff)
 const prevId = currentIndex > 0 ? validReffs[currentIndex - 1] : null
 const nextId = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
 
-const { data: xmlText } = await useFetch('/api/dts/document', {
-  body: { id: props.urn, ref: usedReff },
+const xslPath = () => {
+  switch (true) {
+    case props.urn.includes('commentary'):
+      return 'assets/source/commentary.sef.json'
+    case props.urn.includes('tlg0031'):
+    case props.urn.includes('tlg0527'):
+    case props.urn.includes('1henoch'):
+      return 'assets/source/nt_fragment.sef.json'
+    case props.urn.includes('qumran'):
+      return 'assets/source/qumran.sef.json'
+    default:
+      return 'assets/source/epidoc.sef.json'
+  }
+}
+const { data: formattedText } = await useFetch('/api/dts/document', {
+  body: { id: props.urn, ref: usedReff, xsl: xslPath() },
   method: 'POST'
 })
-var rawXsl = ''
-if (props.urn.includes('commentary')) {
-  rawXsl = (await import('../assets/source/commentary.xsl?raw')).default
-} else if (
-  props.urn.includes('tlg0031') ||
-  props.urn.includes('tlg0527') ||
-  props.urn.includes('1henoch')
-) {
-  rawXsl = (await import('../assets/source/nt_fragment.xsl?raw')).default
-} else if (props.urn.includes('qumran')) {
-  rawXsl = (await import('../assets/source/qumran.xsl?raw')).default
-} else {
-  rawXsl = (await import('../assets/source/epidoc.xsl?raw')).default
-}
-const xsltClass = new Xslt()
-const xmlParser = new XmlParser()
-const parsedXslt = xmlParser.xmlParse(rawXsl)
-const parsedText = await xsltClass.xsltProcess(xmlParser.xmlParse(xmlText.value), parsedXslt)
-const formattedText = computed(() => {
-  return parsedText.replaceAll('span><span', 'span> <span')
-})
+allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
   notificationStore.$reset()
 })
@@ -115,19 +125,12 @@ onUnmounted(() => {
       <v-col v-if="props.urn.includes('qumran')" cols="4">
         <QumranZeichenerklärung />
       </v-col>
-      <v-col cols="8">
+      <v-col :cols="props.urn.includes('qumran') ? 8 : 12">
         <v-container>
           <v-row v-if="alertText">
             <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
           </v-row>
           <v-row justify="center">
-            <v-col cols="12">
-              <v-breadcrumbs :items="ancestors">
-                <template v-slot:item="{ item }">
-                  <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
-                </template>
-              </v-breadcrumbs>
-            </v-col>
             <v-col cols="auto" class="pr-0">
               <h1>{{ docTitle[locale] }} {{ usedReff }}</h1>
             </v-col>
