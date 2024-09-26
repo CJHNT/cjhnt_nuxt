@@ -23,7 +23,6 @@ const changeEmail = async (body) => {
     notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
-    console.log({ error })
     alert(error.statusMessage || error)
     loading.value = false
   }
@@ -42,7 +41,6 @@ const changePassword = async (body) => {
     notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
-    console.log({ error })
     alert(error.statusMessage || error)
     loading.value = false
   }
@@ -62,7 +60,6 @@ const changeNotification = async (body) => {
     notificationStore.addNotification({ type: notificationType, message: notificationMessage })
     loading.value = false
   } catch (error) {
-    console.log({ error })
     alert(error.statusMessage || error)
     loading.value = false
   }

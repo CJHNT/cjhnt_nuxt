@@ -7,8 +7,9 @@ const tab = ref(null)
 const subTab = ref(null)
 const { user } = useUserSession()
 const { locale } = useI18n()
-const searchList = ref([])
 const programmaticChange = ref(false)
+const collListState = useState('collList')
+const collSearchListState = useState('collSearchList')
 const subColls = [
   {
     title: 'collection.bible',
@@ -33,68 +34,75 @@ const subColls = [
   // { title: 'collection.other', collections: [] }
 ]
 
-const collectionLists = ref({
-  'urn:cts:cjhnt:nt': [],
-  'urn:cts:cjhnt:lxx': [],
-  'urn:cts:cjhnt:qumran': [],
-  'urn:cts:greekLit:tlg0018': [],
-  'urn:cts:greekLit:tlg0526': [],
-  'urn:cts:cjhnt:pseudo': []
-  // author_fragments: []
-})
+const collectionLists = collListState.value
+  ? collListState.value
+  : ref({
+      'urn:cts:cjhnt:nt': [],
+      'urn:cts:cjhnt:lxx': [],
+      'urn:cts:cjhnt:qumran': [],
+      'urn:cts:greekLit:tlg0018': [],
+      'urn:cts:greekLit:tlg0526': [],
+      'urn:cts:cjhnt:pseudo': []
+      // author_fragments: []
+    })
 
-for (let coll in collectionLists.value) {
-  const { data } = await useAsyncData(`${coll}Texts`, async () => {
-    const allTexts = await $fetch('/api/dts/collections', {
-      body: { id: coll },
-      method: 'POST'
-    })
-    const textPromises = allTexts.member.map(async (m) => {
-      const textData = await $fetch('/api/dts/collections', {
-        body: { id: m['@id'] },
+const searchList = collSearchListState.value ? collSearchListState.value : ref([])
+
+if (!collListState.value) {
+  for (let coll in collectionLists.value) {
+    const { data } = await useAsyncData(`${coll}Texts`, async () => {
+      const allTexts = await $fetch('/api/dts/collections', {
+        body: { id: coll },
         method: 'POST'
       })
-      const returnObject = {
-        id: textData['@id'],
-        de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-          ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-          : m.title,
-        en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-          ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-          : m.title,
-        type: textData['@type'],
-        versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
-        parentId: coll
-      }
-      const navData = await $fetch('/api/dts/navigation', {
-        body: { id: returnObject.versions[0][0] },
-        method: 'POST'
-      })
-      returnObject.firstChild = navData['hydra:member'][0].ref
-      return returnObject
-    })
-    const finishedPromises = await Promise.all(textPromises)
-    return finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
-  })
-  data.value.map((e) => {
-    searchList.value.push({
-      id: e.id,
-      en: e.en,
-      de: e.de,
-      subTab: e.parentId,
-      tab: subColls.find((c) => {
-        for (let subC of c.collections) {
-          if (subC.urn === e.parentId) {
-            return true
-          }
+      const textPromises = allTexts.member.map(async (m) => {
+        const textData = await $fetch('/api/dts/collections', {
+          body: { id: m['@id'] },
+          method: 'POST'
+        })
+        const returnObject = {
+          id: textData['@id'],
+          de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+            : m.title,
+          en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+            : m.title,
+          type: textData['@type'],
+          versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
+          parentId: coll
         }
-        return false
-      }).title
+        const navData = await $fetch('/api/dts/navigation', {
+          body: { id: returnObject.versions[0][0] },
+          method: 'POST'
+        })
+        returnObject.firstChild = navData['hydra:member'][0].ref
+        return returnObject
+      })
+      const finishedPromises = await Promise.all(textPromises)
+      return finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
     })
-  })
-  collectionLists.value[coll] = data.value
+    data.value.map((e) => {
+      searchList.value.push({
+        id: e.id,
+        en: e.en,
+        de: e.de,
+        subTab: e.parentId,
+        tab: subColls.find((c) => {
+          for (let subC of c.collections) {
+            if (subC.urn === e.parentId) {
+              return true
+            }
+          }
+          return false
+        }).title
+      })
+    })
+    collectionLists.value[coll] = data.value
+  }
+  collListState.value = collectionLists.value
+  collSearchListState.value = searchList.value
 }
-
 async function goToSubtab(newTab, newSubtab, newId) {
   if (tab.value !== newTab) {
     programmaticChange.value = true

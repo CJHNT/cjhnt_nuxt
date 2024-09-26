@@ -89,11 +89,8 @@ const sortedMembers = computed(() => {
         >
       </v-container>
       <div v-else class="collection-list">
-        <v-breadcrumbs :items="ancestors">
-          <template v-slot:item="{ item }">
-            <nuxt-link :to="`/collection/${item.id}`">{{ item.title[locale] }}</nuxt-link>
-          </template>
-        </v-breadcrumbs>
+        <Breadcrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0"></Breadcrumb>
+
         <h1>{{ collName[locale] }}</h1>
         <ul class="collection-list">
           <li v-if="pending">{{ $t('loading') }}</li>

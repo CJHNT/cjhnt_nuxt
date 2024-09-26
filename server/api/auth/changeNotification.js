@@ -23,7 +23,6 @@ export default defineEventHandler(async (event) => {
       },
       loggedInAt: new Date()
     })
-    console.log(session.user)
     return { success: true, user }
   } catch (error) {
     console.error('Error changing email:', error)

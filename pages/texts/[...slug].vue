@@ -15,6 +15,8 @@ const urnReffs = route.params.slug.map((urnReff) => {
   }
   return [urnParts[0], reff]
 })
+const allAncestors = ref([])
+console.log(allAncestors.value)
 </script>
 
 <template>
@@ -26,25 +28,46 @@ const urnReffs = route.params.slug.map((urnReff) => {
           >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
         >
       </v-container>
-      <v-container
-        v-else
-        v-for="urnReff in urnReffs"
-        :key="urnReff.join(';')"
-        :id="urnReff.join(';')"
-        class="text-column"
-      >
-        <CommentaryColumn
-          v-if="urnReff[0].includes('commentary')"
-          :urn="urnReff[0]"
-          :reff="urnReff[1]"
-          v-model="allAncestors"
-        />
-        <InfoColumn
-          v-else-if="urnReff[0].includes('cjhnt:info')"
-          :urn="urnReff[0]"
-          :reff="urnReff[1]"
-        />
-        <TextColumn v-else :urn="urnReff[0]" :reff="urnReff[1]" />
+      <v-container v-else>
+        <v-row justify="center">
+          <v-col
+            v-for="(urnReff, index) in urnReffs"
+            :key="urnReff.join(';')"
+            :id="urnReff.join(';')"
+            :cols="urnReff[0].includes('commentary') ? 6 : 4"
+            class="text-column"
+          >
+            <CommentaryColumn
+              v-if="urnReff[0].includes('commentary')"
+              :urn="urnReff[0]"
+              :reff="urnReff[1]"
+              :index="index"
+              v-model="allAncestors"
+            />
+            <InfoColumn
+              v-else-if="urnReff[0].includes('cjhnt:info')"
+              :urn="urnReff[0]"
+              :reff="urnReff[1]"
+              v-model="allAncestors"
+            />
+            <TextColumn
+              v-else
+              :urn="urnReff[0]"
+              :reff="urnReff[1]"
+              :index="index"
+              v-model="allAncestors"
+            />
+          </v-col>
+          <v-col
+            v-for="(ancestors, index) in allAncestors"
+            :cols="urnReffs.length > 1 ? 10 : 9"
+            :offset="urnReffs.length > 1 ? 0 : 3"
+            order="first"
+            class="py-0"
+          >
+            <Breadcrumb :ancestors="ancestors" :index="index"></Breadcrumb>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </v-responsive>
