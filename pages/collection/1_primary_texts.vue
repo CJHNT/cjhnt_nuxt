@@ -35,7 +35,7 @@ const subColls = [
 ]
 
 const collectionLists = collListState.value
-  ? collListState.value
+  ? ref(collListState.value)
   : ref({
       'urn:cts:cjhnt:nt': [],
       'urn:cts:cjhnt:lxx': [],
@@ -46,7 +46,7 @@ const collectionLists = collListState.value
       // author_fragments: []
     })
 
-const searchList = collSearchListState.value ? collSearchListState.value : ref([])
+const searchList = collSearchListState.value ? ref(collSearchListState.value) : ref([])
 
 if (!collListState.value) {
   for (let coll in collectionLists.value) {

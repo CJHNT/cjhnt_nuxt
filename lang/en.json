@@ -56,7 +56,10 @@
     "searchHint": "Find a collection",
     "openMenu": "Show collection list",
     "closeMenu": "Hide collection list",
-    "emptySearchMessage": "No results"
+    "emptySearchMessage": "No results",
+    "commentarySearchHint": "Find a commentary",
+    "commentaryOpenMenu": "Show commentary list",
+    "commentaryCloseMenu": "Hide commentary list"
   },
   "comptext": {
     "previous": "Previous",

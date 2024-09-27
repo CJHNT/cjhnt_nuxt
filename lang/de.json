@@ -53,10 +53,13 @@
     "author_fragments": "Fragmente",
     "pseudo": "Pseudonyme und anonyme Schriften",
     "other": "Sonstige Quellen",
-    "searchHint": "Eine Sammlung finden",
+    "searchHint": "Eine Sammlung suchen",
     "openMenu": "Sammlungsliste zeigen",
     "closeMenu": "Sammlungsliste schließen",
-    "emptySearchMessage": "Keine Treffer"
+    "emptySearchMessage": "Keine Treffer",
+    "commentarySearchHint": "Ein Kommentar suchen",
+    "commentaryOpenMenu": "Kommentarliste zeigen",
+    "commentaryCloseMenu": "Kommentarliste schließen"
   },
   "comptext": {
     "previous": "Zurück",
