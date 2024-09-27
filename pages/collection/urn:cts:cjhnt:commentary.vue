@@ -65,6 +65,7 @@ if (!commentaryListState.value) {
             )['@value']
           : allTexts.title
       }
+      console.log('intermediate data', allTexts)
       const textInfo = allTexts.member.map((m) => {
         const returnObject = {
           id: m['@id'],
@@ -84,6 +85,7 @@ if (!commentaryListState.value) {
       commentaryLists.value.push({ id: coll['@id'], title: parentTitle, commentaries: asycReturn })
       return asycReturn
     })
+    console.log('returnData', data.value)
     data.value.map((e) => {
       searchList.value.push({
         id: e.id,
