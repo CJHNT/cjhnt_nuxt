@@ -48,7 +48,7 @@ if (!commentaryListState.value) {
     method: 'POST'
   })
   for (let coll of commentaryCollections.value.member) {
-    const { data } = await useAsyncData(`${coll}Texts`, async () => {
+    const { data } = await useAsyncData(`${coll['@id']}Texts`, async () => {
       const allTexts = await $fetch('/api/dts/collections', {
         body: { id: coll['@id'] },
         method: 'POST'
