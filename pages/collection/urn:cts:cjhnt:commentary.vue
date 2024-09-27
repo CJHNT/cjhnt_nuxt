@@ -38,9 +38,9 @@ const { locale } = useI18n()
 const commentaryListState = useState('commentaryList')
 const commentarySearchListState = useState('commentarySearchList')
 
-const commentaryLists = commentaryListState.value ? commentaryListState.value : ref([])
+const commentaryLists = commentaryListState.value ? ref(commentaryListState.value) : ref([])
 
-const searchList = commentarySearchListState.value ? commentarySearchListState.value : ref([])
+const searchList = commentarySearchListState.value ? ref(commentarySearchListState.value) : ref([])
 
 if (!commentaryListState.value) {
   const { data: commentaryCollections } = await useFetch('/api/dts/collections', {

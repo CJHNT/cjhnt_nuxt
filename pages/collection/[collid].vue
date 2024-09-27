@@ -74,13 +74,17 @@ const textPromises = allTexts.value.member.map(async (m) => {
       ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
       : m.title,
     type: textData['@type'],
-    versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']])
+    versions: textData.member
+      ? textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']])
+      : ''
   }
-  const navData = await $fetch('/api/dts/navigation', {
-    body: { id: returnObject.versions[0][0] },
-    method: 'POST'
-  })
-  returnObject.firstChild = navData['hydra:member'][0].ref
+  if (returnObject.versions) {
+    const navData = await $fetch('/api/dts/navigation', {
+      body: { id: returnObject.versions[0][0] },
+      method: 'POST'
+    })
+    returnObject.firstChild = navData['hydra:member'][0].ref
+  }
   return returnObject
 })
 const finishedPromises = await Promise.all(textPromises)
