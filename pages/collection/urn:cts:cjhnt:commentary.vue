@@ -48,25 +48,30 @@ if (!commentaryListState.value) {
     method: 'POST'
   })
   for (let coll of commentaryCollections.value.member) {
-    console.log('member', commentaryCollections.value.member)
     const { data } = await useAsyncData(`${coll['@id']}Texts`, async () => {
       const allTexts = await $fetch('/api/dts/collections', {
         body: { id: coll['@id'] },
         method: 'POST'
       })
+      const bibNamespace = Object.keys(allTexts['@context']).find(
+        (ns) => allTexts['@context'][ns] === 'http://bibliotek-o.org/1.0/ontology/'
+      )
       const parentTitle = {
-        de: allTexts['dts:extensions']['ns2:AbbreviatedTitle'].find((t) => t['@language'] === 'deu')
-          ? allTexts['dts:extensions']['ns2:AbbreviatedTitle'].find(
+        de: allTexts['dts:extensions'][`${bibNamespace}:AbbreviatedTitle`].find(
+          (t) => t['@language'] === 'deu'
+        )
+          ? allTexts['dts:extensions'][`${bibNamespace}:AbbreviatedTitle`].find(
               (t) => t['@language'] === 'deu'
             )['@value']
           : allTexts.title,
-        en: allTexts['dts:extensions']['ns2:AbbreviatedTitle'].find((t) => t['@language'] === 'eng')
-          ? allTexts['dts:extensions']['ns2:AbbreviatedTitle'].find(
+        en: allTexts['dts:extensions'][`${bibNamespace}:AbbreviatedTitle`].find(
+          (t) => t['@language'] === 'eng'
+        )
+          ? allTexts['dts:extensions'][`${bibNamespace}:AbbreviatedTitle`].find(
               (t) => t['@language'] === 'eng'
             )['@value']
           : allTexts.title
       }
-      console.log('intermediate data', allTexts)
       const textInfo = allTexts.member.map((m) => {
         const returnObject = {
           id: m['@id'],
@@ -86,7 +91,6 @@ if (!commentaryListState.value) {
       commentaryLists.value.push({ id: coll['@id'], title: parentTitle, commentaries: asycReturn })
       return asycReturn
     })
-    console.log('returnData', data.value)
     data.value.map((e) => {
       searchList.value.push({
         id: e.id,
