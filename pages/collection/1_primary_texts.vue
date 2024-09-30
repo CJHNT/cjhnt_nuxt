@@ -37,68 +37,93 @@ const subColls = [
 const collectionLists = collListState.value
   ? ref(collListState.value)
   : ref({
-      'urn:cts:cjhnt:nt': [],
-      'urn:cts:cjhnt:lxx': [],
-      'urn:cts:cjhnt:qumran': [],
-      'urn:cts:greekLit:tlg0018': [],
-      'urn:cts:greekLit:tlg0526': [],
-      'urn:cts:cjhnt:pseudo': []
+      'urn:cts:cjhnt:nt': [
+        { id: 'nt_gospels', title: 'subcolls.gospels', subCollections: [] },
+        { id: 'nt_letters', title: 'subcolls.epistles', subCollections: [] },
+        { id: 'nt_revelation', title: 'subcolls.revelation', subCollections: [] }
+      ],
+      'urn:cts:cjhnt:lxx': [
+        { id: 'lxx_pentateuch', title: 'subcolls.pentateuch', subCollections: [] },
+        { id: 'lxx_history', title: 'subcolls.history', subCollections: [] },
+        { id: 'lxx_poetic', title: 'subcolls.poetic', subCollections: [] },
+        { id: 'lxx_prophetic', title: 'subcolls.prophetic', subCollections: [] }
+      ],
+      'urn:cts:cjhnt:qumran': [{ id: 'urn:cts:cjhnt:qumran', title: '', subCollections: [] }],
+      'urn:cts:greekLit:tlg0018': [
+        { id: 'philo_legal', title: 'subcolls.philo_legal', subCollections: [] },
+        { id: 'philo_allegorical', title: 'subcolls.philo_allegorical', subCollections: [] },
+        // { id: 'philo_questions', title: 'subcolls.philo_questions', subCollections: [] },
+        { id: 'philo_historical', title: 'subcolls.philo_historical', subCollections: [] },
+        { id: 'philo_philosophy', title: 'subcolls.philo_philosophy', subCollections: [] }
+      ],
+      'urn:cts:greekLit:tlg0526': [
+        { id: 'urn:cts:greekLit:tlg0526', title: '', subCollections: [] }
+      ],
+      'urn:cts:cjhnt:pseudo': [{ id: 'urn:cts:cjhnt:pseudo', title: '', subCollections: [] }]
       // author_fragments: []
     })
 
 const searchList = collSearchListState.value ? ref(collSearchListState.value) : ref([])
 
 if (!collListState.value) {
-  for (let coll in collectionLists.value) {
-    const { data } = await useAsyncData(`${coll}Texts`, async () => {
-      const allTexts = await $fetch('/api/dts/collections', {
-        body: { id: coll },
-        method: 'POST'
-      })
-      const textPromises = allTexts.member.map(async (m) => {
-        const textData = await $fetch('/api/dts/collections', {
-          body: { id: m['@id'] },
+  for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
+    for (const subColl of subCollInfo) {
+      const { data: subCollTexts } = await useAsyncData(`${subColl.id}Data`, async () => {
+        const subCollTextsInfo = await $fetch('/api/dts/collections', {
+          body: { id: subColl.id },
           method: 'POST'
         })
-        const returnObject = {
-          id: textData['@id'],
-          de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-            : m.title,
-          en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-            : m.title,
-          type: textData['@type'],
-          versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
-          parentId: coll
-        }
-        const navData = await $fetch('/api/dts/navigation', {
-          body: { id: returnObject.versions[0][0] },
-          method: 'POST'
-        })
-        returnObject.firstChild = navData['hydra:member'][0].ref
-        return returnObject
-      })
-      const finishedPromises = await Promise.all(textPromises)
-      return finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
-    })
-    data.value.map((e) => {
-      searchList.value.push({
-        id: e.id,
-        en: e.en,
-        de: e.de,
-        subTab: e.parentId,
-        tab: subColls.find((c) => {
-          for (let subC of c.collections) {
-            if (subC.urn === e.parentId) {
-              return true
-            }
+        const textPromises = subCollTextsInfo.member.map(async (m) => {
+          const textData = await $fetch('/api/dts/collections', {
+            body: { id: m['@id'] },
+            method: 'POST'
+          })
+          console.log(textData)
+          const returnObject = {
+            id: textData['@id'],
+            de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+              ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')[
+                  '@value'
+                ]
+              : m.title,
+            en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+              ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')[
+                  '@value'
+                ]
+              : m.title,
+            type: textData['@type'],
+            versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
+            parentId: coll
           }
-          return false
-        }).title
+          const navData = await $fetch('/api/dts/navigation', {
+            body: { id: returnObject.versions[0][0] },
+            method: 'POST'
+          })
+          returnObject.firstChild = navData['hydra:member'][0].ref
+          return returnObject
+        })
+        const finishedPromises = await Promise.all(textPromises)
+        console.log(finishedPromises)
+        subColl.subCollections = finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
+
+        subColl.subCollections.map((e) => {
+          searchList.value.push({
+            id: e.id,
+            en: e.en,
+            de: e.de,
+            subTab: e.parentId,
+            tab: subColls.find((c) => {
+              for (let subC of c.collections) {
+                if (subC.urn === e.parentId) {
+                  return true
+                }
+              }
+              return false
+            }).title
+          })
+        })
       })
-    })
-    collectionLists.value[coll] = data.value
+    }
   }
   collListState.value = collectionLists.value
   collSearchListState.value = searchList.value

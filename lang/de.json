@@ -108,5 +108,19 @@
     "row23": "Verweis auf ein aramäisches Lemma",
     "row24": "Verweis auf ein hebräisches Lemma",
     "row25": "markiert ein Lemma in der Lemmaliste als Verweis auf ein anderes Lemma, dessen Wörterbuchartikel auch durch Anklicken der Verweislemmata aufgerufen wird. Ein Verweislemma kann entweder eine andere Schreibweise des Hauptlemmas oder Teil eines zusammengesetzten Namens sein oder ein Lemma angeben, das mangels Belegen keinen eigenen Artikel hat, aber in dem Lemma, auf das es verweist, thematisiert wird"
+  },
+  "subcolls": {
+    "pentateuch": "Pentateuch",
+    "history": "Geschichtsbücher",
+    "poetic": "Poetische Bücher",
+    "prophetic": "Prophetische Bücher",
+    "gospels": "Evangelien/Apostelgeschichte",
+    "epistles": "Briefe",
+    "revelation": "Offenbarung",
+    "philo_legal": "Gesetzesauslegung",
+    "philo_allegorical": "Allegorischer Kommentare",
+    "philo_questions": "Fragen und Antworten",
+    "philo_historical": "Historisches/apologetische Schriften",
+    "philo_philosophy": "Philosophische Abhandlungen"
   }
 }

@@ -48,32 +48,37 @@ const numCols = computed(() => {
       <v-col v-for="x in numCols">
         <v-list :lines="false">
           <v-list-item
-            v-for="member in colLists[x - 1]"
-            :key="member.id"
+            v-for="subGroup in colLists[x - 1]"
+            :key="subGroup.id"
             class="pa-0"
-            :id="member.id"
+            :id="subGroup.id"
           >
-            <template v-if="member.versions">
-              <v-list-item-title>{{ member[locale] }}</v-list-item-title>
-              <v-list-item-subtitle>
-                <v-btn
-                  v-for="version in member.versions"
-                  :to="`/texts/${version[0]};${member.firstChild}`"
-                  variant="plain"
-                  density="compact"
-                  >{{ version[1] }}</v-btn
+            <h2 v-if="subGroup.title" class="font-weight-bold pb-2">
+              {{ $t(subGroup.title) }}
+            </h2>
+            <template v-for="member in subGroup.subCollections">
+              <template v-if="member.versions">
+                <v-list-item-title>{{ member[locale] }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  <v-btn
+                    v-for="version in member.versions"
+                    :to="`/texts/${version[0]};${member.firstChild}`"
+                    variant="plain"
+                    density="compact"
+                    >{{ version[1] }}</v-btn
+                  >
+                </v-list-item-subtitle>
+              </template>
+              <template v-else>
+                <v-list-item-title>
+                  <nuxt-link :to="`/texts/${member.id}`">{{
+                    member[locale].split(' ')[0]
+                  }}</nuxt-link></v-list-item-title
                 >
-              </v-list-item-subtitle>
-            </template>
-            <template v-else>
-              <v-list-item-title>
-                <nuxt-link :to="`/texts/${member.id}`">{{
-                  member[locale].split(' ')[0]
-                }}</nuxt-link></v-list-item-title
-              >
-              <v-list-item-subtitle>{{
-                member[locale].split(' ').slice(1).join(' ')
-              }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{
+                  member[locale].split(' ').slice(1).join(' ')
+                }}</v-list-item-subtitle>
+              </template>
             </template>
           </v-list-item>
         </v-list>

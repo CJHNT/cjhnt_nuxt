@@ -108,5 +108,19 @@
     "row23": "reference to an Aramaic lemma",
     "row24": "reference to a Hebrew lemma",
     "row25": "marks a lemma in the lemma list as a reference to another lemma. Clicking on such a lemma will load the article of the referenced lemma. Lemmas with an '*' may either be a different spelling of the main lemma, part of a compound name, or indicate a lemma that has no article of its own due to lack of evidence, but is a subject of discussion in the lemma to which it is linked."
+  },
+  "subcolls": {
+    "pentateuch": "Pentateuch",
+    "history": "Historical Books",
+    "poetic": "Poetic Books",
+    "prophetic": "Prophetic Books",
+    "gospels": "Gospels and Acts",
+    "epistles": "Epistles",
+    "revelation": "Revelation",
+    "philo_legal": "Legal Commentaries",
+    "philo_allegorical": "Allegorical Commentaries",
+    "philo_questions": "Questions and Answers",
+    "philo_historical": "Historical/Apologetic Writiings",
+    "philo_philosophy": "Philosophical Treatises"
   }
 }
