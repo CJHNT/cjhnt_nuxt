@@ -12,7 +12,7 @@ const reffDepth = () => {
   }
   return 1
 }
-const { data: docMeta } = await useAsyncData(props.urn + props.reff, async () =>
+const { data: docMeta } = await useAsyncData(props.urn + props.reff, () =>
   $fetch('/api/dts/collections', {
     body: { id: props.urn },
     method: 'POST'
@@ -117,7 +117,7 @@ const xslPath = () => {
       return 'assets/source/epidoc.sef.json'
   }
 }
-const { data: formattedText } = useAsyncData(`document${props.urn}ref${usedReff}`, () =>
+const { data: formattedText } = await useAsyncData(`document${props.urn}ref${usedReff}`, () =>
   $fetch('/api/dts/document', {
     body: { id: props.urn, ref: usedReff, xsl: xslPath() },
     method: 'POST'
