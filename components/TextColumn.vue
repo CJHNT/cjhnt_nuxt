@@ -12,10 +12,12 @@ const reffDepth = () => {
   }
   return 1
 }
-const { data: docMeta } = await useFetch('/api/dts/collections', {
-  body: { id: props.urn },
-  method: 'POST'
-})
+const { data: docMeta } = await useAsyncData(props.urn + props.reff, async () =>
+  $fetch('/api/dts/collections', {
+    body: { id: props.urn },
+    method: 'POST'
+  })
+)
 const docTitle = {
   de: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
     ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
@@ -32,10 +34,15 @@ if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPa
     parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-const { data: parentData } = await useFetch('/api/dts/collections', {
-  body: { id: parentId },
-  method: 'POST'
-})
+const { data: parentData } = await useAsyncData(parentId, () =>
+  $fetch('/api/dts/collections', {
+    body: { id: parentId },
+    method: 'POST'
+  })
+)
+const siblings = parentData.value.member
+  .map((m) => [m['@id'], m['dts:extensions']['dc:language']])
+  .filter((c) => c[0] !== props.urn)
 let hasParent = false
 if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
   if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
@@ -70,10 +77,12 @@ while (hasParent) {
     hasParent = false
   }
 }
-const { data: navReturn } = await useFetch('/api/dts/navigation', {
-  body: { id: props.urn, level: reffDepth() },
-  method: 'POST'
-})
+const { data: navReturn } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
+  $fetch('/api/dts/navigation', {
+    body: { id: props.urn, level: reffDepth() },
+    method: 'POST'
+  })
+)
 const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
 let usedReff = props.reff
 const alertText = ref('')
@@ -108,10 +117,12 @@ const xslPath = () => {
       return 'assets/source/epidoc.sef.json'
   }
 }
-const { data: formattedText } = await useFetch('/api/dts/document', {
-  body: { id: props.urn, ref: usedReff, xsl: xslPath() },
-  method: 'POST'
-})
+const { data: formattedText } = useAsyncData(`document${props.urn}ref${usedReff}`, () =>
+  $fetch('/api/dts/document', {
+    body: { id: props.urn, ref: usedReff, xsl: xslPath() },
+    method: 'POST'
+  })
+)
 allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
   notificationStore.$reset()
@@ -157,8 +168,8 @@ onUnmounted(() => {
               </v-dialog>
             </v-col>
           </v-row>
-          <v-row v-if="formattedText">
-            <v-col cols="auto">
+          <v-row v-if="formattedText" justify="space-between">
+            <v-col>
               <NuxtLink :to="`/texts/${props.urn};${prevId}`" v-show="prevId !== null">{{
                 $t('comptext.previous')
               }}</NuxtLink>
@@ -171,7 +182,24 @@ onUnmounted(() => {
                 :textUrn="props.urn"
               />
             </v-col>
-            <v-col cols="auto">
+            <v-col>
+              <v-menu v-if="siblings.length > 0" width="10rem">
+                <template v-slot:activator="{ props }">
+                  <v-btn variant="text" size="x-small" v-bind="props">
+                    {{ $t('comptext.readIn') }}
+                  </v-btn>
+                </template>
+                <v-list density="compact" :lines="false">
+                  <v-list-item v-for="(sibling, index) in siblings" :key="index" :value="index">
+                    <NuxtLink
+                      :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
+                      >{{ sibling[1] }}</NuxtLink
+                    >
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </v-col>
+            <v-col>
               <NuxtLink :to="`/texts/${props.urn};${nextId}`" v-show="nextId !== null">{{
                 $t('comptext.next')
               }}</NuxtLink>

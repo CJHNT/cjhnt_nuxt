@@ -33,7 +33,8 @@ const allAncestors = ref([])
             v-for="(urnReff, index) in urnReffs"
             :key="urnReff.join(';')"
             :id="urnReff.join(';')"
-            :cols="urnReff[0].includes('commentary') || urnReff[0].includes('qumran') ? 6 : 4"
+            cols="12"
+            :xl="urnReff[0].includes('commentary') || urnReff[0].includes('qumran') ? 6 : 4"
             class="text-column"
           >
             <CommentaryColumn
@@ -59,8 +60,9 @@ const allAncestors = ref([])
           </v-col>
           <v-col
             v-for="(ancestors, index) in allAncestors"
-            :cols="urnReffs.length > 1 ? 10 : 9"
-            :offset="urnReffs.length > 1 ? 0 : 3"
+            cols="12"
+            :xl="urnReffs.length > 1 ? 10 : 9"
+            :offset-xl="urnReffs.length > 1 ? 0 : 3"
             order="first"
             class="py-0"
           >

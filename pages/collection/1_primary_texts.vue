@@ -78,7 +78,6 @@ if (!collListState.value) {
             body: { id: m['@id'] },
             method: 'POST'
           })
-          console.log(textData)
           const returnObject = {
             id: textData['@id'],
             de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
@@ -103,7 +102,6 @@ if (!collListState.value) {
           return returnObject
         })
         const finishedPromises = await Promise.all(textPromises)
-        console.log(finishedPromises)
         subColl.subCollections = finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
 
         subColl.subCollections.map((e) => {
