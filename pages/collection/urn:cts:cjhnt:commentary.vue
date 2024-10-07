@@ -134,6 +134,7 @@ async function goToSubtab(newTab, newId) {
   foundElement.addEventListener('animationend', () => foundElement.classList.remove('flash-yellow'))
   foundElement.classList.add('flash-yellow')
 }
+const existingCommentaries = computed(() => ntBookList.filter((b) => b in commentaryLists.value))
 </script>
 
 <template>
@@ -175,22 +176,22 @@ async function goToSubtab(newTab, newId) {
             <v-card>
               <v-tabs v-model="tab">
                 <v-tab
-                  v-for="(commentary, commentaryId) in commentaryLists"
+                  v-for="commentaryId in existingCommentaries"
                   :key="commentaryId"
                   :value="commentaryId"
-                  >{{ commentary[0].parentTitle[locale] }}</v-tab
+                  >{{ commentaryLists[commentaryId][0].parentTitle[locale] }}</v-tab
                 >
               </v-tabs>
 
               <v-card-text>
                 <v-tabs-window v-model="tab">
                   <v-tabs-window-item
-                    v-for="(commentary, commentaryId) in commentaryLists"
+                    v-for="commentaryId in existingCommentaries"
                     :key="commentaryId"
                     :value="commentaryId"
                     class="overflow-auto"
                   >
-                    <CollectionList :sorted-members="commentary" />
+                    <CollectionList :sorted-members="commentaryLists[commentaryId]" />
                   </v-tabs-window-item>
                 </v-tabs-window>
               </v-card-text>

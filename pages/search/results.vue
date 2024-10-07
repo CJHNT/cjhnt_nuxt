@@ -85,10 +85,12 @@ const tableSearch = ref('')
                   <template v-if="item.highlight.length > 1">
                     <h4>{{ field.charAt(0).toUpperCase() + field.slice(1) }}</h4>
                     <ul class="ml-4">
+                      <!-- eslint-disable-next-line vue/no-v-html -->
                       <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
                     </ul>
                   </template>
                   <template v-else>
+                    <!-- eslint-disable-next-line vue/no-v-html -->
                     <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
                   </template>
                 </li>
