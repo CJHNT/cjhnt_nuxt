@@ -40,7 +40,7 @@ primaryTextTabs.value = [
   // { title: 'collection.other', collections: [] }
 ]
 
-const collectionLists = ref({
+collListState.value = {
   'urn:cts:cjhnt:nt': [
     { id: 'nt_gospels', title: 'subcolls.gospels', subCollections: [] },
     { id: 'nt_letters', title: 'subcolls.epistles', subCollections: [] },
@@ -63,13 +63,13 @@ const collectionLists = ref({
   'urn:cts:greekLit:tlg0526': [{ id: 'urn:cts:greekLit:tlg0526', title: '', subCollections: [] }],
   'urn:cts:cjhnt:pseudo': [{ id: 'urn:cts:cjhnt:pseudo', title: '', subCollections: [] }]
   // author_fragments: []
-})
+}
 
-const searchList = ref([])
+collSearchListState.value = []
 
-for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
+for (const [coll, subCollInfo] of Object.entries(collListState.value)) {
   for (const subColl of subCollInfo) {
-    await useAsyncData(`${subColl.id}Data`, async () => {
+    useAsyncData(`${subColl.id}Data`, async () => {
       const subCollTextsInfo = await $fetch('/api/dts/collections', {
         body: { id: subColl.id },
         method: 'POST'
@@ -102,7 +102,7 @@ for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
       subColl.subCollections = finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
 
       subColl.subCollections.map((e) => {
-        searchList.value.push({
+        collSearchListState.value.push({
           id: e.id,
           en: e.en,
           de: e.de,
@@ -121,8 +121,6 @@ for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
     })
   }
 }
-collListState.value = collectionLists.value
-collSearchListState.value = searchList.value
 </script>
 
 <template>
