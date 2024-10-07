@@ -67,68 +67,62 @@ const collectionLists = ref({
 
 const searchList = ref([])
 
-await callOnce(async () => {
-  for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
-    for (const subColl of subCollInfo) {
-      await useAsyncData(`${subColl.id}Data`, async () => {
-        const subCollTextsInfo = await $fetch('/api/dts/collections', {
-          body: { id: subColl.id },
+for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
+  for (const subColl of subCollInfo) {
+    await useAsyncData(`${subColl.id}Data`, async () => {
+      const subCollTextsInfo = await $fetch('/api/dts/collections', {
+        body: { id: subColl.id },
+        method: 'POST'
+      })
+      const textPromises = subCollTextsInfo.member.map(async (m) => {
+        const textData = await $fetch('/api/dts/collections', {
+          body: { id: m['@id'] },
           method: 'POST'
         })
-        const textPromises = subCollTextsInfo.member.map(async (m) => {
-          const textData = await $fetch('/api/dts/collections', {
-            body: { id: m['@id'] },
-            method: 'POST'
-          })
-          const returnObject = {
-            id: textData['@id'],
-            de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-              ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')[
-                  '@value'
-                ]
-              : m.title,
-            en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-              ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')[
-                  '@value'
-                ]
-              : m.title,
-            type: textData['@type'],
-            versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
-            parentId: coll
-          }
-          const navData = await $fetch('/api/dts/navigation', {
-            body: { id: returnObject.versions[0][0] },
-            method: 'POST'
-          })
-          returnObject.firstChild = navData['hydra:member'][0].ref
-          return returnObject
+        const returnObject = {
+          id: textData['@id'],
+          de: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
+            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
+            : m.title,
+          en: textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
+            ? textData['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
+            : m.title,
+          type: textData['@type'],
+          versions: textData.member.map((m) => [m['@id'], m['dts:extensions']['dc:language']]),
+          parentId: coll
+        }
+        const navData = await $fetch('/api/dts/navigation', {
+          body: { id: returnObject.versions[0][0] },
+          method: 'POST'
         })
-        const finishedPromises = await Promise.all(textPromises)
-        subColl.subCollections = finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
-
-        subColl.subCollections.map((e) => {
-          searchList.value.push({
-            id: e.id,
-            en: e.en,
-            de: e.de,
-            subTab: e.parentId,
-            tab: primaryTextTabs.value.find((c) => {
-              for (const subC of c.collections) {
-                if (subC.urn === e.parentId) {
-                  return true
-                }
-              }
-              return false
-            }).title
-          })
-        })
-        return null
+        returnObject.firstChild = navData['hydra:member'][0].ref
+        return returnObject
       })
-    }
+      const finishedPromises = await Promise.all(textPromises)
+      subColl.subCollections = finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
+
+      subColl.subCollections.map((e) => {
+        searchList.value.push({
+          id: e.id,
+          en: e.en,
+          de: e.de,
+          subTab: e.parentId,
+          tab: primaryTextTabs.value.find((c) => {
+            for (const subC of c.collections) {
+              if (subC.urn === e.parentId) {
+                return true
+              }
+            }
+            return false
+          }).title
+        })
+      })
+      return null
+    })
   }
-  collListState.value = collectionLists.value
-  collSearchListState.value = searchList.value
-})
+}
+collListState.value = collectionLists.value
+collSearchListState.value = searchList.value
 </script>
 
 <template>
