@@ -38,7 +38,7 @@ const { locale } = useI18n()
 const commentaryListState = useState('commentaryList')
 const commentarySearchListState = useState('commentarySearchList')
 
-const commentaryLists = commentaryListState.value ? ref(commentaryListState.value) : ref([])
+const commentaryLists = commentaryListState.value ? ref(commentaryListState.value) : ref({})
 
 const searchList = commentarySearchListState.value ? ref(commentarySearchListState.value) : ref([])
 
@@ -90,7 +90,6 @@ if (!commentaryListState.value) {
         return returnObject
       })
       const asycReturn = textInfo.sort((a, b) => a.id.localeCompare(b.id))
-      console.log('Return', asycReturn)
       const chapters = []
       for (const c of asycReturn) {
         const chapter = parseInt(c.id.split('.').at(-1).split('_')[0])
@@ -107,7 +106,7 @@ if (!commentaryListState.value) {
           })
         }
       }
-      commentaryLists.value.push(chapters)
+      commentaryLists.value[coll['@id']] = chapters
       return asycReturn
     })
     data.value.map((e) => {
@@ -119,9 +118,9 @@ if (!commentaryListState.value) {
       })
     })
   }
-  commentaryLists.value = commentaryLists.value.sort(
-    (a, b) => ntBookList.indexOf(a.id) - ntBookList.indexOf(b.id)
-  )
+  // commentaryLists.value = commentaryLists.value.sort(
+  //   (a, b) => ntBookList.indexOf(a[0].id) - ntBookList.indexOf(b[0].id)
+  // )
   searchList.value = searchList.value.sort(
     (a, b) => ntBookList.indexOf(a.tab) - ntBookList.indexOf(b.tab)
   )
@@ -176,9 +175,9 @@ async function goToSubtab(newTab, newId) {
             <v-card>
               <v-tabs v-model="tab">
                 <v-tab
-                  v-for="commentary in commentaryLists"
-                  :key="commentary.id"
-                  :value="commentary.id"
+                  v-for="(commentary, commentaryId) in commentaryLists"
+                  :key="commentaryId"
+                  :value="commentaryId"
                   >{{ commentary[0].parentTitle[locale] }}</v-tab
                 >
               </v-tabs>
@@ -186,9 +185,9 @@ async function goToSubtab(newTab, newId) {
               <v-card-text>
                 <v-tabs-window v-model="tab">
                   <v-tabs-window-item
-                    v-for="commentary in commentaryLists"
-                    :key="commentary.id"
-                    :value="commentary.id"
+                    v-for="(commentary, commentaryId) in commentaryLists"
+                    :key="commentaryId"
+                    :value="commentaryId"
                     class="overflow-auto"
                   >
                     <CollectionList :sorted-members="commentary" />

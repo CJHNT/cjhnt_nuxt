@@ -238,7 +238,7 @@ onMounted(() => {
         <v-container>
           <v-row>
             <v-col>
-              // eslint-disable-next-line vue/no-v-html
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <div v-html="ntText" />
             </v-col>
           </v-row>
@@ -293,7 +293,7 @@ onMounted(() => {
           </v-row>
           <v-row class="text-content">
             <v-col>
-              // eslint-disable-next-line vue/no-v-html
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <div v-html="langText()" />
             </v-col>
           </v-row>

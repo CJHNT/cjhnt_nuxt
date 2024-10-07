@@ -67,7 +67,7 @@ const allAncestors = ref([])
             order="first"
             class="py-0"
           >
-            <Breadcrumb :ancestors="ancestors" :index="index" />
+            <BreadCrumb :ancestors="ancestors" :index="index" />
           </v-col>
         </v-row>
       </v-container>

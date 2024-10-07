@@ -212,7 +212,7 @@ onUnmounted(() => {
         <v-container class="text-content">
           <v-row>
             <v-col>
-              // eslint-disable-next-line vue/no-v-html
+              <!-- eslint-disable-next-line vue/no-v-html -->
               <div v-html="formattedText" />
             </v-col>
           </v-row>

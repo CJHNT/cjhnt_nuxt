@@ -9,7 +9,6 @@ const { locale } = useI18n()
 const { name } = useDisplay()
 const colLists = ref([])
 const numCols = ref(4)
-console.log('members', props.sortedMembers)
 
 watch(
   name,

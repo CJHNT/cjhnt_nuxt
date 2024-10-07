@@ -11,7 +11,7 @@ const htmlText = (await import(`@/assets/wissensspeicher/${htmlPath}.html?raw`))
   <v-container class="text-content">
     <v-row>
       <v-col>
-        // eslint-disable-next-line vue/no-v-html
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-html="htmlText" />
       </v-col>
     </v-row>

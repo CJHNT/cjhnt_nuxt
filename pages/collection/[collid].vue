@@ -8,11 +8,16 @@ const { user } = useUserSession()
 const { locale } = useI18n()
 const collName = ref({})
 const ancestors = ref([])
-const collectionLists = useState('collList')
-console.log(collectionLists.value[route.params.collid])
+const collectionLists = route.params.collid.includes('commentary')
+  ? useState('commentaryList')
+  : useState('collList')
+
+const parentUrn = route.params.collid.includes('commentary')
+  ? 'urn:cts:cjhnt:commentary'
+  : '1_primary_texts'
 
 const { data: parentInfo } = await useFetch('/api/dts/collections', {
-  body: { id: '1_primary_texts' },
+  body: { id: parentUrn },
   method: 'POST'
 })
 const parentTitle = {
@@ -23,7 +28,7 @@ const parentTitle = {
     ? parentInfo.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
     : parentInfo.value.title
 }
-ancestors.value.push({ id: '1_primary_texts', title: parentTitle })
+ancestors.value.push({ id: parentUrn, title: parentTitle })
 
 const { data: allTexts } = await useFetch('/api/dts/collections', {
   body: { id: route.params.collid },
@@ -122,7 +127,7 @@ collName.value = {
       <v-container v-else>
         <v-row justify="center">
           <v-col cols="12" xl="8" offset-xxl="2">
-            <Breadcrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />
+            <BreadCrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />
           </v-col>
           <v-col cols="12" xl="8" xxl="6">
             <h1>{{ collName[locale] }}</h1>
