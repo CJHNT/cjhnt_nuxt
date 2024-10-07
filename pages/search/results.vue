@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <script setup>
 definePageMeta({
   middleware: ['auth']
@@ -51,20 +52,20 @@ const tableSearch = ref('')
         <v-col cols="12" md="9" xl="6">
           <h1>{{ $t('search.results') }}</h1>
           <v-text-field
-            width="300"
             v-model="tableSearch"
+            width="300"
             :label="$t('search.searchResults')"
             prepend-inner-icon="mdi-magnify"
             variant="outlined"
             hide-details
             single-line
             clearable
-          ></v-text-field>
+          />
           <v-data-table
+            v-model:search="tableSearch"
             :headers="tableHeaders"
             :items="results.hits"
             :items-per-page-text="$t('search.itemsPerPage')"
-            v-model:search="tableSearch"
             :show-current-page="true"
             page-text=""
             :items-per-page-options="[
@@ -76,20 +77,20 @@ const tableSearch = ref('')
             ]"
             :no-data-text="$t('search.noResults')"
           >
-            <template v-slot:item.title="{ item }">
+            <template #[`item.title`]="{ item }">
               <nuxt-link :to="`/texts/${item.urn}`">{{ item.title }}</nuxt-link>
             </template>
-            <template v-slot:item.highlight="{ item }">
+            <template #[`item.highlight`]="{ item }">
               <ul class="ml-4">
-                <li v-for="(phrase, field) in item.highlight">
+                <li v-for="(phrase, field, index) in item.highlight" :key="index">
                   <template v-if="item.highlight.length > 1">
                     <h4>{{ field.charAt(0).toUpperCase() + field.slice(1) }}</h4>
                     <ul class="ml-4">
-                      <li v-for="p in phrase" v-html="p"></li>
+                      <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
                     </ul>
                   </template>
                   <template v-else>
-                    <li v-for="p in phrase" v-html="p"></li>
+                    <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
                   </template>
                 </li>
               </ul>

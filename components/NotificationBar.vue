@@ -2,6 +2,7 @@
 const props = defineProps({
   notification: { type: Object, required: true }
 })
+defineEmits(['closeNotification'])
 </script>
 
 <template>

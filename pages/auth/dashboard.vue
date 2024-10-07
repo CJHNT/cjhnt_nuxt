@@ -89,17 +89,17 @@ onUnmounted(() => {
           <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
-              @submit="changePassword"
               title="auth.changePassword"
               label="auth.newPassword"
+              @submit="changePassword"
             />
           </v-col>
           <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
-              @submit="changeEmail"
               title="auth.changeEmail"
               label="auth.newEmail"
+              @submit="changeEmail"
             />
           </v-col>
         </v-row>
@@ -108,9 +108,9 @@ onUnmounted(() => {
           <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
             <AuthForm
               :loading="loading"
-              @submit="changeNotification"
               title="auth.changeUpdateStatus"
               :label="user.wantsUpdates ? 'auth.turnOffUpdates' : 'auth.turnOnUpdates'"
+              @submit="changeNotification"
             />
           </v-col>
         </v-row>

@@ -34,7 +34,9 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt',
     'nuxt-auth-utils',
-    '@nuxt/devtools'
+    '@nuxt/devtools',
+    '@nuxt/eslint',
+    '@nuxtjs/eslint-module'
   ],
 
   googleFonts: {
@@ -78,6 +80,8 @@ export default defineNuxtConfig({
     esUser: process.env.ES_USER,
     esPw: process.env.ES_PW
   },
+
+  eslint: {},
 
   compatibilityDate: '2024-08-07'
 })

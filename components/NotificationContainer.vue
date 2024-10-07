@@ -12,8 +12,8 @@ const notifications = useNotificationStore()
               v-for="notification in notifications.notifications"
               :key="notification.id"
               :notification="notification"
-              @closeNotification="notifications.removeNotification(notification)"
-            ></NotificationBar>
+              @close-notification="notifications.removeNotification(notification)"
+            />
           </div>
         </v-col>
       </v-row>

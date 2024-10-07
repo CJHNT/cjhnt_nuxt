@@ -2,7 +2,7 @@
 defineProps({
   loading: { type: Boolean, default: false },
   title: { type: String, required: true },
-  label: { type: String }
+  label: { type: String, default: '' }
 })
 const emit = defineEmits(['submit'])
 const email = ref('')
@@ -38,44 +38,44 @@ const submit = () => {
       <v-card-text>
         <v-text-field
           v-if="['auth.signUp', 'auth.changeEmail', 'auth.login'].includes(title)"
+          v-model="email"
           :label="label ? $t(label) : 'Email'"
           :rules="[validateEmail()]"
           prepend-icon="mdi-email"
-          v-model="email"
         />
         <v-text-field
           v-if="title === 'auth.changeEmail'"
+          v-model="repeatEmail"
           :label="$t('auth.verifyEmail')"
           prepend-icon="mdi-email"
-          v-model="repeatEmail"
           :rules="[() => email === repeatEmail || $t('auth.noEmailMatch')]"
         />
         <v-text-field
           v-if="['auth.signUp', 'auth.changePassword', 'auth.login'].includes(title)"
+          v-model="password"
           :type="showPassword ? 'text' : 'password'"
           :label="label ? $t(label) : $t('auth.password')"
           prepend-icon="mdi-lock"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
-          v-model="password"
         />
         <v-text-field
           v-if="['auth.signUp', 'auth.changePassword'].includes(title)"
+          v-model="repeatPassword"
           :type="showRepeatPassword ? 'text' : 'password'"
           :label="$t('auth.verifyPassword')"
           prepend-icon="mdi-lock"
           :append-icon="showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="showRepeatPassword = !showRepeatPassword"
-          v-model="repeatPassword"
           :rules="[() => password === repeatPassword || $t('auth.noPasswordMatch')]"
+          @click:append="showRepeatPassword = !showRepeatPassword"
         />
         <v-checkbox
           v-if="['auth.signUp'].includes(title)"
           v-model="wantsUpdates"
           :label="label ? $t(label) : $t('auth.sendMeUpdates')"
-        ></v-checkbox>
+        />
       </v-card-text>
-      <v-divider></v-divider>
+      <v-divider />
       <v-card-actions>
         <v-btn color="success" :disabled="loading" type="submit">
           <template v-if="loading">{{ $t('wait') }}</template>
@@ -84,7 +84,7 @@ const submit = () => {
         </v-btn>
       </v-card-actions>
       <template v-if="['auth.signUp', 'auth.login'].includes(title)">
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-text>
           <template v-if="title === 'auth.signUp'">
             {{ $t('auth.alreadyRegistered') }}

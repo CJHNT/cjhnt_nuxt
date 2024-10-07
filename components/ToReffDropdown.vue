@@ -3,10 +3,15 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const compProps = defineProps({
-  currentReff: String,
-  allReffs: Array,
-  reffName: String,
-  textUrn: String
+  currentReff: { type: String, default: '' },
+  allReffs: {
+    type: Array,
+    default() {
+      return []
+    }
+  },
+  reffName: { type: String, default: '' },
+  textUrn: { type: String, default: '' }
 })
 const dropdownMembers = computed(() => {
   return compProps.allReffs.filter((i) => i !== compProps.currentReff)
@@ -20,7 +25,7 @@ function makeNewUrl(n) {
 
 <template>
   <v-menu v-if="dropdownMembers.length > 0" width="10rem">
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <v-btn variant="text" size="x-small" v-bind="props">
         {{ $t('comptext.goTo') }}
       </v-btn>

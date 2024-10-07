@@ -1,1 +1,1 @@
-export default defineEventHandler((event) => pass)
+export default defineEventHandler(() => {})

@@ -47,7 +47,7 @@ if (!commentaryListState.value) {
     body: { id: 'urn:cts:cjhnt:commentary' },
     method: 'POST'
   })
-  for (let coll of commentaryCollections.value.member) {
+  for (const coll of commentaryCollections.value.member) {
     const { data } = await useAsyncData(`${coll['@id']}Texts`, async () => {
       const allTexts = await $fetch('/api/dts/collections', {
         body: { id: coll['@id'] },
@@ -83,12 +83,31 @@ if (!commentaryListState.value) {
             : m.title,
           type: m['@type'],
           parentId: coll['@id'],
-          parentTitle: parentTitle
+          parentTitle: parentTitle,
+          firstChild: '1',
+          versions: null
         }
         return returnObject
       })
       const asycReturn = textInfo.sort((a, b) => a.id.localeCompare(b.id))
-      commentaryLists.value.push({ id: coll['@id'], title: parentTitle, commentaries: asycReturn })
+      console.log('Return', asycReturn)
+      const chapters = []
+      for (const c of asycReturn) {
+        const chapter = parseInt(c.id.split('.').at(-1).split('_')[0])
+        const cExists = chapters.find((d) => d.chapter === chapter)
+        if (cExists) {
+          cExists.subCollections.push(c)
+        } else {
+          chapters.push({
+            id: coll['@id'],
+            title: 'chapter',
+            chapter: chapter,
+            parentTitle: parentTitle,
+            subCollections: [c]
+          })
+        }
+      }
+      commentaryLists.value.push(chapters)
       return asycReturn
     })
     data.value.map((e) => {
@@ -120,7 +139,7 @@ async function goToSubtab(newTab, newId) {
 
 <template>
   <v-responsive>
-    <Footer />
+    <AppFooter />
     <v-main class="d-flex" justify="center" style="min-height: 300px">
       <v-container v-if="user?.role === 'user'" class="text-column">
         <v-alert type="warning"
@@ -132,22 +151,22 @@ async function goToSubtab(newTab, newId) {
           <v-col cols="12" xl="8" xxl="6">
             <v-autocomplete
               :items="searchList"
-              :itemTitle="locale"
-              noDataText="collection.emptySearchMessage"
-              openText="collection.commentaryOpenMenu"
-              closeText="collection.commentaryCloseMenu"
+              :item-title="locale"
+              no-data-text="collection.emptySearchMessage"
+              open-text="collection.commentaryOpenMenu"
+              close-text="collection.commentaryCloseMenu"
               density="compact"
               :hint="$t('collection.commentarySearchHint')"
               width="200"
               persistent-hint
               clearable
             >
-              <template v-slot:item="{ props, item }">
+              <template #item="{ props, item }">
                 <v-list-item
                   v-bind="props"
                   :title="item.raw[locale]"
                   @click="goToSubtab(item.raw.tab, item.raw.id)"
-                ></v-list-item>
+                />
               </template>
             </v-autocomplete>
           </v-col>
@@ -160,7 +179,7 @@ async function goToSubtab(newTab, newId) {
                   v-for="commentary in commentaryLists"
                   :key="commentary.id"
                   :value="commentary.id"
-                  >{{ commentary.title[locale] }}</v-tab
+                  >{{ commentary[0].parentTitle[locale] }}</v-tab
                 >
               </v-tabs>
 
@@ -172,7 +191,7 @@ async function goToSubtab(newTab, newId) {
                     :value="commentary.id"
                     class="overflow-auto"
                   >
-                    <CollectionList :sortedMembers="commentary.commentaries" />
+                    <CollectionList :sorted-members="commentary" />
                   </v-tabs-window-item>
                 </v-tabs-window>
               </v-card-text>

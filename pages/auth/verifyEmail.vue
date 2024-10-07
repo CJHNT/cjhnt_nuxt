@@ -10,9 +10,9 @@
         You should have received an email to verify your email address at {{ user.email }}. If not,
         click the link below to resend the email.
       </v-card-text>
-      <v-divider></v-divider>
+      <v-divider/>
       <v-card-actions>
-        <v-btn @click="verifyEmail" color="info">Verify Email</v-btn>
+        <v-btn color="info" @click="verifyEmail">Verify Email</v-btn>
       </v-card-actions>
     </v-card>
   </v-main>

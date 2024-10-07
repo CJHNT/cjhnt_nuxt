@@ -16,12 +16,12 @@
         </v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field label="Email" prepend-icon="mdi-email" v-model="email" />
+            <v-text-field v-model="email" label="Email" prepend-icon="mdi-email" />
           </v-form>
         </v-card-text>
-        <v-divider></v-divider>
+        <v-divider/>
         <v-card-actions>
-          <v-btn @click="resetPassword" color="info">Reset password</v-btn>
+          <v-btn color="info" @click="resetPassword">Reset password</v-btn>
         </v-card-actions>
       </template>
     </v-card>

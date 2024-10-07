@@ -10,38 +10,37 @@ const logout = () => {
 
 <template>
   <v-app-bar color="#027f42">
-    <template v-slot:prepend>
+    <template #prepend>
       <v-btn class="d-md-none"
         ><v-img
           src="@/assets/img/cjh-logo-quadratisch-klein.png"
           :alt="$t('index.logoAlt')"
           width="32"
           inline
-        ></v-img
-      ></v-btn>
+        /></v-btn>
       <v-btn
         icon="mdi-information-outline"
         href="https://cjhnt-info.saw-leipzig.de/de"
         target="_blank"
-      ></v-btn>
-      <v-btn icon="mdi-home" to="/"></v-btn>
+      />
+      <v-btn icon="mdi-home" to="/"/>
     </template>
-    <template v-slot:append>
+    <template #append>
       <v-tooltip location="bottom" :text="$t('search.toAdvancedSearch')">
-        <template v-slot:activator="{ props }">
-          <v-btn icon="mdi-magnify" to="/search/advanced" v-bind="props"></v-btn>
+        <template #activator="{ props }">
+          <v-btn icon="mdi-magnify" to="/search/advanced" v-bind="props"/>
         </template>
       </v-tooltip>
 
       <template v-if="loggedIn">
         <v-tooltip location="bottom" :text="$t('auth.loggedInAs', { email: user.email })">
-          <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-account" to="/auth/dashboard" v-bind="props"></v-btn>
-            <v-btn icon="mdi-logout" @click="logout" v-bind="props"></v-btn>
+          <template #activator="{ props }">
+            <v-btn icon="mdi-account" to="/auth/dashboard" v-bind="props"/>
+            <v-btn icon="mdi-logout" v-bind="props" @click="logout"/>
           </template>
         </v-tooltip>
       </template>
-      <v-btn v-else icon="mdi-login" to="/auth/login"></v-btn>
+      <v-btn v-else icon="mdi-login" to="/auth/login"/>
       <LangSwitcher />
     </template>
   </v-app-bar>

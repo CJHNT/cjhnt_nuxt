@@ -1,12 +1,12 @@
 <script setup>
-const parentSearchTerm = defineModel()
+const parentSearchTerm = defineModel({ type: String })
 </script>
 
 <template>
   <v-text-field
+    v-model="parentSearchTerm"
     type="input"
     prepend-inner-icon="mdi-magnify"
-    v-model="parentSearchTerm"
     clearable
-  ></v-text-field>
+  />
 </template>

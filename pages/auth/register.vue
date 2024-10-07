@@ -51,12 +51,12 @@ const register = async (body) => {
             :type="alertMessage.type"
             :text="$t(alertMessage.message)"
             closable
-          ></v-alert>
+          />
         </v-col>
       </v-row>
       <v-row justify="center">
         <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
-          <AuthForm :loading="loading" @submit="register" title="auth.signUp" />
+          <AuthForm :loading="loading" title="auth.signUp" @submit="register" />
         </v-col>
       </v-row>
     </v-container>

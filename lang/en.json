@@ -3,6 +3,7 @@
   "wait": "please wait...",
   "closeDialog": "Close Dialog",
   "loading": "Loading...",
+  "chapter": "Chapter {chapter}",
   "index": {
     "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
     "signUp": "Sign up",

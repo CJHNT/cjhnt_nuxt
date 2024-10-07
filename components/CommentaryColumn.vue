@@ -2,8 +2,12 @@
 import { parseFromString } from 'dom-parser'
 
 const { locale } = useI18n()
-const props = defineProps({ urn: String, reff: String, index: Number })
-const allAncestors = defineModel()
+const props = defineProps({
+  urn: { type: String, default: '' },
+  reff: { type: String, default: '' },
+  index: { type: Number, default: 0 }
+})
+const allAncestors = defineModel({ type: Array })
 const ancestors = ref([])
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
@@ -166,7 +170,7 @@ onMounted(() => {
         body: { id: sourceUrn },
         method: 'POST'
       })
-      var langTexts = {}
+      const langTexts = {}
       for (const member of collInfo.member) {
         const xslPath = () => {
           switch (true) {
@@ -232,7 +236,12 @@ onMounted(() => {
     <v-row>
       <v-col cols="4" :order="index">
         <v-container>
-          <v-row v-html="ntText"></v-row>
+          <v-row>
+            <v-col>
+              // eslint-disable-next-line vue/no-v-html
+              <div v-html="ntText" />
+            </v-col>
+          </v-row>
           <v-row class="my-4">
             <v-autocomplete
               :items="memberItems"
@@ -242,8 +251,7 @@ onMounted(() => {
               width="200"
               persistent-hint
               clearable
-            >
-            </v-autocomplete>
+            />
           </v-row>
           <v-row>
             <v-card>
@@ -263,27 +271,32 @@ onMounted(() => {
             </v-col>
             <v-col cols="auto" class="pl-0">
               <v-dialog max-width="500">
-                <template v-slot:activator="{ props: activatorProps }">
+                <template #activator="{ props: activatorProps }">
                   <v-btn v-bind="activatorProps" variant="plain" size="x-small"
                     ><v-icon> mdi-copyright </v-icon></v-btn
                   >
                 </template>
 
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                   <v-card title="Copyright">
                     <v-card-text>{{ $t('comptext.commentaryLicense') }}</v-card-text>
 
                     <v-card-actions>
-                      <v-spacer></v-spacer>
+                      <v-spacer />
 
-                      <v-btn :text="$t('closeDialog')" @click="isActive.value = false"></v-btn>
+                      <v-btn :text="$t('closeDialog')" @click="isActive.value = false" />
                     </v-card-actions>
                   </v-card>
                 </template>
               </v-dialog>
             </v-col>
           </v-row>
-          <v-row class="text-content" v-html="langText()"> </v-row>
+          <v-row class="text-content">
+            <v-col>
+              // eslint-disable-next-line vue/no-v-html
+              <div v-html="langText()" />
+            </v-col>
+          </v-row>
         </v-container>
       </v-col>
     </v-row>

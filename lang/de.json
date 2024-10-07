@@ -3,6 +3,7 @@
   "wait": "bitte warten...",
   "closeDialog": "Fenster schließen",
   "loading": "Laden...",
+  "chapter": "Kapitel {chapter}",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
     "signUp": "Legen Sie ein Konto an",

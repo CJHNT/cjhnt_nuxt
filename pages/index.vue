@@ -4,7 +4,7 @@ fetch()
 const searchTerm = ref('')
 
 watch(searchTerm, () => {
-  if (searchTerm) {
+  if (searchTerm.value) {
     return navigateTo(
       `/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&field=text&page=1`
     )
@@ -15,7 +15,7 @@ watch(searchTerm, () => {
 <template>
   <v-responsive class="align-center">
     <LeftDrawer />
-    <Footer border="t" />
+    <AppFooter border="t" />
 
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <v-container>
@@ -27,17 +27,17 @@ watch(searchTerm, () => {
                   media="(max-width: 960px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
-                />
+                >
                 <source
                   media="(max-width: 1280px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
-                />
+                >
                 <img
                   src="@/assets/img/Wort-Bildmarke-JF.png"
                   alt="Logo: CJHNT Projekt"
                   height="270"
-                />
+                >
               </picture>
             </a>
           </v-col>

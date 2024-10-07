@@ -1,4 +1,7 @@
 <script setup>
+import primaryImage from '@/assets/img/1_primary_texts.png'
+import commentaryImage from '@/assets/img/commentary.jpg'
+import infoImage from '@/assets/img/wissen_texts.png'
 const { locale } = useI18n()
 const { data: theTexts } = await useAsyncData('apiAllTexts', async () => {
   const allTexts = await $fetch('/api/dts/collections', {
@@ -20,9 +23,6 @@ const { data: theTexts } = await useAsyncData('apiAllTexts', async () => {
   const finishedPromises = await Promise.all(textPromises)
   return finishedPromises.sort((a, b) => a.id.localeCompare(b.id))
 })
-import primaryImage from '@/assets/img/1_primary_texts.png'
-import commentaryImage from '@/assets/img/commentary.jpg'
-import infoImage from '@/assets/img/wissen_texts.png'
 
 function getImage(urn) {
   if (urn === '1_primary_texts') {
@@ -42,10 +42,10 @@ function getImage(urn) {
         <figcaption class="text-caption">{{ member[locale] }}</figcaption>
         <nuxt-link class="mx-auto" :to="`/collection/${member.id}`" :title="member[locale]">
           <picture>
-            <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" />
-            <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" />
-            <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" />
-            <img :src="getImage(member.id)" :alt="member[locale]" height="200" />
+            <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" >
+            <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" >
+            <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" >
+            <img :src="getImage(member.id)" :alt="member[locale]" height="200" >
           </picture>
         </nuxt-link>
       </figure>

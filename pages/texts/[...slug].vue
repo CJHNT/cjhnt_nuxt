@@ -20,7 +20,7 @@ const allAncestors = ref([])
 
 <template>
   <v-responsive>
-    <Footer />
+    <AppFooter />
     <v-main class="d-flex justify-center" min-height="300px">
       <v-container v-if="user?.role === 'user'" class="text-column">
         <v-alert type="warning"
@@ -31,42 +31,43 @@ const allAncestors = ref([])
         <v-row justify="center">
           <v-col
             v-for="(urnReff, index) in urnReffs"
-            :key="urnReff.join(';')"
             :id="urnReff.join(';')"
+            :key="urnReff.join(';')"
             cols="12"
             :xl="urnReff[0].includes('commentary') || urnReff[0].includes('qumran') ? 6 : 4"
             class="text-column"
           >
             <CommentaryColumn
               v-if="urnReff[0].includes('commentary')"
+              v-model="allAncestors"
               :urn="urnReff[0]"
               :reff="urnReff[1]"
               :index="index"
-              v-model="allAncestors"
             />
             <InfoColumn
               v-else-if="urnReff[0].includes('cjhnt:info')"
+              v-model="allAncestors"
               :urn="urnReff[0]"
               :reff="urnReff[1]"
-              v-model="allAncestors"
             />
             <TextColumn
               v-else
+              v-model="allAncestors"
               :urn="urnReff[0]"
               :reff="urnReff[1]"
               :index="index"
-              v-model="allAncestors"
             />
           </v-col>
           <v-col
             v-for="(ancestors, index) in allAncestors"
+            :key="index"
             cols="12"
             :xl="urnReffs.length > 1 ? 10 : 9"
             :offset-xl="urnReffs.length > 1 ? 0 : 3"
             order="first"
             class="py-0"
           >
-            <Breadcrumb :ancestors="ancestors" :index="index"></Breadcrumb>
+            <Breadcrumb :ancestors="ancestors" :index="index" />
           </v-col>
         </v-row>
       </v-container>

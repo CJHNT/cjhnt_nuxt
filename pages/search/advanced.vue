@@ -6,7 +6,7 @@ const searchTerm = ref('')
 const slop = ref(0)
 const field = ref('text')
 function submit() {
-  if (searchTerm) {
+  if (searchTerm.value) {
     return navigateTo(
       `/search/results?term=${searchTerm.value.replaceAll(' ', '+')}&field=${field.value}&slop=${slop.value}&page=1`
     )

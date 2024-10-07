@@ -1,10 +1,10 @@
 // auth.d.ts
 declare module '#auth-utils' {
   interface User {
-    email: String
+    email: string
     role: 'admin' | 'project' | 'user'
-    verifiedEmail: Boolean
-    wantsUpdates: Boolean
+    verifiedEmail: boolean
+    wantsUpdates: boolean
   }
 }
 

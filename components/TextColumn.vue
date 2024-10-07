@@ -1,8 +1,11 @@
 <script setup>
 const { locale } = useI18n()
 
-const props = defineProps({ urn: String, reff: { type: String, default: 1 } })
-const allAncestors = defineModel()
+const props = defineProps({
+  urn: { type: String, default: '' },
+  reff: { type: String, default: '1' }
+})
+const allAncestors = defineModel({ type: Array })
 const ancestors = ref([])
 const notificationStore = useNotificationStore()
 const reffDepth = () => {
@@ -146,22 +149,22 @@ onUnmounted(() => {
             </v-col>
             <v-col v-if="docMeta['dts:extensions']['dc:rights']" cols="auto" class="pl-0">
               <v-dialog max-width="500">
-                <template v-slot:activator="{ props: activatorProps }">
+                <template #activator="{ props: activatorProps }">
                   <v-btn v-bind="activatorProps" variant="plain" size="x-small"
                     ><v-icon> mdi-copyright </v-icon></v-btn
                   >
                 </template>
 
-                <template v-slot:default="{ isActive }">
+                <template #default="{ isActive }">
                   <v-card title="Copyright">
                     <v-card-text>
                       {{ docMeta['dts:extensions']['dc:rights'] }}
                     </v-card-text>
 
                     <v-card-actions>
-                      <v-spacer></v-spacer>
+                      <v-spacer />
 
-                      <v-btn :text="$t('closeDialog')" @click="isActive.value = false"></v-btn>
+                      <v-btn :text="$t('closeDialog')" @click="isActive.value = false" />
                     </v-card-actions>
                   </v-card>
                 </template>
@@ -170,22 +173,22 @@ onUnmounted(() => {
           </v-row>
           <v-row v-if="formattedText" justify="space-between">
             <v-col>
-              <NuxtLink :to="`/texts/${props.urn};${prevId}`" v-show="prevId !== null">{{
+              <NuxtLink v-show="prevId !== null" :to="`/texts/${props.urn};${prevId}`">{{
                 $t('comptext.previous')
               }}</NuxtLink>
             </v-col>
             <v-col>
               <ToReffDropdown
-                :currentReff="usedReff"
-                :allReffs="validReffs"
-                :reffName="navReturn.citeType"
-                :textUrn="props.urn"
+                :current-reff="usedReff"
+                :all-reffs="validReffs"
+                :reff-name="navReturn.citeType"
+                :text-urn="props.urn"
               />
             </v-col>
             <v-col>
               <v-menu v-if="siblings.length > 0" width="10rem">
-                <template v-slot:activator="{ props }">
-                  <v-btn variant="text" size="x-small" v-bind="props">
+                <template #activator="{ props: siblingProps }">
+                  <v-btn variant="text" size="x-small" v-bind="siblingProps">
                     {{ $t('comptext.readIn') }}
                   </v-btn>
                 </template>
@@ -200,13 +203,20 @@ onUnmounted(() => {
               </v-menu>
             </v-col>
             <v-col>
-              <NuxtLink :to="`/texts/${props.urn};${nextId}`" v-show="nextId !== null">{{
+              <NuxtLink v-show="nextId !== null" :to="`/texts/${props.urn};${nextId}`">{{
                 $t('comptext.next')
               }}</NuxtLink>
             </v-col>
           </v-row>
         </v-container>
-        <v-container class="text-content" v-html="formattedText"></v-container>
+        <v-container class="text-content">
+          <v-row>
+            <v-col>
+              // eslint-disable-next-line vue/no-v-html
+              <div v-html="formattedText" />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>

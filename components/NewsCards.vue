@@ -8,10 +8,10 @@ watch(locale, async (newLocale) => {
 </script>
 
 <template>
-  <v-container class="pa-0">
+  <v-container v-if="newsItems" class="pa-0">
     <v-hover
-      v-if="newsItems"
-      v-for="item in newsItems.items.slice(0, 3).reverse()"
+      v-for="(item, index) in newsItems.items.slice(0, 3).reverse()"
+      :key="index"
       v-slot="{ isHovering, props }"
     >
       <v-card

@@ -112,7 +112,7 @@ collName.value = {
 
 <template>
   <v-responsive class="align-center">
-    <Footer />
+    <AppFooter />
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <v-container v-if="user?.role === 'user'" class="text-column">
         <v-alert type="warning"
@@ -122,11 +122,11 @@ collName.value = {
       <v-container v-else>
         <v-row justify="center">
           <v-col cols="12" xl="8" offset-xxl="2">
-            <Breadcrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0"></Breadcrumb>
+            <Breadcrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />
           </v-col>
           <v-col cols="12" xl="8" xxl="6">
             <h1>{{ collName[locale] }}</h1>
-            <CollectionList :sorted-members="collectionLists[route.params.collid]"></CollectionList>
+            <CollectionList :sorted-members="collectionLists[route.params.collid]" />
           </v-col>
         </v-row>
       </v-container>

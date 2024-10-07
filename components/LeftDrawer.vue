@@ -13,10 +13,10 @@ onMounted(() => {
 <template>
   <v-navigation-drawer
     :rail="rail"
-    @click="rail = false"
     width="500"
     mobile-breakpoint="xs"
     rail-width="30"
+    @click="rail = false"
   >
     <v-container class="px-0 fill-height">
       <v-row no-gutters class="fill-height">
@@ -44,9 +44,9 @@ onMounted(() => {
           <v-btn
             density="compact"
             :icon="rail ? 'mdi-chevron-right' : 'mdi-chevron-left'"
-            @click.stop="rail = !rail"
             variant="text"
-          ></v-btn>
+            @click.stop="rail = !rail"
+          />
         </v-col>
       </v-row>
     </v-container>

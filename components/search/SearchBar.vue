@@ -1,8 +1,8 @@
 <script setup>
-const parentSearchTerm = defineModel()
+const parentSearchTerm = defineModel({ type: String })
 const searchTerm = ref('')
 function sendSearchQuery() {
-  if (searchTerm) {
+  if (searchTerm.value) {
     parentSearchTerm.value = searchTerm.value
   }
 }
@@ -13,13 +13,13 @@ function sendSearchQuery() {
     <v-col>
       <v-responsive class="mx-auto" max-width="344">
         <v-text-field
+          v-model="searchTerm"
           :hint="$t('index.searchHint')"
           type="input"
           prepend-inner-icon="mdi-magnify"
-          @keydown.enter.prevent="sendSearchQuery"
-          v-model="searchTerm"
           clearable
-        ></v-text-field>
+          @keydown.enter.prevent="sendSearchQuery"
+        />
       </v-responsive>
     </v-col>
   </v-row>

@@ -10,7 +10,6 @@ const { locale } = useI18n()
 const programmaticChange = ref(false)
 const collectionLists = useState('collList')
 const searchList = useState('collSearchList')
-console.log('searchList', searchList.value)
 const subColls = useState('primaryTextTabs')
 
 async function goToSubtab(newTab, newSubtab, newId) {
@@ -35,7 +34,7 @@ watch(tab, (newTab) => {
 
 <template>
   <v-responsive>
-    <Footer />
+    <AppFooter />
     <v-main class="d-flex" justify="center" style="min-height: 300px">
       <v-container v-if="user?.role === 'user'" class="text-column">
         <v-alert type="warning"
@@ -47,22 +46,22 @@ watch(tab, (newTab) => {
           <v-col cols="12" xl="8" xxl="6">
             <v-autocomplete
               :items="searchList"
-              :itemTitle="locale"
-              noDataText="collection.emptySearchMessage"
-              openText="collection.openMenu"
-              closeText="collection.closeMenu"
+              :item-title="locale"
+              no-data-text="collection.emptySearchMessage"
+              open-text="collection.openMenu"
+              close-text="collection.closeMenu"
               density="compact"
               :hint="$t('collection.searchHint')"
               width="200"
               persistent-hint
               clearable
             >
-              <template v-slot:item="{ props, item }">
+              <template #item="{ props, item }">
                 <v-list-item
                   v-bind="props"
                   :title="item.raw[locale]"
                   @click="goToSubtab(item.raw.tab, item.raw.subTab, item.raw.id)"
-                ></v-list-item>
+                />
               </template>
             </v-autocomplete>
           </v-col>
@@ -100,7 +99,7 @@ watch(tab, (newTab) => {
                             :key="coll.urn"
                             :value="coll.urn"
                           >
-                            <CollectionList :sortedMembers="collectionLists[coll.urn]" />
+                            <CollectionList :sorted-members="collectionLists[coll.urn]" />
                           </v-tabs-window-item>
                         </v-tabs-window>
                       </v-card-text>
@@ -108,7 +107,7 @@ watch(tab, (newTab) => {
 
                     <CollectionList
                       v-else
-                      :sortedMembers="collectionLists[subColl.collections[0].urn]"
+                      :sorted-members="collectionLists[subColl.collections[0].urn]"
                     />
                   </v-tabs-window-item>
                 </v-tabs-window>

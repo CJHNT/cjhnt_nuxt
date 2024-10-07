@@ -1,5 +1,5 @@
 <script setup>
-const parentSearchSlop = defineModel()
+const parentSearchSlop = defineModel({ type: Number })
 </script>
 
 <template>

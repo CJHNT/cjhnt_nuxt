@@ -70,7 +70,7 @@ const searchList = ref([])
 await callOnce(async () => {
   for (const [coll, subCollInfo] of Object.entries(collectionLists.value)) {
     for (const subColl of subCollInfo) {
-      const { data: subCollTexts } = await useAsyncData(`${subColl.id}Data`, async () => {
+      await useAsyncData(`${subColl.id}Data`, async () => {
         const subCollTextsInfo = await $fetch('/api/dts/collections', {
           body: { id: subColl.id },
           method: 'POST'
@@ -113,7 +113,7 @@ await callOnce(async () => {
             de: e.de,
             subTab: e.parentId,
             tab: primaryTextTabs.value.find((c) => {
-              for (let subC of c.collections) {
+              for (const subC of c.collections) {
                 if (subC.urn === e.parentId) {
                   return true
                 }
@@ -122,6 +122,7 @@ await callOnce(async () => {
             }).title
           })
         })
+        return null
       })
     }
   }
@@ -133,7 +134,7 @@ await callOnce(async () => {
 <template>
   <NuxtLayout>
     <v-overlay v-model="loading" class="align-center justify-center">
-      <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+      <v-progress-circular color="primary" size="64" indeterminate />
     </v-overlay>
     <NuxtPage />
   </NuxtLayout>
