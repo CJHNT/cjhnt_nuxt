@@ -74,6 +74,13 @@ watch(
                   >
                 </v-list-item-subtitle>
               </template>
+              <template v-else-if="member.id.includes('info')">
+                <v-list-item-title>
+                  <nuxt-link :to="`/texts/${member.id}`">{{
+                    member[locale]
+                  }}</nuxt-link></v-list-item-title
+                >
+              </template>
               <template v-else>
                 <v-list-item-title>
                   <nuxt-link :to="`/texts/${member.id}`">{{
