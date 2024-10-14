@@ -127,7 +127,7 @@ const memberItems = collMembers
       value: m['@id'],
       en: docTitle.en,
       de: docTitle.de,
-      props: { href: `/texts/${m['@id']}` }
+      props: { to: `/texts/${m['@id']}` }
     }
     return returnValue
   })
@@ -158,77 +158,6 @@ function langText() {
     return domText.getElementById('de-text').outerHTML
   }
 }
-
-onMounted(() => {
-  const belegDropdowns = document.querySelectorAll('.belegstelle-button')
-  belegDropdowns.forEach((element) =>
-    element.addEventListener('click', async (event) => {
-      const el = event.currentTarget
-      const sourceUrn = el.getAttribute('source-text')
-      const sourceRef = el.getAttribute('source-verse')
-      const collInfo = await $fetch(`/api/dts/collections`, {
-        body: { id: sourceUrn },
-        method: 'POST'
-      })
-      const langTexts = {}
-      for (const member of collInfo.member) {
-        const xslPath = () => {
-          switch (true) {
-            case member['@id'].includes('commentary'):
-              return 'assets/source/commentary.sef.json'
-            case member['@id'].includes('tlg0031'):
-            case member['@id'].includes('tlg0527'):
-            case member['@id'].includes('1henoch'):
-              return 'assets/source/nt_fragment.sef.json'
-            case member['@id'].includes('qumran'):
-              return 'assets/source/qumran.sef.json'
-            default:
-              return 'assets/source/epidoc.sef.json'
-          }
-        }
-        const processedResult = await $fetch('/api/dts/document', {
-          body: { id: member['@id'], ref: sourceRef, xsl: xslPath() },
-          method: 'POST'
-        })
-
-        if (!['eng', 'deu'].includes(member['dts:extensions']['dc:language'])) {
-          langTexts['Original'] = processedResult
-        } else {
-          langTexts[member['dts:extensions']['dc:language']] = processedResult
-        }
-      }
-      const dropdownContent = document.querySelector(el.getAttribute('data-target'))
-      const tabRow = dropdownContent.querySelector('.tab')
-      const langContents = dropdownContent.querySelector('.tabcontent')
-      tabRow.innerHTML = ''
-      langContents.innerHTML = ''
-      for (const [key, value] of Object.entries(langTexts)) {
-        const template = document.createElement('template')
-        const contentTemplate = document.createElement('template')
-        const active = key === 'Original' ? ' active' : ''
-        const order = key === 'Original' ? ' order-1' : ' order-2'
-        const langKey = key === 'eng' ? 'English' : key === 'deu' ? 'Deutsch' : 'Original'
-        template.innerHTML = `<button class="tablinks border-sm flex-grow-1${active}${order}" onclick="belegLanguage(event, '${sourceUrn}-${key}-section-b')">${langKey}</button>`
-        const result = template.content
-        tabRow.append(result)
-        const display = key === 'Original' ? '' : ' d-none'
-        contentTemplate.innerHTML = `<div class="section-b-tabcontent${display}" id="${sourceUrn}-${key}-section-b">${value}</div>`
-        langContents.append(contentTemplate.content)
-      }
-      const buttonIcon = document.getElementById(el.getAttribute('id') + '-chevron')
-      dropdownContent.classList.toggle('border-opacity-0')
-      if (dropdownContent.style.maxHeight) {
-        dropdownContent.style.maxHeight = null
-        dropdownContent.style.opacity = 0
-      } else {
-        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px'
-        dropdownContent.style.opacity = 1
-      }
-      buttonIcon.classList.toggle('mdi-chevron-down')
-      buttonIcon.classList.toggle('mdi-chevron-up')
-    })
-  )
-})
 </script>
 
 <template>
