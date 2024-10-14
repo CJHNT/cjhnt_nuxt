@@ -1,36 +1,39 @@
-import { initDb } from '../../db/database'
+import { changeUserNotification, createSession } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
-
-  const db = await initDb() // Initialize database connection
+  const desiredStatus = session.user.wantsUpdates ? 0 : 1
 
   try {
-    // Change user's notification status
-    await db.run('UPDATE users SET wants_updates=? WHERE id=?', [
-      session.user.wantsUpdates ? 0 : 1,
-      session.userId
-    ])
-    const user = await db.get('SELECT id, wants_updates, verified_email FROM users WHERE id = ?', [
-      session.userId
-    ])
-    await setUserSession(event, {
-      user: {
-        ...user,
-        password: undefined,
-        verifiedEmail: user.verified_email !== 0,
-        verified_email: undefined,
-        wantsUpdates: user.wants_updates !== 0,
-        wants_updates: undefined
-      },
-      loggedInAt: new Date()
-    })
-    return { success: true, user }
+    if (typeof desiredStatus === 'number') {
+      const statusChanged = changeUserNotification(desiredStatus, session.userId)
+      if (statusChanged) {
+        const result = createSession(session.user.email)
+        if (result !== undefined) {
+          await setUserSession(event, {
+            user: {
+              email: session.user.email,
+              role: result.role,
+              verifiedEmail: result.verifiedEmail,
+              wantsUpdates: result.wantsUpdates
+            },
+            userId: result.userId,
+            token: result.sessionToken
+          })
+          return { error: null }
+        }
+      }
+      console.error('update status')
+      return createError({
+        statusCode: 409,
+        statusMessage: 'Something went wrong while changing your email address. No change was made.'
+      })
+    }
   } catch (error) {
-    console.error('Error changing email:', error)
+    console.error('Error changing update status:', error)
     return createError({
       statusCode: 409,
-      statusMessage: 'Something went wrong while changing your email address. No change was made.'
+      statusMessage: 'Something went wrong while changing your update status. No change was made.'
     })
   }
 })

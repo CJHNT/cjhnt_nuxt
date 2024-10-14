@@ -1,14 +1,11 @@
-import { open } from 'sqlite'
-import sqlite3 from 'sqlite3'
+import Database from 'better-sqlite3'
 
 export const initDb = async () => {
   try {
-    const db = await open({
-      filename: './database.sqlite',
-      driver: sqlite3.Database
-    })
+    const db = new Database('./database.sqlite')
 
-    await db.exec(`
+    db.prepare(
+      `
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         email TEXT UNIQUE,
@@ -20,7 +17,8 @@ export const initDb = async () => {
         wants_updates INT DEFAULT 0
         CHECK (role in ('admin', 'project', 'user'))
       )
-    `)
+    `
+    ).run()
 
     console.log('Database initialized successfully')
     return db

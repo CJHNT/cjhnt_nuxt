@@ -13,6 +13,17 @@ export const changeUserEmail = (newEmail: string, userId: string) => {
   }
 }
 
+export const changeUserNotification = (newStatus: number, userId: string) => {
+  try {
+    const updateChange = db
+      .prepare('UPDATE users SET wants_updates=? WHERE id=?')
+      .run(newStatus, userId)
+    return updateChange.changes === 1
+  } catch {
+    return false
+  }
+}
+
 export const changeUserPassword = async (newPassword: string, userId: string) => {
   const passwordHash = await bcrypt.hash(newPassword, 10)
   try {
