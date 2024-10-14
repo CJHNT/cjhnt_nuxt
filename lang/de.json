@@ -41,7 +41,9 @@
     "pleaseLogin": "{0}, um diese Seite zu sehen.",
     "pleaseLoginLink": "Loggen Sie sich ein",
     "invalidEmail": "Ungültige E-Mail-Adresse",
-    "emptyPassword": "Passwortfeld ist leer."
+    "emptyPassword": "Passwortfeld ist leer.",
+    "weakPassword": "Passwort zu schwach",
+    "weakPasswordAlert": "Das Passwort ist zu schwach. Machen Sie es stärker."
   },
   "collection": {
     "bible": "Bibel",

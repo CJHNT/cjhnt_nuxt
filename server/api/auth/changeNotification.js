@@ -9,9 +9,11 @@ export default defineEventHandler(async (event) => {
     // Change user's notification status
     await db.run('UPDATE users SET wants_updates=? WHERE id=?', [
       session.user.wantsUpdates ? 0 : 1,
-      session.user.id
+      session.userId
     ])
-    const user = await db.get('SELECT id, wants_updates FROM users WHERE id = ?', [session.user.id])
+    const user = await db.get('SELECT id, wants_updates, verified_email FROM users WHERE id = ?', [
+      session.userId
+    ])
     await setUserSession(event, {
       user: {
         ...user,

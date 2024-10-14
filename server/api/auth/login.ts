@@ -1,5 +1,4 @@
-import bcrypt from 'bcrypt'
-import { initDb } from '../../db/database'
+import { createSession, verifyPassword } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -22,36 +21,30 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const db = await initDb() // Initialize database connection
-    const user = await db.get('SELECT * FROM users WHERE email = ?', [email])
-
-    // For security reasons, do not specify if email or password is incorrect
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    if (typeof email === 'string' && typeof password === 'string') {
+      const isValidPassword = await verifyPassword(email, password)
+      if (isValidPassword) {
+        const result = createSession(email)
+        if (result !== undefined) {
+          await setUserSession(event, {
+            user: {
+              email,
+              role: result.role,
+              verifiedEmail: result.verifiedEmail,
+              wantsUpdates: result.wantsUpdates
+            },
+            userId: result.userId,
+            token: result.sessionToken
+          })
+          return { error: null }
+        }
+      }
       console.error(`Invalid email or password for user: ${email}`)
       return createError({
         statusCode: 401,
         statusMessage: 'Invalid email or password'
       })
     }
-    const userReturnObject = {
-      ...user,
-      password: undefined,
-      verifiedEmail: user.verified_email !== 0,
-      verified_email: undefined
-    }
-    await setUserSession(event, {
-      user: {
-        ...user,
-        password: undefined,
-        verifiedEmail: user.verified_email !== 0,
-        verified_email: undefined,
-        wantsUpdates: user.wants_updates !== 0,
-        wants_updates: undefined
-      },
-      loggedInAt: new Date()
-    })
-
-    return { success: true, userReturnObject }
   } catch (error) {
     console.error('Error handling login request:', error)
     return createError({

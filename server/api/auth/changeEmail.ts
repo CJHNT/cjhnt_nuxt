@@ -1,4 +1,4 @@
-import { initDb } from '../../db/database'
+import { changeUserEmail, createSession } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
@@ -30,26 +30,25 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const db = await initDb() // Initialize database connection
-
-    try {
-      // Change user's email address
-      await db.run('UPDATE users SET email=? WHERE id=?', [email, session.user.id])
-      const user = await db.get('SELECT id, email FROM users WHERE email = ?', [email])
-      await setUserSession(event, {
-        user: {
-          ...user,
-          password: undefined,
-          verifiedEmail: user.verified_email !== 0,
-          verified_email: undefined,
-          wantsUpdates: user.wants_updates !== 0,
-          wants_updates: undefined
-        },
-        loggedInAt: new Date()
-      })
-      return { success: true, user }
-    } catch (error) {
-      console.error('Error changing email:', error)
+    if (typeof email === 'string') {
+      const emailChanged = changeUserEmail(email, session.userId)
+      if (emailChanged) {
+        const result = createSession(email)
+        if (result !== undefined) {
+          await setUserSession(event, {
+            user: {
+              email,
+              role: result.role,
+              verifiedEmail: result.verifiedEmail,
+              wantsUpdates: result.wantsUpdates
+            },
+            userId: result.userId,
+            token: result.sessionToken
+          })
+          return { error: null }
+        }
+      }
+      console.error('Error changing email')
       return createError({
         statusCode: 409,
         statusMessage: 'Something went wrong while changing your email address. No change was made.'

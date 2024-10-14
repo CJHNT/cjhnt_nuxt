@@ -2,7 +2,6 @@
 import AuthForm from '@/components/AuthForm.vue'
 
 const loading = ref(false)
-const router = useRouter()
 
 const login = async (body) => {
   loading.value = true
@@ -11,7 +10,7 @@ const login = async (body) => {
       method: 'POST',
       body
     })
-    router.push('/')
+    window.location.href = '/'
     loading.value = false
   } catch (error) {
     console.log({ error })

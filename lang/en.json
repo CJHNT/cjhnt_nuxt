@@ -41,7 +41,9 @@
     "pleaseLogin": "Please {0} to view this page",
     "pleaseLoginLink": "log in",
     "invalidEmail": "Invalid email.",
-    "emptyPassword": "Password field is empty."
+    "emptyPassword": "Password field is empty.",
+    "weakPassword": "Password too weak",
+    "weakPasswordAlert": "This password is weak. Please make it stronger."
   },
   "collection": {
     "bible": "Bible",

@@ -1,4 +1,5 @@
 <script setup>
+import zxcvbn from 'zxcvbn'
 defineProps({
   loading: { type: Boolean, default: false },
   title: { type: String, required: true },
@@ -12,11 +13,17 @@ const repeatPassword = ref('')
 const showPassword = ref(false)
 const showRepeatPassword = ref(false)
 const wantsUpdates = ref(false)
+const { t } = useI18n()
 
 function validateEmail() {
   const pattern =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return pattern.test(email.value) || 'Invalid e-mail.'
+}
+
+function passwordStrength() {
+  const strength = zxcvbn(password.value)
+  return strength.score > 1 || t('auth.weakPassword')
 }
 
 const submit = () => {
@@ -29,6 +36,14 @@ const submit = () => {
   }
   emit('submit', payload)
 }
+
+const passwordStrengthPercent = computed(() => zxcvbn(password.value).score * 25)
+const strengthColor = computed(
+  () =>
+    ['error', 'error', 'warning', 'success', 'success'][
+      Math.floor(passwordStrengthPercent.value / 25)
+    ]
+)
 </script>
 
 <template>
@@ -55,10 +70,19 @@ const submit = () => {
           v-model="password"
           :type="showPassword ? 'text' : 'password'"
           :label="label ? $t(label) : $t('auth.password')"
+          :rules="title !== 'auth.login' ? [passwordStrength()] : []"
           prepend-icon="mdi-lock"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
-        />
+        >
+          <template v-if="title !== 'auth.login'" #loader>
+            <v-progress-linear
+              v-model="passwordStrengthPercent"
+              :color="strengthColor"
+              height="10"
+            />
+          </template>
+        </v-text-field>
         <v-text-field
           v-if="['auth.signUp', 'auth.changePassword'].includes(title)"
           v-model="repeatPassword"

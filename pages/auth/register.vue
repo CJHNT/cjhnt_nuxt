@@ -1,5 +1,6 @@
 <script setup>
 import AuthForm from '@/components/AuthForm.vue'
+import zxcvbn from 'zxcvbn'
 
 const loading = ref(false)
 const router = useRouter()
@@ -13,6 +14,7 @@ function validateEmail(email) {
 
 const register = async (body) => {
   loading.value = true
+  const passwordFeedback = zxcvbn(body.password)
   if (!validateEmail(body.email)) {
     alertMessage.value.type = 'error'
     alertMessage.value.message = 'auth.invalidEmail'
@@ -24,6 +26,10 @@ const register = async (body) => {
   } else if (body.password !== body.repeatPassword) {
     alertMessage.value.type = 'error'
     alertMessage.value.message = 'auth.noPasswordMatch'
+    loading.value = false
+  } else if (passwordFeedback.score < 2) {
+    alertMessage.value.type = 'error'
+    alertMessage.value.message = `${passwordFeedback.feedback.warning ? passwordFeedback.feedback.warning : 'auth.weakPasswordAlert'}: ${passwordFeedback.feedback.suggestions.join('; ')}`
     loading.value = false
   } else {
     try {

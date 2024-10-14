@@ -7,16 +7,17 @@ const router = useRouter()
 const notificationStore = useNotificationStore()
 const { t } = useI18n()
 
-fetch()
+await fetch()
 
 const changeEmail = async (body) => {
   loading.value = true
+  const { csrfToken } = await $fetch('/api/auth/csrf-token')
   try {
     await $fetch('/api/auth/changeEmail', {
       method: 'POST',
-      body
+      body: { ...body, csrfToken }
     })
-    fetch()
+    await fetch()
     router.push({ name: 'auth-dashboard' })
     const notificationType = 'success'
     const notificationMessage = t('auth.emailChanged')
@@ -29,12 +30,13 @@ const changeEmail = async (body) => {
 }
 const changePassword = async (body) => {
   loading.value = true
+  const { csrfToken } = await $fetch('/api/auth/csrf-token')
   try {
     await $fetch('/api/auth/changePassword', {
       method: 'POST',
-      body
+      body: { ...body, csrfToken }
     })
-    fetch()
+    await fetch()
     router.push({ name: 'auth-dashboard' })
     const notificationType = 'success'
     const notificationMessage = t('auth.passwordChanged')
@@ -47,10 +49,11 @@ const changePassword = async (body) => {
 }
 const changeNotification = async (body) => {
   loading.value = true
+  const { csrfToken } = await $fetch('/api/auth/csrf-token')
   try {
     await $fetch('/api/auth/changeNotification', {
       method: 'POST',
-      body
+      body: { ...body, csrfToken }
     })
     await fetch()
     router.push({ name: 'auth-dashboard' })

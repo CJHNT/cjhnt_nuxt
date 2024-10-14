@@ -1,5 +1,4 @@
-import bcrypt from 'bcrypt'
-import { initDb } from '../../db/database'
+import { changeUserPassword, createSession } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
@@ -31,27 +30,25 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const db = await initDb() // Initialize database connection
-    const hashedPassword = await bcrypt.hash(password, 10) // Hash password
-
-    try {
-      // Change user's password address
-      await db.run('UPDATE users SET password=? WHERE id=?', [hashedPassword, session.user.id])
-      const user = await db.get('SELECT id, password FROM users WHERE id = ?', [session.user.id])
-      await setUserSession(event, {
-        user: {
-          ...user,
-          password: undefined,
-          verifiedEmail: user.verified_email !== 0,
-          verified_email: undefined,
-          wantsUpdates: user.wants_updates !== 0,
-          wants_updates: undefined
-        },
-        loggedInAt: new Date()
-      })
-      return { success: true, user }
-    } catch (error) {
-      console.error('Error changing password:', error)
+    if (typeof password === 'string') {
+      const passwordChanged = changeUserPassword(password, session.userId)
+      if (passwordChanged) {
+        const result = createSession(session.user.email)
+        if (result !== undefined) {
+          await setUserSession(event, {
+            user: {
+              email: session.user.email,
+              role: result.role,
+              verifiedEmail: result.verifiedEmail,
+              wantsUpdates: result.wantsUpdates
+            },
+            userId: result.userId,
+            token: result.sessionToken
+          })
+          return { error: null }
+        }
+      }
+      console.error('Error changing password')
       return createError({
         statusCode: 409,
         statusMessage: 'Something went wrong while changing your password. No change was made.'

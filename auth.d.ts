@@ -6,6 +6,12 @@ declare module '#auth-utils' {
     verifiedEmail: boolean
     wantsUpdates: boolean
   }
+
+  interface UserSession {
+    user: User
+    userId: string
+    token: string
+  }
 }
 
 export {}

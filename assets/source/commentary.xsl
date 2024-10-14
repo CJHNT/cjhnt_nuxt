@@ -181,7 +181,6 @@
             <xsl:element name="button">
                 <xsl:attribute name="data-target"><xsl:value-of select="$group-id"/></xsl:attribute>
                 <xsl:attribute name="class">section-d-dropdown-button</xsl:attribute>
-                <xsl:attribute name="onclick">toggleDropdown(event)</xsl:attribute>
                 <xsl:attribute name="aria-expanded">false</xsl:attribute>
                 <xsl:attribute name="aria-controls"><xsl:value-of select="$group-id"/></xsl:attribute>
                 <xsl:element name="span">
@@ -313,7 +312,6 @@
             </xsl:choose>
             <xsl:attribute name="href">#</xsl:attribute>
             <xsl:attribute name="data-target"><xsl:value-of select="@target"/></xsl:attribute>
-            <xsl:attribute name="onclick">openTarget(event)</xsl:attribute>
             <xsl:for-each select="node()">
                 <xsl:choose>
                     <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>

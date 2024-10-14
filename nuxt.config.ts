@@ -36,7 +36,8 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/devtools',
     '@nuxt/eslint',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    'nuxt-security'
   ],
 
   googleFonts: {
@@ -82,6 +83,10 @@ export default defineNuxtConfig({
   },
 
   eslint: {},
+
+  security: {
+    rateLimiter: false
+  },
 
   compatibilityDate: '2024-08-07'
 })

@@ -1,6 +1,6 @@
 <script setup>
 const { user, fetch } = useUserSession()
-fetch()
+await fetch()
 const searchTerm = ref('')
 
 watch(searchTerm, () => {
@@ -27,17 +27,17 @@ watch(searchTerm, () => {
                   media="(max-width: 960px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
-                >
+                />
                 <source
                   media="(max-width: 1280px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
-                >
+                />
                 <img
                   src="@/assets/img/Wort-Bildmarke-JF.png"
                   alt="Logo: CJHNT Projekt"
                   height="270"
-                >
+                />
               </picture>
             </a>
           </v-col>
