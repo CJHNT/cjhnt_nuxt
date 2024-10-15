@@ -177,6 +177,8 @@ if (user.value && user.value.role !== 'user') {
         })
     )
     const bibNamespace = Object.keys(allTexts.value['@context']).find(
+      // rule disabled because ns is not user-provided input
+      // eslint-disable-next-line security/detect-object-injection
       (ns) => allTexts.value['@context'][ns] === 'http://bibliotek-o.org/1.0/ontology/'
     )
     const parentTitle = {

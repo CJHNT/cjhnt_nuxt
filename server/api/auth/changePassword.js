@@ -1,5 +1,13 @@
 import { changeUserPassword, createSession } from '~/utils/db'
 
+// from https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
+function comparePasswords(a, b) {
+  var mismatch = 0
+  for (var i = 0; i < a.length; ++i) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  }
+  return mismatch
+}
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
 
@@ -21,7 +29,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
         statusMessage: 'Password is required'
       })
-    } else if (password !== repeatPassword) {
+    } else if (comparePasswords(password, repeatPassword) !== 0) {
       console.error('Passwords do not match')
 
       return createError({

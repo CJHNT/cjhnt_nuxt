@@ -84,8 +84,12 @@ export default defineNuxtConfig({
 
   eslint: {},
 
-  security: {
-    rateLimiter: false
+  routeRules: {
+    '/api/dts/**': {
+      security: {
+        rateLimiter: false
+      }
+    }
   },
 
   compatibilityDate: '2024-08-07'
