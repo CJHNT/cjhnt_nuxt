@@ -5,6 +5,7 @@
   "loading": "Loading...",
   "chapter": "Chapter {chapter}",
   "home": "Home",
+  "uncaughtError": "There was a problem with your request. ",
   "index": {
     "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
     "signUp": "Sign up",

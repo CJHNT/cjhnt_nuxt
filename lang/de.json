@@ -5,6 +5,7 @@
   "loading": "Laden...",
   "chapter": "Kapitel {chapter}",
   "home": "Home",
+  "uncaughtError": "Ein Fehler ist passiert.",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
     "signUp": "Legen Sie ein Konto an",

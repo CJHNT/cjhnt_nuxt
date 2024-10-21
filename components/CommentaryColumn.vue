@@ -151,13 +151,16 @@ const { data: ntText } = await useAsyncData('apiNtText', async () => {
   })
   return apiResult
 })
-function langText() {
-  if (locale.value === 'en' && formattedText.value.includes('lang="en"')) {
-    return domText.getElementById('en-text').outerHTML
-  } else {
-    return domText.getElementById('de-text').outerHTML
-  }
-}
+const engText = domText.getElementById('en-text') ? domText.getElementById('en-text').outerHTML : ''
+const deuText = domText.getElementById('de-text').outerHTML
+const engClass = computed(() => ({
+  'h-0': locale.value === 'de',
+  'overflow-hidden': locale.value === 'de'
+}))
+const deuClass = computed(() => ({
+  'h-0': locale.value === 'en' && engText,
+  'overflow-hidden': locale.value === 'en' && engText
+}))
 </script>
 
 <template>
@@ -223,7 +226,9 @@ function langText() {
           <v-row class="text-content">
             <v-col>
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div v-html="langText()" />
+              <div :class="engClass" v-html="engText" />
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <div :class="deuClass" v-html="deuText" />
             </v-col>
           </v-row>
         </v-container>

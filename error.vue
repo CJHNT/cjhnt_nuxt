@@ -17,11 +17,20 @@ if (props.error.statusCode === 401) {
     linkMessage: 'auth.login'
   })
   clearError()
+} else if (props.error.statusCode === 403) {
+  notificationStore.addNotification({
+    type: 'warning',
+    message: '',
+    i18n: props.error.message,
+    link: '/',
+    linkMessage: 'Home'
+  })
+  clearError()
 }
 notificationStore.addNotification({
-  type: 'warning',
+  type: 'error',
   message: '',
-  i18n: props.error.message,
+  i18n: 'uncaughtError',
   link: '/',
   linkMessage: 'Home'
 })
