@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(() => {
   } else if (user.value?.role && user.value?.role === 'user') {
     return abortNavigation({
       statusCode: 403,
-      statusMessage: 'Forbidden'
+      statusMessage: 'This page is only available to project members.'
     })
   }
 })

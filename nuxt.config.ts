@@ -37,7 +37,8 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@nuxt/eslint',
     '@nuxtjs/eslint-module',
-    'nuxt-security'
+    'nuxt-security',
+    'nuxt-authorization'
   ],
 
   googleFonts: {

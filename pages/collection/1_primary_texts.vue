@@ -2,10 +2,23 @@
 definePageMeta({
   middleware: ['auth']
 })
+const { loggedIn } = useUserSession()
+// const notificationStore = useNotificationStore()
+
+// if (!loggedIn.value) {
+//   await useAsyncData('authWarning', async () => {
+//     notificationStore.addNotification({
+//       type: 'warning',
+//       message: '',
+//       i18n: 'auth.onlyRegistered',
+//       link: '/auth/login',
+//       linkMessage: 'auth.login'
+//     })
+//   })
+// }
 
 const tab = ref(null)
 const subTab = ref(null)
-const { user } = useUserSession()
 const { locale } = useI18n()
 const programmaticChange = ref(false)
 const collectionLists = useState('collList')
@@ -36,12 +49,8 @@ watch(tab, (newTab) => {
   <v-responsive>
     <AppFooter />
     <v-main class="d-flex" justify="center" style="min-height: 300px">
-      <v-container v-if="user?.role === 'user'" class="text-column">
-        <v-alert type="warning"
-          >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
-        >
-      </v-container>
-      <v-container v-else>
+      <NotificationContainer />
+      <v-container v-if="loggedIn">
         <v-row justify="center">
           <v-col cols="12" xl="8" xxl="6">
             <v-autocomplete

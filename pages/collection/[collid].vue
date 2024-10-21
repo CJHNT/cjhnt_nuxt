@@ -2,9 +2,9 @@
 definePageMeta({
   middleware: ['auth']
 })
+const { loggedIn } = useUserSession()
 const route = useRoute()
 
-const { user } = useUserSession()
 const { locale } = useI18n()
 const collName = ref({})
 const ancestors = ref([])
@@ -57,12 +57,8 @@ collName.value = {
   <v-responsive class="align-center">
     <AppFooter />
     <v-main class="d-flex justify-center" style="min-height: 300px">
-      <v-container v-if="user?.role === 'user'" class="text-column">
-        <v-alert type="warning"
-          >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
-        >
-      </v-container>
-      <v-container v-else>
+      <NotificationContainer />
+      <v-container v-if="loggedIn">
         <v-row justify="center">
           <v-col cols="12" xl="8" offset-xxl="2">
             <BreadCrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />

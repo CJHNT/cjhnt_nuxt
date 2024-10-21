@@ -2,8 +2,8 @@
 definePageMeta({
   middleware: ['auth']
 })
+const { loggedIn } = useUserSession()
 
-const { user } = useUserSession()
 const route = useRoute()
 const queryType = route.query.field === 'belegstellen' ? 'match_phrase_prefix' : 'match_phrase'
 const slop = route.query.field === 'belegstellen' ? '0' : route.query.slop || '8'
@@ -41,12 +41,8 @@ const tableSearch = ref('')
 
 <template>
   <v-main style="min-height: 300px">
-    <v-container v-if="user?.role === 'user'" class="text-column">
-      <v-alert type="warning"
-        >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
-      >
-    </v-container>
-    <v-container v-else>
+    <NotificationContainer />
+    <v-container v-if="loggedIn">
       <v-row justify="center">
         <v-col cols="12" md="9" xl="6">
           <h1>{{ $t('search.results') }}</h1>

@@ -1,9 +1,15 @@
 <script setup>
-const { loggedIn, user, clear, fetch } = useUserSession()
+const { loggedIn, user, fetch } = useUserSession()
 
 await fetch()
 const logout = async () => {
-  await clear()
+  const { csrfToken } = await $fetch('/api/auth/csrf-token')
+  await $fetch('/api/_auth/session', {
+    method: 'DELETE',
+    body: JSON.stringify({
+      csrfToken
+    })
+  })
   window.location.href = '/'
 }
 </script>

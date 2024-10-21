@@ -1,5 +1,10 @@
 <script setup>
+import { allows } from 'nuxt-authorization/utils'
+import { readClosed } from '~/utils/abilities'
+
 const { locale } = useI18n()
+const { user } = useUserSession()
+const projectMember = await allows(readClosed, user.value)
 
 const props = defineProps({
   urn: { type: String, default: '' },
@@ -21,6 +26,8 @@ const { data: docMeta } = await useAsyncData(props.urn + props.reff, () =>
     method: 'POST'
   })
 )
+const openText =
+  docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:accessRights'] === 'open'
 const docTitle = {
   de: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
     ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
@@ -44,8 +51,16 @@ const { data: parentData } = await useAsyncData(parentId, () =>
   })
 )
 const siblings = parentData.value.member
-  .map((m) => [m['@id'], m['dts:extensions']['dc:language']])
+  .map((m) => [
+    m['@id'],
+    m['dts:extensions']['dc:language'],
+    m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights'] === 'open',
+    m['dts:dublincore'] && m['dts:dublincore']['dct:bibliographicCitation']
+      ? m['dts:dublincore']['dct:bibliographicCitation']
+      : m['dts:extensions']['dc:language'][0]['@value']
+  ])
   .filter((c) => c[0] !== props.urn)
+  .filter((c) => projectMember || c[2])
 let hasParent = false
 if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
   if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
@@ -80,54 +95,62 @@ while (hasParent) {
     hasParent = false
   }
 }
-const { data: navReturn } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
-  $fetch('/api/dts/navigation', {
-    body: { id: props.urn, level: reffDepth() },
-    method: 'POST'
-  })
-)
-const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
-let usedReff = props.reff
 const alertText = ref('')
-if (!validReffs.includes(props.reff)) {
-  await useAsyncData('refWarning', () =>
-    notificationStore
-      .addNotification({
-        type: 'warning',
-        // rule disabled because locale is not user-provided input
-        // eslint-disable-next-line security/detect-object-injection
-        message: `Reference ${usedReff} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
-      })
-      .then(() => true)
+const prevId = ref(null)
+const nextId = ref(null)
+const formattedText = ref('')
+const navReturn = ref(null)
+if (openText || projectMember) {
+  const { data: navInfo } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
+    $fetch('/api/dts/navigation', {
+      body: { id: props.urn, level: reffDepth() },
+      method: 'POST'
+    })
   )
-  usedReff = validReffs[0]
-}
-ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff })
-
-const currentIndex = validReffs.findIndex((m) => m === usedReff)
-const prevId = currentIndex > 0 ? validReffs[currentIndex - 1] : null
-const nextId = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
-
-const xslPath = () => {
-  switch (true) {
-    case props.urn.includes('commentary'):
-      return 'assets/source/commentary.sef.json'
-    case props.urn.includes('tlg0031'):
-    case props.urn.includes('tlg0527'):
-    case props.urn.includes('1henoch'):
-      return 'assets/source/nt_fragment.sef.json'
-    case props.urn.includes('qumran'):
-      return 'assets/source/qumran.sef.json'
-    default:
-      return 'assets/source/epidoc.sef.json'
+  navReturn.value = navInfo.value
+  const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
+  let usedReff = props.reff
+  if (!validReffs.includes(props.reff)) {
+    await useAsyncData('refWarning', () =>
+      notificationStore
+        .addNotification({
+          type: 'warning',
+          // rule disabled because locale is not user-provided input
+          // eslint-disable-next-line security/detect-object-injection
+          message: `Reference ${usedReff} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
+        })
+        .then(() => true)
+    )
+    usedReff = validReffs[0]
   }
+  ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff })
+
+  const currentIndex = validReffs.findIndex((m) => m === usedReff)
+  prevId.value = currentIndex > 0 ? validReffs[currentIndex - 1] : null
+  nextId.value = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
+
+  const xslPath = () => {
+    switch (true) {
+      case props.urn.includes('commentary'):
+        return 'assets/source/commentary.sef.json'
+      case props.urn.includes('tlg0031'):
+      case props.urn.includes('tlg0527'):
+      case props.urn.includes('1henoch'):
+        return 'assets/source/nt_fragment.sef.json'
+      case props.urn.includes('qumran'):
+        return 'assets/source/qumran.sef.json'
+      default:
+        return 'assets/source/epidoc.sef.json'
+    }
+  }
+  const { data } = await useAsyncData(`document${props.urn}ref${usedReff}`, () =>
+    $fetch('/api/dts/document', {
+      body: { id: props.urn, ref: usedReff, xsl: xslPath() },
+      method: 'POST'
+    })
+  )
+  formattedText.value = data.value
 }
-const { data: formattedText } = await useAsyncData(`document${props.urn}ref${usedReff}`, () =>
-  $fetch('/api/dts/document', {
-    body: { id: props.urn, ref: usedReff, xsl: xslPath() },
-    method: 'POST'
-  })
-)
 allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
   notificationStore.$reset()
@@ -173,7 +196,7 @@ onUnmounted(() => {
               </v-dialog>
             </v-col>
           </v-row>
-          <v-row v-if="formattedText" justify="space-between">
+          <v-row v-if="navReturn" justify="space-between">
             <v-col>
               <NuxtLink v-show="prevId !== null" :to="`/texts/${props.urn};${prevId}`">{{
                 $t('comptext.previous')
@@ -188,17 +211,22 @@ onUnmounted(() => {
               />
             </v-col>
             <v-col>
-              <v-menu v-if="siblings.length > 0" width="10rem">
+              <v-menu v-if="siblings.length > 0">
                 <template #activator="{ props: siblingProps }">
                   <v-btn variant="text" size="x-small" v-bind="siblingProps">
                     {{ $t('comptext.readIn') }}
                   </v-btn>
                 </template>
                 <v-list density="compact" :lines="false">
-                  <v-list-item v-for="(sibling, index) in siblings" :key="index" :value="index">
+                  <v-list-item
+                    v-for="(sibling, index) in siblings"
+                    :key="index"
+                    :value="index"
+                    class="text-truncate"
+                  >
                     <NuxtLink
                       :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
-                      >{{ sibling[1] }}</NuxtLink
+                      >{{ sibling[3] }}</NuxtLink
                     >
                   </v-list-item>
                 </v-list>
@@ -215,7 +243,17 @@ onUnmounted(() => {
           <v-row>
             <v-col>
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div v-html="formattedText" />
+              <div v-if="formattedText" v-html="formattedText" />
+              <v-alert v-else-if="siblings" type="warning"
+                >{{ $t('comptext.onlyProject') }} {{ $t('comptext.onlyProjectSiblings') }}
+                <nuxt-link
+                  v-for="(sibling, index) in siblings"
+                  :key="index"
+                  :to="`/texts/${sibling[0]};${props.reff}`"
+                  >{{ sibling[3] }},
+                </nuxt-link></v-alert
+              >
+              <v-alert v-else type="warning">{{ $t('comptext.onlyProject') }}</v-alert>
             </v-col>
           </v-row>
         </v-container>

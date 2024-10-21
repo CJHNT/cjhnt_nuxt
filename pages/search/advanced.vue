@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth']
 })
+const { loggedIn } = useUserSession()
 const searchTerm = ref('')
 const slop = ref(0)
 const field = ref('text')
@@ -16,7 +17,8 @@ function submit() {
 
 <template>
   <v-main>
-    <v-container>
+    <NotificationContainer />
+    <v-container v-if="loggedIn">
       <v-row justify="center">
         <v-col cols="12" lg="3">
           <v-card width="100%" class="mx-auto mt-5">

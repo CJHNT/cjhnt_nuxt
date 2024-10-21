@@ -4,6 +4,7 @@
   "closeDialog": "Fenster schließen",
   "loading": "Laden...",
   "chapter": "Kapitel {chapter}",
+  "home": "Home",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
     "signUp": "Legen Sie ein Konto an",
@@ -33,7 +34,8 @@
     "noPasswordMatch": "Passwörter sind nicht gleich",
     "noEmailMatch": "Emailadressen sind nich gleich",
     "loggedInAs": "Als {email} eingeloggt",
-    "onlyProject": "Diese Seite ist nur für Projektmitglieder zugänglich",
+    "onlyProject": "Diese Seite ist nur für Projektmitglieder zugänglich.",
+    "onlyRegistered": "Diese Seite ist nur für registrierte Benutzer zugänglich.",
     "emailChanged": "Emailadresse geändert.",
     "passwordChanged": "Passwort geändert.",
     "updatesOff": "Sie erhalten keine Projektstatus-Updates mehr.",
@@ -71,7 +73,10 @@
     "commentaryLicense": "Bereitgestellt unter einer Creative Commons Namensnennung-ShareAlike 4.0 International Lizenz.",
     "readAnother": "Einen anderen Text lesen",
     "suggestedCitation": "Empfohlene Zitierweise",
-    "readIn": "Lesen auf"
+    "readIn": "Lesen auf",
+    "onlyProject": "Dieser Text ist nur für Projektmitglieder zugänglich.",
+    "onlyProjectSiblings": "Die folgenden Version(en) sind offen zugänglich:",
+    "mustLogin": "Nur registrierte Benutzer haben Zugang zu den Texten. Bitte loggen Sie sich ein oder legen Sie ein Konto an, um Zugang zu bekommen."
   },
   "search": {
     "toAdvancedSearch": "Erweiterte Suche",

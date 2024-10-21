@@ -19,6 +19,7 @@ watch(searchTerm, () => {
 
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <v-container>
+        <NotificationContainer />
         <v-row justify="center">
           <v-col cols="auto" class="pb-sm-16">
             <a href="https://cjhnt-info.saw-leipzig.de/de" target="_blank">

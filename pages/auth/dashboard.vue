@@ -1,6 +1,10 @@
 <script setup>
 import AuthForm from '@/components/AuthForm.vue'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const { loggedIn, user, fetch } = useUserSession()
 const loading = ref(false)
 const router = useRouter()
@@ -74,50 +78,42 @@ onUnmounted(() => {
 
 <template>
   <v-main>
-    <v-container>
+    <NotificationContainer />
+    <v-container v-if="loggedIn">
       <v-row justify="center">
         <v-col cols="12" lg="6" xl="4">
-          <p v-if="loggedIn" class="text-center text-h5 text-lg-h4">
-            {{ $t('auth.hello') }} {{ user?.email }}
-          </p>
-          <v-alert v-else type="info" closable>
-            <i18n-t keypath="auth.pleaseLogin">
-              <nuxt-link :to="{ name: 'auth-login' }">{{ $t('auth.pleaseLoginLink') }}</nuxt-link>
-            </i18n-t>
-          </v-alert>
+          <p class="text-center text-h5 text-lg-h4">{{ $t('auth.hello') }} {{ user?.email }}</p>
         </v-col>
       </v-row>
-      <template v-if="loggedIn">
-        <v-row justify="center">
-          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
-            <AuthForm
-              :loading="loading"
-              title="auth.changePassword"
-              label="auth.newPassword"
-              @submit="changePassword"
-            />
-          </v-col>
-          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
-            <AuthForm
-              :loading="loading"
-              title="auth.changeEmail"
-              label="auth.newEmail"
-              @submit="changeEmail"
-            />
-          </v-col>
-        </v-row>
+      <v-row justify="center">
+        <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
+          <AuthForm
+            :loading="loading"
+            title="auth.changePassword"
+            label="auth.newPassword"
+            @submit="changePassword"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
+          <AuthForm
+            :loading="loading"
+            title="auth.changeEmail"
+            label="auth.newEmail"
+            @submit="changeEmail"
+          />
+        </v-col>
+      </v-row>
 
-        <v-row justify="center">
-          <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
-            <AuthForm
-              :loading="loading"
-              title="auth.changeUpdateStatus"
-              :label="user.wantsUpdates ? 'auth.turnOffUpdates' : 'auth.turnOnUpdates'"
-              @submit="changeNotification"
-            />
-          </v-col>
-        </v-row>
-      </template>
+      <v-row justify="center">
+        <v-col cols="12" sm="6" md="5" xl="3" xxl="2">
+          <AuthForm
+            :loading="loading"
+            title="auth.changeUpdateStatus"
+            :label="user.wantsUpdates ? 'auth.turnOffUpdates' : 'auth.turnOnUpdates'"
+            @submit="changeNotification"
+          />
+        </v-col>
+      </v-row>
     </v-container>
   </v-main>
 </template>

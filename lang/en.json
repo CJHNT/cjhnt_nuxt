@@ -4,6 +4,7 @@
   "closeDialog": "Close Dialog",
   "loading": "Loading...",
   "chapter": "Chapter {chapter}",
+  "home": "Home",
   "index": {
     "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
     "signUp": "Sign up",
@@ -34,6 +35,7 @@
     "noEmailMatch": "Emails do not match",
     "loggedInAs": "Logged in as {email}",
     "onlyProject": "This page is only available to project members.",
+    "onlyRegistered": "This page is only available to registered users.",
     "emailChanged": "Email successfully changed.",
     "passwordChanged": "Password successfully changed.",
     "updatesOff": "You will no longer receive project status updates.",
@@ -71,7 +73,10 @@
     "commentaryLicense": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
     "readAnother": "Read another text",
     "suggestedCitation": "Suggested Citation Form",
-    "readIn": "Read in"
+    "readIn": "Read in",
+    "onlyProject": "This text is only available to project members.",
+    "onlyProjectSiblings": "However there are other other version(s) available:",
+    "mustLogin": "Only registered users have access to our texts. Please either log in or sign up to proceed."
   },
   "search": {
     "toAdvancedSearch": "Advanced Search",

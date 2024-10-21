@@ -2,6 +2,7 @@
 
 <template>
   <v-main>
+    <NotificationContainer />
     <v-card width="400" class="mx-auto mt-5">
       <v-alert v-if="alertMessage.message" closable density="compact" :type="alertMessage.type">{{
         alertMessage.message
@@ -19,7 +20,7 @@
             <v-text-field v-model="email" label="Email" prepend-icon="mdi-email" />
           </v-form>
         </v-card-text>
-        <v-divider/>
+        <v-divider />
         <v-card-actions>
           <v-btn color="info" @click="resetPassword">Reset password</v-btn>
         </v-card-actions>

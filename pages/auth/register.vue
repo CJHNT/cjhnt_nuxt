@@ -50,6 +50,7 @@ const register = async (body) => {
 
 <template>
   <v-main>
+    <NotificationContainer />
     <v-container>
       <v-row justify="center">
         <v-col cols="12" lg="6" xl="4">

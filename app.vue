@@ -14,7 +14,7 @@ nuxtApp.hook('page:start', () => {
 nuxtApp.hook('page:finish', () => {
   loading.value = false
 })
-if (user.value && user.value.role !== 'user') {
+if (user.value) {
   const collListState = useState('collList')
   const collSearchListState = useState('collSearchList')
   const primaryTextTabs = useState('primaryTextTabs')

@@ -2,7 +2,20 @@
 definePageMeta({
   middleware: ['auth']
 })
-const { user } = useUserSession()
+const { loggedIn } = useUserSession()
+// const notificationStore = useNotificationStore()
+
+// if (!loggedIn.value) {
+//   await useAsyncData('authWarning', async () => {
+//     notificationStore.addNotification({
+//       type: 'warning',
+//       message: '',
+//       i18n: 'auth.onlyRegistered',
+//       link: '/auth/login',
+//       linkMessage: 'auth.login'
+//     })
+//   })
+// }
 useHead({
   script: [{ src: '/textPage.js', tagPosition: 'bodyClose', defer: true }]
 })
@@ -22,12 +35,15 @@ const allAncestors = ref([])
   <v-responsive>
     <AppFooter />
     <v-main class="d-flex justify-center" min-height="300px">
-      <v-container v-if="user?.role === 'user'" class="text-column">
+      <!-- <v-container v-if="!loggedIn" class="text-column">
         <v-alert type="warning"
           >{{ $t('auth.onlyProject') }} <nuxt-link :to="{ name: 'index' }">Home</nuxt-link></v-alert
         >
-      </v-container>
-      <v-container v-else>
+      </v-container> -->
+      <NotificationContainer />
+
+      <v-container v-if="loggedIn">
+        <NotificationContainer />
         <v-row justify="center">
           <v-col
             v-for="(urnReff, index) in urnReffs"

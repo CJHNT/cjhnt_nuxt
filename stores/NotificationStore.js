@@ -1,10 +1,14 @@
+import { useLocalStorage } from '@vueuse/core'
 let nextId = 1
 
 export const useNotificationStore = defineStore('NotificationStore', {
   state: () => {
     return {
-      notifications: []
+      notifications: useLocalStorage('notifications', [])
     }
+  },
+  hydrate(state) {
+    state.notifications = useLocalStorage('notifications', [])
   },
   actions: {
     addNotification(notification) {

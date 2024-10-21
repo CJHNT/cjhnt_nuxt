@@ -22,6 +22,7 @@ const login = async (body) => {
 
 <template>
   <v-main>
+    <NotificationContainer />
     <v-container>
       <v-row justify="center">
         <v-col cols="12" sm="6" md="4" xl="3" xxl="2">
