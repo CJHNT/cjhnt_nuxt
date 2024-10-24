@@ -16,6 +16,10 @@ export default defineNuxtConfig({
     }
   },
 
+  imports: {
+    dirs: ['types/*.ts']
+  },
+
   vite: {
     define: {
       global: {}

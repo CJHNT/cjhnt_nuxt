@@ -58,17 +58,28 @@ collName.value = {
     <AppFooter />
     <v-main class="d-flex justify-center" style="min-height: 300px">
       <NotificationContainer />
-      <v-container v-if="loggedIn">
-        <v-row justify="center">
-          <v-col cols="12" xl="8" offset-xxl="2">
-            <BreadCrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />
-          </v-col>
-          <v-col cols="12" xl="8" xxl="6">
-            <h1>{{ collName[locale] }}</h1>
-            <CollectionList :sorted-members="collectionLists[route.params.collid]" />
-          </v-col>
-        </v-row>
-      </v-container>
+      <template v-if="!collectionLists">
+        <v-container>
+          <v-row justify="center" align="center">
+            <v-col cols="auto" align-self="center">
+              <v-progress-circular color="primary" size="64" indeterminate />
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
+      <template v-else>
+        <v-container v-if="loggedIn">
+          <v-row justify="center">
+            <v-col cols="12" xl="8" offset-xxl="2">
+              <BreadCrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />
+            </v-col>
+            <v-col cols="12" xl="8" xxl="6">
+              <h1>{{ collName[locale] }}</h1>
+              <CollectionList :sorted-members="collectionLists[route.params.collid]" />
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
     </v-main>
   </v-responsive>
 </template>

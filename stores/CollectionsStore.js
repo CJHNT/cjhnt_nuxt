@@ -1,14 +1,14 @@
 export const useCollectionsStore = defineStore('CollectionsStore', {
   state: () => {
     return {
-      subColls: [],
+      primaryTexts: [],
       collectionLists: {},
       searchList: []
     }
   },
   actions: {
-    fillData(subs, colls, search) {
-      this.subColls = subs
+    fillData(primary, colls, search) {
+      this.primaryTexts = primary
       this.collectionLists = colls
       this.searchList = search
     }

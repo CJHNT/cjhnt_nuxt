@@ -1,5 +1,5 @@
 <script setup>
-const { user, fetch } = useUserSession()
+const { loggedIn, fetch } = useUserSession()
 await fetch()
 const searchTerm = ref('')
 
@@ -43,7 +43,7 @@ watch(searchTerm, () => {
             </a>
           </v-col>
         </v-row>
-        <template v-if="!user || user.role === 'user'">
+        <template v-if="!loggedIn">
           <v-row justify="center">
             <v-col cols="12" md="8" xl="4">
               <v-alert type="info"

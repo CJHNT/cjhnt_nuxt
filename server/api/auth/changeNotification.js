@@ -23,7 +23,6 @@ export default defineEventHandler(async (event) => {
           return { error: null }
         }
       }
-      console.error('update status')
       return createError({
         statusCode: 409,
         statusMessage: 'Something went wrong while changing your email address. No change was made.'
