@@ -14,7 +14,7 @@ const allAncestors = defineModel({ type: Array })
 const ancestors = ref([])
 const notificationStore = useNotificationStore()
 const reffDepth = () => {
-  const reffSections = props.reff.match(/\./g)
+  const reffSections = props.reff.split('-')[0].match(/\./g)
   if (reffSections) {
     return reffSections.length + 1
   }
@@ -110,7 +110,7 @@ if (openText || projectMember) {
   navReturn.value = navInfo.value
   const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
   let usedReff = props.reff
-  if (!validReffs.includes(props.reff)) {
+  if (!props.reff.split('-').every((e) => validReffs.includes(e))) {
     await useAsyncData('refWarning', () =>
       notificationStore
         .addNotification({

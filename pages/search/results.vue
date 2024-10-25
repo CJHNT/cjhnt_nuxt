@@ -22,7 +22,7 @@ const searchParams = {
     pre_tags: ['<b>'],
     post_tags: ['</b>'],
     fields: {
-      [route.query.field]: { type: highlighter }
+      [route.query.field]: { type: highlighter, number_of_fragments: 0 }
     }
   },
   sort: [{ urn: { order: 'asc' } }],
@@ -73,23 +73,27 @@ const tableSearch = ref('')
             :no-data-text="$t('search.noResults')"
           >
             <template #[`item.title`]="{ item }">
-              <nuxt-link :to="`/texts/${item.urn}`">{{ item.title }}</nuxt-link>
+              <nuxt-link
+                v-if="item.urn.includes('cjhnt:commentary') || item.urn.includes('cjhnt:info')"
+                :to="`/texts/${item.urn}`"
+                >{{ item.title }}</nuxt-link
+              >
+              <template v-else>{{ item.title }}</template>
             </template>
             <template #[`item.highlight`]="{ item }">
               <ul class="ml-4">
-                <li v-for="(phrase, field, index) in item.highlight" :key="index">
-                  <template v-if="item.highlight.length > 1">
-                    <h4>{{ field.charAt(0).toUpperCase() + field.slice(1) }}</h4>
-                    <ul class="ml-4">
-                      <!-- eslint-disable-next-line vue/no-v-html -->
-                      <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
-                    </ul>
-                  </template>
-                  <template v-else>
+                <template v-for="(highlight, index) in item.highlight" :key="index">
+                  <li>
+                    <nuxt-link
+                      v-if="highlight.citation"
+                      :to="`/texts/${item.urn};${highlight.citation}`"
+                      >{{ highlight.citation }}:
+                    </nuxt-link>
+                    <!-- Disabled because highlight.highlight is not user input -->
                     <!-- eslint-disable-next-line vue/no-v-html -->
-                    <li v-for="(p, pIndex) in phrase" :key="pIndex" v-html="p" />
-                  </template>
-                </li>
+                    <span v-html="highlight.highlight" />
+                  </li>
+                </template>
               </ul>
             </template>
           </v-data-table>
