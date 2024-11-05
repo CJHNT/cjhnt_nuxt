@@ -56,7 +56,7 @@
                 <xsl:value-of select="@lemma"/>
             </xsl:attribute>
             <xsl:attribute name="n">
-                <xsl:value-of select="@n"/>
+                <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
             </xsl:attribute>
             <xsl:value-of select="text()"/>
         </xsl:element>

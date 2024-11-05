@@ -477,6 +477,9 @@
                     <xsl:attribute name="class">w</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
+            <xsl:attribute name="n">
+                <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
+            </xsl:attribute>
             <xsl:value-of select="."/>
         </xsl:element>
     </xsl:template>
@@ -504,6 +507,9 @@
                                     <xsl:attribute name="class">w</xsl:attribute>
                                 </xsl:otherwise>
                             </xsl:choose>
+                            <xsl:attribute name="n">
+                                <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
+                            </xsl:attribute>
                             <xsl:value-of select="."/>
                         </xsl:element>
                     </xsl:when>
