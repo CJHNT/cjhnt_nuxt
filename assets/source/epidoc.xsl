@@ -222,5 +222,8 @@
         </li>
     </xsl:template>
     
+    <xsl:template match="t:note">
+    </xsl:template>
+    
 </xsl:stylesheet>
 
