@@ -24,16 +24,19 @@ watch(searchTerm, () => {
           <v-col cols="auto" class="pb-sm-16">
             <a href="https://cjhnt-info.saw-leipzig.de/de" target="_blank">
               <picture class="d-none d-md-flex">
+                <!-- eslint-disable-next-line vue/html-self-closing -->
                 <source
                   media="(max-width: 960px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
                 />
+                <!-- eslint-disable-next-line vue/html-self-closing -->
                 <source
                   media="(max-width: 1280px)"
                   srcset="@/assets/img/Wort-Bildmarke-JF.png"
                   height="180"
                 />
+                <!-- eslint-disable-next-line vue/html-self-closing -->
                 <img
                   src="@/assets/img/Wort-Bildmarke-JF.png"
                   alt="Logo: CJHNT Projekt"
