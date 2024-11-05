@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(() => {
     const pinia = usePinia()
     const notificationStore = useNotificationStore(pinia)
     notificationStore.addNotification({
-      type: 'warning',
+      type: 'error',
       message: '',
       i18n: 'auth.onlyRegistered',
       link: '/auth/login',
