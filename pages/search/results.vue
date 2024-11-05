@@ -2,12 +2,12 @@
 definePageMeta({
   middleware: ['auth']
 })
-const { loggedIn } = useUserSession()
+const { loggedIn, user } = useUserSession()
 
 const route = useRoute()
 const queryType = route.query.field === 'belegstellen' ? 'match_phrase_prefix' : 'match_phrase'
 const slop = route.query.field === 'belegstellen' ? '0' : route.query.slop || '8'
-const highlighter = route.query.field === 'belegstellen' ? 'unified' : 'fvh'
+const highlighter = 'unified'
 const searchParams = {
   size: 10000,
   query: {
@@ -33,8 +33,8 @@ const { data: results } = await useFetch('/api/elasticsearch', {
   body: searchParams
 })
 const tableHeaders = [
-  { title: 'Document', key: 'title' },
-  { title: 'Hits', key: 'highlight', value: (item) => item.highlight[route.query.field] }
+  { title: 'document', key: 'title' },
+  { title: 'search.hits', key: 'highlight', value: (item) => item.highlight[route.query.field] }
 ]
 const tableSearch = ref('')
 </script>
@@ -60,18 +60,15 @@ const tableSearch = ref('')
             v-model:search="tableSearch"
             :headers="tableHeaders"
             :items="results.hits"
-            :items-per-page-text="$t('search.itemsPerPage')"
-            :show-current-page="true"
-            page-text=""
-            :items-per-page-options="[
-              { value: 10, title: '10' },
-              { value: 25, title: '25' },
-              { value: 50, title: '50' },
-              { value: 100, title: '100' },
-              { value: -1, title: $t('search.itemPerPageAll') }
-            ]"
-            :no-data-text="$t('search.noResults')"
+            no-data-text="search.noResults"
           >
+            <template #headers="{ columns }">
+              <tr>
+                <template v-for="column in columns" :key="column.key">
+                  <th>{{ $t(column.title) }}</th>
+                </template>
+              </tr>
+            </template>
             <template #[`item.title`]="{ item }">
               <nuxt-link
                 v-if="item.urn.includes('cjhnt:commentary') || item.urn.includes('cjhnt:info')"
@@ -84,14 +81,19 @@ const tableSearch = ref('')
               <ul class="ml-4">
                 <template v-for="(highlight, index) in item.highlight" :key="index">
                   <li>
-                    <nuxt-link
-                      v-if="highlight.citation"
-                      :to="`/texts/${item.urn};${highlight.citation}`"
-                      >{{ highlight.citation }}:
-                    </nuxt-link>
-                    <!-- Disabled because highlight.highlight is not user input -->
-                    <!-- eslint-disable-next-line vue/no-v-html -->
-                    <span v-html="highlight.highlight" />
+                    <template
+                      v-if="item.openText === 'open' || ['admin', 'project'].includes(user.role)"
+                    >
+                      <nuxt-link
+                        v-if="highlight.citation"
+                        :to="`/texts/${item.urn};${highlight.citation}`"
+                        >{{ highlight.citation }}:
+                      </nuxt-link>
+                      <!-- Disabled because highlight.highlight is not user input -->
+                      <!-- eslint-disable-next-line vue/no-v-html -->
+                      <span v-html="highlight.highlight" />
+                    </template>
+                    <span v-else>{{ highlight.citation }}: {{ $t('comptext.onlyProject') }}</span>
                   </li>
                 </template>
               </ul>
