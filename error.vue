@@ -5,12 +5,11 @@ import type { NuxtError } from '#app'
 const props = defineProps({
   error: { type: Object as () => NuxtError, default: () => {} }
 })
-console.log(props.error.statusCode)
 const notificationStore = useNotificationStore()
 
 if (props.error.statusCode === 401) {
   notificationStore.addNotification({
-    type: 'warning',
+    type: 'error',
     message: '',
     i18n: props.error.message,
     link: '/auth/login',
@@ -19,7 +18,7 @@ if (props.error.statusCode === 401) {
   clearError()
 } else if (props.error.statusCode === 403) {
   notificationStore.addNotification({
-    type: 'warning',
+    type: 'error',
     message: '',
     i18n: props.error.message,
     link: '/',
