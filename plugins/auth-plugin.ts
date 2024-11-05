@@ -11,9 +11,9 @@ export default defineNuxtPlugin(() => {
           type: 'warning',
           message: 'You must be logged in to view this page.'
         })
-        window.location.href = '/auth/login'
-        return abortNavigation()
       })
+      window.location.href = '/auth/login'
+      return abortNavigation()
     }
   })
 })

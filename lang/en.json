@@ -6,6 +6,7 @@
   "chapter": "Chapter {chapter}",
   "home": "Home",
   "uncaughtError": "There was a problem with your request. ",
+  "document": "Document",
   "index": {
     "userAlert": "We'll be publishing our first texts soon. {0} for an account if you want to be notified.",
     "signUp": "Sign up",
@@ -46,7 +47,15 @@
     "invalidEmail": "Invalid email.",
     "emptyPassword": "Password field is empty.",
     "weakPassword": "Password too weak",
-    "weakPasswordAlert": "This password is weak. Please make it stronger."
+    "weakPasswordAlert": "This password is weak. Please make it stronger.",
+    "invalidResetToken": "Your password reset token is expired or invalid. To request another follow the \"Forgot your password\" link.",
+    "forgotPassword": "Forgot your password?",
+    "alreadyLoggedIn": "You are already logged in. If you wish to change your account details, go to the ",
+    "dashboard": "Dashboard.",
+    "resetPassword": "Reset password",
+    "requestResetEmail": "Request Reset Email",
+    "emailSent": "An email has been sent with instructions to reset your password. Check your spam folder if you haven't received it in the next few minutes.",
+    "passwordReset": "Your password has been reset. "
   },
   "collection": {
     "bible": "Bible",
@@ -89,7 +98,8 @@
     "itemPerPageAll": "All",
     "noResults": "No results",
     "searchFieldLabel": "Search field:",
-    "belegstellen": "Cited sources"
+    "belegstellen": "Cited sources",
+    "hits": "Hits"
   },
   "qumranZeichenerklärung": {
     "title": "Sigla",

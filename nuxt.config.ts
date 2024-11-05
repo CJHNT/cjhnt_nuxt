@@ -84,7 +84,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     esUrl: process.env.ES_URL,
     esUser: process.env.ES_USER,
-    esPw: process.env.ES_PW
+    esPw: process.env.ES_PW,
+    mailPw: process.env.MAIL_PW,
+    mailHost: process.env.MAIL_HOST,
+    mailPort: process.env.MAIL_PORT,
+    mailSender: process.env.MAIL_SENDER,
+    sessionPassword: process.env.NUXT_SESSION_PASSWORD,
+    baseUrl: process.env.BASE_URL
   },
 
   eslint: {},

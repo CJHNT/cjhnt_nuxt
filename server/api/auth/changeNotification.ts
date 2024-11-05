@@ -1,7 +1,7 @@
 import { changeUserNotification, createSession } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
+  const session = await requireUserSession(event)
   const desiredStatus = session.user.wantsUpdates ? 0 : 1
 
   try {
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       }
       return createError({
         statusCode: 409,
-        statusMessage: 'Something went wrong while changing your email address. No change was made.'
+        statusMessage: 'Something went wrong while changing your update status. No change was made.'
       })
     }
   } catch (error) {

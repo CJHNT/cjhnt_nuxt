@@ -6,6 +6,7 @@
   "chapter": "Kapitel {chapter}",
   "home": "Home",
   "uncaughtError": "Ein Fehler ist passiert.",
+  "document": "Document",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
     "signUp": "Legen Sie ein Konto an",
@@ -46,7 +47,15 @@
     "invalidEmail": "Ungültige E-Mail-Adresse",
     "emptyPassword": "Passwortfeld ist leer.",
     "weakPassword": "Passwort zu schwach",
-    "weakPasswordAlert": "Das Passwort ist zu schwach. Machen Sie es stärker."
+    "weakPasswordAlert": "Das Passwort ist zu schwach. Machen Sie es stärker.",
+    "invalidResetToken": "Das Token zur Zurücksetzung Ihres Passwortes ist abgelaugen oder ungültig. Um ein neues Token anzufordern, klicken Sie auf den \"Passwort vergessen\"-Link.",
+    "forgotPassword": "Passwort vergessen?",
+    "alreadyLoggedIn": "Sie sind schon eingeloggt. Wenn Sie etwas an Ihrem Konto ändern wollen, gehen Sie zum ",
+    "dashboard": "Dashboard.",
+    "resetPassword": "Passwort zürucksetzen",
+    "requestResetEmail": "Rücksetzungs-E-Mail anfordern",
+    "emailSent": "Eine Email mit Anweisungen zum Zurücksetzen Ihres Passworts wurd verschickt. Schauen Sie gegebenfalls auch in Ihren Spam-Ordner.",
+    "passwordReset": "Ihr Passwort wurde Zurückgesetzt. "
   },
   "collection": {
     "bible": "Bibel",
@@ -89,7 +98,8 @@
     "itemPerPageAll": "Alle",
     "noResults": "Keine Ergebnisse",
     "searchFieldLabel": "Suchfeld:",
-    "belegstellen": "Belegstellen"
+    "belegstellen": "Belegstellen",
+    "hits": "Treffer"
   },
   "qumranZeichenerklärung": {
     "title": "Zeichenerklärung",

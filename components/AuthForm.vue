@@ -116,8 +116,14 @@ const strengthColor = computed(
             <nuxt-link :to="{ name: 'auth-login' }">{{ $t('auth.login') }}</nuxt-link>
           </template>
           <template v-else-if="title === 'auth.login'">
-            {{ $t('auth.noAccountYet') }}
-            <nuxt-link :to="{ name: 'auth-register' }">{{ $t('auth.signUp') }}</nuxt-link>
+            <p>
+              {{ $t('auth.noAccountYet') }}
+              <nuxt-link :to="{ name: 'auth-register' }">{{ $t('auth.signUp') }}</nuxt-link>
+            </p>
+            <p>
+              {{ $t('auth.forgotPassword') }}
+              <nuxt-link to="/auth/forgotPassword">{{ $t('auth.resetPassword') }}</nuxt-link>
+            </p>
           </template>
         </v-card-text>
       </template>

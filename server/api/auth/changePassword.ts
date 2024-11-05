@@ -1,15 +1,15 @@
 import { changeUserPassword, createSession } from '~/utils/db'
 
 // from https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
-function comparePasswords(a, b) {
-  var mismatch = 0
-  for (var i = 0; i < a.length; ++i) {
+function comparePasswords(a: string, b: string) {
+  let mismatch = 0
+  for (let i = 0; i < a.length; ++i) {
     mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i)
   }
   return mismatch
 }
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
+  const session = await requireUserSession(event)
 
   try {
     const body = await readBody(event) // Retrieve request body
@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     }
 
     if (typeof password === 'string') {
-      const passwordChanged = changeUserPassword(password, session.userId)
+      const passwordChanged = await changeUserPassword(password, session.userId)
       if (passwordChanged) {
         const result = createSession(session.user.email)
         if (result !== undefined) {
