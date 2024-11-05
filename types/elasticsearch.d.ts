@@ -13,6 +13,7 @@ interface EsReturnSource {
   belegstellen: string[]
   urn: string
   collection: string
+  openText: 'open' | 'closed' | ''
 }
 
 interface EsReturnShards {
