@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
       body: {
         mailRecipient: body.payload.email,
         mailSubject: 'Password Reset for CJHNT-digital',
-        mailText: `${t('auth.passwordResetEmail.greeting')}  ${body.payload.email},
+        mailText: `${t('auth.passwordResetEmail.greeting', [body.payload.email])}
 
           ${t('auth.passwordResetEmail.htmlReset')} ${t('auth.passwordResetEmail.clickHere')}
 
