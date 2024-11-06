@@ -56,7 +56,16 @@
     "resetPassword": "Passwort zürucksetzen",
     "requestResetEmail": "Rücksetzungs-E-Mail anfordern",
     "emailSent": "Eine Email mit Anweisungen zum Zurücksetzen Ihres Passworts wurd verschickt. Schauen Sie gegebenfalls auch in Ihren Spam-Ordner.",
-    "passwordReset": "Ihr Passwort wurde Zurückgesetzt. "
+    "passwordReset": "Ihr Passwort wurde Zurückgesetzt. ",
+    "passwordResetEmail": {
+      "greeting": "An {0}:",
+      "htmlReset": "Um Ihr Passwort züruckzusetzen",
+      "clickHere": "klicken Sie hier",
+      "alternatively": "Alternativ können Sie den folgenden Link in die Adressleiste ihres Browsers tun:",
+      "ignore": "Wenn Sie die Rücksetzung ihres Passworts nicht angefordert haben, können Sie diese Email ignorieren.",
+      "sincerely": "Mit freundlichen Grüßen",
+      "sender": "Ihr CJHNT-digital Team"
+    }
   },
   "collection": {
     "bible": "Bibel",

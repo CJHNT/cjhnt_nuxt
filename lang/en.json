@@ -56,7 +56,16 @@
     "resetPassword": "Reset password",
     "requestResetEmail": "Request Reset Email",
     "emailSent": "An email has been sent with instructions to reset your password. Check your spam folder if you haven't received it in the next few minutes.",
-    "passwordReset": "Your password has been reset. "
+    "passwordReset": "Your password has been reset. ",
+    "passwordResetEmail": {
+      "greeting": "Dear {0},",
+      "htmlReset": "To reset your password",
+      "clickHere": "click here",
+      "alternatively": "Alternatively, you can paste the following link in your browser's address bar:",
+      "ignore": "If you have not requested a password reset simply ignore this message.",
+      "sincerely": "Sincerely,",
+      "sender": "The CJHNT-digital Team"
+    }
   },
   "collection": {
     "bible": "Bible",
