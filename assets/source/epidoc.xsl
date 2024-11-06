@@ -4,7 +4,7 @@
     <xsl:output omit-xml-declaration="yes" indent="yes" method="html"/>
     
     <xsl:template match="/">
-        <xsl:for-each select="//t:div[@type='textpart'][t:p]">
+        <xsl:for-each select="//t:div[@type='textpart'][t:p or t:head]">
             <xsl:variable name="citStrings">
                 <xsl:for-each select="ancestor::t:div[@type='textpart']">
                     <xsl:value-of select="@n"/><xsl:text>.</xsl:text>
@@ -15,15 +15,29 @@
                 <xsl:attribute name="class">citation-section</xsl:attribute>
                 <xsl:attribute name="n"><xsl:value-of select="$citStrings"/></xsl:attribute>
                 <xsl:attribute name="id"><xsl:value-of select="//t:body/t:div/@n"/><xsl:text>;</xsl:text><xsl:value-of select="$citStrings"/></xsl:attribute>
-                <xsl:for-each select="./t:p">                
-                    <span class="text-paragraph">
-                        <xsl:for-each select="node()">
-                            <xsl:choose>
-                                <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
-                                <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:for-each>
-                    </span>
+                <xsl:for-each select="./*">    
+                    <xsl:choose>
+                        <xsl:when test="local-name() = 'p'">
+                            <span class="text-paragraph">
+                                <xsl:for-each select="node()">
+                                    <xsl:choose>
+                                        <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                                        <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:for-each>
+                            </span>
+                        </xsl:when>
+                        <xsl:when test="local-name() = 'head'">
+                            <span class="text-header">
+                                <xsl:for-each select="node()">
+                                    <xsl:choose>
+                                        <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                                        <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:for-each>
+                            </span>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:for-each>
             </xsl:element>
         </xsl:for-each>
