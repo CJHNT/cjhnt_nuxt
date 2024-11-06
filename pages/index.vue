@@ -1,5 +1,5 @@
 <script setup>
-const { loggedIn, fetch } = useUserSession()
+const { loggedIn, fetch, user } = useUserSession()
 await fetch()
 const searchTerm = ref('')
 
@@ -52,6 +52,17 @@ watch(searchTerm, () => {
               <v-alert type="info"
                 ><i18n-t keypath="index.userAlert">
                   <nuxt-link :to="{ name: 'auth-register' }">{{ $t('index.signUp') }}</nuxt-link>
+                </i18n-t></v-alert
+              >
+            </v-col>
+          </v-row>
+        </template>
+        <template v-else-if="!['project', 'admin'].includes(user.role)">
+          <v-row justify="center">
+            <v-col cols="12" md="8" xl="4">
+              <v-alert type="info"
+                ><i18n-t keypath="index.projectAlert">
+                  <nuxt-link :to="{ name: 'auth-dashboard' }">{{ $t('auth.dashboard') }}</nuxt-link>
                 </i18n-t></v-alert
               >
             </v-col>

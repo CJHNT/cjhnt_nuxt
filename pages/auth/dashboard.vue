@@ -5,7 +5,8 @@ definePageMeta({
   middleware: ['auth']
 })
 
-const { loggedIn, user, fetch } = useUserSession()
+const { user, fetch } = useUserSession()
+const authorized = useState('authorized')
 const loading = ref(false)
 const router = useRouter()
 const notificationStore = useNotificationStore()
@@ -79,7 +80,7 @@ onUnmounted(() => {
 <template>
   <v-main>
     <NotificationContainer />
-    <v-container v-if="loggedIn">
+    <v-container v-if="authorized">
       <v-row justify="center">
         <v-col cols="12" lg="6" xl="4">
           <p class="text-center text-h5 text-lg-h4">{{ $t('auth.hello') }} {{ user?.email }}</p>

@@ -1,8 +1,10 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn, user } = useUserSession()
+const { user } = useUserSession()
+const authorized = useState('authorized')
+const hitWords = useState('hitWords')
 
 const route = useRoute()
 const queryType = route.query.field === 'belegstellen' ? 'match_phrase_prefix' : 'match_phrase'
@@ -42,7 +44,7 @@ const tableSearch = ref('')
 <template>
   <v-main style="min-height: 300px">
     <NotificationContainer />
-    <v-container v-if="loggedIn">
+    <v-container v-if="authorized">
       <v-row justify="center">
         <v-col cols="12" md="9" xl="6">
           <h1>{{ $t('search.results') }}</h1>
@@ -87,6 +89,7 @@ const tableSearch = ref('')
                       <nuxt-link
                         v-if="highlight.citation"
                         :to="`/texts/${item.urn};${highlight.citation}`"
+                        @click="hitWords = highlight.hitIndices"
                         >{{ highlight.citation }}:
                       </nuxt-link>
                       <!-- Disabled because highlight.highlight is not user input -->

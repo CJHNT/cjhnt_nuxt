@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn } = useUserSession()
+const authorized = useState('authorized')
 const searchTerm = ref('')
 const slop = ref(0)
 const field = ref('text')
@@ -18,7 +18,7 @@ function submit() {
 <template>
   <v-main>
     <NotificationContainer />
-    <v-container v-if="loggedIn">
+    <v-container v-if="authorized">
       <v-row justify="center">
         <v-col cols="12" lg="3">
           <v-card width="100%" class="mx-auto mt-5">

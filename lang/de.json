@@ -9,6 +9,7 @@
   "document": "Document",
   "index": {
     "userAlert": "Wir werden bald unsere ersten Texte veröffentlichen. {0}, wenn Sie benachrichtigt werden möchten.",
+    "projectAlert": "Wir werden bald unsere ersten Texte veröffentlichen. Um darüber per Email benachrichtigt zu werden, schalten Sie Projektstatus-Updates in ihrem Benutzerkonto an. {0}",
     "signUp": "Legen Sie ein Konto an",
     "readMore": "Weiter lesen",
     "introBlurb": "Willkommen auf der Forschungsplattform des CJHNT! Alle unsere Texte, sowohl die im Rahmen des Projekts erstellten Kommentare als auch die frühjüdischen Texte, auf denen sie beruhen, werden hier veröffentlicht. Wir werden auch eine erweiterte Suchfunktion haben, die es Ihnen ermöglicht, Ihre eigenen Recherchen in unserem Korpus durchzuführen. Um die Plattform nutzen zu können, müssen Sie ein {0}. Während des Registrierungsprozesses können Sie sich auch dafür anmelden, Updates über neue Texte und neue Funktionen zu erhalten.",

@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn } = useUserSession()
+const authorized = useState('authorized')
 const route = useRoute()
 
 const { locale } = useI18n()
@@ -68,7 +68,7 @@ collName.value = {
         </v-container>
       </template>
       <template v-else>
-        <v-container v-if="loggedIn">
+        <v-container v-if="authorized">
           <v-row justify="center">
             <v-col cols="12" xl="8" offset-xxl="2">
               <BreadCrumb v-if="ancestors.length > 0" :ancestors="ancestors" :index="0" />

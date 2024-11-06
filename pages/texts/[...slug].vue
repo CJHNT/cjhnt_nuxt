@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn } = useUserSession()
+const authorized = useState('authorized')
 // const notificationStore = useNotificationStore()
 
 // if (!loggedIn.value) {
@@ -42,7 +42,7 @@ const allAncestors = ref([])
       </v-container> -->
       <NotificationContainer />
 
-      <v-container v-if="loggedIn">
+      <v-container v-if="authorized">
         <NotificationContainer />
         <v-row justify="center">
           <v-col

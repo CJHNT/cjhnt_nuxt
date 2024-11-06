@@ -1,8 +1,8 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn } = useUserSession()
+const authorized = useState('authorized')
 // const notificationStore = useNotificationStore()
 
 // if (!loggedIn.value) {
@@ -59,7 +59,7 @@ watch(tab, (newTab) => {
         </v-container>
       </template>
       <template v-else>
-        <v-container v-if="loggedIn">
+        <v-container v-if="authorized">
           <v-row justify="center">
             <v-col cols="12" xl="8" xxl="6">
               <v-autocomplete

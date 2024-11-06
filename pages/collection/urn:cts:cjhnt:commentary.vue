@@ -1,8 +1,9 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['project-auth']
 })
-const { loggedIn, user } = useUserSession()
+const { user } = useUserSession()
+const authorized = useState('authorized')
 const projectMember = await allows(readClosed, user.value)
 const ntBookList = useState('ntBookList')
 
@@ -40,7 +41,7 @@ const existingCommentaries = computed(() =>
         </v-container>
       </template>
       <template v-else>
-        <v-container v-if="loggedIn">
+        <v-container v-if="authorized">
           <v-row justify="center">
             <v-col cols="12" xl="8" xxl="6">
               <v-autocomplete

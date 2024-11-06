@@ -5,6 +5,7 @@ import { readClosed } from '~/utils/abilities'
 const { locale } = useI18n()
 const { user } = useUserSession()
 const projectMember = await allows(readClosed, user.value)
+const hitWords = useState('hitWords')
 
 const props = defineProps({
   urn: { type: String, default: '' },
@@ -150,6 +151,17 @@ if (openText || projectMember) {
     })
   )
   formattedText.value = data.value
+  if (hitWords.value) {
+    console.error(hitWords.value)
+    const parser = new DOMParser()
+    const domText = parser.parseFromString(formattedText.value, 'text/html')
+    hitWords.value.forEach((index) => {
+      const hitWord = domText.querySelector(`[n="w-${index}"]`)
+      hitWord.classList.add('searchHit')
+    })
+    formattedText.value = domText.documentElement.outerHTML
+    hitWords.value = null
+  }
 }
 allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
@@ -262,4 +274,8 @@ onUnmounted(() => {
   </v-container>
 </template>
 
-<style></style>
+<style>
+.searchHit {
+  font-weight: bold;
+}
+</style>

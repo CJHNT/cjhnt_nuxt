@@ -1,13 +1,28 @@
 export default defineNuxtRouteMiddleware(() => {
   const { loggedIn, user } = useUserSession()
+  const pinia = usePinia()
+  const notificationStore = useNotificationStore(pinia)
+  const authorized = useState('authorized')
 
   if (!loggedIn.value) {
-    window.location.href = '/auth/login'
-    return abortNavigation()
-  } else if (user.value?.role && user.value?.role === 'user') {
-    return abortNavigation({
-      statusCode: 403,
-      statusMessage: 'This page is only available to project members.'
+    notificationStore.addNotification({
+      type: 'error',
+      message: '',
+      i18n: 'auth.onlyRegistered',
+      link: '/auth/login',
+      linkMessage: 'auth.login'
     })
+    authorized.value = false
+  } else if (user.value?.role && user.value?.role === 'user') {
+    notificationStore.addNotification({
+      type: 'error',
+      message: '',
+      i18n: 'auth.onlyProject',
+      link: '/',
+      linkMessage: 'home'
+    })
+    authorized.value = false
+  } else {
+    authorized.value = true
   }
 })
