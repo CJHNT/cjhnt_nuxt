@@ -13,6 +13,14 @@ export const changeUserEmail = (newEmail: string, userId: string) => {
   }
 }
 
+export const changeUserLocale = (newLocale: string, userId: string) => {
+  try {
+    const localeChange = db.prepare('UPDATE users SET locale=? WHERE id=?').run(newLocale, userId)
+    return localeChange.changes === 1
+  } catch {
+    return false
+  }
+}
 export const changeUserNotification = (newStatus: number, userId: string) => {
   try {
     const updateChange = db
@@ -47,8 +55,9 @@ export const createSession = (email: string) => {
         role: 'admin' | 'project' | 'user'
         verified_email: number
         wants_updates: number
+        locale: 'de' | 'en'
       }
-    >('SELECT id, role, verified_email, wants_updates FROM users WHERE email=?')
+    >('SELECT id, role, verified_email, wants_updates, locale FROM users WHERE email=?')
     .get(email)
   if (user) {
     const info = db
@@ -60,7 +69,8 @@ export const createSession = (email: string) => {
         userId: user.id,
         role: user.role,
         verifiedEmail: user.verified_email !== 0,
-        wantsUpdates: user.wants_updates !== 0
+        wantsUpdates: user.wants_updates !== 0,
+        locale: user.locale || 'en'
       }
     }
   }
@@ -110,6 +120,11 @@ export const verifyUserById = async (userId: string) => {
     return result.id
   }
   return false
+}
+
+export const verifyUserEmailAddress = async (userId: number) => {
+  const info = db.prepare('UPDATE users SET verified_email=1 WHERE id=?').run(userId)
+  return info.changes === 1
 }
 
 export const verifySession = (userId: string, sessionToken: string) => {

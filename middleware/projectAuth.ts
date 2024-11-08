@@ -13,6 +13,15 @@ export default defineNuxtRouteMiddleware(() => {
       linkMessage: 'auth.login'
     })
     authorized.value = false
+  } else if (!user.value?.verifiedEmail) {
+    notificationStore.addNotification({
+      type: 'warning',
+      message: '',
+      i18n: 'auth.emailVerification.emailVerificationEmail.explanation',
+      link: '/auth/verifyEmail',
+      linkMessage: 'auth.emailVerification.requestVerificationEmail'
+    })
+    authorized.value = false
   } else if (user.value?.role && user.value?.role === 'user') {
     notificationStore.addNotification({
       type: 'error',
