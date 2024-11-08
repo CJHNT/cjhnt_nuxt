@@ -5,6 +5,7 @@ declare module '#auth-utils' {
     role: 'admin' | 'project' | 'user'
     verifiedEmail: boolean
     wantsUpdates: boolean
+    locale: 'en' | 'de'
   }
 
   interface UserSession {

@@ -1,13 +1,13 @@
-import { changeUserNotification, createSession } from '~/utils/db'
+import { changeUserLocale, createSession } from '~/utils/db'
 
 export default defineEventHandler(async (event) => {
   const session = await requireUserSession(event)
-  const desiredStatus = session.user.wantsUpdates ? 0 : 1
+  const body = await readBody(event)
 
   try {
-    if (typeof desiredStatus === 'number') {
-      const statusChanged = changeUserNotification(desiredStatus, session.userId)
-      if (statusChanged) {
+    if (['en', 'de'].includes(body.locale)) {
+      const localeChanged = changeUserLocale(body.locale, session.userId)
+      if (localeChanged) {
         const result = createSession(session.user.email)
         if (result !== undefined) {
           await setUserSession(event, {
@@ -26,14 +26,14 @@ export default defineEventHandler(async (event) => {
       }
       return createError({
         statusCode: 409,
-        statusMessage: 'Something went wrong while changing your update status. No change was made.'
+        statusMessage: 'Something went wrong while changing your locale. No change was made.'
       })
     }
   } catch (error) {
     console.error('Error changing update status:', error)
     return createError({
       statusCode: 409,
-      statusMessage: 'Something went wrong while changing your update status. No change was made.'
+      statusMessage: 'Something went wrong while changing your locale. No change was made.'
     })
   }
 })

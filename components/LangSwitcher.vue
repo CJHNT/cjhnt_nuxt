@@ -1,8 +1,24 @@
 <script setup>
-const { setLocale, locale } = useI18n()
+const { locale, setLocale } = useI18n()
+const { user } = useUserSession()
+
+async function setUserLocale(newLocale) {
+  setLocale(newLocale)
+  if (user.value.locale) {
+    await useAsyncData('changeLocale' + Date.now(), () => {
+      const localeChanged = $fetch('/api/auth/changeLocale', {
+        method: 'POST',
+        body: {
+          locale: newLocale
+        }
+      })
+      return localeChanged
+    })
+  }
+}
 </script>
 
 <template>
-  <v-btn v-if="locale === 'de'" @click.prevent.stop="setLocale('en')">en</v-btn>
-  <v-btn v-if="locale === 'en'" @click.prevent.stop="setLocale('de')">de</v-btn>
+  <v-btn v-if="locale === 'de'" @click.prevent.stop="setUserLocale('en')">en</v-btn>
+  <v-btn v-if="locale === 'en'" @click.prevent.stop="setUserLocale('de')">de</v-btn>
 </template>

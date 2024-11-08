@@ -75,10 +75,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    vueI18n: './i18n.config.ts',
-    experimental: {
-      localeDetector: './localeDetector.ts'
-    }
+    vueI18n: './i18n.config.ts'
   },
 
   runtimeConfig: {

@@ -11,7 +11,7 @@ if (loggedIn.value) {
     linkMessage: 'auth.dashboard'
   })
 }
-// need to create a JWT token to send in the body of the mail.
+
 async function resetPassword() {
   await $fetch('/api/auth/forgotPassword', {
     method: 'POST',

@@ -40,7 +40,8 @@ export default defineEventHandler(async (event) => {
               email,
               role: result.role,
               verifiedEmail: result.verifiedEmail,
-              wantsUpdates: result.wantsUpdates
+              wantsUpdates: result.wantsUpdates,
+              locale: result.locale
             },
             userId: result.userId,
             token: result.sessionToken

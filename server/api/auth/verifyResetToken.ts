@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
     const verifiedToken = jwt.verify(body.token, config.sessionPassword)
     if (typeof verifiedToken === 'object') {
-      const result = await verifyUserById(verifiedToken.userId)
+      const result = await verifyUserById(verifiedToken.verifyEmail)
       if (typeof result === 'number') {
         return { error: null, userId: result }
       }

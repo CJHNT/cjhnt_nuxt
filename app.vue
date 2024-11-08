@@ -6,6 +6,9 @@ import './assets/main.css'
 // }
 const nuxtApp = useNuxtApp()
 const loading = ref(false)
+const { setLocale } = useI18n()
+const { user } = useUserSession()
+await setLocale(user.value.locale)
 nuxtApp.hook('page:start', () => {
   loading.value = true
 })

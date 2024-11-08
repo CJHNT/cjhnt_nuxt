@@ -55,9 +55,37 @@
     "dashboard": "Dashboard.",
     "resetPassword": "Reset password",
     "requestResetEmail": "Request Reset Email",
-    "emailSent": "An email has been sent with instructions to reset your password. Check your spam folder if you haven't received it in the next few minutes.",
+    "emailSent": "An email has been sent with instructions",
+    "checkSpam": "Check your spam folder if you haven't received it in the next few minutes.",
     "passwordReset": "Your password has been reset. ",
+    "emailVerification": {
+      "requestVerificationEmail": "Request email verification",
+      "invalidEmailVerificationToken": "Your email verification token is expired or invalid.",
+      "emailVerificationError": "Something went wrong while verifying your email address. If this problem persists, please contact us as cjhnt{'@'}saw-leipzig.de",
+      "emailSentNotification": "@:auth.emailSent to verify your email address. @:auth.checkSpam",
+      "verifyingEmail": "Verifying Email",
+      "emailVerified": "Email verified",
+      "emailVerifiedNotification": "Your email address has been verified.",
+      "emailVerifiedNotificationLogin": "You may now login use the site.",
+      "verificationPage": {
+        "header": "Email Verification",
+        "message": "You should have received an email to verify your email address at { email }. If not, click the link below to resend the email.",
+        "link": "Verify Email",
+        "alreadyVerified": "The email address {email} has already been verified. If you are having trouble accessing the site, please send an email with a description of the problem to cjhnt{'@'}saw-leipzig.de."
+      },
+      "emailVerificationEmail": {
+        "subject": "Email Verification for CJHNT-digital",
+        "greeting": "Dear {0},",
+        "htmlReset": "To verify your Email address",
+        "clickHere": "click here",
+        "alternatively": "Alternatively, you can paste the following link in your browser's address bar:",
+        "explanation": "You must verify your email before you can access the CJHNT-digital platform.",
+        "sincerely": "Sincerely,",
+        "sender": "The CJHNT-digital Team"
+      }
+    },
     "passwordResetEmail": {
+      "subject": "Password Reset for CJHNT-digital",
       "greeting": "Dear {0},",
       "htmlReset": "To reset your password",
       "clickHere": "click here",

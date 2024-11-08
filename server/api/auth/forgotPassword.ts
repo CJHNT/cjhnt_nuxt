@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const userExists = await verifyUserByEmail(body.payload.email)
   const t = await useTranslation(event)
   if (userExists) {
-    const token = jwt.sign({ userId: userExists }, config.sessionPassword, {
+    const token = jwt.sign({ resetPassword: userExists }, config.sessionPassword, {
       expiresIn: 600
     })
     await $fetch('/api/mail/send', {
@@ -17,16 +17,16 @@ export default defineEventHandler(async (event) => {
         mailSubject: 'Password Reset for CJHNT-digital',
         mailText: `${t('auth.passwordResetEmail.greeting', [body.payload.email])}
 
-          ${t('auth.passwordResetEmail.htmlReset')} ${t('auth.passwordResetEmail.clickHere')}
+${t('auth.passwordResetEmail.htmlReset')} ${t('auth.passwordResetEmail.clickHere')}
 
-          ${config.baseUrl}auth/resetPassword?token=${token}
+${config.baseUrl}auth/resetPassword?token=${token}
 
-          ${t('auth.passwordResetEmail.ignore')}
+${t('auth.passwordResetEmail.ignore')}
 
-          ${t('auth.passwordResetEmail.sincerely')}
+${t('auth.passwordResetEmail.sincerely')}
           
-          ${t('auth.passwordResetEmail.sender')}
-          `,
+${t('auth.passwordResetEmail.sender')}
+`,
         mailHtml: `<!doctype html>
           <html>
             <body>
