@@ -42,7 +42,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/eslint-module',
     'nuxt-security',
-    'nuxt-authorization'
+    'nuxt-authorization',
+    '@nuxt/test-utils/module'
   ],
 
   googleFonts: {
@@ -75,7 +76,10 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    vueI18n: './i18n.config.ts'
+    vueI18n: './i18n.config.ts',
+    experimental: {
+      localeDetector: './localeDetector.ts'
+    }
   },
 
   runtimeConfig: {
