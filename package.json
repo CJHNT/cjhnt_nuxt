@@ -11,7 +11,8 @@
     "format": "prettier --write src/",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.5.7",
@@ -48,6 +49,7 @@
     "@types/better-sqlite3": "^7.6.11",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/nodemailer": "^6.4.16",
+    "@vitest/coverage-v8": "^2.1.4",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.2.0",
     "eslint-plugin-vue": "^9.26.0",
