@@ -1,4 +1,4 @@
-import { mount, config, RouterLinkStub } from '@vue/test-utils'
+import { mount, RouterLinkStub } from '@vue/test-utils'
 import NotificationBar from '../NotificationBar.vue'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -9,66 +9,61 @@ const vuetify = createVuetify({
   directives
 })
 
-config.global.plugins = [vuetify]
-config.global.mocks = { $t: (key: string) => key }
-config.global.stubs = { NuxtLink: RouterLinkStub }
+const notificationObject: GlobalNotification = {
+  type: '',
+  message: '',
+  i18n: '',
+  link: '',
+  linkMessage: ''
+}
+
+function mountNotificationBar(config = { mountOptions: {} }) {
+  return mount(NotificationBar, {
+    props: { notification: notificationObject },
+    global: {
+      plugins: [vuetify],
+      mocks: { $t: (key: string) => key },
+      stubs: { NuxtLink: RouterLinkStub }
+    },
+    ...config.mountOptions
+  })
+}
 
 describe('Notification Bar Component', () => {
-  const notificationObject: GlobalNotification = {
-    type: '',
-    message: '',
-    i18n: '',
-    link: '',
-    linkMessage: ''
-  }
   test('renders the correct styles for error, warning, success, info', () => {
     ;['error', 'warning', 'success', 'info'].forEach((status) => {
       notificationObject.type = status
-      const wrapper = mount(NotificationBar, {
-        props: { notification: notificationObject }
-      })
+      const wrapper = mountNotificationBar()
       expect(wrapper.classes()).toEqual(expect.arrayContaining([`bg-${status}`]))
     })
   })
   test('renders message when i18n is empty', () => {
     notificationObject.message = 'Some message'
-    const wrapper = mount(NotificationBar, {
-      props: { notification: notificationObject }
-    })
+    const wrapper = mountNotificationBar()
     expect(wrapper.text()).toEqual('Some message')
   })
   test('renders i18n when message is not empty', () => {
     notificationObject.i18n = 'Some i18n message'
-    const wrapper = mount(NotificationBar, {
-      props: { notification: notificationObject }
-    })
+    const wrapper = mountNotificationBar()
     expect(wrapper.text()).toEqual('Some i18n message')
   })
-  describe('Test link', () => {
-    test('renders correct href', () => {
-      notificationObject.link = '/'
-      notificationObject.linkMessage = 'Home'
-      const wrapper = mount(NotificationBar, {
-        props: { notification: notificationObject }
-      })
-      expect(wrapper.findComponent(RouterLinkStub).props().to).toBe('/')
-    })
-    test('renders correct message for link', () => {
-      const wrapper = mount(NotificationBar, {
-        props: { notification: notificationObject }
-      })
-      expect(wrapper.findComponent(RouterLinkStub).text()).toEqual('Home')
-    })
+  test('link renders correct href and message', () => {
+    notificationObject.link = '/'
+    notificationObject.linkMessage = 'Home'
+    const wrapper = mountNotificationBar()
+    const linkComponent = wrapper.findComponent(RouterLinkStub)
+    expect(linkComponent.props().to).toBe('/')
+    expect(linkComponent.text()).toEqual('Home')
   })
   test('clicking button emits closeNotification', async () => {
-    const wrapper = mount(NotificationBar, {
+    const mountOption = {
       data() {
         return {
           clicked: false
         }
-      },
-      props: { notification: notificationObject }
-    })
+      }
+    }
+    const wrapper = mountNotificationBar({ mountOptions: mountOption })
     const closeButton = wrapper.find('.v-alert__close .v-btn')
     await closeButton.trigger('click')
     expect(wrapper.emitted()).toHaveProperty('closeNotification')
