@@ -52,14 +52,33 @@ const { data: parentData } = await useAsyncData(parentId, () =>
   })
 )
 const siblings = parentData.value.member
-  .map((m) => [
-    m['@id'],
-    m['dts:extensions']['dc:language'],
-    m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights'] === 'open',
-    m['dts:dublincore'] && m['dts:dublincore']['dct:bibliographicCitation']
-      ? m['dts:dublincore']['dct:bibliographicCitation']
-      : m['dts:extensions']['dc:language'][0]['@value']
-  ])
+  .map((m) => {
+    const biblio = {
+      de: '',
+      en: ''
+    }
+    if (m['dts:dublincore'] && m['dts:dublincore']['dct:bibliographicCitation']) {
+      if (typeof m['dts:dublincore']['dct:bibliographicCitation'] === 'object') {
+        biblio.de =
+          m['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
+            '@value'
+          ] || m['dts:extensions']['dc:language'][0]['@value']
+        biblio.en =
+          m['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
+            '@value'
+          ] || m['dts:extensions']['dc:language'][0]['@value']
+      } else if (typeof m['dts:dublincore']['dct:bibliographicCitation'] === 'string') {
+        biblio.de = m['dts:dublincore']['dct:bibliographicCitation']
+        biblio.en = m['dts:dublincore']['dct:bibliographicCitation']
+      }
+    }
+    return [
+      m['@id'],
+      m['dts:extensions']['dc:language'],
+      m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights'] === 'open',
+      biblio
+    ]
+  })
   .filter((c) => c[0] !== props.urn)
   .filter((c) => projectMember || c[2])
 let hasParent = false
@@ -102,6 +121,7 @@ const nextId = ref(null)
 const formattedText = ref('')
 const navReturn = ref(null)
 const usedReff = ref(props.reff)
+const validReffs = ref([])
 if (openText || projectMember) {
   const { data: navInfo } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
     $fetch('/api/dts/navigation', {
@@ -110,25 +130,26 @@ if (openText || projectMember) {
     })
   )
   navReturn.value = navInfo.value
-  const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
-  if (!props.reff.split('-').every((e) => validReffs.includes(e))) {
+  validReffs.value = navReturn.value['hydra:member'].map((r) => r.ref)
+  if (!props.reff.split('-').every((e) => validReffs.value.includes(e))) {
     await useAsyncData('refWarning', () =>
       notificationStore
         .addNotification({
           type: 'warning',
           // rule disabled because locale is not user-provided input
           // eslint-disable-next-line security/detect-object-injection
-          message: `Reference ${usedReff.value} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
+          message: `Reference ${usedReff.value} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs.value[0]}).`
         })
         .then(() => true)
     )
-    usedReff.value = validReffs[0]
+    usedReff.value = validReffs.value[0]
   }
   ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff.value })
 
-  const currentIndex = validReffs.findIndex((m) => m === usedReff.value)
-  prevId.value = currentIndex > 0 ? validReffs[currentIndex - 1] : null
-  nextId.value = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
+  const currentIndex = validReffs.value.findIndex((m) => m === usedReff.value)
+  prevId.value = currentIndex > 0 ? validReffs.value[currentIndex - 1] : null
+  nextId.value =
+    currentIndex + 1 < validReffs.value.length ? validReffs.value[currentIndex + 1] : null
 
   const xslPath = () => {
     switch (true) {
@@ -237,7 +258,7 @@ onUnmounted(() => {
                     class="text-truncate"
                   >
                     <NuxtLink :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
-                      >[{{ sibling[1] }}] {{ sibling[3] }}</NuxtLink
+                      >[{{ sibling[1] }}] {{ sibling[3][locale] }}</NuxtLink
                     >
                   </v-list-item>
                 </v-list>
@@ -261,7 +282,7 @@ onUnmounted(() => {
                   v-for="(sibling, index) in siblings"
                   :key="index"
                   :to="`/texts/${sibling[0]};${props.reff}`"
-                  >{{ sibling[3] }},
+                  >{{ sibling[3][locale] }},
                 </nuxt-link></v-alert
               >
               <v-alert v-else type="warning">{{ $t('comptext.onlyProject') }}</v-alert>
