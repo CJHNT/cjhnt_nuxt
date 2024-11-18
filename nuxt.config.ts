@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { transformAssetUrls } from 'vite-plugin-vuetify'
+// import { transformAssetUrls } from 'vite-plugin-vuetify'
 import path from 'path'
 
 export default defineNuxtConfig({
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     define: {
       global: {}
     },
-    vue: { template: { transformAssetUrls } },
+    // vue: { template: { transformAssetUrls } },
     resolve: {
       alias: {
         '#imports': path.resolve(__dirname, '.nuxt/imports')
