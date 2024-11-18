@@ -101,6 +101,7 @@ const prevId = ref(null)
 const nextId = ref(null)
 const formattedText = ref('')
 const navReturn = ref(null)
+const usedReff = ref(props.reff)
 if (openText || projectMember) {
   const { data: navInfo } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
     $fetch('/api/dts/navigation', {
@@ -110,7 +111,6 @@ if (openText || projectMember) {
   )
   navReturn.value = navInfo.value
   const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
-  let usedReff = props.reff
   if (!props.reff.split('-').every((e) => validReffs.includes(e))) {
     await useAsyncData('refWarning', () =>
       notificationStore
@@ -118,15 +118,15 @@ if (openText || projectMember) {
           type: 'warning',
           // rule disabled because locale is not user-provided input
           // eslint-disable-next-line security/detect-object-injection
-          message: `Reference ${usedReff} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
+          message: `Reference ${usedReff.value} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs[0]}).`
         })
         .then(() => true)
     )
-    usedReff = validReffs[0]
+    usedReff.value = validReffs[0]
   }
-  ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff })
+  ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff.value })
 
-  const currentIndex = validReffs.findIndex((m) => m === usedReff)
+  const currentIndex = validReffs.findIndex((m) => m === usedReff.value)
   prevId.value = currentIndex > 0 ? validReffs[currentIndex - 1] : null
   nextId.value = currentIndex + 1 < validReffs.length ? validReffs[currentIndex + 1] : null
 
@@ -144,9 +144,9 @@ if (openText || projectMember) {
         return 'assets/source/epidoc.sef.json'
     }
   }
-  const { data } = await useAsyncData(`document${props.urn}ref${usedReff}`, () =>
+  const { data } = await useAsyncData(`document${props.urn}ref${usedReff.value}`, () =>
     $fetch('/api/dts/document', {
-      body: { id: props.urn, ref: usedReff, xsl: xslPath() },
+      body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
       method: 'POST'
     })
   )
