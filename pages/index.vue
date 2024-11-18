@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { loggedIn, fetch, user } = useUserSession()
 await fetch()
 const searchTerm = ref('')

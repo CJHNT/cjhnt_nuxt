@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import './assets/main.css'
 // const theme = ref('light')
 // function toggleTheme() {

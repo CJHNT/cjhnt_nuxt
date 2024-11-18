@@ -6,22 +6,10 @@ export default defineVitestConfig({
   // any custom Vitest config you require
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'nuxt',
     exclude: [...configDefaults.exclude, 'e2e/*'],
     root: fileURLToPath(new URL('./', import.meta.url)),
-    setupFiles: ['./tests/unit/setup.ts'],
-    server: {
-      deps: {
-        inline: ['vuetify']
-      }
-    },
-    environmentOptions: {
-      nuxt: {
-        domEnvironment: 'jsdom',
-        rootDir: fileURLToPath(new URL('./', import.meta.url)),
-        overrides: {}
-      }
-    }
+    setupFiles: ['./tests/unit/setup.ts']
   }
 })
 
