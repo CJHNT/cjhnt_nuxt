@@ -4,7 +4,7 @@
     <xsl:output omit-xml-declaration="yes" indent="yes" method="html"/>
     
     <xsl:template match="/">
-        <xsl:for-each select="//t:div[@type='textpart'][t:p or t:head]">
+        <xsl:for-each select="//t:div[@type='textpart'][t:p or t:head or t:lg]">
             <xsl:variable name="citStrings">
                 <xsl:for-each select="ancestor::t:div[@type='textpart']">
                     <xsl:value-of select="@n"/><xsl:text>.</xsl:text>
@@ -36,6 +36,17 @@
                                     </xsl:choose>
                                 </xsl:for-each>
                             </span>
+                        </xsl:when>
+                        <xsl:when test="local-name() = 'lg'">
+                            <xsl:element name="ol">
+                                <xsl:apply-templates select="@urn" />
+                                <xsl:for-each select="node()">
+                                    <xsl:choose>
+                                        <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                                        <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:for-each>
+                            </xsl:element>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:for-each>
@@ -79,6 +90,7 @@
         <xsl:element name="li">
             <xsl:apply-templates select="@urn" />
             <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
+            <xsl:attribute name="class">text-line</xsl:attribute>
             <xsl:for-each select="node()">
                 <xsl:choose>
                     <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>

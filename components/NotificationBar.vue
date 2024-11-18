@@ -1,8 +1,10 @@
-<script setup>
-const props = defineProps({
-  notification: { type: Object, required: true }
-})
-defineEmits(['closeNotification'])
+<script setup lang="ts">
+const props = defineProps<{
+  notification: GlobalNotification
+}>()
+defineEmits<{
+  closeNotification: []
+}>()
 </script>
 
 <template>

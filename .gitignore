@@ -26,3 +26,6 @@ service-account.json
 
 # Database
 database.sqlite
+
+# Testing Coverage
+coverage/

@@ -1,0 +1,225 @@
+{
+  "@id": "https://cjhnt-info.saw-leipzig.de/@search?portal_type=News+Item&portal_type=Event&path.query=en",
+  "items": [
+    {
+      "@id": "https://cjhnt-info.saw-leipzig.de/en/current-news/the-first-six-months",
+      "@type": "News Item",
+      "description": "Take a look at what we achieved in the first six months.",
+      "image_field": "image",
+      "image_scales": {
+        "image": [
+          {
+            "content-type": "image/jpeg",
+            "download": "@@images/image-4624-4ca72cb39eb91889a9407aa2b9519f8f.jpeg",
+            "filename": "Matt beim Arbeiten_1_NOe.jpg",
+            "height": 3472,
+            "scales": {
+              "great": {
+                "download": "@@images/image-1200-0281d699e9a5b903d5e2f2d1ee2ae317.jpeg",
+                "height": 901,
+                "width": 1200
+              },
+              "huge": {
+                "download": "@@images/image-1600-bc8b5782eba6b7833e94bec66ec7be1e.jpeg",
+                "height": 1201,
+                "width": 1600
+              },
+              "icon": {
+                "download": "@@images/image-32-e167c728387605fe1095e33eb06bac39.jpeg",
+                "height": 24,
+                "width": 32
+              },
+              "large": {
+                "download": "@@images/image-800-08ada15b2fe0f8eaae5e56dbcdd01ea7.jpeg",
+                "height": 600,
+                "width": 800
+              },
+              "larger": {
+                "download": "@@images/image-1000-a336ed95c1e4a6b00608e47a49ec4f31.jpeg",
+                "height": 750,
+                "width": 1000
+              },
+              "mini": {
+                "download": "@@images/image-200-eea2b7a52846bbf861a93dee4a9ec8e8.jpeg",
+                "height": 150,
+                "width": 200
+              },
+              "preview": {
+                "download": "@@images/image-400-8a432cacfb35e034af352dcce45cdfc7.jpeg",
+                "height": 300,
+                "width": 400
+              },
+              "teaser": {
+                "download": "@@images/image-600-3b548b2c4ba301488e93afc157229aea.jpeg",
+                "height": 450,
+                "width": 600
+              },
+              "thumb": {
+                "download": "@@images/image-128-bd23de06c8f9a2af176e189fcfca496b.jpeg",
+                "height": 96,
+                "width": 128
+              },
+              "tile": {
+                "download": "@@images/image-64-b976e96a50fb61c8299435b456dfbd5c.jpeg",
+                "height": 48,
+                "width": 64
+              }
+            },
+            "size": 7612825,
+            "width": 4624
+          }
+        ]
+      },
+      "review_state": "published",
+      "title": "The First Six Months...",
+      "type_title": "News Item"
+    },
+    {
+      "@id": "https://cjhnt-info.saw-leipzig.de/en/current-news/work-conference-2025",
+      "@type": "Event",
+      "description": "In january of 2025 the first work conference of the cjhnt project will take place in Wittenberg.",
+      "image_field": "preview_image",
+      "image_scales": {
+        "preview_image": [
+          {
+            "content-type": "image/png",
+            "download": "@@images/preview_image-2740-9fce5c975d6cf69758aa1d260ea6db2a.png",
+            "filename": "IMG_9949.png",
+            "height": 2055,
+            "scales": {
+              "great": {
+                "download": "@@images/preview_image-1200-47b729d2f0c12a35b03c275aec01d1f1.png",
+                "height": 900,
+                "width": 1200
+              },
+              "huge": {
+                "download": "@@images/preview_image-1600-4d961a3aee0d8d415e6be491e6823fde.png",
+                "height": 1200,
+                "width": 1600
+              },
+              "icon": {
+                "download": "@@images/preview_image-32-3ae815fa521224734ffec39526c30b6f.png",
+                "height": 24,
+                "width": 32
+              },
+              "large": {
+                "download": "@@images/preview_image-800-d17ec04a8fd01ae6b3f49585da443133.png",
+                "height": 600,
+                "width": 800
+              },
+              "larger": {
+                "download": "@@images/preview_image-1000-bdc04f51ceb5f218782cbef7cc43617a.png",
+                "height": 750,
+                "width": 1000
+              },
+              "mini": {
+                "download": "@@images/preview_image-200-090d51fed8a6cbb14aa91b428f6d0298.png",
+                "height": 150,
+                "width": 200
+              },
+              "preview": {
+                "download": "@@images/preview_image-400-630f32c2589bdbd24309b5fff39a3188.png",
+                "height": 300,
+                "width": 400
+              },
+              "teaser": {
+                "download": "@@images/preview_image-600-57fb59c99aee56c519a516c155da58b4.png",
+                "height": 450,
+                "width": 600
+              },
+              "thumb": {
+                "download": "@@images/preview_image-128-b957a7d32d2c3439c85577883d81cdbb.png",
+                "height": 96,
+                "width": 128
+              },
+              "tile": {
+                "download": "@@images/preview_image-64-5ca497e6e7cbdc5cd35fc0acfae31b6e.png",
+                "height": 48,
+                "width": 64
+              }
+            },
+            "size": 7188428,
+            "width": 2740
+          }
+        ]
+      },
+      "review_state": "published",
+      "title": "Work Conference 2025",
+      "type_title": "Event"
+    },
+    {
+      "@id": "https://cjhnt-info.saw-leipzig.de/en/current-news/press-release-on-the-project-launch",
+      "@type": "News Item",
+      "description": "Since April 2024, a research project of the Saxon Academy of Sciences in Leipzig has been dedicated to the complete digital documentation of the testimonies of Hellenistic Judaism and the commentary on the writings of the New Testament in the light of these Jewish traditions. The project is part of the Academies' Program, which is currently the largest long-term research program in the humanities and cultural sciences in the Federal Republic of Germany, funded by the federal and state governments and coordinated by the Union of the German Academies of Sciences and Humanities.",
+      "image_field": "image",
+      "image_scales": {
+        "image": [
+          {
+            "content-type": "image/jpeg",
+            "download": "@@images/image-1600-0bd6688b8d87f2bea64d9c33fa251f68.jpeg",
+            "filename": "image-1600-1c12327e6c92254c7dc2562c5414ece9.jpeg",
+            "height": 1066,
+            "scales": {
+              "great": {
+                "download": "@@images/image-1200-c47366ca93e142775cc5931c411961e6.jpeg",
+                "height": 799,
+                "width": 1200
+              },
+              "huge": {
+                "download": "@@images/image-1600-a4071bbc693692dc16abae4c41ab9e85.jpeg",
+                "height": 1066,
+                "width": 1600
+              },
+              "icon": {
+                "download": "@@images/image-32-7fa03d7c4c5c2300e19d5934287e7115.jpeg",
+                "height": 21,
+                "width": 32
+              },
+              "large": {
+                "download": "@@images/image-800-d44e3e66c6eaf926d626bd522c65f646.jpeg",
+                "height": 533,
+                "width": 800
+              },
+              "larger": {
+                "download": "@@images/image-1000-400310ab04961771a575e7ac44f55698.jpeg",
+                "height": 666,
+                "width": 1000
+              },
+              "mini": {
+                "download": "@@images/image-200-b4e7e81c2dd09a2277547ffa28093d9e.jpeg",
+                "height": 133,
+                "width": 200
+              },
+              "preview": {
+                "download": "@@images/image-400-ff91f49c13123416f579e5bb52074f60.jpeg",
+                "height": 266,
+                "width": 400
+              },
+              "teaser": {
+                "download": "@@images/image-600-07150757ca19758dd1f905dd5ae3b27c.jpeg",
+                "height": 399,
+                "width": 600
+              },
+              "thumb": {
+                "download": "@@images/image-128-bf0e4c83edba928f06f466c02df93819.jpeg",
+                "height": 85,
+                "width": 128
+              },
+              "tile": {
+                "download": "@@images/image-64-5400215684cfb6a5e1b97c452a5b290d.jpeg",
+                "height": 42,
+                "width": 64
+              }
+            },
+            "size": 330396,
+            "width": 1600
+          }
+        ]
+      },
+      "review_state": "published",
+      "title": "Press release on the project launch",
+      "type_title": "News Item"
+    }
+  ],
+  "items_total": 4
+}
