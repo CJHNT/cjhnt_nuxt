@@ -236,9 +236,8 @@ onUnmounted(() => {
                     :value="index"
                     class="text-truncate"
                   >
-                    <NuxtLink
-                      :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
-                      >{{ sibling[3] }}</NuxtLink
+                    <NuxtLink :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
+                      >[{{ sibling[1] }}] {{ sibling[3] }}</NuxtLink
                     >
                   </v-list-item>
                 </v-list>

@@ -171,4 +171,8 @@ div.cjh-Zitaterläuterung p {
 .section-subtitle {
   font-weight: bold;
 }
+
+.text-line {
+  margin-left: 20px;
+}
 </style>

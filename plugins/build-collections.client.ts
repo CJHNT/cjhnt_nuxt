@@ -36,8 +36,11 @@ const primaryTextTabs = [
   {
     title: 'collection.pseudo',
     collections: [{ title: 'collection.pseudo', urn: 'urn:cts:cjhnt:pseudo' }]
+  },
+  {
+    title: 'collection.other',
+    collections: [{ title: 'collection.epigraphic', urn: 'urn:cts:cjhnt:epigraphic' }]
   }
-  // { title: 'collection.other', collections: [] }
 ]
 
 const collListState = {
@@ -95,8 +98,11 @@ const collListState = {
   ],
   'urn:cts:cjhnt:pseudo': [
     { id: 'urn:cts:cjhnt:pseudo', title: '', subCollections: [] as SubCollectionList[] }
+  ],
+  // author_fragments: [],
+  'urn:cts:cjhnt:epigraphic': [
+    { id: 'urn:cts:cjhnt:epigraphic', title: '', subCollections: [] as SubCollectionList[] }
   ]
-  // author_fragments: []
 }
 
 export default defineNuxtPlugin({
