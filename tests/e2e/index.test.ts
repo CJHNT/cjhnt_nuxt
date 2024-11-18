@@ -15,11 +15,7 @@ describe('index page', async () => {
       'The First Six Months...'
     ]
     expect(await locater.count()).toBe(3)
-    expect(await locater.allInnerTexts()).toStrictEqual([
-      'Press release on the project launch',
-      'Work Conference 2025',
-      'The First Six Months...'
-    ])
+    expect(await locater.allInnerTexts()).toStrictEqual(expectedTitles)
     // expect(page.locator('.news-title')).toHaveText(['Press release on the project launch', 'Work Conference 2025', 'The First Six Months...'])
   })
 })
