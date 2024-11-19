@@ -45,32 +45,19 @@ if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPa
     parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-const { data: parentData } = await useAsyncData(parentId, () =>
-  $fetch('/api/dts/collections', {
-    body: { id: parentId },
-    method: 'POST'
-  })
-)
-const siblings = parentData.value.member
+const { textAncestors, collMembers } = await useParentInfo(parentId)
+ancestors.value = [...textAncestors].filter((c) => c.id !== parentId)
+const siblings = collMembers
   .map((m) => {
     const biblio = {
-      de: '',
-      en: ''
-    }
-    if (m['dts:dublincore'] && m['dts:dublincore']['dct:bibliographicCitation']) {
-      if (typeof m['dts:dublincore']['dct:bibliographicCitation'] === 'object') {
-        biblio.de =
-          m['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
-            '@value'
-          ] || m['dts:extensions']['dc:language'][0]['@value']
-        biblio.en =
-          m['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
-            '@value'
-          ] || m['dts:extensions']['dc:language'][0]['@value']
-      } else if (typeof m['dts:dublincore']['dct:bibliographicCitation'] === 'string') {
-        biblio.de = m['dts:dublincore']['dct:bibliographicCitation']
-        biblio.en = m['dts:dublincore']['dct:bibliographicCitation']
-      }
+      de:
+        m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'deu')?.[
+          '@value'
+        ] ?? m['dts:extensions']['dc:language'][0]['@value'],
+      en:
+        m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'eng')?.[
+          '@value'
+        ] ?? m['dts:extensions']['dc:language'][0]['@value']
     }
     return [
       m['@id'],
@@ -81,40 +68,6 @@ const siblings = parentData.value.member
   })
   .filter((c) => c[0] !== props.urn)
   .filter((c) => projectMember || c[2])
-let hasParent = false
-if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
-  if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-    hasParent = parentData.value['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(parentData.value['dts:dublincore']['dct:isPartOf'])) {
-    hasParent = parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
-  }
-}
-while (hasParent) {
-  const parentInfo = await $fetch('/api/dts/collections', {
-    body: { id: hasParent },
-    method: 'POST'
-  })
-  const parentTitle = {
-    de: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
-      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
-      : parentInfo.title,
-    en: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
-      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
-      : parentInfo.title
-  }
-  ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle, disabled: false, ref: '' })
-  if (parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']) {
-    if (typeof parentInfo['dts:dublincore']['dct:isPartOf'] === 'string') {
-      hasParent = parentInfo['dts:dublincore']['dct:isPartOf']
-    } else if (Array.isArray(parentInfo['dts:dublincore']['dct:isPartOf'])) {
-      hasParent = parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
-    } else {
-      hasParent = false
-    }
-  } else {
-    hasParent = false
-  }
-}
 const alertText = ref('')
 const prevId = ref(null)
 const nextId = ref(null)

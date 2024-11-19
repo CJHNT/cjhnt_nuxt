@@ -12,7 +12,7 @@ interface DtsExtensions {
 }
 
 interface DtsDublinCore {
-  'dct:bibliographicCitation': string
+  'dct:bibliographicCitation': { '@value': string; '@language': string }[]
   'dct:accessRights'?: 'open' | 'closed'
   'dct:isPartOf': { '@id': string }[]
   'dct:alternative'?: { '@value': string; '@language': string }[]

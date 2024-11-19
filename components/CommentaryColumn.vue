@@ -19,12 +19,14 @@ const { data: textMeta } = await useFetch('/api/dts/collections', {
 })
 
 const docTitle = {
-  de: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-    : textMeta.value.title,
-  en: textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-    ? textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-    : textMeta.value.title
+  de:
+    textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.[
+      '@value'
+    ] ?? textMeta.value.title,
+  en:
+    textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.[
+      '@value'
+    ] ?? textMeta.value.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
 if (textMeta.value['dts:dublincore'] && textMeta.value['dts:dublincore']['dct:isPartOf']) {
@@ -34,94 +36,37 @@ if (textMeta.value['dts:dublincore'] && textMeta.value['dts:dublincore']['dct:is
     parentId = textMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-const { data: parentData } = await useFetch('/api/dts/collections', {
-  body: { id: parentId },
-  method: 'POST'
-})
-const parentTitle = {
-  de: parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
-    ? parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
-    : parentData.value.title,
-  en: parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
-    ? parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
-    : parentData.value.title
-}
-ancestors.value.unshift({
-  id: parentData.value['@id'],
-  title: parentTitle,
-  disabled: false,
-  ref: ''
-})
-let hasParent = false
-if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
-  if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-    hasParent = parentData.value['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(parentData.value['dts:dublincore']['dct:isPartOf'])) {
-    hasParent = parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
-  }
-}
-while (hasParent) {
-  const parentInfo = await $fetch('/api/dts/collections', {
-    body: { id: hasParent },
-    method: 'POST'
-  })
-  const parentTitle = {
-    de: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')
-      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')['@value']
-      : parentInfo.title,
-    en: parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')
-      ? parentInfo['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')['@value']
-      : parentInfo.title
-  }
-  ancestors.value.unshift({ id: parentInfo['@id'], title: parentTitle, disabled: false, ref: '' })
-  if (parentInfo['dts:dublincore'] && parentInfo['dts:dublincore']['dct:isPartOf']) {
-    if (typeof parentInfo['dts:dublincore']['dct:isPartOf'] === 'string') {
-      hasParent = parentInfo['dts:dublincore']['dct:isPartOf']
-    } else if (Array.isArray(parentInfo['dts:dublincore']['dct:isPartOf'])) {
-      hasParent = parentInfo['dts:dublincore']['dct:isPartOf'][0]['@id']
-    } else {
-      hasParent = false
-    }
-  } else {
-    hasParent = false
-  }
-}
-ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: '' })
+const { textAncestors, collMembers } = await useParentInfo(parentId)
+ancestors.value = [...textAncestors, { id: props.urn, title: docTitle, disabled: true, ref: '' }]
 allAncestors.value.push(ancestors.value)
 
 const citation = {
   de:
-    textMeta.value['dts:dublincore'] &&
     textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
       (e) => e['@language'] === 'deu'
-    )
-      ? textMeta.value['dts:dublincore'] &&
-        textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-          (e) => e['@language'] === 'deu'
-        )['@value']
-      : '',
-  en:
-    textMeta.value['dts:dublincore'] &&
+    )['@value'] ??
     textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
       (e) => e['@language'] === 'eng'
-    )
-      ? textMeta.value['dts:dublincore'] &&
-        textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-          (e) => e['@language'] === 'eng'
-        )['@value']
-      : ''
+    )['@value'] ??
+    '',
+  en:
+    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+      (e) => e['@language'] === 'eng'
+    )['@value'] ??
+    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
+      (e) => e['@language'] === 'deu'
+    )['@value'] ??
+    ''
 }
-const collMembers = [...parentData.value.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
 const memberItems = collMembers
   .filter((m) => m['@id'] !== props.urn)
   .map((m) => {
     const docTitle = {
-      de: m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-        ? m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-        : m.title,
-      en: m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-        ? m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-        : m.title
+      de:
+        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+        m.title,
+      en:
+        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ?? m.title
     }
     const returnValue = {
       value: m['@id'],
