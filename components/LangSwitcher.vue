@@ -19,6 +19,16 @@ async function setUserLocale(newLocale) {
 </script>
 
 <template>
-  <v-btn v-if="locale === 'de'" @click.prevent.stop="setUserLocale('en')">en</v-btn>
-  <v-btn v-if="locale === 'en'" @click.prevent.stop="setUserLocale('de')">de</v-btn>
+  <v-btn
+    v-if="locale === 'de'"
+    data-testid="lang-switcher"
+    @click.prevent.stop="setUserLocale('en')"
+    >en</v-btn
+  >
+  <v-btn
+    v-if="locale === 'en'"
+    data-testid="lang-switcher"
+    @click.prevent.stop="setUserLocale('de')"
+    >de</v-btn
+  >
 </template>

@@ -1,0 +1,18 @@
+[
+  {
+    "@context": {
+      "hydra": "https://www.w3.org/ns/hydra/core#",
+      "@vocab": "https://w3id.org/dts/api#"
+    },
+    "level": 1,
+    "passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_001_002{&ref}{&start}{&end}",
+    "@id": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_001_002&level=1&groupBy=1",
+    "hydra:member": [
+      {
+        "ref": "1"
+      }
+    ],
+    "citeDepth": 1,
+    "citeType": "section"
+  }
+]

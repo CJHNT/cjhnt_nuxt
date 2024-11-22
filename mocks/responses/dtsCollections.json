@@ -1,126 +1,3739 @@
-{
-  "@id": "wissen_texts",
-  "@type": "Collection",
-  "title": "Knowledge Base",
-  "totalItems": 3,
-  "dts:extensions": {
-    "dc:title": [
+[
+  {
+    "@id": "wissen_texts",
+    "@type": "Collection",
+    "title": "Knowledge Base",
+    "totalItems": 3,
+    "dts:extensions": {
+      "dc:title": [
+        {
+          "@value": "Wissen",
+          "@language": "deu"
+        },
+        {
+          "@value": "Knowledge Base",
+          "@language": "eng"
+        }
+      ],
+      "dc:type": "cts:textgroup"
+    },
+    "dts:dublincore": {
+      "dct:alternative": "Info"
+    },
+    "member": [
       {
-        "@value": "Wissen",
-        "@language": "deu"
+        "@id": "urn:cts:cjhnt:info.sapsal.text",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.sapsal.text",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.sapsal.text",
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "information",
+          "dc:title": [
+            {
+              "@value": "Die Sapientia Salomonis",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "The Wisdom of Solomon",
+              "@language": "eng"
+            }
+          ],
+          "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License."
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": "wissen_texts",
+          "dct:accessRights": "open"
+        }
       },
       {
-        "@value": "Knowledge Base",
-        "@language": "eng"
+        "@id": "urn:cts:cjhnt:info.lae.text",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.lae.text",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.lae.text",
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "The Life of Adam and Eve in Greek",
+              "@language": "eng"
+            },
+            {
+              "@value": "Das griechische Leben Adams und Evas",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "information",
+          "dc:format": "application/tei+xml",
+          "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": "wissen_texts",
+          "dct:accessRights": "open"
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:info.sir.text",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.sir.text",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.sir.text",
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "Jesus Sirach",
+              "@language": "eng"
+            },
+            {
+              "@value": "Jesus Sirach",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "information",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License."
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": "wissen_texts",
+          "dct:accessRights": "open"
+        }
       }
     ],
-    "dc:type": "cts:textgroup"
-  },
-  "dts:dublincore": {
-    "dct:alternative": "Info"
-  },
-  "member": [
-    {
-      "@id": "urn:cts:cjhnt:info.sapsal.text",
-      "@type": "Resource",
-      "title": "None",
-      "totalItems": 0,
-      "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.sapsal.text",
-      "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.sapsal.text",
-      "dts:extensions": {
-        "dc:language": "mul",
-        "dc:format": "application/tei+xml",
-        "dc:type": "information",
-        "dc:title": [
-          {
-            "@value": "Die Sapientia Salomonis",
-            "@language": "deu"
-          },
-          {
-            "@value": "None",
-            "@language": "mul"
-          },
-          {
-            "@value": "The Wisdom of Solomon",
-            "@language": "eng"
-          }
-        ],
-        "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License."
-      },
-      "dts:dublincore": {
-        "dct:isPartOf": "wissen_texts",
-        "dct:accessRights": "open"
-      }
-    },
-    {
-      "@id": "urn:cts:cjhnt:info.lae.text",
-      "@type": "Resource",
-      "title": "None",
-      "totalItems": 0,
-      "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.lae.text",
-      "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.lae.text",
-      "dts:extensions": {
-        "dc:title": [
-          {
-            "@value": "None",
-            "@language": "mul"
-          },
-          {
-            "@value": "The Life of Adam and Eve in Greek",
-            "@language": "eng"
-          },
-          {
-            "@value": "Das griechische Leben Adams und Evas",
-            "@language": "deu"
-          }
-        ],
-        "dc:type": "information",
-        "dc:format": "application/tei+xml",
-        "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
-        "dc:language": "mul"
-      },
-      "dts:dublincore": {
-        "dct:isPartOf": "wissen_texts",
-        "dct:accessRights": "open"
-      }
-    },
-    {
-      "@id": "urn:cts:cjhnt:info.sir.text",
-      "@type": "Resource",
-      "title": "None",
-      "totalItems": 0,
-      "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:info.sir.text",
-      "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:info.sir.text",
-      "dts:extensions": {
-        "dc:title": [
-          {
-            "@value": "None",
-            "@language": "mul"
-          },
-          {
-            "@value": "Jesus Sirach",
-            "@language": "eng"
-          },
-          {
-            "@value": "Jesus Sirach",
-            "@language": "deu"
-          }
-        ],
-        "dc:type": "information",
-        "dc:language": "mul",
-        "dc:format": "application/tei+xml",
-        "dc:rights": "Distributed under a Creative Commons Attribution-ShareAlike 4.0 International License."
-      },
-      "dts:dublincore": {
-        "dct:isPartOf": "wissen_texts",
-        "dct:accessRights": "open"
-      }
+    "@context": {
+      "dct": "http://purl.org/dc/terms/",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "dts": "https://w3id.org/dts/api#",
+      "@vocab": "https://www.w3.org/ns/hydra/core#"
     }
-  ],
-  "@context": {
-    "dct": "http://purl.org/dc/terms/",
-    "dc": "http://purl.org/dc/elements/1.1/",
-    "dts": "https://w3id.org/dts/api#",
-    "@vocab": "https://www.w3.org/ns/hydra/core#"
+  },
+  {
+    "@id": "urn:cts:cjhnt:commentary.1tim",
+    "@type": "Collection",
+    "title": "Kommentar zu 1. Timotheus",
+    "totalItems": 77,
+    "dts:extensions": {
+      "dc:type": "commentary",
+      "dc:contributor": ["Paulus Enke", "Jens Herzer"],
+      "dc:title": [
+        {
+          "@value": "Commentary on 1 Timothy",
+          "@language": "eng"
+        },
+        {
+          "@value": "Kommentar zu 1. Timotheus",
+          "@language": "deu"
+        }
+      ]
+    },
+    "dts:dublincore": {
+      "dct:alternative": [
+        {
+          "@value": "1Tim",
+          "@language": "deu"
+        },
+        {
+          "@value": "1 Tim",
+          "@language": "eng"
+        }
+      ],
+      "dct:isPartOf": [
+        {
+          "@id": "urn:cts:cjhnt:commentary"
+        }
+      ]
+    },
+    "member": [
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_005bis6",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_005bis6",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_005bis6",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,2/1 Timotheus, das wahre Kind im Glauben",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,2/1 Timotheus, das wahre Kind im Glauben",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,5-6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_005bis6]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:5-6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_005bis6]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_001_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_001_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_001_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,1/2 The Messiah as ἐλπίς",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,1/2 Der Messias als ἐλπίς",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_002]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_002]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_015",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_015",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_015",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,15 [Überschrift ἀποδοχῆς ἄξιος]",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,15 [Überschrift ἀποδοχῆς ἄξιος]",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_015]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_015]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_011",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_011",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_011",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "6,11 Der Mensch Gottes",
+              "@language": "eng"
+            },
+            {
+              "@value": "6,11 Der Mensch Gottes",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,11\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_011]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:11\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_011]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_004_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_004_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_004_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,4/2 Kritik an Mythen und Genealogien (μῦθοι καὶ\n                γενεαλογίαι)",
+              "@language": "deu"
+            },
+            {
+              "@value": "1,4/2 Kritik an Mythen und Genealogien (μῦθοι καὶ\n                γενεαλογίαι)",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,4/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:4/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_002]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_012",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_012",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_012",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "4,12 Das vorbildliche Leben",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,12 Das vorbildliche Leben",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_012]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_012]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_007",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_007",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_007",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,7 Der Lehrer (διδάσκαλος)",
+              "@language": "eng"
+            },
+            {
+              "@value": "2,7 Der Lehrer (διδάσκαλος)",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_007]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_007]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_006",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_006",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_006",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "5,6 Tod durch Luxus",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,6 Tod durch Luxus",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_006]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_006]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_007bis8",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_007bis8",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_007bis8",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "4,7–8 Die Einübung der Frömmigkeit und ihr Nutzen",
+              "@language": "eng"
+            },
+            {
+              "@value": "4,7–8 Die Einübung der Frömmigkeit und ihr Nutzen",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:7-8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_007bis8]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,7-8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_007bis8]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_016_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_016_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_016_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,16/1 Die εὐσέβεια",
+              "@language": "deu"
+            },
+            {
+              "@value": "3,16/1 Die εὐσέβεια",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,16/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:16/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_001]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_002bis7",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_002bis7",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_002bis7",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,2-7 Person und Lebensführung des ἐπίσκοπος",
+              "@language": "eng"
+            },
+            {
+              "@value": "3,2-7 Person und Lebensführung des ἐπίσκοπος",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:2-7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_002bis7]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,2-7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_002bis7]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_005",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_005",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_005",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,5 Der Mittler (μεσίτης)",
+              "@language": "deu"
+            },
+            {
+              "@value": "2,5 Der Mittler (μεσίτης)",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_005]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_005]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_006bis8",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_006bis8",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_006bis8",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "6,5–6 Verwirrte Menschen glauben an das Geschäft mit der Frömmigkeit",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "6,5–6 Verwirrte Menschen glauben an das Geschäft mit der Frömmigkeit",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,6-8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_006bis8]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:6-8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_006bis8]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_018",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_018",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_018",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "6,18 [Überschrift zu κοινωνικός]",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "6,18 [Überschrift zu κοινωνικός]",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_018]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_018]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_019",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_019",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_019",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "6,19 Eine gute Grundlage für die Zukunft und zum wahren Leben",
+              "@language": "eng"
+            },
+            {
+              "@value": "6,19 Eine gute Grundlage für die Zukunft und zum wahren Leben",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_019]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_019]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_016_004",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_016_004",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_016_004",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "3,16/4 Der Verkündiger Gottes",
+              "@language": "deu"
+            },
+            {
+              "@value": "3,16/4 Der Verkündiger Gottes",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:16/4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_004]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,16/4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_004]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_011bis14",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_011bis14",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_011bis14",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "5,11–14 Die Stellung jüngerer Witwen",
+              "@language": "deu"
+            },
+            {
+              "@value": "5,11–14 Die Stellung jüngerer Witwen",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:11-14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_011bis14]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,11-14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_011bis14]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_016_005",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_016_005",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_016_005",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,16/5 Die Aufnahme in den Bereich Gottes",
+              "@language": "deu"
+            },
+            {
+              "@value": "3,16/5 Die Aufnahme in den Bereich Gottes",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,16/5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_005]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:16/5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_005]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_017",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_017",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_017",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "6,17 Gott gibt reichlich zum Genuss (ἀπόλαυσις)",
+              "@language": "deu"
+            },
+            {
+              "@value": "6,17 Gott gibt reichlich zum Genuss (ἀπόλαυσις)",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,17\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_017]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:17\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_017]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_012",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_012",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_012",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,12 Die Einsetzung in den Dienst (διακονία)",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,12 Die Einsetzung in den Dienst (διακονία)",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_012]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_012]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_005",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_005",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_005",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,5 Die Heiligung",
+              "@language": "deu"
+            },
+            {
+              "@value": "4,5 Die Heiligung",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_005]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_005]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "6,2 Das Bemühen um gute Taten",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "6,2 Das Bemühen um gute Taten",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_002]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_002]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "4,1 Die bösen Geister ",
+              "@language": "deu"
+            },
+            {
+              "@value": "4,1 Die bösen Geister ",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_001]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_001]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_013",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_013",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_013",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "4,13 Das (Vor-) Lesen aus der Schrift",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,13 Das (Vor-) Lesen aus der Schrift",
+              "@language": "eng"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_013]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_013]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_014",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_014",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_014",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "6,14 Das Erscheinen des Herrn",
+              "@language": "deu"
+            },
+            {
+              "@value": "6,14 Das Erscheinen des Herrn",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_014]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_014]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_016_003",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_016_003",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_016_003",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "3,16/3 Die Gerechtsprechung",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,16/3 Die Gerechtsprechung",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:16/3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_003]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,16/3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_003]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_019",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_019",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_019",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "1,19 Der Schiffbruch des (falschen) Glaubens",
+              "@language": "deu"
+            },
+            {
+              "@value": "1,19 Der Schiffbruch des (falschen) Glaubens",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_019]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_019]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_006",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_006",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_006",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,6 Die Zuwendung zum Falschen",
+              "@language": "deu"
+            },
+            {
+              "@value": "1,6 Die Zuwendung zum Falschen",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_006]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_006]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_024bis25",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_024bis25",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_024bis25",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "5,14",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,14",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,24-25\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_024bis25]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:24-25\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_024bis25]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_003",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_003",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_003",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,3 Enthaltsamkeit oder Genuss der Schöpfung?",
+              "@language": "deu"
+            },
+            {
+              "@value": "4,3 Enthaltsamkeit oder Genuss der Schöpfung?",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_003]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_003]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_004",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_004",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_004",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "2,4 Gottes guter Wille zum Wohle der Menschen",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,4 Gottes guter Wille zum Wohle der Menschen",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_004]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_004]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_017bis18",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_017bis18",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_017bis18",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,17–18 Die besondere Ehre der Ältesten",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,17–18 Die besondere Ehre der Ältesten",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,17-18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_017bis18]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:17-18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_017bis18]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_005_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_005_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_005_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "1,5/1 Liebe als Ziel der Ermahnung",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,5/1 Liebe als Ziel der Ermahnung",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,5/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_005_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:5/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_005_001]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_013",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_013",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_013",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "1,13 Unwissenheit und Gnade",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,13 Unwissenheit und Gnade",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_013]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_013]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_001bis2",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_001bis2",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_001bis2",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,1–2 Täuschung, Verwirrung und Abfall der Gläubigen\t",
+              "@language": "deu"
+            },
+            {
+              "@value": "4,1–2 Täuschung, Verwirrung und Abfall der Gläubigen\t",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:1-2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_001bis2]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,1-2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_001bis2]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_015_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_015_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_015_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "2,15/2 Die bleibende Heiligkeit (ἁγιασμός)",
+              "@language": "eng"
+            },
+            {
+              "@value": "2,15/2 Die bleibende Heiligkeit (ἁγιασμός)",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,15/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_015_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:15/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_015_002]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_001bis2",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_001bis2",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_001bis2",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,1–2 Fürbitte (nicht nur) für Herrscher",
+              "@language": "deu"
+            },
+            {
+              "@value": "2,1–2 Fürbitte (nicht nur) für Herrscher",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:1-2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_001bis2]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,1-2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_001bis2]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_006",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_006",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_006",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "2,6 Das Lösegeld (ἀντίλυτρον)",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,6 Das Lösegeld (ἀντίλυτρον)",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_006]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:6\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_006]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_001_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_001_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_001_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,1/1 Das Streben nach Höherem",
+              "@language": "eng"
+            },
+            {
+              "@value": "3,1/1 Das Streben nach Höherem",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:1/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_001_001]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,1/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_001_001]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_001_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_001_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_001_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "1,1/1 Gott, der Retter: θεός σωτήρ",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,1/1 Gott, der Retter: θεός σωτήρ",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:1/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_001]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,1/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_001]",
+              "@language": "deu"
+            }
+          ],
+          "dct:accessRights": "open",
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_014bis16",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_014bis16",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_014bis16",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,14–16 Die übergroße Gnade des Herrn",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,14–16 Die übergroße Gnade des Herrn",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:14-16\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_014bis16]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,14-16\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_014bis16]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "2,2 Das ruhige Leben in Frömmigkeit und Würde",
+              "@language": "deu"
+            },
+            {
+              "@value": "2,2 Das ruhige Leben in Frömmigkeit und Würde",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_002]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_013",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_013",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_013",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,13 Die Erschaffung von Adam und Eva",
+              "@language": "eng"
+            },
+            {
+              "@value": "2,13 Die Erschaffung von Adam und Eva",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_013]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_013]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_002_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_002_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_002_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "1,2/2 Zur dreiteiligen Grußformel χάρις ἔλεος εἰρήνη ",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,2/2 Zur dreiteiligen Grußformel χάρις ἔλεος εἰρήνη ",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:2/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_002_002]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,2/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_002_002]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_001_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_001_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_001_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "3,1/2 Amt und Aufgabe des ἐπίσκοπος",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,1/2 Amt und Aufgabe des ἐπίσκοπος",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_001_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_001_002]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_018",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_018",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_018",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "1,18 Der gute Kampf",
+              "@language": "deu"
+            },
+            {
+              "@value": "1,18 Der gute Kampf",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_018]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,18\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_018]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_004_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_004_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_004_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,4/1 Endlose (ἀπέραντος) Mythen und Genealogien",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,4/1 Endlose (ἀπέραντος) Mythen und Genealogien",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,4/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:4/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_001]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_004_003",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_004_003",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_004_003",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,4/3 Die οἰκονομία Gottes",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,4/3 Die οἰκονομία Gottes",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:4/3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_003]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,4/3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_004_003]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_002_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_002_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_002_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,2/1 Timotheus, das wahre Kind im Glauben",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,2/1 Timotheus, das wahre Kind im Glauben",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,2/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_002_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:2/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_002_001]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_011bis12",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_011bis12",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_011bis12",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "2,11–12 Die Unterordnung der Frau",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,11–12 Die Unterordnung der Frau",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,11-12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_011bis12]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:11-12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_011bis12]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_002bis13",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_002bis13",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_002bis13",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "3,2–13 Tugendkataloge",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,2–13 Tugendkataloge",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,2-13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_002bis13]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:2-13\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_002bis13]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_005",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_005",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_005",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "5,5 Zur Wendung „Tag und Nacht“ (νυκτὸς καὶ ἡμέρας)",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,5 Zur Wendung „Tag und Nacht“ (νυκτὸς καὶ ἡμέρας)",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:accessRights": "open",
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_005]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,5\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_005]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_003",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_003",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_003",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,3 Die andere/falsche Lehre (ἑτεροδιδασκαλεῖν)",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,3 Die andere/falsche Lehre (ἑτεροδιδασκαλεῖν)",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_003]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:3\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_003]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_020",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_020",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_020",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,20 (Gottes-) Lästerung",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,20 (Gottes-) Lästerung",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_020]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_020]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_015",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_015",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_015",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,15 Der individuelle Fortschritt",
+              "@language": "eng"
+            },
+            {
+              "@value": "4,15 Der individuelle Fortschritt",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_015]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_015]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_015",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_015",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_015",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,15 Das Haus Gottes",
+              "@language": "eng"
+            },
+            {
+              "@value": "3,15 Das Haus Gottes",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_015]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,15\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_015]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_011",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_011",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_011",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,11 Die vollkommene Seligkeit Gottes",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "1,11 Die vollkommene Seligkeit Gottes",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:11\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_011]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,11\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_011]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.003_016_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.003_016_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.003_016_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "3,16/2 Das Geheimnis (μυστήριον)",
+              "@language": "deu"
+            },
+            {
+              "@value": "3,16/2 Das Geheimnis (μυστήριον)",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 3,16/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 3:16/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.003_016_002]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_014",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_014",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_014",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,14 Evas Schuld ",
+              "@language": "deu"
+            },
+            {
+              "@value": "2,14 Evas Schuld ",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_014]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_014]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_012",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_012",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_012",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "6,12 Der gute Kampf",
+              "@language": "eng"
+            },
+            {
+              "@value": "6,12 Der gute Kampf",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_012]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,12\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_012]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,1 Die Ermahnung Älterer",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,1 Die Ermahnung Älterer",
+              "@language": "deu"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_001]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_020",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_020",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_020",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "6,20 Bewahre das Anvertraute!",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "6,20 Bewahre das Anvertraute!",
+              "@language": "eng"
+            }
+          ]
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_020]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_020]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_005_002",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_005_002",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_005_002",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "1,5/2 Reines Herz, gutes Gewissen, ungeheuchelter Glaube",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,5/2 Reines Herz, gutes Gewissen, ungeheuchelter Glaube",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,5/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_005_002]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:5/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_005_002]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.001_008bis10",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_008bis10",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_008bis10",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "1,8–10 Das gute Gesetz für die Gesetzlosen",
+              "@language": "eng"
+            },
+            {
+              "@value": "1,8–10 Das gute Gesetz für die Gesetzlosen",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:8-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_008bis10]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,8-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_008bis10]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_004",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_004",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_004",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "6,4 Die Krankheit des Streits und ihre Folgen",
+              "@language": "eng"
+            },
+            {
+              "@value": "6,4 Die Krankheit des Streits und ihre Folgen",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_004]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_004]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_019",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_019",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_019",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,19 Die Klage gegen einen Ältesten",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,19 Die Klage gegen einen Ältesten",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_019]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,19\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_019]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_015bis16",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_015bis16",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_015bis16",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "6,15–16 Ehre und Macht dem alleinigen Herrscher, dem König der Könige",
+              "@language": "deu"
+            },
+            {
+              "@value": "6,15–16 Ehre und Macht dem alleinigen Herrscher, dem König der Könige",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:15-16\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_015bis16]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,15-16\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_015bis16]",
+              "@language": "deu"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_007",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_007",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_007",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "4,7 Die Zurückweisung profaner Mythen",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,7 Die Zurückweisung profaner Mythen",
+              "@language": "deu"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_007]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,7\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_007]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_009bis10",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_009bis10",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_009bis10",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "2,9–10 Schmuck und Kleidung der Frauen ",
+              "@language": "eng"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,9–10 Schmuck und Kleidung der Frauen ",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,9-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_009bis10]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:9-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_009bis10]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_014",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_014",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_014",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,14 Die Verleihung des χάρισμα",
+              "@language": "eng"
+            },
+            {
+              "@value": "4,14 Die Verleihung des χάρισμα",
+              "@language": "deu"
+            }
+          ],
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_014]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:14\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_014]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_008",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_008",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_008",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,8 Die Gebetshaltung der Männer",
+              "@language": "deu"
+            },
+            {
+              "@value": "2,8 Die Gebetshaltung der Männer",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_008]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:8\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_008]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.004_010",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.004_010",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.004_010",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:title": [
+            {
+              "@value": "4,10 [Überschrift zu ἀγωνίζομαι]",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "4,10 [Überschrift zu ἀγωνίζομαι]",
+              "@language": "eng"
+            }
+          ],
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 4:10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_010]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 4,10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.004_010]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.002_015_001",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.002_015_001",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.002_015_001",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "2,15/1 Das rechte Sexualleben",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "2,15/1 Das rechte Sexualleben",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:format": "application/tei+xml",
+          "dc:type": "commentary"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 2,15/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_015_001]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 2:15/1\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.002_015_001]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_020",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_020",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_020",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,20 Die öffentliche Zurechtweisung ",
+              "@language": "deu"
+            },
+            {
+              "@value": "5,20 Die öffentliche Zurechtweisung ",
+              "@language": "eng"
+            }
+          ],
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml",
+          "dc:language": "mul"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_020]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,20\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_020]",
+              "@language": "deu"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_021",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_021",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_021",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "5,21 Die Engel als Zeugen",
+              "@language": "eng"
+            },
+            {
+              "@value": "5,21 Die Engel als Zeugen",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,21\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_021]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:21\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_021]",
+              "@language": "eng"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.006_009bis10",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.006_009bis10",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.006_009bis10",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:type": "commentary",
+          "dc:language": "mul",
+          "dc:title": [
+            {
+              "@value": "6,9–10 Verderben durch Reichtum und Habsucht",
+              "@language": "eng"
+            },
+            {
+              "@value": "6,9–10 Verderben durch Reichtum und Habsucht",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            }
+          ],
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 6,9-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_009bis10]",
+              "@language": "deu"
+            },
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 6:9-10\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.006_009bis10]",
+              "@language": "eng"
+            }
+          ],
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ]
+        }
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim.005_004",
+        "@type": "Resource",
+        "title": "None",
+        "totalItems": 0,
+        "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.005_004",
+        "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.005_004",
+        "dts:citeDepth": 1,
+        "dts:extensions": {
+          "dc:title": [
+            {
+              "@value": "5,4 [Überschrift zu πρόγονος]",
+              "@language": "deu"
+            },
+            {
+              "@value": "None",
+              "@language": "mul"
+            },
+            {
+              "@value": "5,4 [Überschrift zu πρόγονος]",
+              "@language": "eng"
+            }
+          ],
+          "dc:language": "mul",
+          "dc:type": "commentary",
+          "dc:format": "application/tei+xml"
+        },
+        "dts:dublincore": {
+          "dct:isPartOf": [
+            {
+              "@id": "urn:cts:cjhnt:commentary.1tim"
+            }
+          ],
+          "dct:bibliographicCitation": [
+            {
+              "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 5:4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_004]",
+              "@language": "eng"
+            },
+            {
+              "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 5,4\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.005_004]",
+              "@language": "deu"
+            }
+          ]
+        }
+      }
+    ],
+    "@context": {
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "dct": "http://purl.org/dc/terms/",
+      "dts": "https://w3id.org/dts/api#",
+      "@vocab": "https://www.w3.org/ns/hydra/core#"
+    }
+  },
+  {
+    "@id": "urn:cts:cjhnt:commentary",
+    "@type": "Collection",
+    "title": "Commentaries",
+    "totalItems": 3,
+    "dts:extensions": {
+      "dc:title": [
+        {
+          "@value": "Kommentare",
+          "@language": "deu"
+        },
+        {
+          "@value": "Commentaries",
+          "@language": "eng"
+        }
+      ],
+      "dc:type": "cts:textgroup"
+    },
+    "dts:dublincore": {
+      "dct:alternative": "Commentaries"
+    },
+    "member": [
+      {
+        "@id": "urn:cts:cjhnt:commentary.mk",
+        "@type": "Collection",
+        "title": "Kommentar zu Markus",
+        "totalItems": 9
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1tim",
+        "@type": "Collection",
+        "title": "Kommentar zu 1. Timotheus",
+        "totalItems": 77
+      },
+      {
+        "@id": "urn:cts:cjhnt:commentary.1kor",
+        "@type": "Collection",
+        "title": "Kommentar zu 1. Korintherbrief",
+        "totalItems": 1
+      }
+    ],
+    "@context": {
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "dct": "http://purl.org/dc/terms/",
+      "dts": "https://w3id.org/dts/api#",
+      "@vocab": "https://www.w3.org/ns/hydra/core#"
+    }
+  },
+  {
+    "@id": "urn:cts:cjhnt:commentary.1tim.001_001_002",
+    "@type": "Resource",
+    "title": "None",
+    "totalItems": 0,
+    "dts:passage": "/api/dts/document?id=urn:cts:cjhnt:commentary.1tim.001_001_002",
+    "dts:references": "/api/dts/navigation?id=urn:cts:cjhnt:commentary.1tim.001_001_002",
+    "dts:citeDepth": 1,
+    "dts:extensions": {
+      "dc:title": [
+        {
+          "@value": "None",
+          "@language": "mul"
+        },
+        {
+          "@value": "1,1/2 The Messiah as ἐλπίς",
+          "@language": "eng"
+        },
+        {
+          "@value": "1,1/2 Der Messias als ἐλπίς",
+          "@language": "deu"
+        }
+      ],
+      "dc:language": "mul",
+      "dc:type": "commentary",
+      "dc:format": "application/tei+xml"
+    },
+    "dts:dublincore": {
+      "dct:isPartOf": [
+        {
+          "@id": "urn:cts:cjhnt:commentary.1tim"
+        }
+      ],
+      "dct:bibliographicCitation": [
+        {
+          "@value": "Herzer, Jens und Paulus Enke, \"Kommentar zu 1. Timotheus 1,1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_002]",
+          "@language": "deu"
+        },
+        {
+          "@value": "Herzer, Jens and Paulus Enke, \"Commentary on 1 Timothy 1:1/2\", in: Corpus Judaeo-Hellenisticum Novi Testamenti digital, [URL: https://cjhnt.saw-leipzig.de/texts/urn:cts:cjhnt:commentary.1tim.001_001_002]",
+          "@language": "eng"
+        }
+      ]
+    },
+    "@context": {
+      "dct": "http://purl.org/dc/terms/",
+      "dc": "http://purl.org/dc/elements/1.1/",
+      "dts": "https://w3id.org/dts/api#",
+      "@vocab": "https://www.w3.org/ns/hydra/core#"
+    }
   }
-}
+]

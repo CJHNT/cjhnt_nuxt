@@ -13,6 +13,10 @@ export const handlers = [
   }),
   http.post('/api/dts/collections', async ({ request }) => {
     const collId = await request.json()
-    return HttpResponse.json(dtsCollectionsResponse)
+    if (typeof collId === 'object') {
+      const returnJson = dtsCollectionsResponse.find((c) => c['@id'] === collId?.id)
+      return HttpResponse.json(returnJson)
+    }
+    return HttpResponse.json(dtsCollectionsResponse[0])
   })
 ]
