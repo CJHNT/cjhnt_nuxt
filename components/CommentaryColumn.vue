@@ -1,5 +1,5 @@
 <script setup>
-import { parseFromString } from 'dom-parser'
+import parentsAndSiblings from '~/utils/parentsAndSiblings'
 
 const { locale } = useI18n()
 const props = defineProps({
@@ -7,7 +7,7 @@ const props = defineProps({
   reff: { type: String, default: '' },
   index: { type: Number, default: 0 }
 })
-const allAncestors = defineModel({ type: Array })
+const allAncestors = defineModel({ type: Array, default: [] })
 const ancestors = ref([])
 const { data: navReturn } = await useFetch('/api/dts/navigation', {
   body: { id: props.urn },
@@ -36,7 +36,7 @@ if (textMeta.value['dts:dublincore'] && textMeta.value['dts:dublincore']['dct:is
     parentId = textMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-const { textAncestors, collMembers } = await useParentInfo(parentId)
+const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors, { id: props.urn, title: docTitle, disabled: true, ref: '' }]
 allAncestors.value.push(ancestors.value)
 
@@ -85,7 +85,8 @@ const { data: formattedText } = await useFetch('/api/dts/document', {
   body: { id: props.urn, ref: usedReff, xsl: 'assets/source/commentary.sef.json' },
   method: 'POST'
 })
-const domText = parseFromString(formattedText.value)
+const parser = new DOMParser()
+const domText = parser.parseFromString(formattedText.value, 'text/html')
 const { data: ntText } = await useAsyncData('apiNtText', async () => {
   const ntElement = domText.getElementsByClassName('nt-source-text')[0]
   const ntSource = ntElement.getAttribute('source-text')

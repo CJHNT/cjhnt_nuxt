@@ -1,6 +1,7 @@
 <script setup>
 import { allows } from 'nuxt-authorization/utils'
 import { readClosed } from '~/utils/abilities'
+import parentsAndSiblings from '~/utils/parentsAndSiblings'
 
 const { locale } = useI18n()
 const { user } = useUserSession()
@@ -45,7 +46,7 @@ if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPa
     parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
-const { textAncestors, collMembers } = await useParentInfo(parentId)
+const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors].filter((c) => c.id !== parentId)
 const siblings = collMembers
   .map((m) => {
