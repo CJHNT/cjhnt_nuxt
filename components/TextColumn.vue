@@ -91,7 +91,7 @@ if (openText || projectMember) {
         .addNotification({
           type: 'warning',
           // rule disabled because locale is not user-provided input
-          // eslint-disable-next-line security/detect-object-injection
+           
           message: `Reference ${usedReff.value} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs.value[0]}).`
         })
         .then(() => true)

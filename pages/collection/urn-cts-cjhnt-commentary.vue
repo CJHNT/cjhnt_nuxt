@@ -21,7 +21,7 @@ async function goToSubtab(newTab, newId) {
 }
 const existingCommentaries = computed(() =>
   // disabled because b is not user-defined input
-  // eslint-disable-next-line security/detect-object-injection
+   
   ntBookList.value.filter((b) => b in commentaryLists.value && commentaryLists.value[b].length > 0)
 )
 </script>

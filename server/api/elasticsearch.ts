@@ -1,5 +1,5 @@
 // Disabled because no object injection variables come from user input
-/* eslint-disable security/detect-object-injection */
+ 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   let slop = '0'
