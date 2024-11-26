@@ -2,11 +2,11 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 import pluginSecurity from 'eslint-plugin-security'
 
 export default withNuxt({
-  ...pluginSecurity.configs.recommended
+  ...pluginSecurity.configs.recommended,
 
-  // rules: {
-  //   'vue/no-v-html': 'off'
-  // }
+  rules: {
+    'vue/html-self-closing': 'off'
+  }
 })
 // your custom flat configs go here, for example:
 // {
