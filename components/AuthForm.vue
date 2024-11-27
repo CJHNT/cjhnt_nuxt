@@ -16,8 +16,6 @@ const wantsUpdates = ref(false)
 const { t } = useI18n()
 
 function validateEmail() {
-  // warning disabled here because the regex is from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
-   
   const pattern = /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/
   return pattern.test(email.value) || 'Invalid e-mail.'
 }
