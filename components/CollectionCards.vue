@@ -40,12 +40,16 @@ function getImage(urn) {
     <v-col v-for="member in theTexts" :key="member.id" cols="auto">
       <figure>
         <figcaption class="text-caption">{{ member[locale] }}</figcaption>
-        <nuxt-link class="mx-auto" :to="`/collection/${member.id}`" :title="member[locale]">
+        <nuxt-link
+          class="mx-auto"
+          :to="`/collection/${member.id.replaceAll(':', '-')}`"
+          :title="member[locale]"
+        >
           <picture>
-            <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" >
-            <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" >
-            <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" >
-            <img :src="getImage(member.id)" :alt="member[locale]" height="200" >
+            <source media="(max-width: 600px)" :srcset="getImage(member.id)" height="100" />
+            <source media="(max-width: 960px)" :srcset="getImage(member.id)" height="130" />
+            <source media="(max-width: 1280px)" :srcset="getImage(member.id)" height="160" />
+            <img :src="getImage(member.id)" :alt="member[locale]" height="200" />
           </picture>
         </nuxt-link>
       </figure>

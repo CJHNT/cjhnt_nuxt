@@ -114,5 +114,29 @@ export const xmlTexts = [
          </span></seg>
    
    </div>`
+  },
+  {
+    id: 'urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1',
+    xml: `<div class="citation-section" n="title" id="urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1;title"><span class="text-header">
+      
+      <span lemma="" n="w-1">A</span>
+      <span lemma="" n="w-2">TREATISE</span>
+      <span lemma="" n="w-3">ON</span>
+      <span lemma="" n="w-4">THE</span>
+      <span lemma="" n="w-5">ACCOUNT</span>
+      <span lemma="" n="w-6">OF</span>
+      <span lemma="" n="w-7">THE</span>
+      <span lemma="" n="w-8">CREATION</span>
+      <span lemma="" n="w-9">OF</span>
+      <span lemma="" n="w-10">THE</span>
+      <span lemma="" n="w-11">WORLD</span>
+      , 
+      <span lemma="" n="w-12">AS</span>
+      <span lemma="" n="w-13">GIVEN</span>
+      <span lemma="" n="w-14">BY</span>
+      <span lemma="" n="w-15">MOSES</span>
+      .
+      
+      </span></div>`
   }
 ]
