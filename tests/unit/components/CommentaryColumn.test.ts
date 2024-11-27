@@ -6,7 +6,6 @@ import * as directives from 'vuetify/directives'
 import { createI18n } from 'vue-i18n'
 import enLang from '~/lang/en.json'
 import deLang from '~/lang/de.json'
-import { flushPromises } from '@vue/test-utils'
 
 const vuetify = createVuetify({
   components,
