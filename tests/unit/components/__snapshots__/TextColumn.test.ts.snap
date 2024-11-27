@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Commentary Column Component > component mounts 1`] = `
+"<div class="v-container v-locale--is-ltr" index="0">
+  <div class="v-row justify-center">
+    <!--v-if-->
+    <div class="v-col v-col-12">
+      <div class="v-container v-locale--is-ltr">
+        <!--v-if-->
+        <div class="v-row justify-center">
+          <div class="v-col v-col-auto pr-0">
+            <h1>De Opificio Mundi (eng) title</h1>
+          </div>
+          <div class="v-col v-col-auto pl-0"><button type="button" class="v-btn v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-plain" aria-haspopup="dialog" aria-expanded="false"><span class="v-btn__overlay"></span><span class="v-btn__underlay"></span>
+              <!----><span class="v-btn__content" data-no-activator=""><i class="mdi-copyright mdi v-icon notranslate v-theme--light v-icon--size-default" aria-hidden="true"></i></span>
+              <!---->
+              <!---->
+            </button>
+            <!---->
+          </div>
+        </div>
+        <div class="v-row justify-space-between">
+          <div class="v-col"><a href="/texts/urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1;null" style="display: none;">Previous</a></div>
+          <div class="v-col"><button type="button" class="v-btn v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text" aria-haspopup="menu" aria-expanded="false" aria-owns="v-menu-1"><span class="v-btn__overlay"></span><span class="v-btn__underlay"></span>
+              <!----><span class="v-btn__content" data-no-activator="">Go to</span>
+              <!---->
+              <!---->
+            </button>
+            <!---->
+          </div>
+          <div class="v-col"><button type="button" class="v-btn v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text" aria-haspopup="menu" aria-expanded="false" aria-owns="v-menu-3"><span class="v-btn__overlay"></span><span class="v-btn__underlay"></span>
+              <!----><span class="v-btn__content" data-no-activator="">Read in</span>
+              <!---->
+              <!---->
+            </button>
+            <!---->
+          </div>
+          <div class="v-col"><a href="/texts/urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1;1">Next</a></div>
+        </div>
+      </div>
+      <div class="v-container v-locale--is-ltr text-content">
+        <div class="v-row">
+          <div class="v-col">
+            <!-- eslint-disable-next-line vue/no-v-html -->
+            <div>
+              <div class="citation-section" n="title" id="urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1;title"><span class="text-header">
+
+      <span lemma="" n="w-1">A</span>
+                <span lemma="" n="w-2">TREATISE</span>
+                <span lemma="" n="w-3">ON</span>
+                <span lemma="" n="w-4">THE</span>
+                <span lemma="" n="w-5">ACCOUNT</span>
+                <span lemma="" n="w-6">OF</span>
+                <span lemma="" n="w-7">THE</span>
+                <span lemma="" n="w-8">CREATION</span>
+                <span lemma="" n="w-9">OF</span>
+                <span lemma="" n="w-10">THE</span>
+                <span lemma="" n="w-11">WORLD</span>
+                ,
+                <span lemma="" n="w-12">AS</span>
+                <span lemma="" n="w-13">GIVEN</span>
+                <span lemma="" n="w-14">BY</span>
+                <span lemma="" n="w-15">MOSES</span>
+                .
+
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
