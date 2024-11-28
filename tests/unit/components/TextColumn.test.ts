@@ -22,7 +22,7 @@ const i18n = createI18n({
 
 describe('Commentary Column Component', async () => {
   const enWrapper = await mountSuspended(TextColumn, {
-    props: { urn: 'urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1', reff: 'title', index: 0 },
+    props: { urn: 'urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1', reff: 'title' },
     global: {
       plugins: [vuetify, i18n]
     },

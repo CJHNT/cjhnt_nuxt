@@ -3,6 +3,7 @@ import { registerEndpoint } from '@nuxt/test-utils/runtime'
 import dtsCollectionResponse from '~/mocks/responses/dtsCollections.json'
 import dtsNavigationResponse from '~/mocks/responses/dtsNavigation.json'
 import { xmlTexts } from '~/mocks/responses/dtsDocument.js'
+import ploneResponse from '~/mocks/responses/plone.json'
 import { readBody } from 'h3'
 import { writeFile } from 'node:fs'
 import { resolvePath } from 'nuxt/kit'
@@ -57,6 +58,11 @@ registerEndpoint('/api/dts/document', {
     const body = await readBody(event)
     return xmlTexts.find((c) => c.id === body.id)?.xml
   }
+})
+
+registerEndpoint('/api/plone/news/:locale', () => {
+  const data = ploneResponse
+  return data
 })
 
 beforeAll(() => {

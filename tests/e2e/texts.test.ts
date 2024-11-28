@@ -12,10 +12,6 @@ mockNuxtImport('useUserSession', () => {
   }
 })
 
-mockNuxtImport('useState', () => {
-  return () => true
-})
-
 describe('tests/[slug].vue tests', async () => {
   await setup()
   test('smoke test', () => {

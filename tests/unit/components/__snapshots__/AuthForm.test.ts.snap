@@ -22,7 +22,7 @@ exports[`AuthForm component > Signup form renders correctly 1`] = `
   <form class="v-form" novalidate="">
     <div class="v-card-title pb-0 text-h5">Sign Up</div>
     <div class="v-card-text">
-      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field">
+      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field" data-testid="email-input">
         <div class="v-input__prepend">
           <!----><i class="mdi-email mdi v-icon notranslate v-theme--light v-icon--size-default" aria-hidden="true"></i>
         </div>
@@ -69,7 +69,7 @@ exports[`AuthForm component > Signup form renders correctly 1`] = `
         </div>
       </div>
       <!--v-if-->
-      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field">
+      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field" data-testid="password-input">
         <div class="v-input__prepend">
           <!----><i class="mdi-lock mdi v-icon notranslate v-theme--light v-icon--size-default" aria-hidden="true"></i>
         </div>
@@ -114,7 +114,7 @@ exports[`AuthForm component > Signup form renders correctly 1`] = `
           <!---->
         </div>
       </div>
-      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field">
+      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field" data-testid="repeat-password-input">
         <div class="v-input__prepend">
           <!----><i class="mdi-lock mdi v-icon notranslate v-theme--light v-icon--size-default" aria-hidden="true"></i>
         </div>
@@ -162,7 +162,7 @@ exports[`AuthForm component > Signup form renders correctly 1`] = `
           <!---->
         </div>
       </div>
-      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-checkbox">
+      <div class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-checkbox" data-testid="updates-checkbox">
         <!---->
         <div class="v-input__control">
           <div class="v-selection-control v-selection-control--density-default v-checkbox-btn">
@@ -184,13 +184,13 @@ exports[`AuthForm component > Signup form renders correctly 1`] = `
       </div>
     </div>
     <hr class="v-divider v-theme--light" aria-orientation="horizontal" role="separator">
-    <div class="v-card-actions"><button type="submit" class="v-btn v-btn--slim v-theme--light text-success v-btn--density-default v-btn--size-default v-btn--variant-text"><span class="v-btn__overlay"></span><span class="v-btn__underlay"></span>
+    <div class="v-card-actions"><button type="submit" class="v-btn v-btn--slim v-theme--light text-success v-btn--density-default v-btn--size-default v-btn--variant-text" data-testid="submit-button"><span class="v-btn__overlay"></span><span class="v-btn__underlay"></span>
         <!----><span class="v-btn__content" data-no-activator="">Sign Up</span>
         <!---->
         <!---->
       </button></div>
     <hr class="v-divider v-theme--light" aria-orientation="horizontal" role="separator">
-    <div class="v-card-text">Already registered? <a href="/auth/login">Login</a></div>
+    <div class="v-card-text">Already registered? <a href="/auth/login" data-testid="login-link">Login</a></div>
   </form>
   <!---->
   <!----><span class="v-card__underlay"></span>
