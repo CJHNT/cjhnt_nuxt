@@ -7,6 +7,8 @@ const { locale } = useI18n()
 const { user } = useUserSession()
 const projectMember = await allows(readClosed, user.value)
 const hitWords = useState('hitWords')
+const linguisticShown = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
+const linguisticExist = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
 
 const props = defineProps({
   urn: { type: String, default: '' },
@@ -126,10 +128,14 @@ if (openText || projectMember) {
     })
   )
   formattedText.value = data.value
+  const parser = new DOMParser()
+  const domText = parser.parseFromString(formattedText.value, 'text/html')
+  for (const ling in linguisticExist.value) {
+    if (domText.querySelector(`span.${ling}`)) {
+      linguisticExist.value[ling] = true
+    }
+  }
   if (hitWords.value) {
-    console.error(hitWords.value)
-    const parser = new DOMParser()
-    const domText = parser.parseFromString(formattedText.value, 'text/html')
     hitWords.value.forEach((index) => {
       const hitWord = domText.querySelector(`[n="w-${index}"]`)
       hitWord.classList.add('searchHit')
@@ -142,6 +148,26 @@ allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
   notificationStore.$reset()
 })
+const toggleLinguistic = (lingType) => {
+  linguisticShown.value[lingType] = !linguisticShown.value[lingType]
+  document.querySelectorAll(`.${lingType}`).forEach((e) => {
+    if (linguisticShown.value[lingType]) {
+      e.classList.remove('d-none')
+      e.parentElement.classList.add('px-1')
+      e.parentElement.addEventListener('animationend', () =>
+        e.parentElement.classList.remove('flash-yellow')
+      )
+      e.parentElement.classList.add('flash-yellow')
+      e.parentElement.classList.add('border')
+    } else {
+      e.classList.add('d-none')
+      if (Object.values(linguisticShown.value).every((v) => v === false)) {
+        e.parentElement.classList.remove('border')
+        e.parentElement.classList.remove('px-1')
+      }
+    }
+  })
+}
 </script>
 
 <template>
@@ -197,6 +223,13 @@ onUnmounted(() => {
                 :text-urn="props.urn"
               />
             </v-col>
+            <template v-for="(v, k) in linguisticShown" :key="k">
+              <v-col v-if="linguisticExist[k]">
+                <v-btn variant="text" size="x-small" @click="toggleLinguistic(k)">{{
+                  $t(`comptext.${k}${v}`)
+                }}</v-btn>
+              </v-col>
+            </template>
             <v-col>
               <v-menu v-if="siblings.length > 0">
                 <template #activator="{ props: siblingProps }">
@@ -251,5 +284,12 @@ onUnmounted(() => {
 <style>
 .searchHit {
   font-weight: bold;
+}
+.stack {
+  display: inline-flex;
+  flex-direction: column;
+}
+.stack span {
+  font-size: smaller;
 }
 </style>
