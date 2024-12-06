@@ -22,7 +22,7 @@ if (props.error.statusCode === 401) {
     message: '',
     i18n: props.error.message,
     link: '/',
-    linkMessage: 'Home'
+    linkMessage: 'home'
   })
   clearError()
 }
@@ -31,7 +31,7 @@ notificationStore.addNotification({
   message: '',
   i18n: 'uncaughtError',
   link: '/',
-  linkMessage: 'Home'
+  linkMessage: 'home'
 })
 clearError()
 </script>
