@@ -64,6 +64,18 @@ describe('AuthForm sign-up form', async () => {
     await repeatPasswordInput.setValue('somePassword')
     expect(repeatPasswordField.attributes('class')).not.toContain('v-input--error')
   })
+  test('showPassword buttons work', async () => {
+    const passwordInput = signUpWrapper.find('[data-testid=password-input] input')
+    const repeatPasswordInput = signUpWrapper.find('[data-testid=repeat-password-input] input')
+    expect(passwordInput.attributes('type')).toBe('password')
+    await signUpWrapper.find('[data-testid=password-input] .v-input__append i').trigger('click')
+    expect(passwordInput.attributes('type')).toBe('text')
+    expect(repeatPasswordInput.attributes('type')).toBe('password')
+    await signUpWrapper
+      .find('[data-testid=repeat-password-input] .v-input__append i')
+      .trigger('click')
+    expect(repeatPasswordInput.attributes('type')).toBe('text')
+  })
   test('submit event emits correctly', async () => {
     await signUpWrapper
       .find('[data-testid=updates-checkbox]')
@@ -106,7 +118,8 @@ describe('AuthForm login form', async () => {
 describe('AuthForm changeEmail form', async () => {
   const changeEmailWrapper = await mountSuspended(AuthForm, {
     props: {
-      title: 'auth.changeEmail'
+      title: 'auth.changeEmail',
+      label: 'auth.newEmail'
     },
     global: {
       plugins: [vuetify, i18n]
@@ -139,7 +152,8 @@ describe('AuthForm changeEmail form', async () => {
 describe('AuthForm changePassword form', async () => {
   const changePasswordWrapper = await mountSuspended(AuthForm, {
     props: {
-      title: 'auth.changePassword'
+      title: 'auth.changePassword',
+      label: 'auth.newPassword'
     },
     global: {
       plugins: [vuetify, i18n]
