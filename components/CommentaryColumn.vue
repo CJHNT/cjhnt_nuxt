@@ -1,7 +1,11 @@
 <script setup>
+import { allows } from 'nuxt-authorization/utils'
+import { readClosed } from '~/utils/abilities'
 import parentsAndSiblings from '~/utils/parentsAndSiblings'
 
 const { locale } = useI18n()
+const { user } = useUserSession()
+const projectMember = await allows(readClosed, user.value)
 const props = defineProps({
   urn: { type: String, default: '' },
   reff: { type: String, default: '' },
@@ -9,31 +13,29 @@ const props = defineProps({
 })
 const allAncestors = defineModel({ type: Array, default: [] })
 const ancestors = ref([])
-const { data: navReturn } = await useFetch('/api/dts/navigation', {
+const navReturn = await $fetch('/api/dts/navigation', {
   body: { id: props.urn },
   method: 'POST'
 })
-const { data: textMeta } = await useFetch('/api/dts/collections', {
+const textMeta = await $fetch('/api/dts/collections', {
   body: { id: props.urn },
   method: 'POST'
 })
 
 const docTitle = {
   de:
-    textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.[
-      '@value'
-    ] ?? textMeta.value.title,
+    textMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+    textMeta.title,
   en:
-    textMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.[
-      '@value'
-    ] ?? textMeta.value.title
+    textMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
+    textMeta.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (textMeta.value['dts:dublincore'] && textMeta.value['dts:dublincore']['dct:isPartOf']) {
-  if (typeof textMeta.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-    parentId = textMeta.value['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(textMeta.value['dts:dublincore']['dct:isPartOf'])) {
-    parentId = textMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+if (textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:isPartOf']) {
+  if (typeof textMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
+    parentId = textMeta['dts:dublincore']['dct:isPartOf']
+  } else if (Array.isArray(textMeta['dts:dublincore']['dct:isPartOf'])) {
+    parentId = textMeta['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
@@ -42,20 +44,20 @@ allAncestors.value.push(ancestors.value)
 
 const citation = {
   de:
-    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-      (e) => e['@language'] === 'deu'
-    )['@value'] ??
-    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-      (e) => e['@language'] === 'eng'
-    )['@value'] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
+      '@value'
+    ] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
+      '@value'
+    ] ??
     '',
   en:
-    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-      (e) => e['@language'] === 'eng'
-    )['@value'] ??
-    textMeta.value['dts:dublincore']['dct:bibliographicCitation'].find(
-      (e) => e['@language'] === 'deu'
-    )['@value'] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
+      '@value'
+    ] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
+      '@value'
+    ] ??
     ''
 }
 const memberItems = collMembers
@@ -76,17 +78,17 @@ const memberItems = collMembers
     }
     return returnValue
   })
-const validReffs = navReturn.value['hydra:member'].map((r) => r.ref)
+const validReffs = navReturn['hydra:member'].map((r) => r.ref)
 let usedReff = props.reff
 if (!validReffs.includes(props.reff)) {
   usedReff = validReffs[0]
 }
-const { data: formattedText } = await useFetch('/api/dts/document', {
+const formattedText = await $fetch('/api/dts/document', {
   body: { id: props.urn, ref: usedReff, xsl: 'assets/source/commentary.sef.json' },
   method: 'POST'
 })
 const parser = new DOMParser()
-const domText = parser.parseFromString(formattedText.value, 'text/html')
+const domText = parser.parseFromString(formattedText, 'text/html')
 const { data: ntText } = await useAsyncData('apiNtText', async () => {
   const ntElement = domText.getElementsByClassName('nt-source-text')[0]
   const ntSource = ntElement.getAttribute('source-text')
@@ -172,9 +174,9 @@ const deuClass = computed(() => ({
           <v-row class="text-content">
             <v-col>
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div :class="engClass" v-html="engText" />
+              <div v-if="engText" :class="engClass" v-html="engText" />
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div :class="deuClass" v-html="deuText" />
+              <div v-if="deuText" :class="deuClass" v-html="deuText" />
             </v-col>
           </v-row>
         </v-container>
