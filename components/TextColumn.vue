@@ -31,15 +31,15 @@ const { data: docMeta } = await useAsyncData(props.urn + props.reff, () =>
 const openText =
   docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:accessRights'] === 'open'
 const docTitle = {
-  de: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-    ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-    : docMeta.value.title,
-  en: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-    ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-    : docMeta.value.title
+  de:
+    docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+    docMeta.value.title,
+  en:
+    docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
+    docMeta.value.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPartOf']) {
+if (docMeta.value['dts:dublincore']?.['dct:isPartOf']) {
   if (typeof docMeta.value['dts:dublincore']['dct:isPartOf'] === 'string') {
     parentId = docMeta.value['dts:dublincore']['dct:isPartOf']
   } else if (Array.isArray(docMeta.value['dts:dublincore']['dct:isPartOf'])) {
@@ -49,6 +49,7 @@ if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPa
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors].filter((c) => c.id !== parentId)
 const siblings = collMembers
+  .filter((c) => c['@id'] !== props.urn)
   .map((m) => {
     const biblio = {
       de:
@@ -63,11 +64,10 @@ const siblings = collMembers
     return [
       m['@id'],
       m['dts:extensions']['dc:language'],
-      m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights'] === 'open',
+      m['dts:dublincore']?.['dct:accessRights'] === 'open',
       biblio
     ]
   })
-  .filter((c) => c[0] !== props.urn)
   .filter((c) => projectMember || c[2])
 const alertText = ref('')
 const prevId = ref(null)
@@ -127,7 +127,6 @@ if (openText || projectMember) {
   )
   formattedText.value = data.value
   if (hitWords.value) {
-    console.error(hitWords.value)
     const parser = new DOMParser()
     const domText = parser.parseFromString(formattedText.value, 'text/html')
     hitWords.value.forEach((index) => {
