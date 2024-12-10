@@ -1,7 +1,11 @@
 <script setup>
+import { allows } from 'nuxt-authorization/utils'
+import { readClosed } from '~/utils/abilities'
 import parentsAndSiblings from '~/utils/parentsAndSiblings'
 
 const { locale } = useI18n()
+const { user } = useUserSession()
+const projectMember = await allows(readClosed, user.value)
 const props = defineProps({
   urn: { type: String, default: '' },
   reff: { type: String, default: '' },

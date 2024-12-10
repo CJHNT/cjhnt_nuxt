@@ -17,15 +17,18 @@
     </xsl:template>
     
     <xsl:template match="t:div[@subtype='chapter']">
+        <xsl:if test="descendant::t:w">
         <xsl:for-each select="node()">
             <xsl:choose>
                 <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
                 <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="t:div[@subtype='verse']">
+        <xsl:if test="descendant::t:w">
         <xsl:variable name="citStrings">
             <xsl:for-each select="ancestor::t:div[@type='textpart']">
                 <xsl:value-of select="@n"/><xsl:text>.</xsl:text>
@@ -48,9 +51,10 @@
                 </xsl:element>
             </xsl:for-each>
         </xsl:element>
+        </xsl:if>
     </xsl:template>
     
-    <xsl:template match="t:w">
+    <xsl:template match="t:w[not(@type='phonetic')]">
         <xsl:element name="span">
             <xsl:attribute name="lemma">
                 <xsl:value-of select="@lemma"/>
@@ -58,7 +62,24 @@
             <xsl:attribute name="n">
                 <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
             </xsl:attribute>
+            <xsl:attribute name="class">stack</xsl:attribute>
             <xsl:value-of select="text()"/>
+            <xsl:if test="@lemma and @lemma != ''">
+                <xsl:element name="span">
+                    <xsl:attribute name="class">lemma d-none</xsl:attribute>
+                    <xsl:value-of select="@lemma"/>
+                </xsl:element>
+            </xsl:if>
+            <xsl:if test="./t:w[@type='phonetic']">
+                <xsl:element name="span">
+                    <xsl:attribute name="class">phonetic d-none</xsl:attribute>
+                    <xsl:value-of select="./t:w[@type='phonetic']/text()"/>
+                </xsl:element>
+                <xsl:element name="span">
+                    <xsl:attribute name="class">phonetic-lemma d-none</xsl:attribute>
+                    <xsl:value-of select="./t:w[@type='phonetic']/@lemma"/>
+                </xsl:element>
+            </xsl:if>
         </xsl:element>
     </xsl:template>
     
