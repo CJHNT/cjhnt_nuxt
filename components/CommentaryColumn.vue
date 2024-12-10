@@ -13,14 +13,13 @@ const props = defineProps({
 })
 const allAncestors = defineModel({ type: Array, default: [] })
 const ancestors = ref([])
-const navReturn = await $fetch('/api/dts/navigation', {
-  body: { id: props.urn },
-  method: 'POST'
-})
 const textMeta = await $fetch('/api/dts/collections', {
   body: { id: props.urn },
   method: 'POST'
 })
+
+const openText =
+  textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:accessRights'] === 'open'
 
 const docTitle = {
   de:
@@ -31,7 +30,7 @@ const docTitle = {
     textMeta.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:isPartOf']) {
+if (textMeta['dts:dublincore']?.['dct:isPartOf']) {
   if (typeof textMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
     parentId = textMeta['dts:dublincore']['dct:isPartOf']
   } else if (Array.isArray(textMeta['dts:dublincore']['dct:isPartOf'])) {
@@ -41,6 +40,27 @@ if (textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:isPartOf']) {
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors, { id: props.urn, title: docTitle, disabled: true, ref: '' }]
 allAncestors.value.push(ancestors.value)
+
+const memberItems = collMembers
+  .filter((m) => m['@id'] !== props.urn)
+  .map((m) => {
+    const docTitle = {
+      de:
+        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+        m.title,
+      en:
+        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ?? m.title
+    }
+    const returnValue = {
+      value: m['@id'],
+      en: docTitle.en,
+      de: docTitle.de,
+      open: m['dts:dublincore']?.['dct:accessRights'] === 'open',
+      props: { to: `/texts/${m['@id']}` }
+    }
+    return returnValue
+  })
+  .filter((c) => projectMember || c.open)
 
 const citation = {
   de:
@@ -60,47 +80,46 @@ const citation = {
     ] ??
     ''
 }
-const memberItems = collMembers
-  .filter((m) => m['@id'] !== props.urn)
-  .map((m) => {
-    const docTitle = {
-      de:
-        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
-        m.title,
-      en:
-        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ?? m.title
-    }
-    const returnValue = {
-      value: m['@id'],
-      en: docTitle.en,
-      de: docTitle.de,
-      props: { to: `/texts/${m['@id']}` }
-    }
-    return returnValue
-  })
-const validReffs = navReturn['hydra:member'].map((r) => r.ref)
-let usedReff = props.reff
-if (!validReffs.includes(props.reff)) {
-  usedReff = validReffs[0]
-}
-const formattedText = await $fetch('/api/dts/document', {
-  body: { id: props.urn, ref: usedReff, xsl: 'assets/source/commentary.sef.json' },
-  method: 'POST'
-})
-const parser = new DOMParser()
-const domText = parser.parseFromString(formattedText, 'text/html')
-const { data: ntText } = await useAsyncData('apiNtText', async () => {
-  const ntElement = domText.getElementsByClassName('nt-source-text')[0]
-  const ntSource = ntElement.getAttribute('source-text')
-  const ntVerse = ntElement.getAttribute('source-verse')
-  const apiResult = await $fetch('/api/dts/document', {
-    body: { id: ntSource, ref: ntVerse, xsl: 'assets/source/nt_fragment.sef.json' },
+
+const engText = ref('')
+const deuText = ref('')
+const navReturn = ref(null)
+const usedReff = ref(props.reff)
+const validReffs = ref([])
+const ntText = ref('')
+
+if (openText || projectMember) {
+  const navInfo = await $fetch('/api/dts/navigation', {
+    body: { id: props.urn },
     method: 'POST'
   })
-  return apiResult
-})
-const engText = domText.getElementById('en-text') ? domText.getElementById('en-text').outerHTML : ''
-const deuText = domText.getElementById('de-text').outerHTML
+  navReturn.value = navInfo
+  validReffs.value = navReturn.value['hydra:member'].map((r) => r.ref)
+  if (!validReffs.value.includes(props.reff)) {
+    usedReff.value = validReffs.value[0]
+  }
+  const formattedText = await $fetch('/api/dts/document', {
+    body: { id: props.urn, ref: usedReff.value, xsl: 'assets/source/commentary.sef.json' },
+    method: 'POST'
+  })
+  const parser = new DOMParser()
+  const domText = parser.parseFromString(formattedText, 'text/html')
+  const { data: apiNtText } = await useAsyncData('apiNtText', async () => {
+    const ntElement = domText.getElementsByClassName('nt-source-text')[0]
+    const ntSource = ntElement.getAttribute('source-text')
+    const ntVerse = ntElement.getAttribute('source-verse')
+    const apiResult = await $fetch('/api/dts/document', {
+      body: { id: ntSource, ref: ntVerse, xsl: 'assets/source/nt_fragment.sef.json' },
+      method: 'POST'
+    })
+    return apiResult
+  })
+  ntText.value = apiNtText.value
+  engText.value = domText.getElementById('en-text')
+    ? domText.getElementById('en-text').outerHTML
+    : ''
+  deuText.value = domText.getElementById('de-text').outerHTML
+}
 const engClass = computed(() => ({
   'h-0': locale.value === 'de',
   'overflow-hidden': locale.value === 'de'
