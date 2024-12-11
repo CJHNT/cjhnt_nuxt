@@ -68,23 +68,16 @@
                 <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
             </xsl:attribute>
             <xsl:attribute name="class">stack</xsl:attribute>
-            <xsl:value-of select="text()"/>
-            <xsl:if test="@lemma and @lemma != ''">
-                <xsl:element name="span">
-                    <xsl:attribute name="class">lemma d-none</xsl:attribute>
-                    <xsl:value-of select="@lemma"/>
-                </xsl:element>
-            </xsl:if>
             <xsl:if test="./t:w[@type='phonetic']">
+                <xsl:attribute name="phonetic-lemma">
+                    <xsl:value-of select="./t:w[@type='phonetic']/@lemma"/>
+                </xsl:attribute>
                 <xsl:element name="span">
                     <xsl:attribute name="class">phonetic d-none</xsl:attribute>
                     <xsl:value-of select="./t:w[@type='phonetic']/text()"/>
                 </xsl:element>
-                <xsl:element name="span">
-                    <xsl:attribute name="class">phonetic-lemma d-none</xsl:attribute>
-                    <xsl:value-of select="./t:w[@type='phonetic']/@lemma"/>
-                </xsl:element>
             </xsl:if>
+            <xsl:value-of select="text()"/>
         </xsl:element>
     </xsl:template>
     
