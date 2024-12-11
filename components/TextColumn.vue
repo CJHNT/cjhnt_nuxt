@@ -24,28 +24,26 @@ const reffDepth = () => {
   }
   return 1
 }
-const { data: docMeta } = await useAsyncData(props.urn + props.reff, () =>
-  $fetch('/api/dts/collections', {
-    body: { id: props.urn },
-    method: 'POST'
-  })
-)
+const docMeta = await $fetch('/api/dts/collections', {
+  body: { id: props.urn },
+  method: 'POST'
+})
 const openText =
-  docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:accessRights'] === 'open'
+  docMeta['dts:dublincore'] && docMeta['dts:dublincore']['dct:accessRights'] === 'open'
 const docTitle = {
   de:
-    docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
-    docMeta.value.title,
+    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+    docMeta.title,
   en:
-    docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
-    docMeta.value.title
+    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
+    docMeta.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (docMeta.value['dts:dublincore']?.['dct:isPartOf']) {
-  if (typeof docMeta.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-    parentId = docMeta.value['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(docMeta.value['dts:dublincore']['dct:isPartOf'])) {
-    parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+if (docMeta['dts:dublincore']?.['dct:isPartOf']) {
+  if (typeof docMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
+    parentId = docMeta['dts:dublincore']['dct:isPartOf']
+  } else if (Array.isArray(docMeta['dts:dublincore']['dct:isPartOf'])) {
+    parentId = docMeta['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
@@ -79,13 +77,11 @@ const navReturn = ref(null)
 const usedReff = ref(props.reff)
 const validReffs = ref([])
 if (openText || projectMember) {
-  const { data: navInfo } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
-    $fetch('/api/dts/navigation', {
-      body: { id: props.urn, level: reffDepth() },
-      method: 'POST'
-    })
-  )
-  navReturn.value = navInfo.value
+  const navInfo = await $fetch('/api/dts/navigation', {
+    body: { id: props.urn, level: reffDepth() },
+    method: 'POST'
+  })
+  navReturn.value = navInfo
   validReffs.value = navReturn.value['hydra:member'].map((r) => r.ref)
   if (!props.reff.split('-').every((e) => validReffs.value.includes(e))) {
     await useAsyncData('refWarning', () =>
@@ -121,13 +117,11 @@ if (openText || projectMember) {
         return 'assets/source/epidoc.sef.json'
     }
   }
-  const { data } = await useAsyncData(`document${props.urn}ref${usedReff.value}`, () =>
-    $fetch('/api/dts/document', {
-      body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
-      method: 'POST'
-    })
-  )
-  formattedText.value = data.value
+  const data = await $fetch('/api/dts/document', {
+    body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
+    method: 'POST'
+  })
+  formattedText.value = data
   const parser = new DOMParser()
   const domText = parser.parseFromString(formattedText.value, 'text/html')
   for (const ling in linguisticExist.value) {
