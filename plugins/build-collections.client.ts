@@ -138,7 +138,16 @@ export default defineNuxtPlugin({
                   m['dts:extensions']['dc:language'],
                   m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights']
                     ? m['dts:dublincore']['dct:accessRights']
-                    : 'closed'
+                    : 'closed',
+                  m['dts:extensions']['dc:language'] === 'eng'
+                    ? m['dts:dublincore']?.['dct:bibliographicCitation'].find(
+                        (e) => e['@language'] === 'eng'
+                      )?.['@value'] || ''
+                    : m['dts:extensions']['dc:language'] === 'deu'
+                      ? m['dts:dublincore']?.['dct:bibliographicCitation'].find(
+                          (e) => e['@language'] === 'deu'
+                        )?.['@value'] || ''
+                      : m['dts:dublincore']?.['dct:bibliographicCitation']?.[0]['@value'] || ''
                 ]),
                 parentId: coll,
                 firstChild: ''
