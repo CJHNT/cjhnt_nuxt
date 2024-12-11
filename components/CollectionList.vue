@@ -75,7 +75,7 @@ const showList = (c) => {
                 {{ $t(subGroup.title, { chapter: subGroup.chapter }) }}
               </h2>
               <template v-for="(member, memberIndex) in subGroup.subCollections" :key="memberIndex">
-                <template v-if="member.versions.some((v) => v.length === 3)">
+                <template v-if="member.versions.some((v) => v.length === 4)">
                   <v-list-item-title>{{ member[locale] }}</v-list-item-title>
                   <v-list-item-subtitle v-if="openVersions(member)">
                     <template
@@ -84,11 +84,15 @@ const showList = (c) => {
                     >
                       <v-btn
                         v-if="projectMember || version[2] === 'open'"
+                        v-bind="biblioProps"
                         :to="`/texts/${version[0]};${member.firstChild}`"
                         variant="plain"
                         density="compact"
-                        >{{ version[1] }}</v-btn
-                      >
+                        >{{ version[1] }}
+                        <v-tooltip v-if="version[3]" activator="parent" location="bottom">
+                          {{ version[3] }}
+                        </v-tooltip>
+                      </v-btn>
                     </template>
                   </v-list-item-subtitle>
                   <v-list-item-subtitle v-else>{{
