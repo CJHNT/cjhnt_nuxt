@@ -9,6 +9,7 @@ const projectMember = await allows(readClosed, user.value)
 const hitWords = useState('hitWords')
 const linguisticShown = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
 const linguisticExist = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
+const route = useRoute()
 
 const props = defineProps({
   urn: { type: String, default: '' },
@@ -227,23 +228,26 @@ const toggleLinguistic = (lingType) => {
               </v-col>
             </template>
             <v-col>
-              <v-menu v-if="siblings.length > 0">
+              <v-menu
+                v-if="siblings.length > 0 && siblings.length !== route.params.slug.length - 1"
+              >
                 <template #activator="{ props: siblingProps }">
                   <v-btn variant="text" size="x-small" v-bind="siblingProps">
                     {{ $t('comptext.readIn') }}
                   </v-btn>
                 </template>
                 <v-list density="compact" :lines="false">
-                  <v-list-item
-                    v-for="(sibling, index) in siblings"
-                    :key="index"
-                    :value="index"
-                    class="text-truncate"
-                  >
-                    <NuxtLink :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
-                      >[{{ sibling[1] }}] {{ sibling[3][locale] }}</NuxtLink
+                  <template v-for="(sibling, index) in siblings" :key="index">
+                    <v-list-item
+                      v-if="!route.path.includes(sibling[0])"
+                      :value="index"
+                      class="text-truncate"
                     >
-                  </v-list-item>
+                      <NuxtLink :to="`${route.path}/${sibling[0]};${props.reff}`"
+                        >[{{ sibling[1] }}] {{ sibling[3][locale] }}</NuxtLink
+                      >
+                    </v-list-item>
+                  </template>
                 </v-list>
               </v-menu>
             </v-col>
