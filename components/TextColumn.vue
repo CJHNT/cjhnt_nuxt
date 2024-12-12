@@ -56,11 +56,15 @@ const siblings = collMembers
       de:
         m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'deu')?.[
           '@value'
-        ] ?? m['dts:extensions']['dc:language'][0]['@value'],
+        ] ??
+        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
+        m['dts:extensions']['dc:language'][0]['@value'],
       en:
         m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'eng')?.[
           '@value'
-        ] ?? m['dts:extensions']['dc:language'][0]['@value']
+        ] ??
+        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
+        m['dts:extensions']['dc:language'][0]['@value']
     }
     return [
       m['@id'],
@@ -175,6 +179,13 @@ const toggleLinguistic = (lingType) => {
       </v-col>
       <v-col :cols="props.urn.includes('qumran') ? 8 : 12">
         <v-container>
+          <v-row>
+            <v-col v-if="route.params.slug.length > 1" offset="11">
+              <NuxtLink :to="route.path.replace(`/${props.urn};${props.reff}`, '')"
+                ><v-icon icon="mdi-close"></v-icon
+              ></NuxtLink>
+            </v-col>
+          </v-row>
           <v-row v-if="alertText">
             <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
           </v-row>
