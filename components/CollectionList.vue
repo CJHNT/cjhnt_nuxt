@@ -84,7 +84,6 @@ const showList = (c) => {
                     >
                       <v-btn
                         v-if="projectMember || version[2] === 'open'"
-                        v-bind="biblioProps"
                         :to="`/texts/${version[0]};${member.firstChild}`"
                         variant="plain"
                         density="compact"
