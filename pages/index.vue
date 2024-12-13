@@ -57,7 +57,7 @@ watch(searchTerm, () => {
             </v-col>
           </v-row>
         </template>
-        <template v-else-if="!['project', 'admin'].includes(user.role)">
+        <template v-else-if="user && !['project', 'admin'].includes(user.role)">
           <v-row justify="center">
             <v-col cols="12" md="8" xl="4">
               <v-alert type="info"

@@ -1,33 +1,33 @@
 export default async function (parentId: string) {
-  const { data: parentData } = await useFetch<DtsNonReadableCollection>('/api/dts/collections', {
+  const parentData = await $fetch<DtsNonReadableCollection>('/api/dts/collections', {
     body: { id: parentId },
     method: 'POST'
   })
-  if (parentData.value) {
+  if (parentData) {
     const parentTitle = {
       de:
-        parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')?.[
+        parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'deu')?.[
           '@value'
-        ] ?? parentData.value.title,
+        ] ?? parentData.title,
       en:
-        parentData.value['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')?.[
+        parentData['dts:extensions']['dc:title'].find((t) => t['@language'] === 'eng')?.[
           '@value'
-        ] ?? parentData.value.title
+        ] ?? parentData.title
     }
     const ancestors = [
       {
-        id: parentData.value['@id'],
+        id: parentData['@id'],
         title: parentTitle,
         disabled: false,
         ref: ''
       }
     ]
     let hasParent: string | boolean = false
-    if (parentData.value['dts:dublincore'] && parentData.value['dts:dublincore']['dct:isPartOf']) {
-      if (typeof parentData.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-        hasParent = parentData.value['dts:dublincore']['dct:isPartOf']
-      } else if (Array.isArray(parentData.value['dts:dublincore']['dct:isPartOf'])) {
-        hasParent = parentData.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+    if (parentData['dts:dublincore'] && parentData['dts:dublincore']['dct:isPartOf']) {
+      if (typeof parentData['dts:dublincore']['dct:isPartOf'] === 'string') {
+        hasParent = parentData['dts:dublincore']['dct:isPartOf']
+      } else if (Array.isArray(parentData['dts:dublincore']['dct:isPartOf'])) {
+        hasParent = parentData['dts:dublincore']['dct:isPartOf'][0]['@id']
       }
     }
     while (hasParent) {
@@ -66,9 +66,7 @@ export default async function (parentId: string) {
         hasParent = false
       }
     }
-    const collMembers = [...parentData.value.member].sort((a, b) =>
-      a['@id'].localeCompare(b['@id'])
-    )
+    const collMembers = [...parentData.member].sort((a, b) => a['@id'].localeCompare(b['@id']))
     return { textAncestors: ancestors, collMembers }
   }
   return { textAncestors: [], collMembers: [] }

@@ -175,4 +175,14 @@ div.cjh-Zitaterläuterung p {
 .text-line {
   margin-left: 20px;
 }
+
+li::marker {
+  content: '';
+}
+
+li:hover::marker,
+li:nth-child(5n)::marker {
+  content: attr(value) '  ';
+  font-size: x-small;
+}
 </style>

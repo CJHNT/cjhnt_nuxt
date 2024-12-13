@@ -124,7 +124,13 @@
     "readIn": "Read in",
     "onlyProject": "This text is only available to project members.",
     "onlyProjectSiblings": "However there are other other version(s) available:",
-    "mustLogin": "Only registered users have access to our texts. Please either log in or sign up to proceed."
+    "mustLogin": "Only registered users have access to our texts. Please either log in or sign up to proceed.",
+    "lemmafalse": "Show lemmas",
+    "lemmatrue": "Hide lemmas",
+    "phoneticfalse": "Show transcription",
+    "phonetictrue": "Hide transcription",
+    "phonetic-lemmafalse": "Show transcribed lemmas",
+    "phonetic-lemmatrue": "Hide transcribed lemmas"
   },
   "search": {
     "toAdvancedSearch": "Advanced Search",

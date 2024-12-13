@@ -7,6 +7,9 @@ const { locale } = useI18n()
 const { user } = useUserSession()
 const projectMember = await allows(readClosed, user.value)
 const hitWords = useState('hitWords')
+const linguisticShown = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
+const linguisticExist = ref({ lemma: false, phonetic: false, 'phonetic-lemma': false })
+const route = useRoute()
 
 const props = defineProps({
   urn: { type: String, default: '' },
@@ -22,52 +25,54 @@ const reffDepth = () => {
   }
   return 1
 }
-const { data: docMeta } = await useAsyncData(props.urn + props.reff, () =>
-  $fetch('/api/dts/collections', {
-    body: { id: props.urn },
-    method: 'POST'
-  })
-)
+const docMeta = await $fetch('/api/dts/collections', {
+  body: { id: props.urn },
+  method: 'POST'
+})
 const openText =
-  docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:accessRights'] === 'open'
+  docMeta['dts:dublincore'] && docMeta['dts:dublincore']['dct:accessRights'] === 'open'
 const docTitle = {
-  de: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')
-    ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')['@value']
-    : docMeta.value.title,
-  en: docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')
-    ? docMeta.value['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')['@value']
-    : docMeta.value.title
+  de:
+    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
+    docMeta.title,
+  en:
+    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
+    docMeta.title
 }
 let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (docMeta.value['dts:dublincore'] && docMeta.value['dts:dublincore']['dct:isPartOf']) {
-  if (typeof docMeta.value['dts:dublincore']['dct:isPartOf'] === 'string') {
-    parentId = docMeta.value['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(docMeta.value['dts:dublincore']['dct:isPartOf'])) {
-    parentId = docMeta.value['dts:dublincore']['dct:isPartOf'][0]['@id']
+if (docMeta['dts:dublincore']?.['dct:isPartOf']) {
+  if (typeof docMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
+    parentId = docMeta['dts:dublincore']['dct:isPartOf']
+  } else if (Array.isArray(docMeta['dts:dublincore']['dct:isPartOf'])) {
+    parentId = docMeta['dts:dublincore']['dct:isPartOf'][0]['@id']
   }
 }
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors].filter((c) => c.id !== parentId)
 const siblings = collMembers
+  .filter((c) => c['@id'] !== props.urn)
   .map((m) => {
     const biblio = {
       de:
         m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'deu')?.[
           '@value'
-        ] ?? m['dts:extensions']['dc:language'][0]['@value'],
+        ] ??
+        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
+        m['dts:extensions']['dc:language'][0]['@value'],
       en:
         m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'eng')?.[
           '@value'
-        ] ?? m['dts:extensions']['dc:language'][0]['@value']
+        ] ??
+        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
+        m['dts:extensions']['dc:language'][0]['@value']
     }
     return [
       m['@id'],
       m['dts:extensions']['dc:language'],
-      m['dts:dublincore'] && m['dts:dublincore']['dct:accessRights'] === 'open',
+      m['dts:dublincore']?.['dct:accessRights'] === 'open',
       biblio
     ]
   })
-  .filter((c) => c[0] !== props.urn)
   .filter((c) => projectMember || c[2])
 const alertText = ref('')
 const prevId = ref(null)
@@ -77,13 +82,11 @@ const navReturn = ref(null)
 const usedReff = ref(props.reff)
 const validReffs = ref([])
 if (openText || projectMember) {
-  const { data: navInfo } = await useAsyncData(`${props.urn}level${reffDepth()}`, () =>
-    $fetch('/api/dts/navigation', {
-      body: { id: props.urn, level: reffDepth() },
-      method: 'POST'
-    })
-  )
-  navReturn.value = navInfo.value
+  const navInfo = await $fetch('/api/dts/navigation', {
+    body: { id: props.urn, level: reffDepth() },
+    method: 'POST'
+  })
+  navReturn.value = navInfo
   validReffs.value = navReturn.value['hydra:member'].map((r) => r.ref)
   if (!props.reff.split('-').every((e) => validReffs.value.includes(e))) {
     await useAsyncData('refWarning', () =>
@@ -119,15 +122,19 @@ if (openText || projectMember) {
         return 'assets/source/epidoc.sef.json'
     }
   }
-  const { data } = await useAsyncData(`document${props.urn}ref${usedReff.value}`, () =>
-    $fetch('/api/dts/document', {
-      body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
-      method: 'POST'
-    })
-  )
-  formattedText.value = data.value
+  const data = await $fetch('/api/dts/document', {
+    body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
+    method: 'POST'
+  })
+  formattedText.value = data
+  const parser = new DOMParser()
+  const domText = parser.parseFromString(formattedText.value, 'text/html')
+  for (const ling in linguisticExist.value) {
+    if (domText.querySelector(`span.${ling}`)) {
+      linguisticExist.value[ling] = true
+    }
+  }
   if (hitWords.value) {
-    console.error(hitWords.value)
     const parser = new DOMParser()
     const domText = parser.parseFromString(formattedText.value, 'text/html')
     hitWords.value.forEach((index) => {
@@ -142,6 +149,26 @@ allAncestors.value.push(ancestors.value)
 onUnmounted(() => {
   notificationStore.$reset()
 })
+const toggleLinguistic = (lingType) => {
+  linguisticShown.value[lingType] = !linguisticShown.value[lingType]
+  document.querySelectorAll(`.${lingType}`).forEach((e) => {
+    if (linguisticShown.value[lingType]) {
+      e.classList.remove('d-none')
+      e.parentElement.classList.add('px-1')
+      e.parentElement.addEventListener('animationend', () =>
+        e.parentElement.classList.remove('flash-yellow')
+      )
+      e.parentElement.classList.add('flash-yellow')
+      e.parentElement.classList.add('border')
+    } else {
+      e.classList.add('d-none')
+      if (Object.values(linguisticShown.value).every((v) => v === false)) {
+        e.parentElement.classList.remove('border')
+        e.parentElement.classList.remove('px-1')
+      }
+    }
+  })
+}
 </script>
 
 <template>
@@ -152,6 +179,13 @@ onUnmounted(() => {
       </v-col>
       <v-col :cols="props.urn.includes('qumran') ? 8 : 12">
         <v-container>
+          <v-row>
+            <v-col v-if="route.params.slug.length > 1" offset="11">
+              <NuxtLink :to="route.path.replace(`/${props.urn};${props.reff}`, '')"
+                ><v-icon icon="mdi-close"></v-icon
+              ></NuxtLink>
+            </v-col>
+          </v-row>
           <v-row v-if="alertText">
             <v-alert closable density="compact" type="warning">{{ alertText }}</v-alert>
           </v-row>
@@ -197,24 +231,34 @@ onUnmounted(() => {
                 :text-urn="props.urn"
               />
             </v-col>
+            <template v-for="(v, k) in linguisticShown" :key="k">
+              <v-col v-if="linguisticExist[k]">
+                <v-btn variant="text" size="x-small" @click="toggleLinguistic(k)">{{
+                  $t(`comptext.${k}${v}`)
+                }}</v-btn>
+              </v-col>
+            </template>
             <v-col>
-              <v-menu v-if="siblings.length > 0">
+              <v-menu
+                v-if="siblings.length > 0 && siblings.length !== route.params.slug.length - 1"
+              >
                 <template #activator="{ props: siblingProps }">
                   <v-btn variant="text" size="x-small" v-bind="siblingProps">
                     {{ $t('comptext.readIn') }}
                   </v-btn>
                 </template>
                 <v-list density="compact" :lines="false">
-                  <v-list-item
-                    v-for="(sibling, index) in siblings"
-                    :key="index"
-                    :value="index"
-                    class="text-truncate"
-                  >
-                    <NuxtLink :to="`/texts/${props.urn};${props.reff}/${sibling[0]};${props.reff}`"
-                      >[{{ sibling[1] }}] {{ sibling[3][locale] }}</NuxtLink
+                  <template v-for="(sibling, index) in siblings" :key="index">
+                    <v-list-item
+                      v-if="!route.path.includes(sibling[0])"
+                      :value="index"
+                      class="text-truncate"
                     >
-                  </v-list-item>
+                      <NuxtLink :to="`${route.path}/${sibling[0]};${props.reff}`"
+                        >[{{ sibling[1] }}] {{ sibling[3][locale] }}</NuxtLink
+                      >
+                    </v-list-item>
+                  </template>
                 </v-list>
               </v-menu>
             </v-col>
@@ -251,5 +295,12 @@ onUnmounted(() => {
 <style>
 .searchHit {
   font-weight: bold;
+}
+.stack {
+  display: inline-flex;
+  flex-direction: column;
+}
+.stack span {
+  font-size: smaller;
 }
 </style>

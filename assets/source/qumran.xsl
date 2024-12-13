@@ -22,37 +22,41 @@
     </xsl:template>
     
     <xsl:template match="t:div[@subtype='column']">
-        <xsl:for-each select="node()">
-            <xsl:choose>
-                <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
-                <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+        <xsl:if test="descendant::t:w">
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:if>
     </xsl:template>
     
-    <xsl:template match="t:div[@subtype='line']">
-        <xsl:variable name="citStrings">
-            <xsl:for-each select="ancestor::t:div[@type='textpart']">
-                <xsl:value-of select="@n"/><xsl:text>.</xsl:text>
-            </xsl:for-each>
-            <xsl:value-of select="@n"/>
-        </xsl:variable>
-        <xsl:element name="seg">
-            <xsl:attribute name="class">citation-section</xsl:attribute>
-            <xsl:attribute name="n"><xsl:value-of select="$citStrings"/></xsl:attribute>
-            <xsl:attribute name="id"><xsl:value-of select="//t:body/t:div/@n"/><xsl:text>;</xsl:text><xsl:value-of select="$citStrings"/></xsl:attribute>
-            <xsl:for-each select="child::t:ab">
-                <xsl:element name="span">
-                    <xsl:attribute name="class">text-paragraph</xsl:attribute>
-                    <xsl:for-each select="node()">
-                        <xsl:choose>
-                            <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
-                            <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:for-each>
-                </xsl:element>
-            </xsl:for-each>
-        </xsl:element>
+    <xsl:template match="t:div[@subtype='line']">        
+        <xsl:if test="descendant::t:w">
+            <xsl:variable name="citStrings">
+                <xsl:for-each select="ancestor::t:div[@type='textpart']">
+                    <xsl:value-of select="@n"/><xsl:text>.</xsl:text>
+                </xsl:for-each>
+                <xsl:value-of select="@n"/>
+            </xsl:variable>
+            <xsl:element name="seg">
+                <xsl:attribute name="class">citation-section</xsl:attribute>
+                <xsl:attribute name="n"><xsl:value-of select="$citStrings"/></xsl:attribute>
+                <xsl:attribute name="id"><xsl:value-of select="//t:body/t:div/@n"/><xsl:text>;</xsl:text><xsl:value-of select="$citStrings"/></xsl:attribute>
+                <xsl:for-each select="child::t:ab">
+                    <xsl:element name="span">
+                        <xsl:attribute name="class">text-paragraph</xsl:attribute>
+                        <xsl:for-each select="node()">
+                            <xsl:choose>
+                                <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                                <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </xsl:element>
+                </xsl:for-each>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="t:w">
@@ -63,6 +67,16 @@
             <xsl:attribute name="n">
                 <xsl:text>w-</xsl:text><xsl:value-of select="@n"/>
             </xsl:attribute>
+            <xsl:attribute name="class">stack</xsl:attribute>
+            <xsl:if test="./t:w[@type='phonetic']">
+                <xsl:attribute name="phonetic-lemma">
+                    <xsl:value-of select="./t:w[@type='phonetic']/@lemma"/>
+                </xsl:attribute>
+                <xsl:element name="span">
+                    <xsl:attribute name="class">phonetic d-none</xsl:attribute>
+                    <xsl:value-of select="./t:w[@type='phonetic']/text()"/>
+                </xsl:element>
+            </xsl:if>
             <xsl:value-of select="text()"/>
         </xsl:element>
     </xsl:template>

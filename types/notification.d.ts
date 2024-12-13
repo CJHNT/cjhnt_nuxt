@@ -1,6 +1,6 @@
 declare global {
   interface GlobalNotification {
-    type: string
+    type: 'error' | 'warning' | 'success' | 'info'
     message: string
     i18n: string
     link: string
