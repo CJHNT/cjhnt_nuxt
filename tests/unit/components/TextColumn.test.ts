@@ -20,7 +20,7 @@ const i18n = createI18n({
   }
 })
 
-describe('Commentary Column Component', async () => {
+describe('Text Column Component', async () => {
   const enWrapper = await mountSuspended(TextColumn, {
     props: { urn: 'urn:cts:greekLit:tlg0018.tlg001.1st1K-eng1', reff: 'title' },
     global: {
@@ -31,14 +31,24 @@ describe('Commentary Column Component', async () => {
   test('component mounts', () => {
     expect(enWrapper.html()).toMatchSnapshot()
   })
-  // I think this doesn't work because the textPage.js file is not loaded on the component but on the page
-  // test('clicking belegstelle-erlautert reveals the text in section D', async () => {
-  //   const clickElement = enWrapper.find('[class*=belegstelle-erl]')
-  //   const targetEl = enWrapper.find(`${clickElement.attributes('data-target')}`)
-  //   let expandElement = targetEl.element.parentElement
-  //   expect(expandElement?.classList.contains('border-opacity-0')).toBe(true)
-  //   await clickElement.trigger('click')
-  //   expandElement = targetEl.element.parentElement
-  //   expect(expandElement?.classList.contains('border-opacity-0')).toBe(false)
-  // })
+  test('component deals correctly with depth of reference', async () => {
+    const wrapper = await mountSuspended(TextColumn, {
+      props: { urn: 'urn:cts:greekLit:tlg0527.tlg001.hanhart', reff: '1.1' },
+      global: {
+        plugins: [vuetify, i18n]
+      },
+      route: '/texts/urn:cts:greekLit:tlg0527.tlg001.hanhart;1.1'
+    })
+    expect(wrapper.find('h1').text()).toBe('Genesis 1.1')
+  })
+  test('component deals correctly with invalid reference', async () => {
+    const wrapper = await mountSuspended(TextColumn, {
+      props: { urn: 'urn:cts:greekLit:tlg0527.tlg001.hanhart', reff: '1.100' },
+      global: {
+        plugins: [vuetify, i18n]
+      },
+      route: '/texts/urn:cts:greekLit:tlg0527.tlg001.hanhart;1.1'
+    })
+    expect(wrapper.find('h1').text()).toBe('Genesis 1.1')
+  })
 })

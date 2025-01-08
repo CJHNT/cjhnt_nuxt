@@ -2,6 +2,8 @@
 import { allows } from 'nuxt-authorization/utils'
 import { readClosed } from '~/utils/abilities'
 import parentsAndSiblings from '~/utils/parentsAndSiblings'
+import chooseXsl from '~/utils/chooseXsl'
+import { getParentId, getEnDeBibliography, checkOpenText, getDocTitle } from '~/utils/getTextMeta'
 
 const { locale } = useI18n()
 const { user } = useUserSession()
@@ -12,7 +14,7 @@ const linguisticExist = ref({ lemma: false, phonetic: false, 'phonetic-lemma': f
 const route = useRoute()
 
 const props = defineProps({
-  urn: { type: String, default: '' },
+  urn: { type: String, required: true },
   reff: { type: String, default: '1' }
 })
 const allAncestors = defineModel({ type: Array, default: [] })
@@ -29,43 +31,15 @@ const docMeta = await $fetch('/api/dts/collections', {
   body: { id: props.urn },
   method: 'POST'
 })
-const openText =
-  docMeta['dts:dublincore'] && docMeta['dts:dublincore']['dct:accessRights'] === 'open'
-const docTitle = {
-  de:
-    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
-    docMeta.title,
-  en:
-    docMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
-    docMeta.title
-}
-let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (docMeta['dts:dublincore']?.['dct:isPartOf']) {
-  if (typeof docMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
-    parentId = docMeta['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(docMeta['dts:dublincore']['dct:isPartOf'])) {
-    parentId = docMeta['dts:dublincore']['dct:isPartOf'][0]['@id']
-  }
-}
+const openText = checkOpenText(docMeta)
+const docTitle = getDocTitle(docMeta)
+const parentId = getParentId(docMeta) || props.urn.split('.').slice(0, -1).join('.')
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors].filter((c) => c.id !== parentId)
 const siblings = collMembers
   .filter((c) => c['@id'] !== props.urn)
   .map((m) => {
-    const biblio = {
-      de:
-        m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'deu')?.[
-          '@value'
-        ] ??
-        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
-        m['dts:extensions']['dc:language'][0]['@value'],
-      en:
-        m['dts:dublincore']['dct:bibliographicCitation']?.find((e) => e['@language'] === 'eng')?.[
-          '@value'
-        ] ??
-        m['dts:dublincore']['dct:bibliographicCitation']?.[0]['@value'] ??
-        m['dts:extensions']['dc:language'][0]['@value']
-    }
+    const biblio = getEnDeBibliography(m)
     return [
       m['@id'],
       m['dts:extensions']['dc:language'],
@@ -89,16 +63,10 @@ if (openText || projectMember) {
   navReturn.value = navInfo
   validReffs.value = navReturn.value['hydra:member'].map((r) => r.ref)
   if (!props.reff.split('-').every((e) => validReffs.value.includes(e))) {
-    await useAsyncData('refWarning', () =>
-      notificationStore
-        .addNotification({
-          type: 'warning',
-          // rule disabled because locale is not user-provided input
-
-          message: `Reference ${usedReff.value} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs.value[0]}).`
-        })
-        .then(() => true)
-    )
+    notificationStore.addNotification({
+      type: 'warning',
+      message: `Reference ${props.reff} not found in ${docTitle[locale]}. Returning the text's first ${navReturn.value.citeType} (${validReffs.value[0]}).`
+    })
     usedReff.value = validReffs.value[0]
   }
   ancestors.value.push({ id: props.urn, title: docTitle, disabled: true, ref: usedReff.value })
@@ -108,22 +76,9 @@ if (openText || projectMember) {
   nextId.value =
     currentIndex + 1 < validReffs.value.length ? validReffs.value[currentIndex + 1] : null
 
-  const xslPath = () => {
-    switch (true) {
-      case props.urn.includes('commentary'):
-        return 'assets/source/commentary.sef.json'
-      case props.urn.includes('tlg0031'):
-      case props.urn.includes('tlg0527'):
-      case props.urn.includes('1henoch'):
-        return 'assets/source/nt_fragment.sef.json'
-      case props.urn.includes('qumran'):
-        return 'assets/source/qumran.sef.json'
-      default:
-        return 'assets/source/epidoc.sef.json'
-    }
-  }
+  const xslPath = chooseXsl(props.urn)
   const data = await $fetch('/api/dts/document', {
-    body: { id: props.urn, ref: usedReff.value, xsl: xslPath() },
+    body: { id: props.urn, ref: usedReff.value, xsl: xslPath },
     method: 'POST'
   })
   formattedText.value = data

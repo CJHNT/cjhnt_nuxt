@@ -48,6 +48,33 @@ describe('Commentary Column Component', async () => {
     })
     expect(deWrapper.html()).toMatchSnapshot()
   })
+  test('text without deu and eng tags on dc:title works', async () => {
+    const wrapper = await mountSuspended(CommentaryColumn, {
+      props: { urn: 'urn:cts:cjhnt:commentary.1tim.001_001_001', reff: '1', index: 0 },
+      global: {
+        plugins: [vuetify, i18nDe]
+      }
+    })
+    expect(wrapper.find('h1').text()).toContain('no language')
+  })
+  test('call to document api with non-existent ref returns valid ref', async () => {
+    const wrapper = await mountSuspended(CommentaryColumn, {
+      props: { urn: 'urn:cts:cjhnt:commentary.1tim.001_001_001', reff: '2', index: 0 },
+      global: {
+        plugins: [vuetify, i18nDe]
+      }
+    })
+    expect(wrapper.find('h1').text()).toContain('no language')
+  })
+  test('closed document is not shown', async () => {
+    const wrapper = await mountSuspended(CommentaryColumn, {
+      props: { urn: 'urn:cts:cjhnt:commentary.1tim.001_002_001', reff: '1', index: 0 },
+      global: {
+        plugins: [vuetify, i18nDe]
+      }
+    })
+    expect(wrapper.find('#de-text').exists()).toBeFalsy()
+  })
   // test('sibling menu is not empty', async () => {
   //   const clickElement = enWrapper.getComponent('[title=Open]')
   //   expect(clickElement.attributes('aria-label')).toBe('Open')

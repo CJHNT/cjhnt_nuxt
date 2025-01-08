@@ -64,20 +64,20 @@ const memberItems = collMembers
 
 const citation = {
   de:
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
-      '@value'
-    ] ??
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
-      '@value'
-    ] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation']?.find(
+      (e) => e['@language'] === 'deu'
+    )?.['@value'] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation']?.find(
+      (e) => e['@language'] === 'eng'
+    )?.['@value'] ??
     '',
   en:
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
-      '@value'
-    ] ??
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
-      '@value'
-    ] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation']?.find(
+      (e) => e['@language'] === 'eng'
+    )?.['@value'] ??
+    textMeta['dts:dublincore']['dct:bibliographicCitation']?.find(
+      (e) => e['@language'] === 'deu'
+    )?.['@value'] ??
     ''
 }
 
@@ -115,9 +115,7 @@ if (openText || projectMember) {
     return apiResult
   })
   ntText.value = apiNtText.value
-  engText.value = domText.getElementById('en-text')
-    ? domText.getElementById('en-text').outerHTML
-    : ''
+  engText.value = domText.getElementById('en-text')?.outerHTML ?? ''
   deuText.value = domText.getElementById('de-text').outerHTML
 }
 const engClass = computed(() => ({
