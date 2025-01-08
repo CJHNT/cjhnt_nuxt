@@ -58,7 +58,7 @@
     <xsl:template match="t:div[@type='sectionA']">
         <xsl:if test="t:p/node()">
             <xsl:choose>
-                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                <xsl:when test="ancestor::t:div[@type='lang-div' and @subtype='en']">
                     <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Literature</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
@@ -77,7 +77,7 @@
     <xsl:template match="t:div[@type='sectionB']">
         <xsl:if test="t:p/node()">
             <xsl:choose>
-                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                <xsl:when test="ancestor::t:div[@type='lang-div' and @subtype='en']">
                     <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Primary Sources</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
@@ -108,8 +108,8 @@
     <xsl:template match="t:div[@type='sectionC']">
         <xsl:if test="t:p/node()">
             <xsl:choose>
-                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
-                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Rationale for Chosen Sources</xsl:element>
+                <xsl:when test="ancestor::t:div[@type='lang-div' and @subtype='en']">
+                    <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Explanation for Selection of Sources</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Begründung der Textauswahl</xsl:element>
@@ -136,7 +136,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                        <xsl:when test="ancestor::t:div[@type='lang-div' and @subtype='en']">
                             <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Texts</xsl:element>
                         </xsl:when>
                         <xsl:otherwise>
@@ -157,7 +157,7 @@
     <xsl:template match="t:div[@type='sectionE']">
         <xsl:if test="t:p/node()">
             <xsl:choose>
-                <xsl:when test="ancestor::div[@type='lang-div' and @subtype='en']">
+                <xsl:when test="ancestor::t:div[@type='lang-div' and @subtype='en']">
                     <xsl:element name="h3"><xsl:attribute name="class">section-subtitle</xsl:attribute>Summary and Additional Information</xsl:element>
                 </xsl:when>
                 <xsl:otherwise>
