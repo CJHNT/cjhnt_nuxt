@@ -55,7 +55,7 @@ describe('Commentary Column Component', async () => {
         plugins: [vuetify, i18nDe]
       }
     })
-    expect(wrapper.find('h1').text()).toContain('no language')
+    expect(wrapper.find('h1').text()).toContain('1,1/1 Gott, der Retter: θεός σωτήρ')
   })
   test('call to document api with non-existent ref returns valid ref', async () => {
     const wrapper = await mountSuspended(CommentaryColumn, {
@@ -64,7 +64,7 @@ describe('Commentary Column Component', async () => {
         plugins: [vuetify, i18nDe]
       }
     })
-    expect(wrapper.find('h1').text()).toContain('no language')
+    expect(wrapper.find('h1').text()).toContain('1,1/1 Gott, der Retter: θεός σωτήρ')
   })
   test('closed document is not shown', async () => {
     const wrapper = await mountSuspended(CommentaryColumn, {

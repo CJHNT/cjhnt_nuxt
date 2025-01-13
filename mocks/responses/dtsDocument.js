@@ -1798,6 +1798,333 @@ export const xmlTexts = [
          . 
          </span></seg>
    
-   </div`
+   </div>`
+  },
+  {
+    id: 'urn:cts:greekLit:tlg0527.tlg001.hanhart',
+    reff: '50.26',
+    xml: `<div>
+   
+   
+   <seg class="citation-section" n="50.26" id="urn:cts:greekLit:tlg0527.tlg001.hanhart;50.26"><span class="text-paragraph">
+         <span lemma="" n="w-32115" class="stack">καὶ</span>
+         <span lemma="" n="w-32116" class="stack">ἐτελεύτησεν</span>
+         <span lemma="" n="w-32117" class="stack">Ιωσηφ</span>
+         <span lemma="" n="w-32118" class="stack">ἐτῶν</span>
+         <span lemma="" n="w-32119" class="stack">ἑκατὸν</span>
+         <span lemma="" n="w-32120" class="stack">δέκα·</span>
+         <span lemma="" n="w-32121" class="stack">καὶ</span>
+         <span lemma="" n="w-32122" class="stack">ἔθαψαν</span>
+         <span lemma="" n="w-32123" class="stack">αὐτὸν</span>
+         <span lemma="" n="w-32124" class="stack">καὶ</span>
+         <span lemma="" n="w-32125" class="stack">ἔθηκαν</span>
+         <span lemma="" n="w-32126" class="stack">ἐν</span>
+         <span lemma="" n="w-32127" class="stack">τῇ</span>
+         <span lemma="" n="w-32128" class="stack">σορῷ</span>
+         <span lemma="" n="w-32129" class="stack">ἐν</span>
+         <span lemma="" n="w-32130" class="stack">Αἰγύπτῳ</span>
+         .
+         </span></seg>
+   
+   </div>`
+  },
+  {
+    id: 'urn:cts:cjhnt:1henoch.1henoch.stuckenbruck',
+    reff: '1.1',
+    xml: `<div>
+   
+   
+   <seg class="citation-section" n="1.1" id="urn:cts:cjhnt:1henoch.1henoch.stuckenbruck;1.1"><span class="text-paragraph">
+         <span lemma="" n="w-1" class="stack">ቃለ</span>
+         ፡ 
+         <span lemma="" n="w-2" class="stack">በረከት</span>
+         ፡ 
+         <span lemma="" n="w-3" class="stack">ዘሄኖክ</span>
+         ፡ 
+         <span lemma="" n="w-4" class="stack">በከመ</span>
+         ፡ 
+         <span lemma="" n="w-5" class="stack">ባረከ</span>
+         ፡ 
+         <span lemma="" n="w-6" class="stack">ኅሩያነ</span>
+         ፡ 
+         <span lemma="" n="w-7" class="stack">ወጻድቃነ</span>
+         ፡ 
+         <span lemma="" n="w-8" class="stack">እለ</span>
+         ፡ 
+         <span lemma="" n="w-9" class="stack">ሀለዉ</span>
+         ፡ 
+         <span lemma="" n="w-10" class="stack">ይኩኑ</span>
+         ፡ 
+         <span lemma="" n="w-11" class="stack">በዕለተ</span>
+         ፡ 
+         <span lemma="" n="w-12" class="stack">ምንዳቤ</span>
+         ፡ 
+         <span lemma="" n="w-13" class="stack">ለአሰስሎ</span>
+         ፡ 
+         <span lemma="" n="w-14" class="stack">ኵሉ</span>
+         ፡ 
+         <span lemma="" n="w-15" class="stack">ረሲዓን</span>
+         ።
+         </span></seg>
+   
+   </div>`
+  },
+  {
+    id: 'urn:cts:cjhnt:1henoch.1henoch.cjhnt_eng',
+    reff: '61.5',
+    xml: `<div>
+   
+   
+   <seg class="citation-section" n="61.5" id="urn:cts:cjhnt:1henoch.1henoch.cjhnt_eng;61.5"><span class="text-paragraph">
+         <span lemma="" n="w-" class="stack">These</span>
+         <span lemma="" n="w-" class="stack">measurements</span>
+         <span lemma="" n="w-" class="stack">will</span>
+         <span lemma="" n="w-" class="stack">reveal</span>
+         <span lemma="" n="w-" class="stack">all</span>
+         <span lemma="" n="w-" class="stack">secrets</span>
+         <span lemma="" n="w-" class="stack">of</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">Earth</span>
+         '
+         <span lemma="" n="w-" class="stack">s</span>
+         <span lemma="" n="w-" class="stack">depths</span>
+         . 
+         <span lemma="" n="w-" class="stack">Those</span>
+         <span lemma="" n="w-" class="stack">who</span>
+         <span lemma="" n="w-" class="stack">were</span>
+         <span lemma="" n="w-" class="stack">destroyed</span>
+         <span lemma="" n="w-" class="stack">by</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">desert</span>
+         , 
+         <span lemma="" n="w-" class="stack">and</span>
+         <span lemma="" n="w-" class="stack">those</span>
+         <span lemma="" n="w-" class="stack">who</span>
+         <span lemma="" n="w-" class="stack">were</span>
+         <span lemma="" n="w-" class="stack">devoured</span>
+         <span lemma="" n="w-" class="stack">by</span>
+         <span lemma="" n="w-" class="stack">wild</span>
+         <span lemma="" n="w-" class="stack">animals</span>
+         , 
+         <span lemma="" n="w-" class="stack">and</span>
+         <span lemma="" n="w-" class="stack">those</span>
+         <span lemma="" n="w-" class="stack">who</span>
+         <span lemma="" n="w-" class="stack">were</span>
+         <span lemma="" n="w-" class="stack">swallowed</span>
+         <span lemma="" n="w-" class="stack">by</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">fish</span>
+         <span lemma="" n="w-" class="stack">of</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">sea</span>
+         , 
+         <span lemma="" n="w-" class="stack">accordingly</span>
+         <span lemma="" n="w-" class="stack">they</span>
+         <span lemma="" n="w-" class="stack">will</span>
+         <span lemma="" n="w-" class="stack">return</span>
+         <span lemma="" n="w-" class="stack">and</span>
+         <span lemma="" n="w-" class="stack">rely</span>
+         <span lemma="" n="w-" class="stack">on</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">day</span>
+         <span lemma="" n="w-" class="stack">of</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">Chosen</span>
+         <span lemma="" n="w-" class="stack">One</span>
+         . 
+         <span lemma="" n="w-" class="stack">Therefore</span>
+         <span lemma="" n="w-" class="stack">there</span>
+         <span lemma="" n="w-" class="stack">is</span>
+         <span lemma="" n="w-" class="stack">no</span>
+         <span lemma="" n="w-" class="stack">one</span>
+         <span lemma="" n="w-" class="stack">who</span>
+         <span lemma="" n="w-" class="stack">will</span>
+         <span lemma="" n="w-" class="stack">be</span>
+         <span lemma="" n="w-" class="stack">destroyed</span>
+         <span lemma="" n="w-" class="stack">before</span>
+         <span lemma="" n="w-" class="stack">the</span>
+         <span lemma="" n="w-" class="stack">Lord</span>
+         <span lemma="" n="w-" class="stack">of</span>
+         <span lemma="" n="w-" class="stack">Spirits</span>
+         <span lemma="" n="w-" class="stack">and</span>
+         <span lemma="" n="w-" class="stack">no</span>
+         <span lemma="" n="w-" class="stack">one</span>
+         <span lemma="" n="w-" class="stack">who</span>
+         <span lemma="" n="w-" class="stack">would</span>
+         <span lemma="" n="w-" class="stack">be</span>
+         <span lemma="" n="w-" class="stack">able</span>
+         <span lemma="" n="w-" class="stack">to</span>
+         <span lemma="" n="w-" class="stack">be</span>
+         <span lemma="" n="w-" class="stack">destroyed</span>
+         .
+         </span></seg>
+   
+   </div>`
+  },
+  {
+    id: 'urn:cts:cjhnt:1henoch.1henoch.stuckenbruck',
+    reff: '61.5',
+    xml: `<div>
+   
+   
+   <seg class="citation-section" n="61.5" id="urn:cts:cjhnt:1henoch.1henoch.stuckenbruck;61.5"><span class="text-paragraph">
+         <span lemma="ወ+እሉ" n="w-6619" class="stack" phonetic-lemma="wa+ʾəllu"><span class="phonetic d-none">Waʾəllu</span>
+            ወእሉ
+            
+            </span>
+         ፡ 
+         <span lemma="መጥነ" n="w-6620" class="stack" phonetic-lemma="maṭna"><span class="phonetic d-none">ʾəmṭāna</span>
+            አምጣነ
+            
+            </span>
+         ፡ 
+         <span lemma="ከሠተ" n="w-6621" class="stack" phonetic-lemma="kaśata"><span class="phonetic d-none">yəkaśśətu</span>
+            ይከሥቱ
+            
+            </span>
+         ፡ 
+         <span lemma="ኵለ" n="w-6622" class="stack" phonetic-lemma="kᵂall-"><span class="phonetic d-none">kᵂəllo</span>
+            ኵሎ
+            
+            </span>
+         ፡ 
+         <span lemma="ኀበአ" n="w-6623" class="stack" phonetic-lemma="h̬abʾa"><span class="phonetic d-none">h̬əbuʾatā</span>
+            ኅቡአታ
+            
+            </span>
+         ፡ 
+         <span lemma="ለ+ዐመቀ" n="w-6624" class="stack" phonetic-lemma="la+ʿamaqa"><span class="phonetic d-none">laʿəməqa</span>
+            ለዕምቀ
+            
+            </span>
+         ፡ 
+         <span lemma="ምድር" n="w-6625" class="stack" phonetic-lemma="mədr"><span class="phonetic d-none">mədr.</span>
+            ምድር
+            
+            </span>
+         ። 
+         <span lemma="ወ+እለ" n="w-6626" class="stack" phonetic-lemma="wa+ʾəlla"><span class="phonetic d-none">Waʾəlla</span>
+            ወእለ
+            
+            </span>
+         ፡ 
+         <span lemma="ሀጕለ/ሐጕለ" n="w-6627" class="stack" phonetic-lemma="hagᵂla/ḥagᵂla"><span class="phonetic d-none">taḥagᵂəlu</span>
+            ተሐጕሉ
+            
+            </span>
+         ፡ 
+         <span lemma="እም+በድወ" n="w-6628" class="stack" phonetic-lemma="ʾəm+badwa"><span class="phonetic d-none">ʾəmbadw</span>
+            እምበድው
+            
+            </span>
+         ፡ 
+         <span lemma="ወ+እለ" n="w-6629" class="stack" phonetic-lemma="wa+ʾəlla"><span class="phonetic d-none">waʾəlla</span>
+            ወእለ
+            
+            </span>
+         ፡ 
+         <span lemma="በልዐ" n="w-6630" class="stack" phonetic-lemma="balʿa"><span class="phonetic d-none">tabaləʿu</span>
+            ተበልዑ
+            
+            </span>
+         ፡ 
+         <span lemma="እም+አርዌ" n="w-6631" class="stack" phonetic-lemma="ʾəm+arwe"><span class="phonetic d-none">ʾəmʾarāwit</span>
+            እምአራዊት
+            
+            </span>
+         ፡ 
+         <span lemma="ወ+እለ" n="w-6632" class="stack" phonetic-lemma="wa+ʾəlla"><span class="phonetic d-none">waʾəlla</span>
+            ወእለ
+            
+            </span>
+         ፡ 
+         <span lemma="በልዐ" n="w-6633" class="stack" phonetic-lemma="balʿa"><span class="phonetic d-none">tabaləʿu</span>
+            ተበልዑ
+            
+            </span>
+         ፡ 
+         <span lemma="እም+ዓሣ" n="w-6634" class="stack" phonetic-lemma="em+ʿāśā"><span class="phonetic d-none">emʿāśāta</span>
+            እምዓሣተ
+            
+            </span>
+         ፡ 
+         <span lemma="ባሕር" n="w-6635" class="stack" phonetic-lemma="bāḥr"><span class="phonetic d-none">bāḥr</span>
+            ባሕር
+            
+            </span>
+         ፡ 
+         <span lemma="ከመ" n="w-6636" class="stack" phonetic-lemma="kama"><span class="phonetic d-none">kama</span>
+            ከመ
+            
+            </span>
+         ፡ 
+         <span lemma="ገብአ" n="w-6637" class="stack" phonetic-lemma="gabʾa"><span class="phonetic d-none">yəgəbbəʾu</span>
+            ይግብኡ
+            
+            </span>
+         ፡ 
+         <span lemma="ወ+ተመርጐዘ" n="w-6638" class="stack" phonetic-lemma="wa+tamargᵂaza/mrgᵂz"><span class="phonetic d-none">wayətmarəgᵂgᵂazu</span>
+            ወይትመርጐዙ
+            
+            </span>
+         ፡ 
+         <span lemma="በ+ወዐለ/ውዕለ" n="w-6639" class="stack" phonetic-lemma="ba+waʿala/waʿla"><span class="phonetic d-none">baʿəlata</span>
+            በዕለተ
+            
+            </span>
+         ፡ 
+         <span lemma="ኀርየ/ኀረየ" n="w-6640" class="stack" phonetic-lemma="h̬arya/h̬araya"><span class="phonetic d-none">h̬əruy.</span>
+            ኅሩይ
+            
+            </span>
+         ። 
+         <span lemma="እስመ" n="w-6641" class="stack" phonetic-lemma="ʾəsma"><span class="phonetic d-none">ʾəsma</span>
+            እስመ
+            
+            </span>
+         ፡ 
+         <span lemma="አልብ" n="w-6642" class="stack" phonetic-lemma="ʾalb-"><span class="phonetic d-none">ʾalbotu</span>
+            አልቦቱ
+            
+            </span>
+         ፡ 
+         <span lemma="ዘ+ሀጕለ/ሐጕለ" n="w-6643" class="stack" phonetic-lemma="za+hagᵂla/ḥagᵂla"><span class="phonetic d-none">zayetḥagᵂgᵂal</span>
+            ዘይትሐጐል
+            
+            </span>
+         ፡ 
+         <span lemma="በ+ቀደመ" n="w-6644" class="stack" phonetic-lemma="ba+qadama"><span class="phonetic d-none">baqədma</span>
+            በቅድመ
+            
+            </span>
+         ፡ 
+         <span lemma="ገዝአ" n="w-6645" class="stack" phonetic-lemma="gazʾa"><span class="phonetic d-none">ʾəgziʾa</span>
+            እግዚአ
+            
+            </span>
+         ፡ 
+         <span lemma="ነፍሰ" n="w-6646" class="stack" phonetic-lemma="nafsa"><span class="phonetic d-none">manāfəst.</span>
+            መናፍስት
+            
+            </span>
+         ። 
+         <span lemma="ወ+አልብ" n="w-6647" class="stack" phonetic-lemma="wa+ʾalb-"><span class="phonetic d-none">Waʾalbo</span>
+            ወአልቦ
+            
+            </span>
+         ፡ 
+         <span lemma="ዘ+ክህለ" n="w-6648" class="stack" phonetic-lemma="za+kəhla"><span class="phonetic d-none">zayəkl</span>
+            ዘይክል
+            
+            </span>
+         ፡ 
+         <span lemma="ሀጕለ/ሐጕለ" n="w-6649" class="stack" phonetic-lemma="hagᵂla/ḥagᵂla"><span class="phonetic d-none">taḥagᵂəlota.</span>
+            ተሐጕሎተ
+            
+            </span>
+         ፡
+         </span></seg>
+   
+   </div>`
   }
 ]

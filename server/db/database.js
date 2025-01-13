@@ -14,7 +14,8 @@ export const initDb = async () => {
         sessionToken TEXT,
         csrfToken TEXT,
         verified_email INT DEFAULT 0,
-        wants_updates INT DEFAULT 0
+        wants_updates INT DEFAULT 0,
+        locale TEXT
         CHECK (role in ('admin', 'project', 'user'))
       )
     `
