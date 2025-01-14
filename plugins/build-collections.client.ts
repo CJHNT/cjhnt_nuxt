@@ -30,7 +30,7 @@ const primaryTextTabs = [
       { title: 'collection.qumran', urn: 'urn:cts:cjhnt:qumran' },
       { title: 'collection.philo', urn: 'urn:cts:greekLit:tlg0018' },
       { title: 'collection.josephus', urn: 'urn:cts:greekLit:tlg0526' }
-      // { title: 'collection.author_fragments', urn: 'author_fragments' }
+      // { title: 'collection.author_fragments', urn: 'urn:cts:cjhnt:author_fragments' }
     ]
   },
   {
