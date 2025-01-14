@@ -16,8 +16,6 @@ const wantsUpdates = ref(false)
 const { t } = useI18n()
 
 function validateEmail() {
-  // warning disabled here because the regex is from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
-   
   const pattern = /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/
   return pattern.test(email.value) || 'Invalid e-mail.'
 }
@@ -57,12 +55,14 @@ const strengthColor = computed(
           v-model="email"
           :label="label ? $t(label) : 'Email'"
           :rules="[validateEmail()]"
+          data-testid="email-input"
           prepend-icon="mdi-email"
         />
         <v-text-field
           v-if="title === 'auth.changeEmail'"
           v-model="repeatEmail"
           :label="$t('auth.verifyEmail')"
+          data-testid="repeat-email-input"
           prepend-icon="mdi-email"
           :rules="[() => email === repeatEmail || $t('auth.noEmailMatch')]"
         />
@@ -72,6 +72,7 @@ const strengthColor = computed(
           :type="showPassword ? 'text' : 'password'"
           :label="label ? $t(label) : $t('auth.password')"
           :rules="title !== 'auth.login' ? [passwordStrength()] : []"
+          data-testid="password-input"
           prepend-icon="mdi-lock"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPassword = !showPassword"
@@ -89,6 +90,7 @@ const strengthColor = computed(
           v-model="repeatPassword"
           :type="showRepeatPassword ? 'text' : 'password'"
           :label="$t('auth.verifyPassword')"
+          data-testid="repeat-password-input"
           prepend-icon="mdi-lock"
           :append-icon="showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[() => password === repeatPassword || $t('auth.noPasswordMatch')]"
@@ -97,12 +99,13 @@ const strengthColor = computed(
         <v-checkbox
           v-if="['auth.signUp'].includes(title)"
           v-model="wantsUpdates"
+          data-testid="updates-checkbox"
           :label="label ? $t(label) : $t('auth.sendMeUpdates')"
         />
       </v-card-text>
       <v-divider />
       <v-card-actions>
-        <v-btn color="success" :disabled="loading" type="submit">
+        <v-btn color="success" :disabled="loading" type="submit" data-testid="submit-button">
           <template v-if="loading">{{ $t('wait') }}</template>
           <template v-else-if="title === 'auth.changeUpdateStatus'">{{ $t(label) }}</template>
           <template v-else>{{ $t(title) }}</template>
@@ -113,16 +116,22 @@ const strengthColor = computed(
         <v-card-text>
           <template v-if="title === 'auth.signUp'">
             {{ $t('auth.alreadyRegistered') }}
-            <nuxt-link :to="{ name: 'auth-login' }">{{ $t('auth.login') }}</nuxt-link>
+            <nuxt-link :to="{ name: 'auth-login' }" data-testid="login-link">{{
+              $t('auth.login')
+            }}</nuxt-link>
           </template>
           <template v-else-if="title === 'auth.login'">
             <p>
               {{ $t('auth.noAccountYet') }}
-              <nuxt-link :to="{ name: 'auth-register' }">{{ $t('auth.signUp') }}</nuxt-link>
+              <nuxt-link :to="{ name: 'auth-register' }" data-testid="signup-link">{{
+                $t('auth.signUp')
+              }}</nuxt-link>
             </p>
             <p>
               {{ $t('auth.forgotPassword') }}
-              <nuxt-link to="/auth/forgotPassword">{{ $t('auth.resetPassword') }}</nuxt-link>
+              <nuxt-link to="/auth/forgotPassword" data-testid="forgot-password-link">{{
+                $t('auth.resetPassword')
+              }}</nuxt-link>
             </p>
           </template>
         </v-card-text>

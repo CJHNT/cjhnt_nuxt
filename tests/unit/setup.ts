@@ -3,6 +3,7 @@ import { registerEndpoint } from '@nuxt/test-utils/runtime'
 import dtsCollectionResponse from '~/mocks/responses/dtsCollections.json'
 import dtsNavigationResponse from '~/mocks/responses/dtsNavigation.json'
 import { xmlTexts } from '~/mocks/responses/dtsDocument.js'
+import ploneResponse from '~/mocks/responses/plone.json'
 import { readBody } from 'h3'
 import { writeFile } from 'node:fs'
 import { resolvePath } from 'nuxt/kit'
@@ -33,10 +34,13 @@ registerEndpoint('/api/dts/navigation', {
   method: 'POST',
   handler: async (event) => {
     const body = await readBody(event)
-    const returnJson = dtsNavigationResponse.find((c) => c['@id'].includes(body.id))
+    const navLevel = body.level || '1'
+    const returnJson = dtsNavigationResponse.find((c) =>
+      c['@id'].includes(`id=${body.id}&level=${navLevel}`)
+    )
     if (!returnJson && body.id) {
       const newData = await (
-        await fetch(`http://localhost:5000/api/dts/navigation?id=${body.id}`)
+        await fetch(`http://localhost:5000/api/dts/navigation?id=${body.id}&level=${navLevel}`)
       ).json()
       dtsNavigationResponse.push(newData)
       const savePath = await resolvePath('./mocks/responses/dtsNavigation.json')
@@ -55,8 +59,13 @@ registerEndpoint('/api/dts/document', {
   method: 'POST',
   handler: async (event) => {
     const body = await readBody(event)
-    return xmlTexts.find((c) => c.id === body.id)?.xml
+    return xmlTexts.find((c) => c.id === body.id && c.reff === body.ref)?.xml
   }
+})
+
+registerEndpoint('/api/plone/news/:locale', () => {
+  const data = ploneResponse
+  return data
 })
 
 beforeAll(() => {

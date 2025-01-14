@@ -2,6 +2,7 @@
 import { allows } from 'nuxt-authorization/utils'
 import { readClosed } from '~/utils/abilities'
 import parentsAndSiblings from '~/utils/parentsAndSiblings'
+import { getParentId, getEnDeBibliography, checkOpenText, getDocTitle } from '~/utils/getTextMeta'
 
 const { locale } = useI18n()
 const { user } = useUserSession()
@@ -18,25 +19,11 @@ const textMeta = await $fetch('/api/dts/collections', {
   method: 'POST'
 })
 
-const openText =
-  textMeta['dts:dublincore'] && textMeta['dts:dublincore']['dct:accessRights'] === 'open'
+const openText = checkOpenText(textMeta)
+const docTitle = getDocTitle(textMeta)
 
-const docTitle = {
-  de:
-    textMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
-    textMeta.title,
-  en:
-    textMeta['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ??
-    textMeta.title
-}
-let parentId = props.urn.split('.').slice(0, -1).join('.')
-if (textMeta['dts:dublincore']?.['dct:isPartOf']) {
-  if (typeof textMeta['dts:dublincore']['dct:isPartOf'] === 'string') {
-    parentId = textMeta['dts:dublincore']['dct:isPartOf']
-  } else if (Array.isArray(textMeta['dts:dublincore']['dct:isPartOf'])) {
-    parentId = textMeta['dts:dublincore']['dct:isPartOf'][0]['@id']
-  }
-}
+const parentId = getParentId(textMeta) || props.urn.split('.').slice(0, -1).join('.')
+
 const { textAncestors, collMembers } = await parentsAndSiblings(parentId)
 ancestors.value = [...textAncestors, { id: props.urn, title: docTitle, disabled: true, ref: '' }]
 allAncestors.value.push(ancestors.value)
@@ -44,13 +31,7 @@ allAncestors.value.push(ancestors.value)
 const memberItems = collMembers
   .filter((m) => m['@id'] !== props.urn)
   .map((m) => {
-    const docTitle = {
-      de:
-        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'deu')?.['@value'] ??
-        m.title,
-      en:
-        m['dts:extensions']['dc:title'].find((e) => e['@language'] === 'eng')?.['@value'] ?? m.title
-    }
+    const docTitle = getDocTitle(m)
     const returnValue = {
       value: m['@id'],
       en: docTitle.en,
@@ -62,24 +43,7 @@ const memberItems = collMembers
   })
   .filter((c) => projectMember || c.open)
 
-const citation = {
-  de:
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
-      '@value'
-    ] ??
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
-      '@value'
-    ] ??
-    '',
-  en:
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'eng')[
-      '@value'
-    ] ??
-    textMeta['dts:dublincore']['dct:bibliographicCitation'].find((e) => e['@language'] === 'deu')[
-      '@value'
-    ] ??
-    ''
-}
+const citation = getEnDeBibliography(textMeta)
 
 const engText = ref('')
 const deuText = ref('')
@@ -115,9 +79,7 @@ if (openText || projectMember) {
     return apiResult
   })
   ntText.value = apiNtText.value
-  engText.value = domText.getElementById('en-text')
-    ? domText.getElementById('en-text').outerHTML
-    : ''
+  engText.value = domText.getElementById('en-text')?.outerHTML ?? ''
   deuText.value = domText.getElementById('de-text').outerHTML
 }
 const engClass = computed(() => ({
