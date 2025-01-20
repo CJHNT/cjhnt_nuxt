@@ -43,7 +43,8 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     'nuxt-security',
     'nuxt-authorization',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    'nuxt-tiptap-editor'
   ],
 
   googleFonts: {
@@ -80,6 +81,10 @@ export default defineNuxtConfig({
     experimental: {
       localeDetector: './localeDetector.ts'
     }
+  },
+
+  tiptap: {
+    prefix: 'Tiptap'
   },
 
   runtimeConfig: {

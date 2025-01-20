@@ -52,6 +52,8 @@ declare global {
     passage: string
     '@id': string
     'hydra:member': { ref: string }[]
+    citeDepth: number
+    citeType: string
   }
 }
 
