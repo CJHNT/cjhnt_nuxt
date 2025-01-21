@@ -172,6 +172,10 @@ div.cjh-Zitaterläuterung p {
   font-weight: bold;
 }
 
+.subsection-subtitle {
+  font-style: italic;
+}
+
 .text-line {
   margin-left: 20px;
 }

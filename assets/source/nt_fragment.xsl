@@ -54,6 +54,30 @@
         </xsl:if>
     </xsl:template>
     
+    <xsl:template match="t:div[@type='section-heading']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">section-subtitle</xsl:attribute>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:div[@type='sub-section-heading']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">subsection-subtitle</xsl:attribute>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
     <xsl:template match="t:w[not(@type='phonetic')]">
         <xsl:element name="span">
             <xsl:attribute name="lemma">
