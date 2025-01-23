@@ -46,6 +46,8 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module'
   ],
 
+  plugins: [{ src: '~/plugins/matomo.client.js', mode: 'client' }],
+
   googleFonts: {
     families: {
       'Noto Serif': {
@@ -91,7 +93,11 @@ export default defineNuxtConfig({
     mailPort: process.env.MAIL_PORT,
     mailSender: process.env.MAIL_SENDER,
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    public: {
+      matomoHost: 'https://analytics.saw-leipzig.de/',
+      matomoSiteId: 18
+    }
   },
 
   eslint: {},
