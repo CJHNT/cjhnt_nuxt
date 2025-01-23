@@ -95,8 +95,8 @@ export default defineNuxtConfig({
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
     baseUrl: process.env.BASE_URL,
     public: {
-      matomoHost: 'https://analytics.saw-leipzig.de/',
-      matomoSiteId: 18
+      matomoHost: process.env.MATOMO_HOST,
+      matomoSiteId: Number(process.env.MATOMO_SITE_ID)
     }
   },
 
