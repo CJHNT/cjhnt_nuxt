@@ -10,14 +10,22 @@ const workEditionError = ref('')
 const workSections = ref([] as string[])
 const citSection = ref('')
 const origText = ref('')
+const cjhntDeu = ref<string | undefined>('')
+const cjhntEng = ref<string | undefined>('')
+const deuText = ref('')
+const engText = ref('')
 const xslPath = ref('')
+const showEditors = ref(false)
 
 watch(selectedWork, async (newWork, oldWork) => {
   workEditionError.value = ''
   if (newWork && newWork !== oldWork) {
+    showEditors.value = false
     citSection.value = ''
     origText.value = ''
     const edition = newWork.versions.find((v) => v[4].includes('edition'))
+    cjhntDeu.value = newWork.versions.find((v) => v[0].includes('cjhnt_deu'))?.[0]
+    cjhntEng.value = newWork.versions.find((v) => v[0].includes('cjhnt_eng'))?.[0]
     if (edition) {
       let navReturn: DtsNavigation = await $fetch('/api/dts/navigation', {
         method: 'post',
@@ -46,6 +54,7 @@ watch(selectedWork, async (newWork, oldWork) => {
 
 watch(citSection, async (newSection, oldSection) => {
   if (newSection && newSection !== oldSection) {
+    showEditors.value = false
     origText.value = await $fetch('/api/dts/document', {
       method: 'post',
       body: {
@@ -54,7 +63,30 @@ watch(citSection, async (newSection, oldSection) => {
         xsl: xslPath.value
       }
     })
+    if (cjhntDeu.value) {
+      const deutsch = await $fetch('/api/dts/document', {
+        method: 'post',
+        body: {
+          id: cjhntDeu.value,
+          ref: newSection,
+          xsl: xslPath.value
+        }
+      })
+      deuText.value = parseTranslation(deutsch)
+    }
+    if (cjhntEng.value) {
+      const english = await $fetch('/api/dts/document', {
+        method: 'post',
+        body: {
+          id: cjhntEng.value,
+          ref: newSection,
+          xsl: xslPath.value
+        }
+      })
+      engText.value = parseTranslation(english)
+    }
   }
+  showEditors.value = true
 })
 </script>
 
@@ -83,13 +115,23 @@ watch(citSection, async (newSection, oldSection) => {
       </template>
       <v-row v-if="origText && selectedWork && workSections.length > 0">
         <v-col cols="6">
+          <div class="text-h5">Original Language</div>
           <!-- eslint-disable-next-line vue/no-v-html -->
           <div v-html="origText"></div>
         </v-col>
       </v-row>
-      <v-row v-if="citSection">
+      <v-row v-if="showEditors">
         <v-col cols="6">
-          <TiptapTranslationEditor></TiptapTranslationEditor>
+          <TiptapEditor
+            title="German Translation"
+            :text="deuText"
+            :tools="['paragraph', 'undo', 'redo']"
+          />
+          <TiptapEditor
+            title="English Translation"
+            :text="engText"
+            :tools="['paragraph', 'undo', 'redo']"
+          />
         </v-col>
       </v-row>
     </v-container>
