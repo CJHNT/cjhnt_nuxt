@@ -186,5 +186,16 @@
     "philo_questions": "Fragen und Antworten",
     "philo_historical": "Historisches/apologetische Schriften",
     "philo_philosophy": "Philosophische Abhandlungen"
+  },
+  "privacy": {
+    "pageHeader": "Datenschutz",
+    "logFilesHeader": "Log-Dateien",
+    "logFilesP1": "Diese Seite erhebt und verwendet Daten in Log Files, die der Internet-Browser des Benutzers übermittelt. Dies sind: Browsertyp / -version, verwendetes Betriebssystem, Referrer URL (die zuvor besuchte Seite), Uhrzeit der Server-Anfrage.",
+    "logFilesP2": "Diese Daten sind bestimmten Personen nicht zuzuordnen. Sie sind notwendig, um den Inhalt des Online-Angebots beim Nutzer darzustellen. Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Daten werden nach einer anonymen statistischen Auswertung gelöscht.",
+    "cookiesHeader": "Cookies",
+    "cookiesP1": "Im Zusammenhang mit der Bereitstellung von Online-Angeboten werden sogenannte \"Cookies\" verwendet. \"Cookies\" sind Textdateien, die beim Besuch einer Internetseite auf dem Computer des Besuchers gespeichert werden. \"Cookies\" werden einmalig bzw. längerwährend verwendet, je nach Browsereinstellung, um dem Besucher bestimmte Funktionen des Online-Angebots zu ermöglichen. Die Textdateien enthalten keinerlei personenbezogene Daten und werden auch nicht mit anderen Datenquellen verbunden.",
+    "cookiesP2": "Sie können die Installation der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich nutzen können.",
+    "userTrackingHeader": "Analyse der Benutzung der Website",
+    "userTrackingP1": "Diese Website benutzt Matomo, eine Open-Source-Software zur statistischen Auswertung der Besucherzugriffe. Auf unserer Webseite verwendet Matomo keine Cookies, um die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die Informationen über Ihre Benutzung dieses Internetangebotes werden auf dem Server des Anbieters in Deutschland gespeichert. Die IP-Adresse wird sofort nach der Verarbeitung und vor deren Speicherung anonymisiert."
   }
 }

@@ -186,5 +186,16 @@
     "philo_questions": "Questions and Answers",
     "philo_historical": "Historical/Apologetic Writiings",
     "philo_philosophy": "Philosophical Treatises"
+  },
+  "privacy": {
+    "pageHeader": "Privacy Policy",
+    "logFilesHeader": "Log Files",
+    "logFilesP1": "This web-site creates and uses log files to store data that comes from the user's browser. These data are: the browser type and version, the user's operating system, referrer URL (the page from which the user came) and the time of the server request.",
+    "logFilesP2": "These data contain no personal data from the user. The data are required to display the online offerings to the user. These data are never combined with data from other sources. The data are deleted after an anonymous, statisical analysis.",
+    "cookiesHeader": "Cookies",
+    "cookiesP1": "This web-site uses browser cookies. These are text files that are stored on the user's computer when visiting the site. They may either be used only once or over a longer period depending on the users browser settings. Certain functionality on this site is only possible because of these cookies. The text files contiain no personal information and are never combined with data from other sources.",
+    "cookiesP2": "You can stop your browser from storing these cookies by changing your browser settings. But then not all functionality will be available.",
+    "userTrackingHeader": "Web-Site Usage Analysis",
+    "userTrackingP1": "This website uses Matomo, an open-source software package, for statistical analysis of web-site usage. Matomo does not use cookies on our web-site to gather and analyze this data. This information about site usage is saved on the provider's server in Germany. The user's IP-address is anonymized by Matomo."
   }
 }
