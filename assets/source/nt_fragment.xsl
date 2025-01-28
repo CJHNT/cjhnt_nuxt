@@ -55,7 +55,7 @@
     </xsl:template>
     
     <xsl:template match="t:div[@type='section-heading']">
-        <xsl:element name="span">
+        <xsl:element name="div">
             <xsl:attribute name="class">section-subtitle</xsl:attribute>
             <xsl:for-each select="node()">
                 <xsl:choose>
@@ -67,8 +67,20 @@
     </xsl:template>
     
     <xsl:template match="t:div[@type='sub-section-heading']">
-        <xsl:element name="span">
+        <xsl:element name="div">
             <xsl:attribute name="class">subsection-subtitle</xsl:attribute>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:div[@type='minor-heading']">
+        <xsl:element name="div">
+            <xsl:attribute name="class">minor-heading</xsl:attribute>
             <xsl:for-each select="node()">
                 <xsl:choose>
                     <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
@@ -118,7 +130,7 @@
         </xsl:element>
     </xsl:template>
     
-    <xsl:template match="seg[@rend='em']">
+    <xsl:template match="t:seg[@rend='em']">
         <xsl:element name="span">
             <xsl:attribute name="class">font-italic font-weight-bold</xsl:attribute>
             <xsl:for-each select="node()">
@@ -128,5 +140,15 @@
                 </xsl:choose>
             </xsl:for-each>
         </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:span[@rend='mx-auto']">
+        <xsl:element name="span">
+            <xsl:attribute name="class">mx-auto</xsl:attribute>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="t:note">
+        
     </xsl:template>
 </xsl:stylesheet>
