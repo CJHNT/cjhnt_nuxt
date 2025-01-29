@@ -47,6 +47,8 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor'
   ],
 
+  plugins: [{ src: '~/plugins/matomo.client.js', mode: 'client' }],
+
   googleFonts: {
     families: {
       'Noto Serif': {
@@ -96,7 +98,11 @@ export default defineNuxtConfig({
     mailPort: process.env.MAIL_PORT,
     mailSender: process.env.MAIL_SENDER,
     sessionPassword: process.env.NUXT_SESSION_PASSWORD,
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    public: {
+      matomoHost: process.env.MATOMO_HOST,
+      matomoSiteId: Number(process.env.MATOMO_SITE_ID)
+    }
   },
 
   eslint: {},

@@ -170,10 +170,18 @@ div.cjh-Zitaterläuterung p {
 
 .section-subtitle {
   font-weight: bold;
+  text-align: center;
 }
 
 .subsection-subtitle {
   font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+
+.minor-heading {
+  font-variant: small-caps;
+  text-align: center;
 }
 
 .text-line {

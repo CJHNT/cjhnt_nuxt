@@ -30,6 +30,11 @@ const logout = async () => {
         target="_blank"
       />
       <v-btn icon="mdi-home" to="/" />
+      <v-tooltip location="bottom" :text="$t('privacy.pageHeader')">
+        <template #activator="{ props }">
+          <v-btn icon="mdi-security" to="/privacy" v-bind="props" />
+        </template>
+      </v-tooltip>
     </template>
     <template #append>
       <v-tooltip location="bottom" :text="$t('search.toAdvancedSearch')">
