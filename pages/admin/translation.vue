@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import { allows } from 'nuxt-authorization/utils'
+import { editTranslations } from '~/utils/abilities'
 import type { SubCollectionList } from '~/plugins/build-collections.client'
+import type { TranslationJson } from '~/utils/buildTranslationXml'
+import type { TranslationBody } from '~/server/api/admin/translation/[urn]'
 
 const { locale } = useI18n()
+const { user } = useUserSession()
+const allowed = await allows(editTranslations, user.value)
 
 const workList: Ref<SubCollectionList[]> = useState('allWorks')
-const selectedWork = ref({} as SubCollectionList)
+const selectedWork = ref(undefined)
 const workEdition = ref('')
 const workEditionError = ref('')
 const workSections = ref([] as string[])
@@ -16,6 +22,24 @@ const deuText = ref('')
 const engText = ref('')
 const xslPath = ref('')
 const showEditors = ref(false)
+
+async function saveTranslation(json: TranslationJson, lang: 'deu' | 'eng') {
+  const newUrls = {
+    deu: cjhntDeu.value ?? workEdition.value + '_cjhnt_deu',
+    eng: cjhntEng.value ?? workEdition.value + '_cjhnt_eng'
+  }
+  const returnCode = await $fetch('/api/admin/translation/' + newUrls[lang], {
+    method: 'post',
+    body: {
+      editionUrn: workEdition.value,
+      translationLang: lang,
+      translationJson: json,
+      citation: citSection.value,
+      user: user.value?.email
+    } as TranslationBody
+  })
+  console.error(returnCode)
+}
 
 watch(selectedWork, async (newWork, oldWork) => {
   workEditionError.value = ''
@@ -92,7 +116,7 @@ watch(citSection, async (newSection, oldSection) => {
 
 <template>
   <v-main>
-    <v-container>
+    <v-container v-if="allowed">
       <template v-if="workList">
         <v-autocomplete
           v-if="workList"
@@ -124,14 +148,28 @@ watch(citSection, async (newSection, oldSection) => {
         <v-col cols="6">
           <TiptapEditor
             title="German Translation"
+            lang="deu"
             :text="deuText"
-            :tools="['paragraph', 'undo', 'redo']"
+            :tools="['bold', 'italic', 'undo', 'redo']"
+            @save="saveTranslation"
           />
           <TiptapEditor
             title="English Translation"
+            lang="eng"
             :text="engText"
-            :tools="['paragraph', 'undo', 'redo']"
+            :tools="['bold', 'italic', 'undo', 'redo']"
+            @save="saveTranslation"
           />
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container v-else>
+      <v-row justify="center">
+        <v-col cols="auto">
+          <v-alert type="error"
+            >{{ $t('admin.translation.notAllowed') }}
+            <NuxtLink to="/">{{ $t('home') }}</NuxtLink></v-alert
+          >
         </v-col>
       </v-row>
     </v-container>

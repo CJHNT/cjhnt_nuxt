@@ -142,6 +142,18 @@
         </xsl:element>
     </xsl:template>
     
+    <xsl:template match="t:seg[@rend]">
+        <xsl:element name="span">
+            <xsl:attribute name="class" select="@rend"></xsl:attribute>
+            <xsl:for-each select="node()">
+                <xsl:choose>
+                    <xsl:when test="self::text()"><xsl:value-of select="."/></xsl:when>
+                    <xsl:otherwise><xsl:apply-templates select="."></xsl:apply-templates></xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+    
     <xsl:template match="t:span[@rend='mx-auto']">
         <xsl:element name="span">
             <xsl:attribute name="class">mx-auto</xsl:attribute>

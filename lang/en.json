@@ -197,5 +197,20 @@
     "cookiesP2": "You can stop your browser from storing these cookies by changing your browser settings. But then not all functionality will be available.",
     "userTrackingHeader": "Web-Site Usage Analysis",
     "userTrackingP1": "This website uses Matomo, an open-source software package, for statistical analysis of web-site usage. Matomo does not use cookies on our web-site to gather and analyze this data. This information about site usage is saved on the provider's server in Germany. The user's IP-address is anonymized by Matomo."
+  },
+  "admin": {
+    "translation": {
+      "notAllowed": "You are not authorized to edit translations.",
+      "editTranslation": "Enter or edit a translation"
+    }
+  },
+  "tipTap": {
+    "bold": "Bold",
+    "boldSymbol": "B",
+    "italic": "Italic",
+    "italicSymbol": "I",
+    "undo": "Undo",
+    "redo": "Redo",
+    "save": "Save"
   }
 }
