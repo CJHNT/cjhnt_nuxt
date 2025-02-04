@@ -11,3 +11,7 @@
 html {
   overflow-y: auto;
 }
+
+.bg-error a[href] {
+  color: lightblue;
+}

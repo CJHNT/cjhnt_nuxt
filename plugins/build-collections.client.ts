@@ -3,7 +3,7 @@ interface SubCollectionList {
   de: string
   en: string
   type: string
-  versions: string[][]
+  versions: [string, string, string, string, string, number][]
   parentId: string
   firstChild: string
 }
@@ -105,6 +105,8 @@ const collListState = {
   ]
 }
 
+const allWorks = [] as SubCollectionList[]
+
 export default defineNuxtPlugin({
   name: 'build-collections',
   parallel: true,
@@ -147,7 +149,9 @@ export default defineNuxtPlugin({
                       ? m['dts:dublincore']?.['dct:bibliographicCitation'].find(
                           (e) => e['@language'] === 'deu'
                         )?.['@value'] || ''
-                      : m['dts:dublincore']?.['dct:bibliographicCitation']?.[0]['@value'] || ''
+                      : m['dts:dublincore']?.['dct:bibliographicCitation']?.[0]['@value'] || '',
+                  m['dts:extensions']['dc:type'],
+                  m['dts:citeDepth']
                 ]),
                 parentId: coll,
                 firstChild: ''
@@ -179,6 +183,7 @@ export default defineNuxtPlugin({
                   })?.title || '',
                 openText: 'open'
               })
+              allWorks.push(e)
             })
             collSearchListState.sort((a, b) => a.id.localeCompare(b.id))
           }
@@ -187,6 +192,9 @@ export default defineNuxtPlugin({
       useState('collList', () => collListState)
       useState('collSearchList', () => collSearchListState)
       useState('primaryTextTabs', () => primaryTextTabs)
+      useState('allWorks', () => allWorks)
     })
   }
 })
+
+export type { SubCollectionList }

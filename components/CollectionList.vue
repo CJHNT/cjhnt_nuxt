@@ -57,6 +57,24 @@ const showList = (c) => {
   }
   return true
 }
+
+const sortVersions = (versions) => {
+  return versions.toSorted((a, b) => {
+    if (a[4] < b[4]) {
+      return -1
+    }
+    if (a[4] > b[4]) {
+      return 1
+    }
+    if (a[1] < b[1]) {
+      return -1
+    }
+    if (a[1] > b[1]) {
+      return 1
+    }
+    return 0
+  })
+}
 </script>
 
 <template>
@@ -75,11 +93,11 @@ const showList = (c) => {
                 {{ $t(subGroup.title, { chapter: subGroup.chapter }) }}
               </h2>
               <template v-for="(member, memberIndex) in subGroup.subCollections" :key="memberIndex">
-                <template v-if="member.versions.some((v) => v.length === 4)">
+                <template v-if="member.versions.some((v) => v.length === 6)">
                   <v-list-item-title>{{ member[locale] }}</v-list-item-title>
                   <v-list-item-subtitle v-if="openVersions(member)">
                     <template
-                      v-for="(version, versionIndex) in member.versions"
+                      v-for="(version, versionIndex) in sortVersions(member.versions)"
                       :key="versionIndex"
                     >
                       <v-btn

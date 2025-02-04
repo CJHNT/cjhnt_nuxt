@@ -1,4 +1,5 @@
 <script setup>
+import { editTranslations } from '~/utils/abilities'
 const { loggedIn, user, fetch } = useUserSession()
 
 await fetch()
@@ -44,6 +45,13 @@ const logout = async () => {
       </v-tooltip>
 
       <template v-if="loggedIn">
+        <Can :ability="editTranslations" :args="[user]">
+          <v-tooltip location="bottom" :text="$t('admin.translation.editTranslation')">
+            <template #activator="{ props }">
+              <v-btn icon="mdi-translate" to="/admin/translation" v-bind="props" />
+            </template>
+          </v-tooltip>
+        </Can>
         <v-tooltip location="bottom" :text="$t('auth.loggedInAs', { email: user.email })">
           <template #activator="{ props }">
             <v-btn icon="mdi-account" to="/auth/dashboard" v-bind="props" />

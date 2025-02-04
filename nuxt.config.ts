@@ -43,7 +43,8 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     'nuxt-security',
     'nuxt-authorization',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    'nuxt-tiptap-editor'
   ],
 
   plugins: [{ src: '~/plugins/matomo.client.js', mode: 'client' }],
@@ -82,6 +83,10 @@ export default defineNuxtConfig({
     experimental: {
       localeDetector: './localeDetector.ts'
     }
+  },
+
+  tiptap: {
+    prefix: 'Tiptap'
   },
 
   runtimeConfig: {
