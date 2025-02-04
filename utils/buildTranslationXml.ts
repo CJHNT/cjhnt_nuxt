@@ -23,7 +23,7 @@ const wordRe = /(\W*)(\w+)(\W*)/g
 export default function (tipTapJson: TranslationJson) {
   let xmlString = ''
   tipTapJson.content.forEach((p) => {
-    xmlString = xmlString.concat('<p>')
+    xmlString = xmlString.concat('<ab>')
     p.content.forEach((t) => {
       let endTag = ''
       if (t.marks) {
@@ -48,7 +48,7 @@ export default function (tipTapJson: TranslationJson) {
       }
       xmlString = xmlString.concat(endTag)
     })
-    xmlString = xmlString.concat('</p>')
+    xmlString = xmlString.concat('</ab>')
   })
   return xmlString
 }
