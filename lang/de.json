@@ -211,6 +211,7 @@
     "italicSymbol": "K",
     "undo": "Rückgängig",
     "redo": "Wiedherstellen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "saveToGit": "Zu Git speichern"
   }
 }

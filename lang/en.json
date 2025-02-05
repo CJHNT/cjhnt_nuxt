@@ -211,6 +211,7 @@
     "italicSymbol": "I",
     "undo": "Undo",
     "redo": "Redo",
-    "save": "Save"
+    "save": "Save",
+    "saveToGit": "Save to Git"
   }
 }
