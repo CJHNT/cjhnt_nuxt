@@ -10,7 +10,7 @@ const { user } = useUserSession()
 const allowed = await allows(editTranslations, user.value)
 
 const workList: Ref<SubCollectionList[]> = useState('allWorks')
-const selectedWork = ref(undefined)
+const selectedWork = ref(undefined as unknown as SubCollectionList)
 const workEdition = ref('')
 const workEditionError = ref('')
 const workSections = ref([] as string[])
@@ -37,6 +37,16 @@ async function saveTranslation(json: TranslationJson, lang: 'deu' | 'eng') {
       citation: citSection.value,
       user: user.value?.email
     } as TranslationBody
+  })
+  console.error(returnCode)
+}
+
+async function saveToGit() {
+  const returnCode = await $fetch('/api/admin/git', {
+    method: 'post',
+    body: {
+      user: user.value?.email
+    }
   })
   console.error(returnCode)
 }
@@ -144,24 +154,33 @@ watch(citSection, async (newSection, oldSection) => {
           <div v-html="origText"></div>
         </v-col>
       </v-row>
-      <v-row v-if="showEditors">
-        <v-col cols="6">
-          <TiptapEditor
-            title="German Translation"
-            lang="deu"
-            :text="deuText"
-            :tools="['bold', 'italic', 'undo', 'redo']"
-            @save="saveTranslation"
-          />
-          <TiptapEditor
-            title="English Translation"
-            lang="eng"
-            :text="engText"
-            :tools="['bold', 'italic', 'undo', 'redo']"
-            @save="saveTranslation"
-          />
-        </v-col>
-      </v-row>
+      <template v-if="showEditors">
+        <v-row>
+          <v-col cols="6">
+            <TiptapEditor
+              title="German Translation"
+              lang="deu"
+              :text="deuText"
+              :tools="['bold', 'italic', 'undo', 'redo']"
+              @save="saveTranslation"
+            />
+            <TiptapEditor
+              title="English Translation"
+              lang="eng"
+              :text="engText"
+              :tools="['bold', 'italic', 'undo', 'redo']"
+              @save="saveTranslation"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div>
+              <v-btn @click="saveToGit">{{ $t('tipTap.saveToGit') }}</v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </template>
     </v-container>
     <v-container v-else>
       <v-row justify="center">
