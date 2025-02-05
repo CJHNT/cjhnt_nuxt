@@ -98,26 +98,44 @@ watch(citSection, async (newSection, oldSection) => {
       }
     })
     if (cjhntDeu.value) {
-      const deutsch = await $fetch('/api/dts/document', {
+      const deuNav: DtsNavigation = await $fetch('/api/dts/navigation', {
         method: 'post',
         body: {
           id: cjhntDeu.value,
-          ref: newSection,
-          xsl: xslPath.value
+          level: newSection.split('.').length
         }
       })
-      deuText.value = parseTranslation(deutsch)
+      if (deuNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
+        const deutsch = await $fetch('/api/dts/document', {
+          method: 'post',
+          body: {
+            id: cjhntDeu.value,
+            ref: newSection,
+            xsl: xslPath.value
+          }
+        })
+        deuText.value = parseTranslation(deutsch)
+      }
     }
     if (cjhntEng.value) {
-      const english = await $fetch('/api/dts/document', {
+      const engNav: DtsNavigation = await $fetch('/api/dts/navigation', {
         method: 'post',
         body: {
           id: cjhntEng.value,
-          ref: newSection,
-          xsl: xslPath.value
+          level: newSection.split('.').length
         }
       })
-      engText.value = parseTranslation(english)
+      if (engNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
+        const english = await $fetch('/api/dts/document', {
+          method: 'post',
+          body: {
+            id: cjhntEng.value,
+            ref: newSection,
+            xsl: xslPath.value
+          }
+        })
+        engText.value = parseTranslation(english)
+      }
     }
   }
   showEditors.value = true
