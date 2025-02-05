@@ -18,7 +18,7 @@ interface TranslationJson {
   content: TranslationParagraph[]
 }
 
-const wordRe = /(\W*)(\w+)(\W*)/g
+const wordRe = /(\P{L}*)(\p{L}+)(\P{L}*)/gu
 
 export default function (tipTapJson: TranslationJson) {
   let xmlString = ''
