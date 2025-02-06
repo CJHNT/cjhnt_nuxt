@@ -220,3 +220,9 @@ watch(citSection, async (newSection, oldSection) => {
     </v-container>
   </v-main>
 </template>
+
+<style>
+.cit-string {
+  display: none;
+}
+</style>
