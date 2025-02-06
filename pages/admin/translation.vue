@@ -53,92 +53,100 @@ async function saveToGit() {
 
 watch(selectedWork, async (newWork, oldWork) => {
   workEditionError.value = ''
-  if (newWork && newWork !== oldWork) {
+  if (newWork !== oldWork) {
     showEditors.value = false
     citSection.value = ''
     origText.value = ''
-    const edition = newWork.versions.find((v) => v[4].includes('edition'))
-    cjhntDeu.value = newWork.versions.find((v) => v[0].includes('cjhnt_deu'))?.[0]
-    cjhntEng.value = newWork.versions.find((v) => v[0].includes('cjhnt_eng'))?.[0]
-    if (edition) {
-      let navReturn: DtsNavigation = await $fetch('/api/dts/navigation', {
-        method: 'post',
-        body: {
-          id: edition[0],
-          level: edition[5]
-        }
-      })
-      if (navReturn.citeType === 'word') {
-        navReturn = await $fetch('/api/dts/navigation', {
+    engText.value = ''
+    deuText.value = ''
+    if (newWork) {
+      const edition = newWork.versions.find((v) => v[4].includes('edition'))
+      cjhntDeu.value = newWork.versions.find((v) => v[0].includes('cjhnt_deu'))?.[0]
+      cjhntEng.value = newWork.versions.find((v) => v[0].includes('cjhnt_eng'))?.[0]
+      if (edition) {
+        let navReturn: DtsNavigation = await $fetch('/api/dts/navigation', {
           method: 'post',
           body: {
             id: edition[0],
-            level: edition[5] - 1
+            level: edition[5]
           }
         })
+        if (navReturn.citeType === 'word') {
+          navReturn = await $fetch('/api/dts/navigation', {
+            method: 'post',
+            body: {
+              id: edition[0],
+              level: edition[5] - 1
+            }
+          })
+        }
+        workSections.value = navReturn['hydra:member'].map((m) => m.ref)
+        xslPath.value = chooseXsl(edition[0])
+        workEdition.value = edition[0]
+      } else {
+        workEditionError.value = 'No edition found for this work.'
       }
-      workSections.value = navReturn['hydra:member'].map((m) => m.ref)
-      xslPath.value = chooseXsl(edition[0])
-      workEdition.value = edition[0]
-    } else {
-      workEditionError.value = 'No edition found for this work.'
     }
   }
 })
 
 watch(citSection, async (newSection, oldSection) => {
-  if (newSection && newSection !== oldSection) {
+  if (newSection !== oldSection) {
     showEditors.value = false
-    origText.value = await $fetch('/api/dts/document', {
-      method: 'post',
-      body: {
-        id: workEdition.value,
-        ref: newSection,
-        xsl: xslPath.value
-      }
-    })
-    if (cjhntDeu.value) {
-      const deuNav: DtsNavigation = await $fetch('/api/dts/navigation', {
+    engText.value = ''
+    deuText.value = ''
+    if (newSection) {
+      origText.value = await $fetch('/api/dts/document', {
         method: 'post',
         body: {
-          id: cjhntDeu.value,
-          level: newSection.split('.').length
+          id: workEdition.value,
+          ref: newSection,
+          xsl: xslPath.value
         }
       })
-      if (deuNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
-        const deutsch = await $fetch('/api/dts/document', {
+      if (cjhntDeu.value) {
+        const deuNav: DtsNavigation = await $fetch('/api/dts/navigation', {
           method: 'post',
           body: {
             id: cjhntDeu.value,
-            ref: newSection,
-            xsl: xslPath.value
+            level: newSection.split('.').length
           }
         })
-        deuText.value = parseTranslation(deutsch)
-      }
-    }
-    if (cjhntEng.value) {
-      const engNav: DtsNavigation = await $fetch('/api/dts/navigation', {
-        method: 'post',
-        body: {
-          id: cjhntEng.value,
-          level: newSection.split('.').length
+        if (deuNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
+          const deutsch = await $fetch('/api/dts/document', {
+            method: 'post',
+            body: {
+              id: cjhntDeu.value,
+              ref: newSection,
+              xsl: xslPath.value
+            }
+          })
+          deuText.value = parseTranslation(deutsch)
         }
-      })
-      if (engNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
-        const english = await $fetch('/api/dts/document', {
+      }
+      if (cjhntEng.value) {
+        const engNav: DtsNavigation = await $fetch('/api/dts/navigation', {
           method: 'post',
           body: {
             id: cjhntEng.value,
-            ref: newSection,
-            xsl: xslPath.value
+            level: newSection.split('.').length
           }
         })
-        engText.value = parseTranslation(english)
+        if (engNav['hydra:member'].map((m) => m.ref).includes(newSection)) {
+          const english = await $fetch('/api/dts/document', {
+            method: 'post',
+            body: {
+              id: cjhntEng.value,
+              ref: newSection,
+              xsl: xslPath.value
+            }
+          })
+          engText.value = parseTranslation(english)
+        }
       }
+      showEditors.value = true
     }
   }
-  showEditors.value = true
 })
 </script>
 
