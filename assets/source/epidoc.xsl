@@ -4,7 +4,7 @@
     <xsl:output omit-xml-declaration="yes" indent="yes" method="html"/>
     
     <xsl:template match="/">
-        <xsl:for-each select="//t:div[@type='textpart'][t:p or t:head or t:lg]">
+        <xsl:for-each select="//t:div[@type='textpart'][t:p or t:ab or t:head or t:lg]">
             <xsl:if test="descendant::t:w">
                <xsl:variable name="citStrings">
                    <xsl:for-each select="ancestor::t:div[@type='textpart']">
@@ -16,9 +16,10 @@
                    <xsl:attribute name="class">citation-section</xsl:attribute>
                    <xsl:attribute name="n"><xsl:value-of select="$citStrings"/></xsl:attribute>
                    <xsl:attribute name="id"><xsl:value-of select="//t:body/t:div/@n"/><xsl:text>;</xsl:text><xsl:value-of select="$citStrings"/></xsl:attribute>
+                   <span class="cit-string"><xsl:value-of select="$citStrings"/></span>
                    <xsl:for-each select="./*">    
                        <xsl:choose>
-                           <xsl:when test="local-name() = 'p'">
+                           <xsl:when test="local-name() = 'p' or local-name() = 'ab'">
                                <span class="text-paragraph">
                                    <xsl:for-each select="node()">
                                        <xsl:choose>

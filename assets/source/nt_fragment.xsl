@@ -39,6 +39,10 @@
             <xsl:attribute name="class">citation-section</xsl:attribute>
             <xsl:attribute name="n"><xsl:value-of select="$citStrings"/></xsl:attribute>
             <xsl:attribute name="id"><xsl:value-of select="//t:body/t:div/@n"/><xsl:text>;</xsl:text><xsl:value-of select="$citStrings"/></xsl:attribute>
+            <xsl:element name="span">
+                <xsl:attribute name="class">cit-string</xsl:attribute>
+                <xsl:value-of select="$citStrings"/>
+            </xsl:element>
             <xsl:for-each select="child::t:ab">
                 <xsl:element name="span">
                     <xsl:attribute name="class">text-paragraph</xsl:attribute>

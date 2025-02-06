@@ -119,8 +119,7 @@ const allAncestors = ref([])
 </style>
 
 <style>
-.citation-section::before {
-  content: ' ' attr(n) ' ';
+.cit-string {
   vertical-align: super;
   font-size: small;
 }
